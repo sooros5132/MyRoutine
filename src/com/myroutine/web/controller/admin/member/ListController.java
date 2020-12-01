@@ -1,4 +1,4 @@
-package com.myroutine.web.admin.controller.member;
+package com.myroutine.web.controller.admin.member;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.myroutine.web.admin.entity.Member;
-import com.myroutine.web.admin.service.MemberService;
+import com.myroutine.web.entity.admin.Member;
+import com.myroutine.web.service.admin.MemberService;
 
 @WebServlet("/admin/member/list")
 public class ListController extends HttpServlet {

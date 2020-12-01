@@ -1,4 +1,4 @@
-package com.myroutine.web.admin.entity;
+package com.myroutine.web.entity.admin;
 
 import java.sql.Date;
 

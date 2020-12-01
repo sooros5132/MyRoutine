@@ -1,4 +1,4 @@
-package com.myroutine.web.admin.service;
+package com.myroutine.web.service.admin;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.myroutine.web.admin.entity.Member;
+import com.myroutine.web.entity.admin.Member;
 
 public class MemberService {
 
