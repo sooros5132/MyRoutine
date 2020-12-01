@@ -1,0 +1,87 @@
+
+.member-list > h1{
+    font-size: 30px; 
+    color: #30baa1;
+    font-weight: bold;
+}
+
+
+.member-list > table{
+    min-width: 1000px;
+    width: 100%;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.member-list-setting{
+    display: flex;
+}
+
+.member-list-setting .member-list-size{
+    margin-left: auto;
+}
+
+.member-list > table tbody select{
+    width: 100%;
+    padding-left: 2px;
+    -webkit-appearance: auto;
+    -moz-appearance: auto;
+    appearance: auto;
+}
+
+.member-list > table tr{
+    line-height: 30px;
+    text-align: center;
+}
+
+.member-list > table thead tr{
+    background: #30baa1;
+    color: white;
+}
+
+.member-list > table thead th{
+    border: 1px solid #ddd;
+}
+.member-list > table tbody tr td{
+    border: 1px solid #ddd;
+    border-top: 0;
+}
+.member-list > table tbody tr.even{
+    background-color: #f9f9f9;
+}
+.member-list > table .change-box{
+    display: flex;
+}
+.member-list > table .change-box div{
+    flex: 0 0 auto;
+    height: 20px;
+    flex-basis: calc(100% - 30px);
+}
+.member-list > table .change-box .change-icon{
+    flex-basis: 30px;
+    background: transparent;
+    font-size: 16px;
+    color: #ddd;
+}
+.member-list > table .change-box.active .change-icon{
+    color: #30baa1;
+}
+.member-list > table .change-box .change-icon:hover{
+    background-color: #eee;
+}
+.member-list > table .change-box input{
+    width: 100%;
+    height: 100%;
+    border: 0;
+    outline: none;
+    text-align: center;
+    font-size: 14px;
+    background-color: transparent;
+    box-sizing: border-box;
+}
+.member-list > table .change-box input:hover,
+.member-list > table .change-box input:focus{
+    --background-color: #eee;
+    border: 1px solid #30baa1;
+}
