@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.myroutine.web.entity.admin.Member;
-import com.myroutine.web.service.admin.MemberService;
+import com.myroutine.web.entity.user.Member;
+import com.myroutine.web.service.user.MemberService;
 
 @WebServlet("/admin/member/list")
 public class ListController extends HttpServlet {

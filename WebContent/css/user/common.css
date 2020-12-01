@@ -1,0 +1,217 @@
+.container{
+    display:flex;
+    /* width: 1200px; */
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+
+/* 
+위쪽 화살표??
+<div class="arrow">
+    <div></div>
+    <div></div>                    
+</div>
+*/
+.arrow{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-evenly;
+}
+
+.arrow div{
+    flex: 0 0 3px;
+    height: 12px;
+    margin-top: 5.5px;
+    background-color: #f9f9f9;
+}
+
+.arrow div:first-child{
+    transform: rotate(45deg) translateX(3px);
+}
+
+.arrow div:last-child{
+    transform: rotate(-45deg) translateX(-3px);
+}
+ /* //위족 화살표 */ 
+
+/* 하단 메뉴 */ 
+.bottom-container{
+    position: fixed;
+    bottom: -40px;
+    left: 0px;
+    width: 100%;
+    height: 40px;
+    transition: bottom .5s;
+}
+
+.bottom-container.alert-active{
+    bottom: 0px;
+}
+
+.bottom-container .bottom-menu{
+    margin: 0 auto;
+    position: relative;
+    max-width: 1200px;
+}
+
+.bottom-btn{
+    position: absolute;
+    top:-40px;
+    right:15px;
+    width:30px;
+    height:30px;
+    overflow: hidden;
+    opacity: 0;
+    background: #333333;
+    transition: opacity .5s, bottom .5s;
+    cursor: pointer;
+}
+
+.bottom-btn svg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    fill: transparent;
+    stroke: #f1718c;
+    stroke-width: 3px;
+    stroke-dasharray: 95;
+    transform: rotate(-90deg);
+}
+/* // 하단 메뉴 */ 
+
+.reveal{opacity: 1;pointer-events: all;}
+.circle{border-radius: 50% 50%;}
+.d-none{display:none;}
+.border-decoration{
+    box-sizing: border-box;
+    border: 20px solid #ddd;
+    border-image: repeating-linear-gradient(-45deg,#e66465 0,#e66465 10px,#f6b73c 10px,#f6b73c 20px,#e66465 20px) 20 20 repeat;
+}
+
+@media screen and (max-width:768px){
+    .body{background: #000000;padding-top: 40px;}
+    /* .body{
+        background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+        background-size: 1800% 1800%;
+        animation: rainbow 18s ease infinite;
+    }
+
+    @keyframes rainbow { 
+        0%{background-position:0% 82%}
+        50%{background-position:100% 19%}
+        100%{background-position:0% 82%}
+    } */
+}
+
+:root {
+    --mainColor: #30baa1;
+    --px1: 0.07692307692rem;
+    --px2: 0.1538461538rem;
+    --px4: 0.3076923077rem;
+    --px8: 0.6153846154rem;
+    --px12: 0.9230769231rem;
+    --px16: 1.230769231rem;
+    --px20: 1.538461538rem;
+    --px24: 1.846153846rem;
+    --px28: 2.153846154rem;
+    --px32: 2.461538462rem;
+    --px36: 2.769230769rem;
+    --px40: 3.076923077rem;
+    --px48: 3.692307692rem;
+    --px56: 4.307692308rem;
+    --px64: 4.923076923rem;
+    --px72: 5.538461538rem;
+    --px80: 6.153846154rem;
+    --px88: 6.769230769rem;
+    --px96: 7.384615385rem;
+    --px104: 8rem;
+    --px112: 8.615384615rem;
+    --px120: 9.230769231rem;
+    --px128: 9.846153846rem;
+    --px136: 10.46153846rem;
+    --px144: 11.07692308rem;
+    --px152: 11.69230769rem;
+    --px160: 12.30769231rem;
+    --px168: 12.92307692rem;
+    --px176: 13.53846154rem;
+    --px184: 14.15384615rem;
+    --px192: 14.76923077rem;
+    --px200: 15.38461538rem;
+    --px208: 16rem;
+    --px456: 35.07692307rem;
+    --px520: 40rem;
+    --px600: 46.15384615rem;
+    --px480: 36.92307692rem;
+    --px768: 59.07692308rem;
+    --px960: 73.84615385rem;
+    --px1080: 83.07692308rem;
+    --px1280: 98.46153846rem;
+    --gray100: #cadfe6;
+    --gray300: #96a9b0;
+    --gray500: #73868c;
+    --gray700: #303f45;
+    --gray800: #132026;
+    --gray900: #061117;
+    --green100: #d6efde;
+    --green200: #8cffa9;
+    --green300: #5eff87;
+    --green500: #12b355;
+    --green700: #19422c;
+    --red100: #fcd8da;
+    --red200: #ff968c;
+    --red300: #ff6179;
+    --red500: #f2304e;
+    --red700: #5a2f3b;
+    --blue100: #e6ecff;
+    --blue200: #8cf2ff;
+    --blue300: #54ebff;
+    --blue400: #3d97f2;
+    --blue500: #547fff;
+    --blue700: #23525c;
+    --yellow500: #ffcb33;
+    --logoBlue: #5b69b1;
+    --lime: #8cbf26;
+    --red: #e5603b;
+    --redDark: #d04f4f;
+    --blue: #618fb0;
+    --green: #56bc76;
+    --greenDark: #388d53;
+    --orange: #eac85e;
+    --yellow: #eed37e;
+    --pink: #e671b8;
+    --purple: #a700ae;
+    --brown: #a05000;
+    --teal: #4ab0ce;
+    --gray: #666;
+    --grayDark: #555;
+    --grayDarker: #222;
+    --grayLight: #999;
+    --backgroundGray: #333;
+    --lightGray: #f8f8f8;
+    --shadowGray: rgba(103, 103, 103, 0.4);
+    --white: #fff;
+    --black: #000;
+    --depthChart_bidBorder: rgba(86, 188, 118, 0.7);
+    --depthChart_bidBorderSplit: rgba(86, 188, 118, 0.4);
+    --depthChart_bidFill: rgba(86, 188, 118, 0.4);
+    --depthChart_bidFillSplit: rgba(86, 188, 118, 0.2);
+    --depthChart_askBorder: rgba(229, 96, 59, 0.7);
+    --depthChart_askBorderSplit: rgba(229, 96, 59, 0.4);
+    --depthChart_askFill: rgba(229, 96, 59, 0.4);
+    --depthChart_askFillSplit: rgba(229, 96, 59, 0.2);
+    --depthChart_midLine: #555;
+    --highLight: rgba(238, 211, 126, 0.5);
+    --borderBlack3: rgba(18, 18, 18, 0.3);
+    --borderBlack5: rgba(18, 18, 18, 0.5);
+    --borderBlack7: rgba(18, 18, 18, 1);
+    --backGray15: rgba(77, 76, 76, 0.15);
+    --backGray3: rgba(77, 76, 76, 0.3);
+    --backGray5: rgba(77, 76, 76, 0.5);
+    --backGray7: rgba(77, 76, 76, 0.7);
+    --backOdd: rgba(77, 76, 76, 0.15);
+    --backEven: rgba(62, 62, 62, 0.15);
+    --backgroundColor: #000000;
+}

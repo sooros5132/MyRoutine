@@ -1,4 +1,4 @@
-package com.myroutine.web.service.admin;
+package com.myroutine.web.service.user;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -9,13 +9,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.myroutine.web.entity.admin.Member;
+import com.myroutine.web.entity.user.Member;
 
 public class MemberService {
 
-	private final String url = "jdbc:oracle:thin:@hi.namoolab.com:1521/xepdb1";
-	private final String userId = "TEAMONE";
-	private final String pwd = "11111";
+	private final String dbUrl = "jdbc:oracle:thin:@hi.namoolab.com:1521/xepdb1";
+	private final String dbId = "TEAMONE";
+	private final String dbPwd = "11111";
 
 	public List<Member> getList() {
 		return this.getList(20);
@@ -30,7 +30,7 @@ public class MemberService {
 		try {
 			// Class.forName = 문자열을 클래스로
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url, userId, pwd);
+			Connection con = DriverManager.getConnection(dbUrl, dbId, dbPwd);
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			
@@ -40,7 +40,7 @@ public class MemberService {
 				String name = rs.getString("name");
 				String nickname = rs.getString("nickname");
 				String pwd = rs.getString("pwd");
-				char gender = rs.getString("gender").charAt(0);
+				String gender = rs.getString("gender");
 				Date birthday = rs.getDate("birthday");
 				String phone = rs.getString("phone");
 				Date regdate = rs.getDate("regdate");
@@ -145,7 +145,7 @@ public class MemberService {
 		try {
 			// Class.forName = 문자열을 클래스로
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url, userId, pwd);
+			Connection con = DriverManager.getConnection(dbUrl, dbId, dbPwd);
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			
@@ -154,7 +154,7 @@ public class MemberService {
 				String nickname = rs.getString("nickname");
 				String name = rs.getString("name");
 				String pwd = rs.getString("pwd");
-				char gender = rs.getString("gender").charAt(0);
+				String gender = rs.getString("gender");
 				Date birthday = rs.getDate("birthday");
 				String phone = rs.getString("phone");
 				Date regdate = rs.getDate("regdate");
@@ -206,7 +206,7 @@ public class MemberService {
 		try {
 			// Class.forName = 문자열을 클래스로
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url, userId, pwd);
+			Connection con = DriverManager.getConnection(dbUrl, dbId, dbPwd);
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			
@@ -215,7 +215,7 @@ public class MemberService {
 				String email = rs.getString("email");
 				String name = rs.getString("name");
 				String pwd = rs.getString("pwd");
-				char gender = rs.getString("gender").charAt(0);
+				String gender = rs.getString("gender");
 				Date birthday = rs.getDate("birthday");
 				String phone = rs.getString("phone");
 				Date regdate = rs.getDate("regdate");
@@ -259,65 +259,45 @@ public class MemberService {
 		return m;
 	}
 	
-//	public String putMember(Member member) {
-//		String sql = String.format("SELECT * FROM MEMBER WHERE NICKNAME = '%s'",
-//				member.getAuthority());
-//		List<Member> list = new ArrayList<>();
-//		Member m = null;
-//		
-//		try {
-//			// Class.forName = 문자열을 클래스로
-//			Class.forName("oracle.jdbc.driver.OracleDriver");
-//			Connection con = DriverManager.getConnection(url, userId, pwd);
-//			Statement st = con.createStatement();
-//			ResultSet rs = st.executeQuery(sql);
-//			
-//			if(rs.next()) {
-//				int id = rs.getInt("id");
-//				String email = rs.getString("email");
-//				String name = rs.getString("name");
-//				String pwd = rs.getString("pwd");
-//				char gender = rs.getString("gender").charAt(0);
-//				Date birthday = rs.getDate("birthday");
-//				String phone = rs.getString("phone");
-//				Date regdate = rs.getDate("regdate");
-//				byte authority = rs.getByte("authority");
-//				byte publicinfo = rs.getByte("publicinfo");
-//				byte mailauth = rs.getByte("mailauth");
-//				byte receivingmail = rs.getByte("receivingmail");
-//				byte receivingsms = rs.getByte("receivingsms");
-//				Date finalconnection = rs.getDate("finalconnection");
-//			    
-//				m = new Member(
-//					id,
-//					email,
-//					name,
-//					nickname,
-//					pwd,
-//					gender,
-//					birthday,
-//					phone,
-//					regdate,
-//					authority,
-//					publicinfo,
-//					mailauth,
-//					receivingmail,
-//					receivingsms,
-//					finalconnection
-//				);
-//				if( m != null)
-//					translate(m);
-//			}
-//			
-//			rs.close();
-//			st.close();
-//			con.close();
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} catch (ClassNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//		return m;
-//	}
+	public boolean putMember(Member m) {
+		
+
+		boolean putStatus = false;
+		String email = m.getEmail();
+		String name = m.getName();
+		String nickname = m.getNickname();
+		String pwd = m.getPwd();
+		
+		if( email.equals("") || name.equals("") ||
+			nickname.equals("") || pwd.equals("") ) {
+			return false;
+		}
+		
+		String sql = String.format("INSERT INTO MEMBER"
+				+ "(ID, EMAIL, NAME, NICKNAME, PWD, AUTHORITY, REGDATE) "
+				+ "VALUES (0, '%s', '%s', '%s', '%s', 1, '2020-12-01')",
+				email, name, nickname, pwd);
+		
+		
+		try {
+			// Class.forName = 문자열을 클래스로
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(dbUrl, dbId, dbPwd);
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			
+//			System.out.println("MemberService.java -> putMember() 에서 메시지" + rs.toString());
+
+			putStatus = true;
+			rs.close();
+			st.close();
+			con.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return putStatus;
+	}
 }

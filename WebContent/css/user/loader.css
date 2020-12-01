@@ -1,0 +1,125 @@
+.loading-container{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    z-index: 1;
+}
+
+.loading{
+    position: fixed;
+    top:0;
+    width:5.2%;
+    height:100%;
+    background-color: #000;
+    /* transition: 0.5s linear; */
+    transition: transform 1s;
+    /* transition: transform 1s; */
+}
+.loading-logo{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
+    background: rgba(0,0,0,0.9);
+    /* display:flex;
+    justify-content: center;
+    align-items: center; */
+    z-index: 1;
+    transition: opacity 1s 1s;
+}
+.loading-logo-inner{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15%;
+    /* animation: logo-toggle 2s linear infinite; */
+}
+.loading-logo.fadeout{
+    opacity: 0;
+}
+
+@keyframes logo-toggle {
+    0%{
+        fill: hsl(0, 100%, 50%);
+        opacity: 1;
+    }
+    50%{
+        opacity: 0.4;
+    }
+    100%{
+        fill: hsl(359, 100%, 50%);
+        opacity: 1;
+    }
+}
+
+/* 로딩 2 ---------------------------------- */
+
+.loading-container2{
+    position: fixed;
+    width: 100vw;
+    height: 200vh;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+    /* transform: rotate(90deg) */
+}
+
+.loading-container2 div {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    margin-top: calc(100vh + 57vw);
+    transform: skewY(-30deg);
+    overflow: hidden;
+}
+
+.loading-container2.active div{
+    margin-top:calc(-100vh - 57vw);
+}
+
+.loading-container2.active .loading-back1{
+    transition: height 0.7s cubic-bezier(0.55, 0.055, 0.675, 0.19), margin-top 0.95s cubic-bezier(0.645, 0.045, 0.355, 1);
+    height:0;
+}
+
+.loading-container2.active .loading-back2{
+    transition: margin-top 0.7s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.loading-container2.active .loading-back3{
+    transition: height 1.25s cubic-bezier(0.55, 0.055, 0.675, 0.19), margin-top 1.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+    height:0;
+}
+
+.loading-back1{
+    height: 30vh;
+    background-color: #ffc200;
+}
+.loading-back2{
+    height: 100vh;
+    background-color: #e3114e;
+}
+.loading-back3{
+    height: 160vh;
+    background-color: #2133b5;
+}
+
+/* 로딩 3 ---------------------------------- */
+
+.loading-bar{
+    position: fixed;
+    top:0;
+    left:0;
+    width:10%;
+    height:4px;
+    background-color: orange;
+    transition: width 0.5s, top 0.5s 0.5s, opacity 0.5s 1s; 
+    z-index: 10;
+}

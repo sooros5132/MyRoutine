@@ -1,0 +1,79 @@
+
+.logo-svg-draw {
+    stroke: #28B49B;
+    stroke-width: 2;
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: logo-stroke-frame 3s linear alternate infinite;
+}
+
+@keyframes logo-stroke-frame {
+    0% {
+        stroke-dashoffset: 200;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* heartbeat 1s ease-in-out infinite both */
+@keyframes heartbeat {
+    from {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transform-origin: center center;
+        transform-origin: center center;
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out
+    }
+    10% {
+        -webkit-transform: scale(0.91);
+        transform: scale(0.91);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in
+    }
+    17% {
+        -webkit-transform: scale(0.98);
+        transform: scale(0.98);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out
+    }
+    33% {
+        -webkit-transform: scale(0.87);
+        transform: scale(0.87);
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in
+    }
+    45% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-animation-timing-function: ease-out;
+        animation-timing-function: ease-out
+    }
+}
+
+.login-svg-draw {
+    stroke: #ff7d00;
+    stroke-width: 0.3;
+    stroke-dasharray: 150;
+    stroke-dashoffset: 150;
+    animation: login-stroke-frame 6s ease-out alternate infinite;
+}
+
+@keyframes login-stroke-frame {
+    0% {
+        stroke-dashoffset: 0;
+        fill-opacity: 1;
+        fill: url(#login-svg-color);
+    }
+    
+    50% {
+        fill-opacity: 0.5;
+    }
+
+    90% {
+        stroke-dashoffset: 150;
+        fill-opacity: 1;
+        fill: url(#login-svg-color);
+    }
+}

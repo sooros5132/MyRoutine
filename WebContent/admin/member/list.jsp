@@ -60,14 +60,18 @@
             <main class="main">
                 <div class="member-list">
                     <div style="margin-bottom: 20px;padding: 10px; background: #f5f5f5;">
-                        <h1 style="font-size: 20px;">메모 저장기능 x</h1>
+                        <h1 style="font-size: 20px;">아이디어 메모 저장기능 x</h1>
 <textarea style="font-family: 'Courier New', Courier, monospace;" name="" id="" cols="30" rows="10">
 회원 / 차단 /        탈퇴상태 / 관리자
  1  /  2  /            8   /   9
 
 체크표시 언제 바뀔지
-1. data-origin 속성으로 기존 값 가지고 있다가 비교 후 다르면 체크아이콘 활성
-2. 바뀌면 무조건 체크아이콘 활성
+1. O data-origin 속성으로 기존 값 가지고 있다가 비교 후 다르면 체크아이콘 활성
+2. X 바뀌면 무조건 체크아이콘 활성
+
+가입 페이지
+/account/signUp.html
+
 </textarea>
                     </div>
                     <h1>회원관리</h1>
