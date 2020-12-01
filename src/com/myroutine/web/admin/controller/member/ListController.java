@@ -1,4 +1,4 @@
-package com.myroutine.web.admin.member;
+package com.myroutine.web.admin.controller.member;
 
 import java.io.IOException;
 import java.util.List;
