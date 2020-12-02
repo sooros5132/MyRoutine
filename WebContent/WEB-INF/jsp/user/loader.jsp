@@ -53,7 +53,7 @@
 		        let alertCnt = 0;
 		        document.querySelector(".alert-btn").addEventListener("click", (e)=>{
 		            alertOpen({
-		                setText: `"${'${++alertCnt}'}"번 누름`,
+		                setText: `${'${++alertCnt}'}번 누름`,
 		                activeTime: 10,
 		                alertColor: ""
 		            });

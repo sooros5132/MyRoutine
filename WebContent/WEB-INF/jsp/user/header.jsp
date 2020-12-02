@@ -30,8 +30,8 @@
             <section class="member-container">
                 <h1 class="d-none">회원 메뉴</h1>
                 <ul>
-                    <li><div><a class="login-btn"href="/account/signUp.html">회원가입</a></div></li>
-                    <!-- <li><div><a>로그아웃</a></div></li> -->
+                    <li><div><a class="login-btn"href="/account/login">로그인</a></div></li>
+                    <li><div><a class="login-btn"href="/account/signUp">가입</a></div></li>
                 </ul>
             </section>
             <section class="mobile-menu-open">

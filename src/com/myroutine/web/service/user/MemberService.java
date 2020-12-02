@@ -267,6 +267,7 @@ public class MemberService {
 		String name = m.getName();
 		String nickname = m.getNickname();
 		String pwd = m.getPwd();
+		Date date = new Date(System.currentTimeMillis());
 		
 		if( email.equals("") || name.equals("") ||
 			nickname.equals("") || pwd.equals("") ) {
@@ -275,8 +276,8 @@ public class MemberService {
 		
 		String sql = String.format("INSERT INTO MEMBER"
 				+ "(ID, EMAIL, NAME, NICKNAME, PWD, AUTHORITY, REGDATE) "
-				+ "VALUES (0, '%s', '%s', '%s', '%s', 1, '2020-12-01')",
-				email, name, nickname, pwd);
+				+ "VALUES (0, '%s', '%s', '%s', '%s', 1, '%s')",
+				email, name, nickname, pwd, date);
 		
 		
 		try {

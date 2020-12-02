@@ -1,6 +1,7 @@
 package com.myroutine.web.controller.user.member;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,11 +19,11 @@ public class PutController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// null은 없고 ""만 검사하게
 		String email = request.getParameter("userEmail");
 		String name = request.getParameter("userName");
 		String nickname = request.getParameter("userNickName");
 		String pwd = request.getParameter("userPwd");
+		
 		boolean putStatus = false;
 		System.out.printf("com.myroutine.web.controller.user.member.PutController.java 에서의 로그\n%s, %s, %s, %s\n", email, name, nickname, pwd);
 		if( email != null && name != null &&
@@ -39,6 +40,7 @@ public class PutController extends HttpServlet {
 		}
 		request.setAttribute("putStatus", putStatus);
 		request.getRequestDispatcher("put.jsp").forward(request, response);
+		
 	}
 	
 }

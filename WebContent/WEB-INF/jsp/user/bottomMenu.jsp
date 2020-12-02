@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <!-- 하단 메뉴 -->
-    <link rel="stylesheet" href="./css/user/alert.css">
-    <link rel="stylesheet" href="./css/user/bottom-menu.css">
+    <link rel="stylesheet" href="/css/user/alert.css">
+    <link rel="stylesheet" href="/css/user/bottom-menu.css">
     <div class="bottom-container">
         <!-- 알림창 -->
         <!-- 
@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <script src="./js/user/alert.js"></script>
+        <script src="/js/user/alert.js"></script>
         <!-- // 알림창 -->
 
    		<!-- // 하단 메뉴 버튼 -->

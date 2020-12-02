@@ -18,20 +18,17 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int size = 10;
+		int size = 20;
 		String temp = request.getParameter("size");
 		if( temp != null && temp != "")
 			size = Integer.parseInt(temp);
 		
 		MemberService service = new MemberService();
-//		Member n = service.get(id);
 		List<Member> memberList = service.getList(size);
 		
 		request.setAttribute("memberList", memberList);
 
 		request.getRequestDispatcher("/admin/member/list.jsp").forward(request, response);
-//		System.out.println(memberList.toString());
-		System.out.println("sussess");
 	}
 	
 }

@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="ko" style="min-width: 300px;">
 <head>
     <meta charset="UTF-8">
@@ -11,6 +12,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/jsp/user/header.jsp" />
+	<!-- 바디 -->
     <div class="body">
         <h1 class="d-none">메인 바디</h1>
         <section>
@@ -20,15 +22,22 @@
                 <iframe class="main-video" style="width:100%" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </section>
-        <div style="min-height: 1000px; background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);">
-            <jsp:include page="/WEB-INF/jsp/user/login.jsp" />
-            <div class="border-decoration" style="width: 400px;background:#ffffff; margin: 0 auto;text-align:center;padding:100px 20px;"><span style="font-size: 20px; font-weight: bold;">새로운 기능</span><br><br><a href="/account/signUp.html">/account/signUp.html<br>에서 가입 가능</a><br><br><br><a href="/admin/member/list">회원관리 보러가기</a></div>
+        <div style="min-height: 1000px; padding: 70px 0; background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);">
+            <jsp:include page="/WEB-INF/jsp/user/account/login.jsp" />
+            <div class="border-decoration" style="max-width: 400px;background:#ffffff; margin: 0 auto;text-align:center;padding:100px 20px;">
+            	<span style="font-size: 20px; font-weight: bold;">새로운 기능</span>
+            	<br>
+            	<br>
+	            <a href="/account/signUp">/account/signUp<br>에서 가입 가능</a>
+	            <br>
+	            <br>
+	            <br>
+	            <a href="/admin/member/list">회원관리 구경하러 가자~</a>
+            </div>
         </div>        
     </div>
-
-    <footer style="background: brown; height: 200px">
-        <div class="container"></div>
-    </footer>
+	<!-- // 바디 -->
+	<jsp:include page="/WEB-INF/jsp/user/footer.jsp" />
     
     <jsp:include page="/WEB-INF/jsp/user/loader.jsp" />
     <jsp:include page="/WEB-INF/jsp/user/bottomMenu.jsp" />

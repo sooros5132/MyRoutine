@@ -5,7 +5,6 @@
 
 .account-container{
     width: 100%;
-    margin-top: 70px;
     /* position: absolute;
     top: 0; */
 }
@@ -27,6 +26,13 @@
     background: #ffffff;
     position: relative;
     overflow: hidden;
+}
+
+
+.account-inner > h1{
+    font-size: 30px;
+    font-weight: bold;
+    padding: 20px 0;
 }
 
 .account-inner .account-logo{
