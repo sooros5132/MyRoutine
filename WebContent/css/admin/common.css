@@ -1,7 +1,7 @@
 @charset 'UTF-8';
 /* layout */
-html,body {width:100%; height:100%; color:#262626; }
-.wrapper{ display:flex; flex-direction:column; min-height: 100%; min-width:1200px; overflow-x:auto;}
+html,body {width:100%; min-height:100%; color:#262626; }
+.wrapper{ display:flex; flex-direction:column; min-height: 100%; min-width:1400px; --overflow-x:auto;}
 
 /* header */
 .header {display:flex; height:90px; border-bottom:1px solid #ddd; background:#30baa1; border-bottom:1px solid #30baa1; overflow:hidden;}
@@ -16,13 +16,12 @@ html,body {width:100%; height:100%; color:#262626; }
 .header-util .admin {color:#fff; font-weight:bold; margin-right:20px;}
 .header-util .logout-btn {display:block; padding:8px; background:#f9f9f9; font-size:14px;}
 
-
 /*body*/
-.body {display:flex; flex:1;}
+.body {display:flex;}
 
 /*aside*/
-.aside {display:flex; flex:none; width:250px; background:#fff; border-right:1px solid #ddd;}
-.snb {width:100%;}
+.aside {width:250px; background:#fff; border-right:1px solid #ddd;}
+.snb {width:inherit;}
 .snb ul.dep1 > li {border-bottom:1px solid #ddd;}
 
 .snb ul.dep1 > li > a {position:relative; display:block; padding:16px; font-size:17px; font-weight:bold;} 
@@ -36,7 +35,7 @@ html,body {width:100%; height:100%; color:#262626; }
 
 
 /* main */
-.main {flex:1; padding:40px 50px;}
+.main {flex: 1 0 auto; padding:40px 50px;}
 
 /* footer */
 .footer {flex-basis:45px; line-height:45px; text-align:center;  background:#f7f7f7; border-top:1px solid #ddd;}
