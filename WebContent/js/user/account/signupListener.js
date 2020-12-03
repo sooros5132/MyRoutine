@@ -21,7 +21,7 @@
         let submitBtn = document.getElementById("signup-submit-btn");
         formInput.forEach(textChk => {
             if ( textChk.value.length == 0 ){
-                submitBtn.style.background = "#aeaeae";
+                submitBtn.classList.remove("active");
                 allInputChk = false;
             }
         });
@@ -29,9 +29,9 @@
         // 모두 입력 됐을 시
         if ( allInputChk ){
             if( pwdSame() ){
-                submitBtn.style.background = "#1a73e8";
+                submitBtn.classList.add("active");
             } else {
-                submitBtn.style.background = "#aeaeae";
+                submitBtn.classList.remove("active");
             }
             
         }
@@ -68,16 +68,16 @@
     }
     
     // 자동 선택
-    // window.addEventListener("load", (e)=>{
-    //     setTimeout(()=>{
-    //         formInput.forEach(input => {
-    //             let textLen = input.value.length;
-    //             if( textLen != 0 ){
-    //                 input.parentElement.classList.add("input-active");
-    //             }
-    //         });
-    //     }, 10);
-    // });
+    window.addEventListener("load", (e)=>{
+        setTimeout(()=>{
+            formInput.forEach(input => {
+                let textLen = input.value.length;
+                if( textLen != 0 ){
+                    input.parentElement.classList.add("input-active");
+                }
+            });
+        }, 10);
+    });
     
     formInput.forEach(input => {
         let inputLabel = input.parentElement.querySelector(".input-label");
@@ -114,46 +114,47 @@
     
     // 로그인 버튼 눌렀을 경우 Input들 체크
     document.getElementById("signup-submit-btn").addEventListener("click", (e) => {
-        let inputChkAll = true;
-    
-        // 입력 안됐을 경우 빨간색 표시
-        formInput.forEach(inputChk => {
-            if ( inputChk.value.length == 0 ){
-                let inputLabel = inputChk.parentElement.querySelector(".input-label");
-                let errorMsg = inputChk.parentElement.querySelector(".error-msg");
-                inputChk.parentElement.classList.add("input-error");
-                errorMsg.textContent = inputLabel.textContent + "을(를) 입력해주세요";
-                inputChkAll = false;
-                alertOpen({
-                    setText: "필수 항목을 작성해 주세요",
-                    activeTime: 20,
-                    alertColor: "#ff0000"
-                });
+
+        // 입력 안됐을 경우 빨간색 표시 + return
+		let allInputCheck = true;
+		for( let i = 0; i < formInput.length; i++){
+            if ( formInput[i].value.length == 0 ){
+	            let inputLabel = formInput[i].parentElement.querySelector(".input-label");
+	            let errorMsg = formInput[i].parentElement.querySelector(".error-msg");
+	            formInput[i].parentElement.classList.add("input-error");
+	            errorMsg.textContent = inputLabel.textContent + "을(를) 입력해주세요";
+				allInputCheck = false;
             }
-        });
-        
-        // 모두 입력 됐을 시
-        if ( inputChkAll ){
-            if( pwdSame() ){
-                console.log(e)
-                alertOpen({
-                    setText: "회원가입 누름",
-                    activeTime: 20,
-                    alertColor: ""
-                });
-                e.preventDefault();
-                return;
-            } else {
-                alertOpen({
-                    setText: "비밀번호가 다릅니다",
-                    activeTime: 20,
-                    alertColor: "#ff0000"
-                });
-            }
-        }
-        console.log(1);
-        e.preventDefault();
-    
+		}
+		if( !allInputCheck ){
+            alertOpen({setText: "필수 항목을 작성해 주세요",activeTime: 20,alertColor: "#ff0000"});
+			e.preventDefault();
+        	return;
+		}
+		
+		// 이메일 형식 맞는지 체크
+		const emailRegex = RegExp('^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\[.]{1}[a-zA-Z]{2,3}$');
+		let emailInput = document.querySelector("#userEmail");
+		let emailCheck = emailRegex.test(emailInput.value);
+		if( !emailCheck ){
+            let errorMsg = emailInput.parentElement.querySelector(".error-msg");
+            emailInput.parentElement.classList.add("input-error");
+            errorMsg.innerText = "이메일을 형식을 확인해주세요\nex) exam123@exam.com";
+			alertOpen({setText: "이메일을 형식을 확인해주세요",activeTime: 20,alertColor: "#ff0000"});
+			e.preventDefault();
+        	return;
+		}
+		
+		// 비밀번호 같은지 체크
+        if( !pwdSame() ){
+            alertOpen({setText: "비밀번호가 다릅니다",activeTime: 20,alertColor: "#ff0000"});
+			e.preventDefault();
+			return;
+		}
+		
+		// 이상없음 가입중
+		alertOpen({setText: "처리중", activeTime: 20,alertColor: ""});
+		
     });
 }());
 

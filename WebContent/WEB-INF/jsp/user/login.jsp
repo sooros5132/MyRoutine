@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="/css/user/account/accounts.css">
     <section class="account-container">
 	    <form method="POST">
-	        <div class="account-inner">
+	        <div class="account-inner border-decoration">
 	            <div class="account-logo">
 	                <div>
 	                    <svg style="fill: transparent; overflow: unset;filter: drop-shadow( 1px 1px 2px #000000aa );" viewBox="0 0 44 40">
@@ -46,7 +46,7 @@
 	                </svg>
 	            </div>
 	            <div>
-	                <input required type="email" id="userEmail" name="userEmail" class="user-info"/>
+	                <input required type="email" id="userId" name="userId" class="user-info"/>
 	                <label for="userId" class="input-label">이메일</label>
 	                <div class="error-msg"></div>
 	            </div>
@@ -58,11 +58,11 @@
 	            </div>
 	            
 	            <input type="submit" id="login-submit-btn" class="submit-btn" value="로그인">
-	            <div class="recovery"><span><a href="/account/recoveryEmail">이메일</a></span> / <span><a href="/account/recoveryPwd">비밀번호</a> 찾기</span></div>
+	            <div class="recovery"><span><a href="/account/recoveryEmail.html">이메일</a></span> / <span><a href="/account/recoveryPwd.html">비밀번호</a> 찾기</span></div>
 	
-	            <div id="signup-btn" class="account-btn"><a href="/account/signUp">회원가입</a></div>
+	            <div id="signup-btn" class="account-btn"><a href="/account/signUp.html">회원가입</a></div>
 	        </div>
 	    </form>
 	</section>
-	<script src="/js/user/account/accountListener.js"></script>
+	<script src="/js/user/account/loginListener.js"></script>
     <!-- // 로그인 -->

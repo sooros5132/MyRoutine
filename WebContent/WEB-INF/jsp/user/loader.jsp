@@ -48,18 +48,6 @@
     <script src="/js/user/loader.js"></script>
     <!-- // 로딩 2 -->
     <script>
-	    (function(){
-	    	window.addEventListener("load", ()=>{
-		        let alertCnt = 0;
-		        document.querySelector(".alert-btn").addEventListener("click", (e)=>{
-		            alertOpen({
-		                setText: `${'${++alertCnt}'}번 누름`,
-		                activeTime: 10,
-		                alertColor: ""
-		            });
-		        });
-	    	});
-	    }());
 	    // 개발할땐 끄기 ==========================================
 	    loader();
 	    loader3();

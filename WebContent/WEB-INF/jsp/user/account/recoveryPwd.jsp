@@ -5,7 +5,7 @@
         <div class="account-inner">
             <h1>비밀번호 찾기</h1>
             <div>
-                <input required type="email" id="userId" name="userId" class="user-info"/>
+                <input required type="email" id="userEmail" name="userEmail" class="user-info"/>
                 <div class="input-label">이메일</div>
                 <div class="error-msg"></div>
             </div>

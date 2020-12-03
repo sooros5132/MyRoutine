@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <!-- 헤더 -->
+    <link rel="stylesheet" href="/css/user/header.css">
     <header class="header">
         <div class="container header-container">
             <h1 class="d-none">헤더메뉴</h1>
@@ -46,5 +47,5 @@
             </section>
         </div>
     </header>
-    <link rel="stylesheet" href="/css/user/header.css">
+    <script src="/js/user/header.js"></script>
     <!-- // 헤더 -->

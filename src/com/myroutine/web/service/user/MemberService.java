@@ -3,6 +3,7 @@ package com.myroutine.web.service.user;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -259,10 +260,8 @@ public class MemberService {
 		return m;
 	}
 	
-	public boolean putMember(Member m) {
-		
-
-		boolean putStatus = false;
+	public int putMember(Member m) {
+		int result = 0;
 		String email = m.getEmail();
 		String name = m.getName();
 		String nickname = m.getNickname();
@@ -271,26 +270,27 @@ public class MemberService {
 		
 		if( email.equals("") || name.equals("") ||
 			nickname.equals("") || pwd.equals("") ) {
-			return false;
+			return result;
 		}
 		
-		String sql = String.format("INSERT INTO MEMBER"
-				+ "(ID, EMAIL, NAME, NICKNAME, PWD, AUTHORITY, REGDATE) "
-				+ "VALUES (0, '%s', '%s', '%s', '%s', 1, '%s')",
-				email, name, nickname, pwd, date);
-		
+		String sql ="INSERT INTO "
+				+ "MEMBER (ID, EMAIL, NAME, NICKNAME, PWD, AUTHORITY, REGDATE) "
+				+ "VALUES (?, ?, ?, ?, ?, 1, ?)";
 		
 		try {
-			// Class.forName = 문자열을 클래스로
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(dbUrl, dbId, dbPwd);
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1, m.getId());
+			st.setString(2, m.getEmail());
+			st.setString(3, m.getName());
+			st.setString(4, m.getNickname());
+			st.setString(5, m.getPwd());
+			st.setDate(6, date);
+			result = st.executeUpdate();
 			
 //			System.out.println("MemberService.java -> putMember() 에서 메시지" + rs.toString());
 
-			putStatus = true;
-			rs.close();
 			st.close();
 			con.close();
 			
@@ -299,6 +299,69 @@ public class MemberService {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		return putStatus;
+		return result;
 	}
+	
+	public int deleteMember(int id) {
+		int result = 0;
+		
+		if( id == 0 )
+			return result;
+		
+		String sql ="DELETE FROM MEMBER WHERE ID = ?";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(dbUrl, dbId, dbPwd);
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1, id);
+			
+			result = st.executeUpdate();
+
+//			System.out.println("MemberService.java -> deleteMember() 에서 메시지" + rs.toString());
+
+			st.close();
+			con.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public int editMember(int id, String key, String value) {
+		int result = 0;
+		
+		if( id == 0 ||
+			key == null || value == null ||
+			key.equals("") || value.equals(""))
+			return result;
+		
+		String sql;
+		if( IsNumberService.isNumberic(value) )
+			sql = String.format("UPDATE MEMBER SET %s = %s WHERE ID = %d", key, value, id);
+		else
+			sql = String.format("UPDATE MEMBER SET %s = '%s' WHERE ID = %d", key, value, id);
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(dbUrl, dbId, dbPwd);
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			result = st.executeUpdate();
+			System.out.println("admin.member.MemberService -> editMember() 에서 메시지 실행된 명령줄: " + result);
+
+			st.close();
+			con.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }

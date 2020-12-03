@@ -23,17 +23,19 @@
             </div>
         </section>
         <div style="min-height: 1000px; padding: 70px 0; background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);">
-            <jsp:include page="/WEB-INF/jsp/user/account/login.jsp" />
-            <div class="border-decoration" style="max-width: 400px;background:#ffffff; margin: 0 auto;text-align:center;padding:100px 20px;">
-            	<span style="font-size: 20px; font-weight: bold;">새로운 기능</span>
-            	<br>
-            	<br>
-	            <a href="/account/signUp">/account/signUp<br>에서 가입 가능</a>
-	            <br>
-	            <br>
-	            <br>
-	            <a href="/admin/member/list">회원관리 구경하러 가자~</a>
+            <div style="margin: 50px 10px;">
+            	<div class="border-decoration account-inner" style="min-width: 100px; max-width: 400px;background:#ffffff; margin: 0 auto;text-align:center;padding:50px 20px;">
+	            	<span style="font-size: 20px; font-weight: bold;">새로운 기능</span>
+	            	<br>
+	            	<br>
+		            <a href="/account/signUp">/account/signUp<br>에서 가입 가능</a>
+		            <br>
+		            <br>
+		            <br>
+		            <a href="/admin/member/list">회원관리 구경하러 가자~</a>
+	            </div>
             </div>
+            <jsp:include page="/WEB-INF/jsp/user/account/login.jsp" />
         </div>        
     </div>
 	<!-- // 바디 -->
@@ -103,16 +105,6 @@
             // --// 비디오 설정 끝
 
 
-            // 모바일 헤더 토글
-            let menuOpenBtn = document.querySelector(".mobile-menu-open");
-            menuOpenBtn.addEventListener("click", (e)=>{
-                let headerNode = document.querySelector(".header");
-                if( document.querySelector(".header.active") ){
-                    headerNode.classList.remove("active");
-                } else {
-                    headerNode.classList.add("active");
-                }
-            })
         }());
 
         // 처음 사이즈 작게 해서 키우기

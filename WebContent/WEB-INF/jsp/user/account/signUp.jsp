@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div class="account-container">
+    <form method="POST">
+    <%--
     <form method="POST" action="/account/put">
+    /account/signUp에서 모두 처리하게 바뀜.
+    --%>
         <div class="account-inner">
             <h1>회원가입</h1>
 

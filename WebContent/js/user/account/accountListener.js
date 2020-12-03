@@ -1,20 +1,19 @@
-
-// 자동 선택
-// window.addEventListener("load", (e)=>{
-//     setTimeout(()=>{
-//         formInput.forEach(input => {
-//             let textLen = input.value.length;
-//             if( textLen != 0 ){
-//                 input.parentElement.classList.add("input-active");
-//             }
-//         });
-//     }, 10);
-// });
-
 (function(){
     let formInput = document.querySelectorAll(".account-inner .user-info");
     let pwdInput = document.querySelectorAll("input[type=password]");
 
+    // 자동 선택
+    window.addEventListener("load", (e)=>{
+        setTimeout(()=>{
+            formInput.forEach(input => {
+                let textLen = input.value.length;
+                if( textLen != 0 ){
+                    input.parentElement.classList.add("input-active");
+                }
+            });
+        }, 10);
+    });
+    
     if( pwdInput ){
         pwdInput.forEach(input => {
             input.addEventListener("input", (e) => {
@@ -84,35 +83,45 @@
     
     // 로그인 버튼 눌렀을 경우 Input들 체크
     document.getElementsByClassName("submit-btn")[0].addEventListener("click", (e) => {
-        let allInputChk = true;
-    
-        // 입력 안됐을 경우 빨간색 표시
-        formInput.forEach(inputChk => {
-            if ( inputChk.value.length == 0 ){
-                let inputLabel = inputChk.parentElement.querySelector(".input-label");
-                let errorMsg = inputChk.parentElement.querySelector(".error-msg");
-                inputChk.parentElement.classList.add("input-error");
-                errorMsg.textContent = inputLabel.textContent + "을(를) 입력해주세요";
-                allInputChk = false;
-                alertOpen({
-                    setText: "필수 항목을 작성해 주세요",
-                    activeTime: 20,
-                    alertColor: "#ff0000"
-                });
+
+        // 입력 안됐을 경우 빨간색 표시 + return
+		let allInputCheck = true;
+		for( let i = 0; i < formInput.length; i++){
+            if ( formInput[i].value.length == 0 ){
+	            let inputLabel = formInput[i].parentElement.querySelector(".input-label");
+	            let errorMsg = formInput[i].parentElement.querySelector(".error-msg");
+	            formInput[i].parentElement.classList.add("input-error");
+	            errorMsg.textContent = inputLabel.textContent + "을(를) 입력해주세요";
+				allInputCheck = false;
             }
+		}
+		if( !allInputCheck ){
+            alertOpen({setText: "필수 항목을 작성해 주세요",activeTime: 20,alertColor: "#ff0000"});
+			e.preventDefault();
+        	return;
+		}
+
+		// 이메일 형식 맞는지 체크
+		// const emailRegex = RegExp('^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$');
+		const emailRegex = RegExp('^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\[.]{1}[a-zA-Z]{2,3}$');
+		let emailInput = document.querySelector("#userEmail");
+		let emailCheck = emailRegex.test(emailInput.value);
+		if( !emailCheck ){
+            let errorMsg = emailInput.parentElement.querySelector(".error-msg");
+            emailInput.parentElement.classList.add("input-error");
+            errorMsg.innerText = "이메일을 형식을 확인해주세요\nex) exam123@exam.com";
+			alertOpen({setText: "이메일을 확인해주세요",activeTime: 20,alertColor: "#ff0000"});
+			e.preventDefault();
+        	return;
+		}
+		
+        alertOpen({
+            setText: "처리중 #지금은 테스트, 동작안함",
+            activeTime: 20,
+            alertColor: ""
         });
-    
-        // 모두 입력 됐을 시
-        if ( allInputChk ){
-            console.log("sussess");
-            alertOpen({
-                setText: "로그인 버튼 누름",
-                activeTime: 20,
-                alertColor: ""
-            });
-            e.preventDefault();
-        }
-        
+
+        e.preventDefault();
     });
 }());
 

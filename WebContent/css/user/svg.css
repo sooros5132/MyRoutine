@@ -77,3 +77,38 @@
         fill: url(#login-svg-color);
     }
 }
+
+
+.svg-check-container{
+    width: 100%;
+    height: 100%;
+    overflow: unset;
+}
+
+.svg-check-container .svg-check {
+    fill: none;
+    stroke: transparent;
+    stroke-width: 8px;
+    stroke-miterlimit: 10;
+    stroke-dashoffset: 0;
+    stroke-dasharray: 60;
+}
+
+.svg-check-container.active .svg-check {
+    stroke: #30baa1;
+    animation: svg-check 2s linear alternate infinite;
+}
+
+@keyframes svg-check {
+    0% {
+        stroke-dashoffset: 60;
+    }
+    
+    10% {
+        stroke-dashoffset: 60;
+    }
+
+    40% {
+        stroke-dashoffset: 0;
+    }
+}
