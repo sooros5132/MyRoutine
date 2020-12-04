@@ -50,27 +50,27 @@
 .member-list > table tbody tr.even{
     background-color: #f9f9f9;
 }
-.member-list > table .change-box{
+.member-list > table .data-update-box{
     display: flex;
 }
-.member-list > table .change-box div{
+.member-list > table .data-update-box div{
     flex: 0 0 auto;
     height: 20px;
     flex-basis: calc(100% - 30px);
 }
-.member-list > table .change-box .change-icon{
+.member-list > table .data-update-box .change-icon{
     flex-basis: 30px;
     background: transparent;
     font-size: 16px;
     color: #ddd;
 }
-.member-list > table .change-box.active .change-icon{
+.member-list > table .data-update-box.active .change-icon{
     color: #30baa1;
 }
-.member-list > table .change-box .change-icon:hover{
+.member-list > table .data-update-box .change-icon:hover{
     background-color: #eee;
 }
-.member-list > table .change-box input{
+.member-list > table .data-update-box input{
     width: 100%;
     height: 100%;
     border: 0;
@@ -80,8 +80,37 @@
     background-color: transparent;
     box-sizing: border-box;
 }
-.member-list > table .change-box input:hover,
-.member-list > table .change-box input:focus{
+.member-list > table .data-update-box input:hover,
+.member-list > table .data-update-box input:focus{
     --background-color: #eee;
     border: 1px solid #30baa1;
+}
+
+.member-list > table td{
+	background: transparent;
+}
+.member-list > table td.new-update{
+	animation: highlight 1s ease 1;
+}
+.member-list > table tr.delete{
+	background: rgba(196, 62, 9, 0.7) !important;
+	animation: element-delete 3s linear 1;
+}
+
+@keyframes highlight {
+    0%{
+		background: rgba(238,211,126,0.7);
+    }
+    100%{
+		background: transparent;
+    }
+}
+
+@keyframes element-delete {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
 }
