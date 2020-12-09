@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../../css/admin/exercise/detail.css">
 
     <script src="../../js/admin_common.js"></script>
-    <script src="../../js/adnub/exercise/detail.js"></script>
+    <script src="../../js/admin/exercise/detail.js"></script>
 </head>
 
 <body>
@@ -68,7 +68,7 @@
                         <div class="btn-left"></div>
                         <div class="cliper">
                             <div class="show-room">
-                           		<img src="../../image/exercise/${ex.engName}1.jpg" alt="${ex.engName}1">
+                           		<img src="../../image/exercise/${ex.engName}1.jpg" alt="${ex.engName}1" class="current">
                                 <img src="../../image/exercise/${ex.engName}2.jpg" alt="${ex.engName}2">
                                 <img src="../../image/exercise/${ex.engName}3.jpg" alt="${ex.engName}3">
                             </div>
