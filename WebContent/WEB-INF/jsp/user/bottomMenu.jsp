@@ -3,6 +3,7 @@
     <!-- 하단 메뉴 -->
     <link rel="stylesheet" href="/css/user/alert.css">
     <link rel="stylesheet" href="/css/user/bottom-menu.css">
+    <link rel="stylesheet" href="/css/common.css">
     <div class="bottom-container">
         <!-- 알림창 -->
         <!-- 
