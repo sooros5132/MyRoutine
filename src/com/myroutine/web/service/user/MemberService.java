@@ -41,38 +41,31 @@ public class MemberService {
 				String name = rs.getString("name");
 				String nickname = rs.getString("nickname");
 				String pwd = rs.getString("pwd");
-				String gender = rs.getString("gender");
-				Date birthday = rs.getDate("birthday");
 				String phone = rs.getString("phone");
+				int rule = rs.getInt("rule");
 				Date regdate = rs.getDate("regdate");
-				byte authority = rs.getByte("authority");
-				byte publicinfo = rs.getByte("publicinfo");
-				byte mailauth = rs.getByte("mailauth");
-				byte receivingmail = rs.getByte("receivingmail");
-				byte receivingsms = rs.getByte("receivingsms");
-				Date finalconnection = rs.getDate("finalconnection");
+				Date birthday = rs.getDate("birthday");
+				int openInfo = rs.getInt("open_info");
+				Date finalConnection = rs.getDate("final_connection");
+				String gender = rs.getString("gender");
 			    
 				Member m = new Member(
-					id,
-					email,
-					name,
-					nickname,
-					pwd,
-					gender,
-					birthday,
-					phone,
-					regdate,
-					authority,
-					publicinfo,
-					mailauth,
-					receivingmail,
-					receivingsms,
-					finalconnection
+				    id,
+				    email,
+				    name,
+				    nickname,
+				    pwd,
+				    phone,
+				    rule,
+				    regdate,
+				    birthday,
+				    openInfo,
+				    finalConnection,
+				    gender
 				);
-				if( m != null)
-					translate(m);
 				
 				list.add(m);
+				System.out.println(m.toString());
 			}
 			
 			rs.close();
@@ -86,57 +79,7 @@ public class MemberService {
 		}
 		return list;
 	}
-
-	private void translate(Member m) {
-		
-		String authority = null;
-		switch ( m.getAuthority() ) {
-		case 1:
-			authority = "회원";
-			break;
-		case 2:
-			authority = "차단";
-			break;
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		case 7:
-			break;
-		case 8:
-			authority = "탈퇴";
-			break;
-		case 9:
-			authority = "관리자";
-			break;
-		default:
-			authority = "오류";
-			break;
-		}
-		m.setAuthorityString(authority);
-		
-		if(m.getPublicinfo() == 0)
-		    m.setPublicinfoBoolean(false);
-		else
-		    m.setPublicinfoBoolean(true);
-
-		if(m.getMailauth() == 0)
-		    m.setMailauthString("NO");
-		else
-			m.setMailauthString("YES");
-
-		if(m.getReceivingmail() == 0)
-		    m.setReceivingmailBoolean(false);
-		else
-		    m.setReceivingmailBoolean(true);
-
-		if(m.getReceivingsms() == 0)
-		    m.setReceivingsmsBoolean(false);
-		else
-		    m.setReceivingsmsBoolean(true);
-
-	}
-
+	
 	public Member get(int id) {
 		String sql = "SELECT * FROM MEMBER WHERE ID = " + id;
 		// ORDER BY NICNAME DESC
@@ -152,39 +95,31 @@ public class MemberService {
 			
 			if(rs.next()) {
 				String email = rs.getString("email");
-				String nickname = rs.getString("nickname");
 				String name = rs.getString("name");
+				String nickname = rs.getString("nickname");
 				String pwd = rs.getString("pwd");
-				String gender = rs.getString("gender");
-				Date birthday = rs.getDate("birthday");
 				String phone = rs.getString("phone");
+				int rule = rs.getInt("rule");
 				Date regdate = rs.getDate("regdate");
-				byte authority = rs.getByte("authority");
-				byte publicinfo = rs.getByte("publicinfo");
-				byte mailauth = rs.getByte("mailauth");
-				byte receivingmail = rs.getByte("receivingmail");
-				byte receivingsms = rs.getByte("receivingsms");
-				Date finalconnection = rs.getDate("finalconnection");
+				Date birthday = rs.getDate("birthday");
+				int openInfo = rs.getInt("open_info");
+				Date finalConnection = rs.getDate("final_connection");
+				String gender = rs.getString("gender");
 			    
 				m = new Member(
-					id,
-					name,
-					email,
-					nickname,
-					pwd,
-					gender,
-					birthday,
-					phone,
-					regdate,
-					authority,
-					publicinfo,
-					mailauth,
-					receivingmail,
-					receivingsms,
-					finalconnection
+				    id,
+				    email,
+				    name,
+				    nickname,
+				    pwd,
+				    phone,
+				    rule,
+				    regdate,
+				    birthday,
+				    openInfo,
+				    finalConnection,
+				    gender
 				);
-				if( m != null)
-					translate(m);
 			}
 			
 			rs.close();
@@ -216,36 +151,29 @@ public class MemberService {
 				String email = rs.getString("email");
 				String name = rs.getString("name");
 				String pwd = rs.getString("pwd");
-				String gender = rs.getString("gender");
-				Date birthday = rs.getDate("birthday");
 				String phone = rs.getString("phone");
+				int rule = rs.getInt("rule");
 				Date regdate = rs.getDate("regdate");
-				byte authority = rs.getByte("authority");
-				byte publicinfo = rs.getByte("publicinfo");
-				byte mailauth = rs.getByte("mailauth");
-				byte receivingmail = rs.getByte("receivingmail");
-				byte receivingsms = rs.getByte("receivingsms");
-				Date finalconnection = rs.getDate("finalconnection");
+				Date birthday = rs.getDate("birthday");
+				int openInfo = rs.getInt("open_info");
+				Date finalConnection = rs.getDate("final_connection");
+				String gender = rs.getString("gender");
 			    
 				m = new Member(
-					id,
-					email,
-					name,
-					nickname,
-					pwd,
-					gender,
-					birthday,
-					phone,
-					regdate,
-					authority,
-					publicinfo,
-					mailauth,
-					receivingmail,
-					receivingsms,
-					finalconnection
+				    id,
+				    email,
+				    name,
+				    nickname,
+				    pwd,
+				    phone,
+				    rule,
+				    regdate,
+				    birthday,
+				    openInfo,
+				    finalConnection,
+				    gender
 				);
-				if( m != null)
-					translate(m);
+				
 			}
 			
 			rs.close();

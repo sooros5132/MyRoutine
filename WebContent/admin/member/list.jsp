@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이루틴</title>
+    <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/admin/reset.css">
     <link rel="stylesheet" href="../../css/admin/common.css">
     <link rel="stylesheet" href="../../css/xeicon.min.css">
@@ -71,7 +72,7 @@
 2. X 바뀌면 무조건 체크아이콘 활성
 
 가입 페이지
-/account/signUp.html
+/account/signUp
 </textarea>
                     </div>
                     <h1>회원관리</h1>
@@ -140,14 +141,14 @@
 	        <div class="change-icon update-btn"><i class="xi-check"></i></div>
 	    </div>
 	</td>
-	<td><c:choose><c:when test="${m.mailauth == 1}">YES</c:when><c:otherwise>NO</c:otherwise></c:choose></td>
-	<td><input class="data-input" type="checkbox" data-origin="${m.receivingmail == 1}" name="receivingmail"></td>
+	<td>NO</td>
+	<td><input class="data-input" type="checkbox" data-origin="" name="receivingmail"></td>
 	<td>${m.regdate}</td>
 	<td class="member-status"></td>
 	<td colspan="2">
 	    <div class="data-update-box">
 	        <div class="data-box">
-	            <select class="data-input" data-origin="${m.authority}" name="authority">
+	            <select class="data-input" data-origin="${m.rule}" name="rule">
 	                <option value="1">회원</option>
 	                <option value="7">차단</option>
 	                <option value="8">탈퇴</option>
@@ -172,17 +173,17 @@
 	        <div class="change-icon update-btn"><i class="xi-check"></i></div>
 	    </div>
 	</td>
-	<td><input class="data-input" type="checkbox" data-origin="${m.publicinfo == 1}" name="publicinfo"></td>
-	<td><input class="data-input" type="checkbox" data-origin="${m.receivingsms == 1}" name="receivingsms"></td>
+	<td><input class="data-input" type="checkbox" data-origin="${m.openInfo == 1}" name="openInfo"></td>
+	<td></td>
 	<td>
 	    <div class="data-update-box">
 	        <div class="data-box"><input class="data-input" type="text" value="${m.birthday}" data-origin="${m.birthday}" name="birthday"></div>
 	        <div class="change-icon update-btn"><i class="xi-check"></i></div>
 	    </div>
 	</td>
-	<td>${m.finalconnection}</td>
+	<td>${m.finalConnection}</td>
 	<td class="member-status-withdraw"></td>
-	<td class="member-status-block"><input class="data-input" type="checkbox" data-origin="${m.authority == 7}" name="authority"></td>
+	<td class="member-status-block"><input class="data-input" type="checkbox" data-origin="${m.rule == 7}" name="rule"></td>
 </tr>
 </c:forEach>
                         </tbody>
