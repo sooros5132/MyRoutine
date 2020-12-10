@@ -1,7 +1,6 @@
 package com.myroutine.web.controller.admin.exercise;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,9 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.myroutine.web.entity.admin.exercise.Exercise;
-import com.myroutine.web.entity.admin.exercise.ExerciseBackup;
 import com.myroutine.web.service.admin.exercise.ExerciseService;
-import com.myroutine.web.service.admin.exercise.ExerciseServiceBackup;
+
 @WebServlet("/admin/exercise/detail")
 public class DetailController extends HttpServlet{
 //	운동페이지 name 을 기준으로 페이지 띄우지? 

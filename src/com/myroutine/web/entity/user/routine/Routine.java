@@ -11,7 +11,6 @@ public class Routine {
     private int regMemberId;
     
     public Routine() {
-		// TODO Auto-generated constructor stub
 	}
     
 	public Routine(int id, String name, Date regdate, Date executeDate, Date releaseDate, int regMemberId) {
