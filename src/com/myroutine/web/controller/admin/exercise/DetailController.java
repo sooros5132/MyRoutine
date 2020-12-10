@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.myroutine.web.entity.admin.exercise.Exercise;
 import com.myroutine.web.entity.admin.exercise.ExerciseBackup;
+import com.myroutine.web.service.admin.exercise.ExerciseService;
 import com.myroutine.web.service.admin.exercise.ExerciseServiceBackup;
 @WebServlet("/admin/exercise/detail")
 public class DetailController extends HttpServlet{
@@ -17,14 +19,13 @@ public class DetailController extends HttpServlet{
 //	name 하나만 받는거 get으로 받을거야
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String name = req.getParameter("name");
-		ExerciseServiceBackup service = new ExerciseServiceBackup();
-		ExerciseBackup ex =service.get(name);
+		int id = Integer.parseInt(req.getParameter("id"));
+		ExerciseService service = new ExerciseService();
+		Exercise ex =service.get(id);
 		
-		System.out.println(name);
+		System.out.println(id);
 		req.setAttribute("ex", ex);
 		
 		req.getRequestDispatcher("detail.jsp").forward(req, resp);
 	}
-	
 }
