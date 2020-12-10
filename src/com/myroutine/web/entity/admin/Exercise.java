@@ -8,28 +8,43 @@ public class Exercise {
 	private String contents;
 	private Date regdate;
 	private String engName;
-	private String recommeand;
-	private int bodyPart;
+	private String recommand;
 	private int memberId;
 	private int categoryId;
 	
 	
 	public Exercise() {
-		// TODO Auto-generated constructor stub
 	}
-	public Exercise(int id, String name, String contents, Date regdate, String engName, String recommeand, int bodyPart,
-			int memberId, int categoryId) {
+	
+	public Exercise(String name, String contents, String engName, String recommand, int memberId,
+			int categoryId) {		
+		//this 쓰는법 물어보기
+		this.name = name;
+		this.contents = contents;
+		this.engName = engName;
+		this.recommand = recommand;
+		this.memberId = memberId;
+		this.categoryId = categoryId;
+	}
+	
+	public Exercise(int id, String name, String contents, Date regdate, String engName, String recommand, int memberId,
+			int categoryId) {
 		this.id = id;
 		this.name = name;
 		this.contents = contents;
 		this.regdate = regdate;
 		this.engName = engName;
-		this.recommeand = recommeand;
-		this.bodyPart = bodyPart;
+		this.recommand = recommand;
 		this.memberId = memberId;
 		this.categoryId = categoryId;
 	}
 	
+	
+
+	
+
+
+
 	public int getId() {
 		return id;
 	}
@@ -60,17 +75,11 @@ public class Exercise {
 	public void setEngName(String engName) {
 		this.engName = engName;
 	}
-	public String getRecommeand() {
-		return recommeand;
+	public String getRecommand() {
+		return recommand;
 	}
-	public void setRecommeand(String recommeand) {
-		this.recommeand = recommeand;
-	}
-	public int getBodyPart() {
-		return bodyPart;
-	}
-	public void setBodyPart(int bodyPart) {
-		this.bodyPart = bodyPart;
+	public void setRecommand(String recommand) {
+		this.recommand = recommand;
 	}
 	public int getMemberId() {
 		return memberId;
@@ -84,13 +93,5 @@ public class Exercise {
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
-	
-	
-
-	
-
-
-	
-
 	
 }
