@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.myroutine.web.entity.admin.achievement.Achievement;
 
-public interface AchievementDao {
+public interface AchievementDao { //테이블명Dao
 	int insert(Achievement ach);
 
 	int update(Achievement ach);
