@@ -1,11 +1,6 @@
 package com.myroutine.web.service.admin.exercise;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Date;
+import java.util.List;
 
 import com.myroutine.web.dao.ExerciseDao;
 import com.myroutine.web.entity.admin.Exercise;
@@ -21,16 +16,24 @@ public class ExerciseService {
 		return result;
 	}
 	
+	//운동 수정
+		public int update(Exercise ex) {
+			int result = 0;
+			return result;
+			
+		}
+		
+	//운동 리스트 불러오기
+	public List<Exercise> getList() {
+		
+		return exerciseDao.getList();
+	}
+
 	//운동 정보 불러오기
 	public Exercise get(int id) {
 		return exerciseDao.get(id);
 	}
 	
-	//운동 수정
-	public int update(Exercise ex) {
-		int result = 0;
-		return result;
-		
-	}
+	
 
 }

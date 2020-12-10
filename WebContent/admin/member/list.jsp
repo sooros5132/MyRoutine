@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이루틴</title>
+    <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/admin/reset.css">
     <link rel="stylesheet" href="../../css/admin/common.css">
     <link rel="stylesheet" href="../../css/xeicon.min.css">
@@ -58,19 +59,20 @@
 
             <!-- main(개별 컨턴츠 넣는곳) -->
             <main class="main">
+            	<link rel="stylesheet" href="../../css/admin/member/list.css">
                 <div class="member-list">
                     <div style="margin-bottom: 20px;padding: 10px; background: #f5f5f5;">
                         <h1 style="font-size: 20px;">아이디어 메모 저장기능 x</h1>
 <textarea style="font-family: 'Courier New', Courier, monospace;" name="" id="" cols="30" rows="10">
-회원 / 차단 /        탈퇴상태 / 관리자
- 1  /  2  /            8   /   9
+회원 /       차단 /  탈퇴상태 / 관리자
+ 1  /        7  /      8   /   9
 
 체크표시 언제 바뀔지
 1. O data-origin 속성으로 기존 값 가지고 있다가 비교 후 다르면 체크아이콘 활성
 2. X 바뀌면 무조건 체크아이콘 활성
 
 가입 페이지
-/account/signUp.html
+/account/signUp
 </textarea>
                     </div>
                     <h1>회원관리</h1>
@@ -109,7 +111,7 @@
                                 <th>가입일</th>
                                 <th>회원상태</th> <!-- 회원, 관리자, 정지, 탈퇴 표시-->
                                 <th colspan="2">권한 변경</th> <!-- 여기서 관리자 권한 부여 -->
-                                <th rowspan="2">강제<br>탈퇴</th>
+                                <th rowspan="2">강제<br>삭제</th>
                             </tr>
                             <tr>
                                 <th>닉네임</th>
@@ -124,112 +126,72 @@
                         </thead>
                         <tbody>
 <c:forEach var="m" items="${memberList}" varStatus="status">
-<tr class="<c:choose><c:when test="${status.index % 2 == 0}">odd</c:when><c:otherwise>even</c:otherwise></c:choose>">
+<tr class="<c:choose><c:when test="${status.index % 2 == 0}">odd</c:when><c:otherwise>even</c:otherwise></c:choose>" data-member-id="${m.id}">
 	<td rowspan="2"><input type="checkbox" class="member-select"></td>
-	<td>${m.email}</td>
+	<td>
+	    <div class="data-update-box">
+			<div class="data-box"><input class="data-input" type="text" value="${m.email}" data-origin="${m.email}" name="email"></div>
+			<div class="change-icon update-btn"><i class="xi-check"></i></div>
+	    </div>
+	</td>
 	<td>${m.gender}</td>
 	<td>
-	    <div class="change-box">
-	        <div><input type="text" value="${m.name}" data-origin="${m.name}"></div>
-	        <div class="change-icon"><i class="xi-check"></i></div>
+	    <div class="data-update-box">
+	        <div class="data-box"><input class="data-input" type="text" value="${m.name}" data-origin="${m.name}" name="name"></div>
+	        <div class="change-icon update-btn"><i class="xi-check"></i></div>
 	    </div>
 	</td>
-	<td>${m.mailauthString}</td>
-	<td><input type="checkbox" data-origin="${m.receivingmailBoolean}"></td>
+	<td>NO</td>
+	<td><input class="data-input" type="checkbox" data-origin="" name="receivingmail"></td>
 	<td>${m.regdate}</td>
-	<td>${m.authorityString}</td>
+	<td class="member-status"></td>
 	<td colspan="2">
-	    <div class="change-box">
-	        <div>
-	            <select name="" id="">
-	                <option>관리자</option>
-	                <option selected>회원</option>
-	                <option>차단</option>
+	    <div class="data-update-box">
+	        <div class="data-box">
+	            <select class="data-input" data-origin="${m.rule}" name="rule">
+	                <option value="1">회원</option>
+	                <option value="7">차단</option>
+	                <option value="8">탈퇴</option>
+	                <option value="9">관리자</option>
 	            </select>
 	        </div>
-	        <div class="change-icon"><i class="xi-check"></i></div>
+	        <div class="change-icon update-btn"><i class="xi-check"></i></div>
 	    </div>
 	</td>
-	<td rowspan="2"><input type="button" value="탈퇴"></td>
+	<td rowspan="2"><input class="data-input member-delete" type="button" value="삭제" name="delete"></td>
 </tr>
-<tr class="<c:choose><c:when test="${status.index % 2 == 0}">odd</c:when><c:otherwise>even</c:otherwise></c:choose>">
+<tr class="<c:choose><c:when test="${status.index % 2 == 0}">odd</c:when><c:otherwise>even</c:otherwise></c:choose>" data-member-id="${m.id}">
 	<td>
-	    <div class="change-box">
-	        <div><input type="text" value="${m.nickname}" data-origin="${m.nickname}"></div>
-	        <div class="change-icon"><i class="xi-check"></i></div>
+	    <div class="data-update-box">
+	        <div class="data-box"><input class="data-input" type="text" value="${m.nickname}" data-origin="${m.nickname}" name="nickname"></div>
+	        <div class="change-icon update-btn"><i class="xi-check"></i></div>
 	    </div>
 	</td>
 	<td colspan="2">
-	    <div class="change-box">
-	        <div><input type="text" value="${m.phone}" data-origin="${m.phone}"></div>
-	        <div class="change-icon"><i class="xi-check"></i></div>
+	    <div class="data-update-box">
+	        <div class="data-box"><input class="data-input" type="text" value="${m.phone}" data-origin="${m.phone}" name="phone"></div>
+	        <div class="change-icon update-btn"><i class="xi-check"></i></div>
 	    </div>
 	</td>
-	<td><input type="checkbox" data-origin="${m.publicinfoBoolean}"></td>
-	<td><input type="checkbox" data-origin="${m.receivingsmsBoolean}"></td>
+	<td><input class="data-input" type="checkbox" data-origin="${m.openInfo == 1}" name="openInfo"></td>
+	<td></td>
 	<td>
-	    <div class="change-box">
-	        <div><input type="text" value="${m.birthday}" data-origin="${m.birthday}"></div>
-	        <div class="change-icon"><i class="xi-check"></i></div>
+	    <div class="data-update-box">
+	        <div class="data-box"><input class="data-input" type="text" value="${m.birthday}" data-origin="${m.birthday}" name="birthday"></div>
+	        <div class="change-icon update-btn"><i class="xi-check"></i></div>
 	    </div>
 	</td>
-	<td>${m.finalconnection}</td>
-	<td><c:choose><c:when test="${m.authority == 8}">YES</c:when><c:otherwise>NO</c:otherwise></c:choose></td>
-	<td><input type="checkbox" data-origin="${m.authorityString eq '차단'}"></td>
+	<td>${m.finalConnection}</td>
+	<td class="member-status-withdraw"></td>
+	<td class="member-status-block"><input class="data-input" type="checkbox" data-origin="${m.rule == 7}" name="rule"></td>
 </tr>
 </c:forEach>
                         </tbody>
                     </table>
+				<jsp:include page="/WEB-INF/jsp/user/bottomMenu.jsp" />
                 </div>
+    			<script src="../../js/admin/member/memberEdit.js"></script>
             </main>
-            <link rel="stylesheet" href="../../css/admin/member/list.css">
-            <script>
-	            (function(){
-	                window.addEventListener("load", function(){
-	                    let memberTable = document.querySelector(".member-list table");
-	                    // 전체 선택 체크박스
-	                    memberTable.querySelector(".all-member-select").addEventListener("click", (e)=>{
-	                        let memberList = document.querySelectorAll(".member-select");
-	                        if( memberList ){
-	                            memberList.forEach(member => {
-	                                member.checked = e.target.checked;
-	                            });
-	                        }
-	                    });
-	                    // 초기 체크박스 세팅
-	                    let checkboxs = memberTable.querySelectorAll("tbody input[type=checkbox]");
-	                    checkboxs.forEach(checkbox => {
-	                        let originChecked = checkbox.dataset.origin == "true";
-	                        if( originChecked ){
-	                            checkbox.checked = originChecked;
-	                        }
-	                        // 맨 왼쪽 체크박스는 제외 member-select 
-	                        let notMemberSelect = checkbox.classList.contains("member-select");
-	                        if( !notMemberSelect ){
-	                            checkbox.addEventListener("click", (e)=>{
-	                            let check = confirm("변경하시겠습니까??");
-	                            if(check){
-	
-	                            } else {
-	                                e.preventDefault();
-	                            }
-	                        });
-	                        }
-	                    });
-	                    // 데이터 바뀜 체크
-	                    let textInputs = memberTable.querySelectorAll("tbody input[type=text]");
-	                    textInputs.forEach(input => {
-	                        input.addEventListener("input", (e)=>{
-	                            let parentChangeBox = input.parentElement.parentElement;
-	                            if( input.value != input.dataset.origin )
-	                                parentChangeBox.classList.add("active");
-	                            else 
-	                                parentChangeBox.classList.remove("active");
-	                        });
-	                    });
-	                });
-	            }());
-			</script>
             <!-- //main(개별 컨턴츠 넣는곳) -->
         </div>
 

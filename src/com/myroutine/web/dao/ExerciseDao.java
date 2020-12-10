@@ -10,5 +10,9 @@ public interface ExerciseDao {
 	//운동수정
 	int update(Exercise exercise);
 
+//	int delete(int id);
+
 	Exercise get(int id);
+
+	List<Exercise> getList();
 }

@@ -1,0 +1,124 @@
+.name-box, .part1, .part2{
+    margin: 1px;
+    box-sizing: border-box;
+}
+.label{
+    --width: 46px;
+    background-color: #30baa1;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.part{
+    display: flex;
+    border: 1px solid #30baa1;
+    
+}
+
+.content{
+    padding: 5px;
+    width: 100px;
+    --height: 40px;
+    text-align: center;
+}
+
+.text-content{
+    border: 1px solid #30baa1;
+}
+
+button{
+    background-color: #30baa1;
+    color: white;
+    font-weight: bold;
+    margin-left: auto;
+    padding: 10px;
+}
+
+.btn-left {
+    width: 0px;
+    height: 0px;
+    border-top: 15px solid transparent;
+    border-right: 30px solid #30baa1;
+    border-bottom: 15px solid transparent;
+    align-self: center;
+  }
+
+.btn-right {
+    width: 0px;
+    height: 0px;
+    border-top: 15px solid transparent;
+    border-left: 30px solid #30baa1;
+    border-bottom: 15px solid transparent;
+    align-self: center;
+}
+/*======================================*/
+.main-container{
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    margin: 0px auto;
+}
+.image-container{
+    display: flex;
+    width: 400px;
+    height: 250px;
+    margin: 0px auto;
+}
+.image-container .cliper{
+    width: 250px;
+    overflow:hidden;
+}
+
+.image-container .cliper .show-room{
+    display: flex;
+    width: 250px;
+    height: 250px;
+    margin: 0px auto;
+    --border:1px solid #30baa1;
+    transition: transform 500ms ease-in-out;
+    box-sizing: border-box;
+}
+
+.image-container .cliper .show-room img{
+    flex:1 0 250px;    
+}
+
+
+.detail-box{
+   display: flex;
+   margin: 10px 0px;
+}
+
+.container {
+    display: flex;
+    border: 1px solid #30baa1;
+}
+
+.part-box{
+    display: flex;
+    --margin-left: auto;
+}
+.part-box-left{
+    display: flex;
+    margin-left: auto;
+}
+
+.description-box{
+    --display: flex;
+    margin: 10px 0px;
+}
+.description-box .label{
+    width: auto;
+}
+.recomand-box{
+    --display: flex;
+    margin:10px 0px;
+}
+.recomand-box .label{
+    width: auto;
+}
+.button-box{
+    margin-left: auto;
+}
