@@ -1,4 +1,4 @@
-package com.myroutine.web.service.user;
+package com.myroutine.web.service;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -14,7 +14,7 @@ public class TimeService {
 	}
 
 	// 2020-12-03 16:47:41
-	public String getDate() {
+	public String getNowDate() {
 		formatter = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss", Locale.KOREA );
 		currentTime = new Date(System.currentTimeMillis());
 		dTime = formatter.format ( currentTime );

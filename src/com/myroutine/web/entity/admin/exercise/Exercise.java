@@ -3,86 +3,83 @@ package com.myroutine.web.entity.admin.exercise;
 import java.util.Date;
 
 public class Exercise {
+	private int id;
 	private String name;
-	private String des;
-	private String rec;
-	private String div1;
-	private String div2;
+	private String contents;
+	private String recommend;
 	private Date regDate;
-	private String files;
 	private String engName;
-	
+	private int categoryId;
+	private int memberId;
 	public Exercise() {
-		
-	}
-	public Exercise(String name, String des, String rec, String div1, String div2,Date regDate, String files,String engName) {
 		super();
-		this.name = name;
-		this.des = des;
-		this.rec = rec;
-		this.div1 = div1;
-		this.div2 = div2;
-		this.regDate= regDate;
-		this.files=files;
-		this.engName=engName;
+		// TODO Auto-generated constructor stub
 	}
-	
+	public Exercise(int id, String name, String contents, String recommend, Date regDate, String engName,
+			int categoryId, int memberId) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.contents = contents;
+		this.recommend = recommend;
+		this.regDate = regDate;
+		this.engName = engName;
+		this.categoryId = categoryId;
+		this.memberId = memberId;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDes() {
-		return des;
+	public String getContents() {
+		return contents;
 	}
-	public void setDes(String des) {
-		this.des = des;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
-	public String getRec() {
-		return rec;
+	public String getRecommend() {
+		return recommend;
 	}
-	public void setRec(String rec) {
-		this.rec = rec;
+	public void setRecommend(String recommend) {
+		this.recommend = recommend;
 	}
-	public String getDiv1() {
-		return div1;
-	}
-	public void setDiv1(String div1) {
-		this.div1 = div1;
-	}
-	public String getDiv2() {
-		return div2;
-	}
-	public void setDiv2(String div2) {
-		this.div2 = div2;
-	}
-	
 	public Date getRegDate() {
 		return regDate;
 	}
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	public String getFiles() {
-		return files;
-	}
-	public void setFiles(String files) {
-		this.files = files;
-	}
-	
 	public String getEngName() {
 		return engName;
 	}
 	public void setEngName(String engName) {
 		this.engName = engName;
 	}
+	public int getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+	public int getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(int memberId) {
+		this.memberId = memberId;
+	}
 	@Override
 	public String toString() {
-		return "Exercise [name=" + name + ", des=" + des + ", rec=" + rec + ", div1=" + div1 + ", div2=" + div2
-				+ ", regDate=" + regDate + ", files=" + files + ", engName=" + engName + "]";
+		return "Exercise [id=" + id + ", name=" + name + ", contents=" + contents + ", recomand=" + recommend
+				+ ", regDate=" + regDate + ", engName=" + engName + ", categoryId=" + categoryId + ", memberId="
+				+ memberId + "]";
 	}
-	
-	
-	
+
 }

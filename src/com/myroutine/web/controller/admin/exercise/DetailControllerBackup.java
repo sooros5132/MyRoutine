@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.myroutine.web.entity.admin.exercise.ExerciseBackup;
 import com.myroutine.web.service.admin.exercise.ExerciseServiceBackup;
-@WebServlet("/admin/exercise/detail")
-public class DetailController extends HttpServlet{
+@WebServlet("/admin/exercise/detailBackup")
+public class DetailControllerBackup extends HttpServlet{
 //	운동페이지 name 을 기준으로 페이지 띄우지? 
 //	name 하나만 받는거 get으로 받을거야
 	@Override
@@ -24,7 +24,7 @@ public class DetailController extends HttpServlet{
 		System.out.println(name);
 		req.setAttribute("ex", ex);
 		
-		req.getRequestDispatcher("detail.jsp").forward(req, resp);
+		req.getRequestDispatcher("detailBackup.jsp").forward(req, resp);
 	}
 	
 }

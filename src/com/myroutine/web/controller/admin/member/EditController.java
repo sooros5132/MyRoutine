@@ -76,14 +76,14 @@ public class EditController extends HttpServlet {
 			
 			// 삭제하는거일경우
 			if( key.equals("delete") && value.equals("1")) {
-				result = service.deleteMember(id);
+				result = service.delete(id);
 				out.printf("{\"result\":%d}", result);
 				continue;
 			}
 
 			System.out.printf("admin.member.EditController -> EditController() 에서 메시지 id: %d, key: %s, value: %s\n", id, key, value);
 			
-			result = service.editMember(id, key, value);
+			result = service.update(id, key, value);
 			out.printf("{\"result\":%d}", result);
 		}
 		out.close();

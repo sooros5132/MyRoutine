@@ -51,7 +51,7 @@ public class SignUpController extends HttpServlet {
 				m.setId(num);
 				// ===================================
 				
-				result = service.putMember(m);
+				result = service.put(m);
 				request.setAttribute("m", m);
 			}
 			
