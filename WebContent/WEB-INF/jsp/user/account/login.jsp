@@ -48,13 +48,13 @@
 	            <div>
 	                <input required type="email" id="userEmail" name="userEmail" class="user-info"/>
 	                <label for="userId" class="input-label">이메일</label>
-	                <div class="error-msg"></div>
+	                <div class="input-msg error-msg"></div>
 	            </div>
 	
 	            <div>
 	                <input required type="password" id="userPwd" name="userPwd" class="user-info"/>
 	                <label for="userPwd" class="input-label">비밀번호</label>
-	                <div class="error-msg"></div>
+	                <div class="input-msg error-msg"></div>
 	            </div>
 	            
 	            <input type="submit" id="login-submit-btn" class="submit-btn" value="로그인">

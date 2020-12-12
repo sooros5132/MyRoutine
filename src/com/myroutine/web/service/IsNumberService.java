@@ -1,6 +1,15 @@
 package com.myroutine.web.service;
 
 public class IsNumberService {
+	
+	public static void main(String[] args) {
+		System.out.println(isNumberic(""));
+		System.out.println(isNumberic(null));
+		System.out.println(isInteger(""));
+		System.out.println(isInteger(null));
+		
+	}
+	
 	public static boolean isNumberic(String s) { //숫자 판별 함수
 		try {
 	     	Double.parseDouble(s);

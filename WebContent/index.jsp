@@ -59,7 +59,7 @@
         .taebo-game-img{
             width: 520px;
             height: 635px;
-            background: url(/TB_40_2.png) no-repeat;
+            background: url(/image/TB_40_2.png) no-repeat;
             transform: scale(0.7);
         }
     </style>

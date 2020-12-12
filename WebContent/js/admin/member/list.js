@@ -1,6 +1,45 @@
 (function(){
     window.addEventListener("load", function(){
-        let memberTable = document.querySelector(".member-list table");
+
+        //페이징 설정
+        (function(){
+            let pagingNodes = document.querySelectorAll(".member-list .member-list-paging .paging");
+            pagingNodes.forEach(pageingNode => {
+
+                let dataPage = pageingNode.dataset.page;
+                let reg = /[\\?&]page=([^&#]*)/;
+                let pram;
+
+                if( location.search.match(reg) ){
+                    pram = location.search.replace(/[\\?&]page=([^&#]*)/, `&page=${dataPage}`)
+                } else {
+                    if( location.search == "" ){
+                        pram = `?page=${dataPage}`;
+                    } else {
+                        pram = location.search + `&page=${dataPage}`;
+                    }
+                }
+                pageingNode.addEventListener("click", ()=>{
+                    location.href = pram;
+                })
+            });
+        }())
+
+        //현재 페이지숫자를 배경으로
+        
+        (function(){
+            let currentPageNumber = document.querySelector(".page-number td");
+            let tbodyNode = currentPageNumber.parentElement.parentElement;
+            // currentPageNumber.style.width = `${tbodyNode.offsetWidth}px`;
+            currentPageNumber.style.lineHeight = `${tbodyNode.offsetHeight}px`;
+            currentPageNumber.style.fontSize = `${tbodyNode.offsetHeight}px`;
+            if( tbodyNode.offsetHeight > 1500 ){
+                currentPageNumber.style.fontSize = `1500px`;
+            }
+        }())
+
+
+        let memberTable = document.querySelector(".member-list .member-list-table");
         // 전체 선택 체크박스
         memberTable.querySelector(".all-member-select").addEventListener("click", (e)=>{
             let memberList = document.querySelectorAll(".member-select");

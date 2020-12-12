@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.myroutine.web.service.user.MemberService;
+import com.myroutine.web.service.admin.member.MemberService;
 
 @WebServlet("/admin/member/edit")
 public class EditController extends HttpServlet {
@@ -34,6 +34,8 @@ public class EditController extends HttpServlet {
 		int id = 0;
 		int result = 0;
 		String idCheck = request.getParameter("id");
+
+		// id값 안오면 바로 연결 끊음
 		if( idCheck == null || idCheck.equals("") ) {
 			out = response.getWriter();
 			out.printf("{\"result\":%d}", result);
@@ -42,7 +44,7 @@ public class EditController extends HttpServlet {
 		
 		// 아이디, 키 세팅
 		id = Integer.parseInt(idCheck);
-		String str = "email,name,nickname,phone,birthday,authority,receivingmail,publicinfo,receivingsms,delete";
+		String str = "email,name,nickname,phone,birthday,rule,open_info,delete";
 		List<String> keys = new ArrayList<String>();
 		Map<String, String> datas = new HashMap<String, String>();
 		

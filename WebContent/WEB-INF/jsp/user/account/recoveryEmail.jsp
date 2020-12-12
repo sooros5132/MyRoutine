@@ -7,7 +7,7 @@
             <div>
                 <input required type="email" id="userEmail" name="userEmail" class="user-info"/>
                 <div class="input-label">이메일</div>
-                <div class="error-msg"></div>
+                <div class="input-msg error-msg"></div>
             </div>
 
             <!--

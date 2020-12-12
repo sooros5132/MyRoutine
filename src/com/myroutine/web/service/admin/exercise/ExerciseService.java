@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 
 import com.myroutine.web.dao.ExerciseDao;
 import com.myroutine.web.entity.admin.exercise.Exercise;
-import com.newlecture.web.dao.NoticeDao;
 
 
 public class ExerciseService {
