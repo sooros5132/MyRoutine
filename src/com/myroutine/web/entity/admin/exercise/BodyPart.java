@@ -2,15 +2,17 @@ package com.myroutine.web.entity.admin.exercise;
 
 public class BodyPart {
 	private int id;
-    private String bodyPart;
+    private String name;
+    
+    
     
     public BodyPart() {
-		// TODO Auto-generated constructor stub
 	}
     
-	public BodyPart(int id, String bodyPart) {
+    
+	public BodyPart(int id, String name) {
 		this.id = id;
-		this.bodyPart = bodyPart;
+		this.name = name;
 	}
 	
 	public int getId() {
@@ -19,12 +21,14 @@ public class BodyPart {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getBodyPart() {
-		return bodyPart;
+	public String getName() {
+		return name;
 	}
-	public void setBodyPart(String bodyPart) {
-		this.bodyPart = bodyPart;
+	public void setName(String name) {
+		this.name = name;
 	}
+    
+   
 	
     
 }

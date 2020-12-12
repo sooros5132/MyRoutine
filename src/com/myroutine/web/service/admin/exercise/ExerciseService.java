@@ -1,35 +1,39 @@
 package com.myroutine.web.service.admin.exercise;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 
 import com.myroutine.web.dao.ExerciseDao;
 import com.myroutine.web.entity.admin.exercise.Exercise;
 
-
 public class ExerciseService {
 	private ExerciseDao exerciseDao;
 	
+	
+	
+	//� ���
+	public int insert(Exercise ex) {
+		int result = 0;
+		return result;
+	}
+	
+	//� ����
+		public int update(Exercise ex) {
+			int result = 0;
+			return result;
+			
+		}
+		
+	//� ����Ʈ �ҷ�����
 	public List<Exercise> getList() {
 		
 		return exerciseDao.getList();
 	}
-	
-	
+
+	//� ���� �ҷ�����
 	public Exercise get(int id) {
-		
 		return exerciseDao.get(id);
 	}
+	
+	
 
-	
-	
 }

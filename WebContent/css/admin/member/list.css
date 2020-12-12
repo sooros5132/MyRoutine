@@ -156,11 +156,14 @@
 	text-align: center;
 	padding: 4px 0;
 }
+.member-list-paging a.disable{
+	color: #dddddd;
+}
 .member-list-paging a.now-page{
 	background: #30baa1;
 	color: #ffffff;
 }
-.member-list-paging a:not(.now-page):hover{ 
+.member-list-paging a:not(.disable):hover{ 
 	background: #4bdec3;
 	color: #ffffff;
 }

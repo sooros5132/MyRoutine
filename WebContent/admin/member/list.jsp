@@ -285,13 +285,13 @@
 						    	<c:set var="endPage" value="${totalPage}"/>
 						    </c:if>
 						    
-   						 	<a class="p-prev-next p-first-end paging" data-page="1"><i class="xi-angle-left-min"></i><i class="xi-angle-left-min"></i></a>
-						    <a class="p-prev-next paging" data-page="${page-1}"><i class="xi-angle-left-min"></i></a>
+   						 	<a class="p-prev-next p-first-end paging <c:if test="${page <= 1}">disable</c:if>" data-page="1"><i class="xi-angle-left-min"></i><i class="xi-angle-left-min"></i></a>
+						    <a class="p-prev-next paging <c:if test="${page <= 1}">disable</c:if>" data-page="${page-1}"><i class="xi-angle-left-min"></i></a>
     						
 						    <c:forEach begin="${startPage}" end="${endPage}" var="nowPage">
 						        <c:choose>
 						            <c:when test="${nowPage eq page}">
-						                <a class="now-page"style="font-weight: bold">${nowPage}</a>
+						                <a class="now-page disable"style="font-weight: bold">${nowPage}</a>
 						            </c:when>
 						            <c:otherwise>
 						                <a class="paging" data-page="${nowPage}">${nowPage}</a>
@@ -299,8 +299,8 @@
 						        </c:choose>
 						    </c:forEach>
 						    
-						    <a class="p-prev-next paging" data-page="${page+1}"><i class="xi-angle-right-min"></i></a>
-						    <a class="p-prev-next p-first-end paging" data-page="<fmt:parseNumber integerOnly="true" value="${totalPage}" />"><i class="xi-angle-right-min"></i><i class="xi-angle-right-min"></i></a>
+						    <a class="p-prev-next paging <c:if test="${page >= totalPage}">disable</c:if>" data-page="${page+1}"><i class="xi-angle-right-min"></i></a>
+						    <a class="p-prev-next p-first-end paging <c:if test="${page >= totalPage}">disable</c:if>" <c:if test="${page <= 1}">disable</c:if> data-page="<fmt:parseNumber integerOnly="true" value="${totalPage}" />"><i class="xi-angle-right-min"></i><i class="xi-angle-right-min"></i></a>
 						    <%--
 						    <div>memberList: ${totalCount}, start: ${startPage}, end: ${endPage}, totalPage: ${totalPage}, pagingHalf: ${pagingHalf}</div>
 						    --%>

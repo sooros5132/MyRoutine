@@ -5,9 +5,12 @@ import java.util.List;
 import com.myroutine.web.entity.admin.exercise.Exercise;
 
 public interface ExerciseDao {
-//	int insert(Exercise exercise);
-
-//	int update(Exercise exercise);
+	
+	//운동추가
+	int insert(Exercise exercise);
+	
+	//운동수정
+	int update(Exercise exercise);
 
 //	int delete(int id);
 

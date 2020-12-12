@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이루틴</title>
+
+    <!-- 
+        공통 파일입니다. (경로 다 달라서 재설정 해야합니다.)
+        (로고이미지도 경로 수정해야합니다.)
+    -->
+
+    <!-- 공통CSS -->
+    <link rel="stylesheet" href="../css/admin/reset.css">
+    <link rel="stylesheet" href="../css/admin/common.css">
+    <link rel="stylesheet" href="../css/xeicon.min.css">
+    
+    <!-- 공통JS -->
+    <script src="../../js/admin_common.js"></script>
+    
+    <!-- 개별JS -->
+    <script src="../../js/admin_common.js"></script>
+ 
+</head>
+<body>
+    <div class="wrapper">
+        <!-- header -->
+        <header class="header">
+            <h1 class="logo"><a href="#"><img src="../image/common/logo.png" alt="마이루틴"></a></h1>
+            <nav class="gnb">
+                <ul>
+                    <li><a href="#" class="active"><i class="xi-calendar-list"></i>운동 관리</a></li>
+                    <li><a href="#"><i class="xi-group"></i>회원 관리</a></li>
+                    <li><a href="#"><i class="xi-forum"></i>커뮤니티 관리</a></li>
+                    <li><a href="#"><i class="xi-comment"></i>공지사항 관리</a></li>
+                </ul>
+            </nav> 
+            
+            <div class="header-util">
+                <span class="admin">황병준님</span>
+                <a class="logout-btn" href="#">로그아웃</a>
+            </div>
+        </header>
+        <!-- //header -->
+       
+
+        <div class="body">
+            <!-- aside -->
+            <aside class="aside">
+                <nav class="snb">
+                    <!-- <h2>서브메뉴</h2> -->
+                    <ul class="dep1">
+                        <!-- 하위 메뉴가 있으면 li태그에 data-type:true 넣어주세요 -->
+                        <li data-type="true">
+                            <a href="#">재활관리<i class="xi-angle-right-min"></i></a>
+                            <ul class="dep2">
+                                <li><a href="https:\\www.naver.com">재활 보기</a></li>
+                                <li><a href="https:\\www.naver.com">재활 등록</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="https:\\www.naver.com">재활관리2</a></li>
+                        <li><a href="https:\\www.naver.com">재활관리2</a></li>
+                        <li><a href="https:\\www.naver.com">재활관리2</a></li>
+                    </ul>
+                </nav>
+            </aside>
+            <!-- //aside -->
+
+            <!-- main(개별 컨턴츠 넣는곳) -->
+            <main class="main">
+
+            </main>
+            <!-- //main(개별 컨턴츠 넣는곳) -->
+        </div>
+
+        <!-- footer -->
+        <footer class="footer">
+            <span>ⓒ 마이 루틴</span>
+        </footer>
+        <!-- //footer -->
+    </div>
+</body>
+</html>

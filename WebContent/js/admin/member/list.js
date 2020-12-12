@@ -2,41 +2,46 @@
     window.addEventListener("load", function(){
 
         //페이징 설정
-        (function(){
-            let pagingNodes = document.querySelectorAll(".member-list .member-list-paging .paging");
-            pagingNodes.forEach(pageingNode => {
+        let pagingNodes = document.querySelectorAll(".member-list .member-list-paging .paging");
+        pagingNodes.forEach(pagingNode => {
 
-                let dataPage = pageingNode.dataset.page;
-                let reg = /[\\?&]page=([^&#]*)/;
-                let pram;
+            // 사용 불가인 경우 패스
+            if( pagingNode.classList.contains("disable") ){
+                return;
+            }
 
-                if( location.search.match(reg) ){
-                    pram = location.search.replace(/[\\?&]page=([^&#]*)/, `&page=${dataPage}`)
+            let dataPage = pagingNode.dataset.page;
+            let reg = /[\\?&]page=([^&#]*)/;
+            // let reg = /[\\?&]page=([^&#]*)/ 물음표 뺌
+            let oldPram = location.search;
+            let newPram;
+
+
+            if( oldPram.match(reg) ){
+                if( oldPram.match(/^[?page]/) ){
+                    newPram = oldPram.replace(reg, `?page=${dataPage}`)
                 } else {
-                    if( location.search == "" ){
-                        pram = `?page=${dataPage}`;
-                    } else {
-                        pram = location.search + `&page=${dataPage}`;
-                    }
+                    newPram = oldPram.replace(reg, `&page=${dataPage}`)
                 }
-                pageingNode.addEventListener("click", ()=>{
-                    location.href = pram;
-                })
-            });
-        }())
+            } else {
+                if( oldPram == "" ){
+                    newPram = `?page=${dataPage}`;
+                } else {
+                    newPram = oldPram + `&page=${dataPage}`;
+                }
+            }
+            pagingNode.href = `${location.pathname}${newPram}`;
+        });
 
         //현재 페이지숫자를 배경으로
-        
-        (function(){
-            let currentPageNumber = document.querySelector(".page-number td");
-            let tbodyNode = currentPageNumber.parentElement.parentElement;
-            // currentPageNumber.style.width = `${tbodyNode.offsetWidth}px`;
-            currentPageNumber.style.lineHeight = `${tbodyNode.offsetHeight}px`;
-            currentPageNumber.style.fontSize = `${tbodyNode.offsetHeight}px`;
-            if( tbodyNode.offsetHeight > 1500 ){
-                currentPageNumber.style.fontSize = `1500px`;
-            }
-        }())
+        let currentPageNumber = document.querySelector(".page-number td");
+        let tbodyNode = currentPageNumber.parentElement.parentElement;
+        // currentPageNumber.style.width = `${tbodyNode.offsetWidth}px`;
+        currentPageNumber.style.lineHeight = `${tbodyNode.offsetHeight}px`;
+        currentPageNumber.style.fontSize = `${tbodyNode.offsetHeight}px`;
+        if( tbodyNode.offsetHeight > 1500 ){
+            currentPageNumber.style.fontSize = `1500px`;
+        }
 
 
         let memberTable = document.querySelector(".member-list .member-list-table");
