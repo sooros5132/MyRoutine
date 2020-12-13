@@ -9,10 +9,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.myroutine.web.dao.jdbc.DBContext;
 import com.myroutine.web.entity.Member;
 import com.myroutine.web.service.IsNumberService;
+import com.myroutine.web.service.TimeService;
 
 public class JdbcMemberDao implements MemberDao {
 	
@@ -85,7 +87,7 @@ public class JdbcMemberDao implements MemberDao {
 				Date regdate = rs.getDate("regdate");
 				Date birthday = rs.getDate("birthday");
 				int openInfo = rs.getInt("open_info");
-				Date finalConnection = rs.getDate("final_connection");
+				Date lastLogin = rs.getDate("last_login");
 				String gender = rs.getString("gender");
 			    
 				Member m = new Member(
@@ -99,7 +101,7 @@ public class JdbcMemberDao implements MemberDao {
 				    regdate,
 				    birthday,
 				    openInfo,
-				    finalConnection,
+				    lastLogin,
 				    gender
 				);
 				
@@ -144,7 +146,7 @@ public class JdbcMemberDao implements MemberDao {
 				Date regdate = rs.getDate("regdate");
 				Date birthday = rs.getDate("birthday");
 				int openInfo = rs.getInt("open_info");
-				Date finalConnection = rs.getDate("final_connection");
+				Date lastLogin = rs.getDate("last_login");
 				String gender = rs.getString("gender");
 			    
 				m = new Member(
@@ -158,7 +160,7 @@ public class JdbcMemberDao implements MemberDao {
 				    regdate,
 				    birthday,
 				    openInfo,
-				    finalConnection,
+				    lastLogin,
 				    gender
 				);
 			}
@@ -207,33 +209,49 @@ public class JdbcMemberDao implements MemberDao {
 	}
 
 	@Override
-	public int update(int id, String key, String value) {
+	public int update(int id, Map<String, String> datas) {
 		int result = 0;
 		
-		if( id == 0 ||
-			key == null || value == null ||
-			key.equals("") || value.equals(""))
+		if( id == 0 || datas.isEmpty())
 			return result;
 
-		String url = DBContext.URL;
-		String sql;
+		List<String> args = new ArrayList<String>();
 		
-		if( IsNumberService.isNumberic(value) )
-			sql = String.format("UPDATE MEMBER SET %s = %s WHERE ID = %d", key, value, id);
-		else
-			sql = String.format("UPDATE MEMBER SET %s = '%s' WHERE ID = %d", key, value, id);
+		datas.entrySet().forEach((entry) -> {
+			String key = entry.getKey().toUpperCase();
+			String value = entry.getValue();
+
+			if(key.equals("LAST_LOGIN")) {
+				value = TimeService.getCreationTimeNoSeparator();
+				args.add(String.format("%s = TO_DATE('%s','YYYYMMDDHH24MISS')", key, value));
+			} else {
+				if( IsNumberService.isNumberic(value) )
+					args.add(String.format("%s = %s", key, value));
+				else
+					args.add(String.format("%s = '%s'", key, value));
+			}
+		});
+		
+		String param = String.join(", ", args);
+		
+		String url = DBContext.URL;
+//		String sql = "UPDATE MEMBER SET ? WHERE ID = ?";
+		String sql = "UPDATE MEMBER SET " + param + " WHERE ID = "+ id;
+		
+		System.out.println("dao.jdbc.admin.jdbc.JdbcMemberDao -> update() 에서 메시지 실행할 SQL문\n UPDATE MEMBER SET " + param + " WHERE ID = "+ id);
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
 			PreparedStatement st = con.prepareStatement(sql);
-			
+//			st.setString(1, param);
+//			st.setInt(2, id);
+				
 			result = st.executeUpdate();
-			System.out.println("JdbcMemberDao -> editMember() 에서 메시지 실행된 명령줄: " + result);
+			System.out.println("JdbcMemberDao -> update() 에서 메시지 실행된 명령줄: " + result);
 
 			st.close();
 			con.close();
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -241,7 +259,52 @@ public class JdbcMemberDao implements MemberDao {
 		}
 		return result;
 	}
-
+	
+//	@Override
+//	public int update(int id, String key, String value) {
+//		int result = 0;
+//		
+//		if( id == 0 ||
+//			key == null || value == null ||
+//			key.equals("") || value.equals(""))
+//			return result;
+//
+//		String url = DBContext.URL;
+//		String sql = "UPDATE MEMBER SET";
+//		
+//		if(key.equals("last_login")) {
+//			sql += String.format(" %s = TO_DATE('%s','YYYYMMDDHH24MISS')", key, value);
+//		} else {
+//			if( IsNumberService.isNumberic(value) )
+//				sql += String.format(" %s = %s", key, value);
+//			else
+//				sql += String.format(" %s = '%s'", key, value);
+//		}
+//		
+//		sql += String.format(" WHERE ID = %d", id);
+//		System.out.println("dao.jdbc.admin.jdbc.JdbcMemberDao -> update() 에서 메시지 실행할 SQL문\n" + sql);
+//		
+//		// UPDATE MEMBER SET FINAL_CONNECTION = TO_DATE('20201203164741','YYYYMMDDHH24MISS') WHERE NAME = 'tester94';
+//		
+//		try {
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+//			PreparedStatement st = con.prepareStatement(sql);
+//			
+//			result = st.executeUpdate();
+//			System.out.println("JdbcMemberDao -> editMember() 에서 메시지 실행된 명령줄: " + result);
+//
+//			st.close();
+//			con.close();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		return result;
+//	}
+	
 	@Override
 	public int totalCount() {
 		int result = 0;

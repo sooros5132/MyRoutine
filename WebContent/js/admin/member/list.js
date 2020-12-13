@@ -1,5 +1,6 @@
 (function(){
     window.addEventListener("load", function(){
+        let confirmStr = "데이터를 변경 하시겠습니까??";
 
         //페이징 설정
         let pagingNodes = document.querySelectorAll(".member-list .member-list-paging .paging");
@@ -18,7 +19,7 @@
 
 
             if( oldPram.match(reg) ){
-                if( oldPram.match(/^[?page]/) ){
+                if( oldPram.match(/^\?page/) ){
                     newPram = oldPram.replace(reg, `?page=${dataPage}`)
                 } else {
                     newPram = oldPram.replace(reg, `&page=${dataPage}`)
@@ -35,14 +36,15 @@
 
         //현재 페이지숫자를 배경으로
         let currentPageNumber = document.querySelector(".page-number td");
-        let tbodyNode = currentPageNumber.parentElement.parentElement;
-        // currentPageNumber.style.width = `${tbodyNode.offsetWidth}px`;
-        currentPageNumber.style.lineHeight = `${tbodyNode.offsetHeight}px`;
-        currentPageNumber.style.fontSize = `${tbodyNode.offsetHeight}px`;
-        if( tbodyNode.offsetHeight > 1500 ){
-            currentPageNumber.style.fontSize = `1500px`;
+        if( currentPageNumber ){
+            let tbodyNode = currentPageNumber.parentElement.parentElement;
+            // currentPageNumber.style.width = `${tbodyNode.offsetWidth}px`;
+            currentPageNumber.style.lineHeight = `${tbodyNode.offsetHeight}px`;
+            currentPageNumber.style.fontSize = `${tbodyNode.offsetHeight}px`;
+            if( tbodyNode.offsetHeight > 1500 ){
+                currentPageNumber.style.fontSize = `1500px`;
+            }    
         }
-
 
         let memberTable = document.querySelector(".member-list .member-list-table");
         // 전체 선택 체크박스
@@ -55,7 +57,33 @@
             }
         });
 
-        // 초기 인풋들 세팅
+        // 초기 Input들 세팅
+        let lastLoginNodes = memberTable.querySelectorAll("tbody .member-last-login");
+        lastLoginNodes.forEach(lastLogin => {
+            let updateBtn = lastLogin.querySelector(".update-btn");
+            let parentTrElement = lastLogin.parentElement.parentElement;
+            let memberId = parentTrElement.dataset.memberId;
+            updateBtn.addEventListener("click", (e)=>{
+
+                confirmCheck = confirm(confirmStr);
+                if( !confirmCheck ){
+                    alertOpen({setText: `취소되었습니다.`,activeTime: 10,alertColor: ""});
+                    e.preventDefault();
+                    return;
+                }
+
+                memberUpdatePromise({id:memberId, key:"last_login", value:"update"})
+                .then((data) => {
+                    if(!data)
+                        return;
+                    let textNode = lastLogin.querySelector(".data-box");
+                    textNode.textContent = data["last_login"].substring(0,16);
+                    highlight(lastLogin.parentElement);
+                })
+                .catch((error) => console.log(error));
+            })
+        });
+
         let inputs = memberTable.querySelectorAll("tbody .data-input, tbody .member-delete");
         inputs.forEach(input => {
             
@@ -67,7 +95,6 @@
             let dataValue;
             let confirmCheck;
             let dataUpdateBox;
-            let confirmStr = "데이터를 변경 하시겠습니까??";
 
             if( input.classList.contains("member-delete")){
                 input.addEventListener("click", (e)=>{
@@ -83,7 +110,7 @@
                     }
                 });
             }
-
+			
             switch( input.type ){
                 case "checkbox":{
                     parentTdElement = input.parentElement;
@@ -105,6 +132,8 @@
 
                     break;
                 }
+                case "tel":
+                case "date":
                 case "text":{
                     parentTdElement = input.parentElement.parentElement.parentElement;
                     parentTrElement = input.parentElement.parentElement.parentElement.parentElement;
@@ -122,7 +151,6 @@
                         dataValue = input.value;
                         dataSend(e);
                     });
-
                     break;
                 }
                 case "select-one":{
@@ -133,7 +161,7 @@
 
                     // 초기 seleted 세팅 
                     input.querySelector(`option[value="${dataValue}"]`).selected = true;
-                    authTostring(dataValue);
+                    ruleToString(dataValue);
                     
                     input.addEventListener("change", (e) =>{
                         let parentDataUpdateBox = input.parentElement.parentElement;
@@ -167,67 +195,46 @@
                     e.preventDefault();
                     return;
                 }
-                memberUpdate({id:memberId, key:dataKey, value:dataValue});
-            }
-
-            let memberUpdate = function ({id = "", key="", value=""}){
-                let xhr = new XMLHttpRequest();
-                let params = `id=${id}&${key}=${value}`;
-                let formData = encodeURI(params);
-                xhr.onload = function() {
-                    if (xhr.status === 200 || xhr.status === 201) {
-                        if( xhr.responseText == "" ){
-                            alertOpen({setText: `실패하였습니다.`,activeTime: 20,alertColor: "#ff0000"});
-                            return;
-                        }
-                        
-                        let data = JSON.parse(xhr.responseText);
-                        if( data.result == 0 ){
-                            alertOpen({setText: `실패하였습니다.`,activeTime: 20,alertColor: "#ff0000"});
-                            return;
-                        }
-                        
-                        // 변경되고 이벤트
-                        alertOpen({setText: `변경되었습니다.`,activeTime: 20,alertColor: "#30baa1"});
-
-                        switch( input.type ){
-                            case "checkbox":{
-                                input.dataset.origin = input.checked;
-                                break;
-                            }
-                            case "text":{
-                                input.dataset.origin = input.value;
-                                dataUpdateBox.classList.remove("active");
-                                break;
-                            }
-                            case "select-one":{
-                                input.dataset.origin = input.value;
-                                authTostring(input.value);
-                                break;
-                            }
-                        }
-                        if( input.classList.contains("member-delete")){
-                            parentTrElement.classList.add("delete");
-                            parentTrElement.nextElementSibling.classList.add("delete");
-
-                            setTimeout(()=>{
-                                parentTrElement.nextElementSibling.remove();
-                                parentTrElement.remove();
-                            }, 2900);
-                            return;
-                        }
-                        highlight(parentTdElement);
-                    } else {
-                        console.error(xhr.responseText);
-                    }
-                };
-                xhr.open('POST', '/admin/member/edit');
-                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-                xhr.send(formData); // 폼 데이터 객체 전송
                 
+                memberUpdatePromise({id:memberId, key:dataKey, value:dataValue})
+                .then((data) => {
+                    if(!data)
+                        return;
+                    // 변경되고 이벤트
+                    switch( input.type ){
+                        case "checkbox":{
+                            input.dataset.origin = input.checked;
+                            break;
+                        }
+                        case "tel":
+                        case "date":
+                        case "text":{
+                            input.dataset.origin = input.value;
+                            dataUpdateBox.classList.remove("active");
+                            break;
+                        }
+                        case "select-one":{
+                            input.dataset.origin = input.value;
+                            ruleToString(input.value);
+                            break;
+                        }
+                    }
+                    if( input.classList.contains("member-delete")){
+                        parentTrElement.classList.add("delete");
+                        parentTrElement.nextElementSibling.classList.add("delete");
+
+                        setTimeout(()=>{
+                            parentTrElement.nextElementSibling.remove();
+                            parentTrElement.remove();
+                        }, 2900);
+                        return;
+                    }
+                    highlight(parentTdElement);
+                })
+                .catch((error) => console.log(error));
             }
-            
-            function authTostring(num){
+
+            function ruleToString(num){
                 let changeStr;
                 let parentNextElement = parentTrElement.nextElementSibling;
                 let memberStatus = parentTrElement.querySelector(".member-status")
@@ -246,13 +253,11 @@
                     case 7:{
                         changeStr = "차단";
                         block.checked = true;
-                        highlight(block);
                         break;
                     }
                     case 8:{
                         changeStr = "탈퇴";
                         withdraw.textContent = "YES";
-                        highlight(withdraw);
                         break;
                     }
                     case 9:{
@@ -261,12 +266,11 @@
                     }
                 }
                 memberStatus.textContent = changeStr;
-                highlight(memberStatus);
             }
         });
 
         // 데이터 바뀜 체크
-        let textInputs = memberTable.querySelectorAll("tbody input[type=text]");
+        let textInputs = memberTable.querySelectorAll("tbody input[type=text], tbody input[type=tel], tbody input[type=date]");
         textInputs.forEach(input => {
             input.addEventListener("input", (e)=>{
                 let parentChangeBox = input.parentElement.parentElement;
@@ -277,6 +281,41 @@
             });
         });
     });
+
+    const memberUpdatePromise = ({id = "", key="", value=""}) => {
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            let params = `id=${id}&${key}=${value}`;
+            let formData = encodeURI(params);
+            xhr.onload = () => {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    //console.log(xhr);
+                    if( xhr.responseText == "" ){
+                        alertOpen({setText: `실패하였습니다.`,activeTime: 20,alertColor: "#ff0000"});
+                        resolve(false);
+                        return;
+                    }
+                    
+                    let data = JSON.parse(xhr.responseText);
+                    if( data == "" || data == null ||  data?.result == "fail" ){
+                        alertOpen({setText: `실패하였습니다.`,activeTime: 20,alertColor: "#ff0000"});
+                        resolve(false);
+                        return;
+                    }
+                    if( data?.result == "sussess" ){
+                        resolve(data.datas);
+                        alertOpen({setText: `변경되었습니다.`,activeTime: 20,alertColor: "#30baa1"});
+                    }
+                } else {
+                    console.error(xhr.responseText);
+                }
+            }
+            xhr.onerror = () => reject(xhr.status);
+            xhr.open('POST', '/admin/member/edit');
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+            xhr.send(formData); // 폼 데이터 객체 전송
+        });
+    };
 
     let highlight = function ( element ){
         element.classList.remove("new-update");

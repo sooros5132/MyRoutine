@@ -2,6 +2,7 @@ package com.myroutine.web.service.admin.member;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.myroutine.web.dao.jdbc.admin.member.JdbcMemberDao;
 import com.myroutine.web.dao.jdbc.admin.member.MemberDao;
@@ -50,11 +51,11 @@ public class MemberService {
 		
 		return result;
 	}
-	
-	public int update(int id, String key, String value) {
+
+	public int update(int id, Map<String, String> datas) {
 		int result = 0;
 		
-		result = memberDao.update(id, key, value);
+		result = memberDao.update(id, datas);
 		
 		return result;
 	}

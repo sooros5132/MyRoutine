@@ -24,7 +24,7 @@ public class ListController extends HttpServlet {
 		int rule = 0;
 		String key = request.getParameter("key");
 		String value = request.getParameter("value");
-		String searchOption = request.getParameter("searchOption");
+		String searchOption = request.getParameter("search_option");
 		String temp;
 		
 		temp = request.getParameter("size");
@@ -68,7 +68,7 @@ public class ListController extends HttpServlet {
 		request.setAttribute("key", key);
 		request.setAttribute("value", value);
 		request.setAttribute("rule", rule);
-		request.setAttribute("searchOption", searchOption);
+		request.setAttribute("search_option", searchOption);
 		request.setAttribute("totalCount", totalCount);
 		
 

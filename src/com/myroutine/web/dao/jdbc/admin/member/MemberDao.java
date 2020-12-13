@@ -1,6 +1,7 @@
 package com.myroutine.web.dao.jdbc.admin.member;
 
 import java.util.List;
+import java.util.Map;
 
 import com.myroutine.web.entity.Member;
 
@@ -9,6 +10,6 @@ public interface MemberDao {
 	Member get(int id);
 
 	int delete(int memberId);
-	int update(int memberId, String key, String value);
+	int update(int id, Map<String, String> datas);
 	int totalCount();
 }

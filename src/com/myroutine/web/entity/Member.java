@@ -13,7 +13,7 @@ public class Member {
     private Date regdate;
     private Date birthday;
     private int openInfo;
-    private Date finalConnection;
+    private Date lastLogin;
     private String gender;
     
     public Member() {
@@ -29,7 +29,8 @@ public class Member {
     }
 
 	public Member(int id, String email, String name, String nickname, String pwd, String phone, int rule, Date regdate,
-			Date birthday, int openInfo, Date finalConnection, String gender) {
+			Date birthday, int openInfo, Date lastLogin, String gender) {
+		super();
 		this.id = id;
 		this.email = email;
 		this.name = name;
@@ -40,7 +41,7 @@ public class Member {
 		this.regdate = regdate;
 		this.birthday = birthday;
 		this.openInfo = openInfo;
-		this.finalConnection = finalConnection;
+		this.lastLogin = lastLogin;
 		this.gender = gender;
 	}
 
@@ -124,12 +125,12 @@ public class Member {
 		this.openInfo = openInfo;
 	}
 
-	public Date getFinalConnection() {
-		return finalConnection;
+	public Date getLastLogin() {
+		return lastLogin;
 	}
 
-	public void setFinalConnection(Date finalConnection) {
-		this.finalConnection = finalConnection;
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
 	}
 
 	public String getGender() {
@@ -144,7 +145,7 @@ public class Member {
 	public String toString() {
 		return "Member [id=" + id + ", email=" + email + ", name=" + name + ", nickname=" + nickname + ", pwd=" + pwd
 				+ ", phone=" + phone + ", rule=" + rule + ", regdate=" + regdate + ", birthday=" + birthday
-				+ ", openInfo=" + openInfo + ", finalConnection=" + finalConnection + ", gender=" + gender + "]";
+				+ ", openInfo=" + openInfo + ", lastLogin=" + lastLogin + ", gender=" + gender + "]";
 	}
     
 }

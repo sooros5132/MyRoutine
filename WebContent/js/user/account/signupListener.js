@@ -122,7 +122,6 @@
         	return;
         }
         
-        
 		for( let i = 0; i < formInput.length; i++){
             let errorClassContain = formInput[i].parentElement.classList.contains("input-error");
             if(errorClassContain){
@@ -134,7 +133,6 @@
         }
 		
 		// 이메일 형식 맞는지 체크
-		
 		let emailInput = document.querySelector("#userEmail");
 		let emailCheck = emailRegex.test(emailInput.value);
 		if( !emailCheck ){
@@ -159,8 +157,8 @@
     });
 
 	
-    // 자동 선택
     window.addEventListener("load", (e)=>{
+        // 자동 선택
         setTimeout(()=>{
             formInput.forEach(input => {
                 let textLen = input.value.length;
@@ -168,13 +166,12 @@
                     input.parentElement.classList.add("input-active");
                 }
             });
-		}, 10);
+		}, 100);
 
+        // 중복 검사
 		let dupCheckInput = document.querySelectorAll("#userEmail, #userNickname");
-
 		emailInput = document.querySelector("#userEmail");
 		nickNameInput = document.querySelector("#userNickname");
-
 		dupCheckInput.forEach(input => {
 			let checkInput = setTimeout(()=>{});
 			input.addEventListener("input", (e)=>{

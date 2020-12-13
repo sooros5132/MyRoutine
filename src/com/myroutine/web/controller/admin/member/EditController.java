@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.myroutine.web.service.IsNumberService;
+import com.myroutine.web.service.TimeService;
 import com.myroutine.web.service.admin.member.MemberService;
 
 @WebServlet("/admin/member/edit")
@@ -21,45 +23,43 @@ public class EditController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setStatus(404);
+		// 테스트용 넘기기
+		// doPost(request, response);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// JSON응답 세팅
+		// JSON SETTING ---------------------------------------------
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
-		PrintWriter out;
+		PrintWriter out = response.getWriter();
 		
 		int id = 0;
 		int result = 0;
 		String idCheck = request.getParameter("id");
 
-		// id값 안오면 바로 연결 끊음
+		// DISCONNECT CHECK -----------------------------------------
 		if( idCheck == null || idCheck.equals("") ) {
-			out = response.getWriter();
-			out.printf("{\"result\":%d}", result);
+			out.print("{\"result\": \"fail\"}");
 			return;
 		}
 		
-		// 아이디, 키 세팅
+		// SETTING --------------------------------------------------
 		id = Integer.parseInt(idCheck);
-		String str = "email,name,nickname,phone,birthday,rule,open_info,delete";
+
+//		삭제 기능 잠시 꺼둠 
+//		활성화 -> actions배열에 delete 추가
+		String[] actions = {"email","name","nickname","phone","birthday","rule","open_info","last_login"};
 		List<String> keys = new ArrayList<String>();
 		Map<String, String> datas = new HashMap<String, String>();
 		
-		{ // 키들 넣기
-			String[] temp = str.split(",");
-			
-			for(int i = 0; i < temp.length; i++)
-				keys.add(temp[i]);
-		}
+//		키들 넣기
+		for(String action : actions)
+			keys.add(action);
 
 		// 람다식 
 		// 받아온 데이터가 없다면 keys에서 제거함
-		// [email,name,nickname,phone,birthday,authority,receivingmail,publicinfo,receivingsms]
-		// 거치면 아래가 나옴 대입 안해줘도 자동으로 들어감
-		// [receivingmail]
 		keys.removeIf( key -> {
 			String temp = request.getParameter(key);
 			if( temp == null || temp.equals("") ) {
@@ -68,26 +68,32 @@ public class EditController extends HttpServlet {
 			datas.put(key, temp);
 			return false;
 		});
-		
-		MemberService service = new MemberService();
-		out = response.getWriter();
-		
-		// 키들 순회
-		for(String key : keys) {
-			String value = datas.get(key);
-			
-			// 삭제하는거일경우
-			if( key.equals("delete") && value.equals("1")) {
-				result = service.delete(id);
-				out.printf("{\"result\":%d}", result);
-				continue;
-			}
 
-			System.out.printf("admin.member.EditController -> EditController() 에서 메시지 id: %d, key: %s, value: %s\n", id, key, value);
-			
-			result = service.update(id, key, value);
-			out.printf("{\"result\":%d}", result);
+		List<String> results = new ArrayList<String>();
+		MemberService service = new MemberService();
+
+		// UPDATE --------------------------------------------
+		TimeService.setNowDate();
+		result = service.update(id, datas);
+
+		// RESULT --------------------------------------------
+		if( result == 0 ) {
+			out.print("{\"result\": \"fail\"}");
+			out.close();
+			return;
 		}
+		
+		if(datas.get("last_login") != null)
+			results.add("\"last_login\":\"" + TimeService.getCreationTime() + "\"");
+		
+		results.add("\"updateKeys\":[\"" + String.join("\",\"",keys) + "\"]");
+		
+		out.print("{\"result\":\"sussess\",");
+		out.print("\"datas\":{");
+		out.print(String.join(",",results));
+		out.print("}");
+		out.print("}");
+		
 		out.close();
 	}
 }

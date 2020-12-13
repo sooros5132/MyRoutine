@@ -90,15 +90,15 @@
                                                 <input type="radio" name="key" id="open_info" value="open_info" <c:if test="${key == 'open_info'}">checked</c:if>>
                                                 <label for="open_info">정보공개</label>
                                                 <input type="radio" name="key" id="none" value="" <c:if test="${key != 'email' && key != 'nickname' && key != 'name' && key != 'phone' && key != 'open_info'}">checked</c:if>>
-                                                <label for="none">권한만 검색</label>
+                                                <label for="none">선택안함</label>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>검색 내용</td>
                                             <td>
-                                                <input type="radio" name="searchOption" id="same" value="same" <c:if test="${searchOption == 'same'}">checked</c:if>>
+                                                <input type="radio" name="search_option" id="same" value="same" <c:if test="${search_option == 'same'}">checked</c:if>>
                                                 <label for="same">일치</label>
-                                                <input type="radio" name="searchOption" id="contain" value="contain" <c:if test="${searchOption != 'same'}">checked</c:if>>
+                                                <input type="radio" name="search_option" id="contain" value="contain" <c:if test="${search_option != 'same'}">checked</c:if>>
                                                 <label for="contain">일부</label>
                                                 <select style="width:auto" name="rule" class="rule-value">
                                                     <option value="0" <c:if test="${rule < 1 && 9 < rule}">selected</c:if>>모든 권한</option>
@@ -136,7 +136,8 @@
                             </form>
                         </div>
                     </div>
-                    <a href="/account/signUp">가입하러 가기 -></a>
+                    <div><a href="/account/signUp">가입하러 가기 -></a></div>
+                    <div style="text-align:right;"><span>삭제 기능 꺼둠</span></div>
                     <table class="member-list-table">
                         <colgroup>
                             <col style="width: 3%">
@@ -146,22 +147,22 @@
                             <col style="width: 12%">
                             <col style="width: 8%">
                             <col style="width: 13%">
+                            <col style="width: 5%">
+                            <col style="width: 5%">
                             <col style="width: 12%">
-                            <col style="width: 5%">
-                            <col style="width: 5%">
                             <col style="width: 5%">
                         </colgroup>
                         <thead>
                             <tr>
                                 <th rowspan="2"><input type="checkbox" class="all-member-select"></th>
-                                <th rowspan="2">상세<br>보기<br>예정</th>
+                                <th rowspan="2">ID</th>
                                 <th>이메일</th>
                                 <th>성별</th>
                                 <th>이름</th>
                                 <th>메일인증</th>
-                                <th>가입일</th>
                                 <th>회원상태</th> <!-- 회원, 관리자, 정지, 탈퇴 표시-->
                                 <th colspan="2">권한 변경</th> <!-- 여기서 관리자 권한 부여 -->
+                                <th>가입일</th>
                                 <th rowspan="2">강제<br>삭제</th>
                             </tr>
                             <tr>
@@ -169,9 +170,9 @@
                                 <th colspan="2">핸드폰번호</th>
                                 <th>정보 공개</th>
                                 <th>생년월일</th>
-                                <th>최종접속</th>
                                 <th>탈퇴</th>
                                 <th>차단</th>
+                                <th>최종접속</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -194,7 +195,6 @@
 	    </div>
 	</td>
 	<td>NO</td>
-	<td><fmt:formatDate value="${m.regdate}" pattern="yyyy-MM-dd HH:mm"/></td>
 	<td class="member-status"></td>
 	<td colspan="2">
 	    <div class="data-update-box">
@@ -209,6 +209,7 @@
 	        <div class="change-icon update-btn"><i class="xi-check"></i></div>
 	    </div>
 	</td>
+	<td><fmt:formatDate value="${m.regdate}" pattern="yyyy-MM-dd HH:mm"/></td>
 	<td rowspan="2"><input class="data-input member-delete" type="button" value="삭제" name="delete"></td>
 </tr>
 <tr class="<c:choose><c:when test="${status.index % 2 == 0}">odd</c:when><c:otherwise>even</c:otherwise></c:choose>" data-member-id="${m.id}">
@@ -227,13 +228,18 @@
 	<td><input class="data-input" type="checkbox" data-origin="${m.openInfo == 1}" name="open_info"></td>
 	<td>
 	    <div class="data-update-box">
-	        <div class="data-box"><input class="data-input" type="text" value="${m.birthday}" data-origin="${m.birthday}" name="birthday"></div>
+	        <div class="data-box"><input class="data-input" type="date" value="${m.birthday}" data-origin="${m.birthday}" name="birthday"></div>
 	        <div class="change-icon update-btn"><i class="xi-check"></i></div>
 	    </div>
 	</td>
-	<td><fmt:formatDate value="${m.finalConnection}" pattern="yyyy-MM-dd HH:mm"/></td>
 	<td class="member-status-withdraw"></td>
 	<td class="member-status-block"><input class="data-input" type="checkbox" data-origin="${m.rule == 7}" name="rule"></td>
+	<td>
+	    <div class="data-update-box active member-last-login">
+	        <div class="data-box"><fmt:formatDate value="${m.lastLogin}" pattern="yyyy-MM-dd HH:mm"/></div>
+	        <div class="change-icon update-btn"><i class="xi-renew"></i></div>
+	    </div>
+	</td>
 </tr>
 </c:forEach>
 
@@ -328,7 +334,7 @@ page: 페이지
 key: 검색 키
 value: 검색 값
 rule: 회원 권한
-searchOption: 검색 내용의 일치, 일부
+search_option: 검색 내용의 일치, 일부
 
 회원 /       차단 /  탈퇴상태 / 관리자
  1  /        7  /      8   /   9

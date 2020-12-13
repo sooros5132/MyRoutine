@@ -5,19 +5,27 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class TimeService {
-	private SimpleDateFormat formatter;
-	private Date currentTime;
-	private String dTime;
+	private static Date currentTime;
 	
-	public TimeService() {
-		
+	static{
+		currentTime = new Date(System.currentTimeMillis());
 	}
 
 	// 2020-12-03 16:47:41
-	public String getNowDate() {
-		formatter = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss", Locale.KOREA );
-		currentTime = new Date(System.currentTimeMillis());
-		dTime = formatter.format ( currentTime );
+	public static String getCreationTime() {
+		SimpleDateFormat formatter = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss", Locale.KOREA );
+		String dTime = formatter.format ( currentTime );
 		return dTime;
+	}
+	
+	// 20201203164741
+	public static String getCreationTimeNoSeparator() {
+		SimpleDateFormat formatter = new SimpleDateFormat ( "yyyyMMddHHmmss", Locale.KOREA );
+		String dTime = formatter.format ( currentTime );
+		return dTime;
+	}
+	
+	public static void setNowDate() {
+		currentTime = new Date(System.currentTimeMillis());
 	}
 }
