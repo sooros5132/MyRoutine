@@ -10,7 +10,7 @@
 .member-search-container tr td:first-child{
     --border-right: 1px solid #ddd;
     text-align: right;
-    background: #33b9a3;
+    background: #30baa1;
     padding-right: 12px;
     color: #ffffff;
     font-weight: bold;
@@ -74,6 +74,12 @@
     border: 1px solid #ddd;
     border-top: 0;
 }
+.member-list > table tbody tr td.changed{
+	background: rgba(48, 186, 161, 0.2);
+}
+.member-list > table tbody tr td.fail{
+	background: rgba(255, 0, 0, 0.2);
+}
 .member-list > table tbody tr.even{
     background-color: rgb(240, 240, 240, 0.3);
 }
@@ -91,10 +97,11 @@
     font-size: 20px;
     color: #ddd;
 }
-.member-list > table .data-update-box.active .change-icon{
+.member-list > table tbody .change-icon.changed,
+.member-list > table td.changed .data-update-box .change-icon{
     color: #30baa1;
 }
-.member-list > table .data-update-box .change-icon:hover{
+.member-list > table .data-update-box .change-icon i:hover{
     background-color: #eee;
 }
 .member-list > table .data-update-box input{
@@ -107,6 +114,9 @@
     background-color: transparent;
     box-sizing: border-box;
     border: 1px solid transparent;
+}
+.member-list > table .data-update-box input[type="checkbox"]{
+	height:initial;
 }
 .member-list > table .data-update-box input:hover,
 .member-list > table .data-update-box input:focus{
@@ -160,6 +170,7 @@
 }
 .member-list-paging a.disable{
 	color: #dddddd;
+	cursor: initial;
 }
 .member-list-paging a.now-page{
 	background: #30baa1;

@@ -22,9 +22,9 @@ public class EditController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setStatus(404);
+//		response.setStatus(404);
 		// 테스트용 넘기기
-		// doPost(request, response);
+		doPost(request, response);
 	}
 	
 	@Override
@@ -65,6 +65,10 @@ public class EditController extends HttpServlet {
 			if( temp == null || temp.equals("") ) {
 				return true;
 			}
+			if( key.equals("last_login")) {
+				TimeService.setNowDate();
+				temp = TimeService.getCreationTimeNoSeparator();
+			}
 			datas.put(key, temp);
 			return false;
 		});
@@ -73,8 +77,7 @@ public class EditController extends HttpServlet {
 		MemberService service = new MemberService();
 
 		// UPDATE --------------------------------------------
-		TimeService.setNowDate();
-		result = service.update(id, datas);
+		result = service.updateAll(id, datas);
 
 		// RESULT --------------------------------------------
 		if( result == 0 ) {
@@ -87,6 +90,7 @@ public class EditController extends HttpServlet {
 			results.add("\"last_login\":\"" + TimeService.getCreationTime() + "\"");
 		
 		results.add("\"updateKeys\":[\"" + String.join("\",\"",keys) + "\"]");
+		results.add("\"updateLines\":" + result);
 		
 		out.print("{\"result\":\"sussess\",");
 		out.print("\"datas\":{");

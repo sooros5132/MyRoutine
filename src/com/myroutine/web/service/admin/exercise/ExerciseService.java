@@ -8,8 +8,6 @@ import com.myroutine.web.entity.admin.exercise.Exercise;
 public class ExerciseService {
 	private ExerciseDao exerciseDao;
 	
-	
-	
 	//� ���
 	public int insert(Exercise ex) {
 		int result = 0;
@@ -29,7 +27,6 @@ public class ExerciseService {
 		return exerciseDao.getList();
 	}
 
-	//� ���� �ҷ�����
 	public Exercise get(int id) {
 		return exerciseDao.get(id);
 	}

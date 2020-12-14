@@ -21,17 +21,29 @@ public class JdbcMemberDao implements MemberDao {
 	private String sqlTemp = "";
 	
 	@Override
-	public List<Member> getList(int size, int page, String key, String value, int searchRule, String searchOption) {
+	public List<Member> getList() {
+		return getList(1, 20, 1, "", "", "");
+	}
+
+	@Override
+	public List<Member> getList(int startIndex, int endIndex) {
+		return getList(startIndex, endIndex, 1, "", "", "");
+	}
+
+	@Override
+	public List<Member> getList(int startIndex, int endIndex, int rule) {
+		return getList(startIndex, endIndex, rule, "", "", "");
+	}
+
+	@Override
+	public List<Member> getList(int startIndex, int endIndex, String key, String value, String searchOption) {
+		return getList(1, 20, 1, key, value, searchOption);
+	}
+	
+	@Override
+	public List<Member> getList(int startIndex, int endIndex, int searchRule, String key, String value, String searchOption) {
 		List<Member> list = new ArrayList<>();
 
-		int start = size * page - size + 1;
-		int end = size * page;
-		
-		if(page <= 1) {
-			start = 1;
-			end = size;
-		}
-		
 		String url = DBContext.URL;
 //		String sql = String.format("SELECT * FROM ( SELECT ROWNUM NUM, MEMBER.* FROM MEMBER WHERE %s LIKE '%%%s%%' ORDER BY ID DESC) WHERE NUM BETWEEN %d AND %d", key, value, start, end);
 		String sql = "SELECT * FROM (SELECT ROWNUM NUM, M.* FROM ( SELECT * FROM MEMBER";
@@ -39,20 +51,20 @@ public class JdbcMemberDao implements MemberDao {
 		boolean existKeyAndValue = false;
 		
 		// 검색
-		if( !searchOption.equals("") ) {
-			if( searchOption.equals("same") ) {
-				sql += String.format(" WHERE %s = '%s'", key, value);
+		if(!key.equals("") && !value.equals("")) {
+			if( !searchOption.equals("") ) {
+				if( searchOption.equals("same") ) {
+					sql += String.format(" WHERE %s = '%s'", key, value);
+					existKeyAndValue = true;
+				}
+			} 
+			if( !existKeyAndValue ) {
+				sql += String.format(" WHERE %s LIKE '%%%s%%'", key, value);
 				existKeyAndValue = true;
 			}
-		} 
-		
-		if( !existKeyAndValue && !key.equals("") && !value.equals("") ) {
-			sql += String.format(" WHERE %s LIKE '%%%s%%'", key, value);
-			existKeyAndValue = true;
 		}
 		
 		// 권한
-		
 		if ( searchRule != 0 ) {
 			if(existKeyAndValue)
 				sql += " AND";
@@ -64,9 +76,8 @@ public class JdbcMemberDao implements MemberDao {
 		sqlTemp = sql + " ORDER BY ID DESC) M )";
 		
 		// 정렬, 페이징
-		sql += String.format(" ORDER BY ID DESC) M ) WHERE NUM BETWEEN %d AND %d", start, end);
+		sql += String.format(" ORDER BY ID DESC) M ) WHERE NUM BETWEEN %d AND %d", startIndex, endIndex);
 
-		
 		System.out.println("dao.jdbc.admin.jdbc.JdbcMemberDao -> getList() 에서 메시지 실행할 SQL문\n" + sql);
 		
 		try {
@@ -208,47 +219,90 @@ public class JdbcMemberDao implements MemberDao {
 		return result;
 	}
 
+//	@Override
+//	public int update(int id, Map<String, String> datas) {
+//		int result = 0;
+//		
+//		if( id == 0 || datas.isEmpty())
+//			return result;
+//
+//		List<String> args = new ArrayList<String>();
+//		
+//		datas.entrySet().forEach((entry) -> {
+//			String key = entry.getKey().toUpperCase();
+//			String value = entry.getValue();
+//
+//			if(key.equals("LAST_LOGIN")) {
+//				args.add(String.format("%s = TO_DATE('%s','YYYYMMDDHH24MISS')", key, value));
+//			} else {
+//				if( IsNumberService.isNumberic(value) )
+//					args.add(String.format("%s = %s", key, value));
+//				else
+//					args.add(String.format("%s = '%s'", key, value));
+//			}
+//		});
+//		
+//		String param = String.join(",", args);
+//		
+//		String url = DBContext.URL;
+////		String sql = "UPDATE MEMBER SET ? WHERE ID = ?";
+//		String sql = String.format("UPDATE MEMBER SET %s WHERE ID = %d", args, id);
+//		
+//		System.out.println("dao.jdbc.admin.jdbc.JdbcMemberDao -> update() 에서 메시지 실행할 SQL문\n UPDATE MEMBER SET " + param + " WHERE ID = "+ id);
+//		
+//		try {
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+//			PreparedStatement st = con.prepareStatement(sql);
+////			st.setString(1, param);
+////			st.setInt(2, id);
+//			
+//			result = st.executeUpdate();
+//			System.out.println("JdbcMemberDao -> update() 에서 메시지 실행된 명령줄: " + result);
+//
+//			st.close();
+//			con.close();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		return result;
+//	}
+	
 	@Override
-	public int update(int id, Map<String, String> datas) {
+	public int update(int id, String key, String value) {
 		int result = 0;
 		
-		if( id == 0 || datas.isEmpty())
+		if( id == 0 ||
+			key == null || value == null ||
+			key.equals("") || value.equals(""))
 			return result;
 
-		List<String> args = new ArrayList<String>();
-		
-		datas.entrySet().forEach((entry) -> {
-			String key = entry.getKey().toUpperCase();
-			String value = entry.getValue();
-
-			if(key.equals("LAST_LOGIN")) {
-				value = TimeService.getCreationTimeNoSeparator();
-				args.add(String.format("%s = TO_DATE('%s','YYYYMMDDHH24MISS')", key, value));
-			} else {
-				if( IsNumberService.isNumberic(value) )
-					args.add(String.format("%s = %s", key, value));
-				else
-					args.add(String.format("%s = '%s'", key, value));
-			}
-		});
-		
-		String param = String.join(", ", args);
+		key = key.toUpperCase();
 		
 		String url = DBContext.URL;
-//		String sql = "UPDATE MEMBER SET ? WHERE ID = ?";
-		String sql = "UPDATE MEMBER SET " + param + " WHERE ID = "+ id;
+		String sql;
 		
-		System.out.println("dao.jdbc.admin.jdbc.JdbcMemberDao -> update() 에서 메시지 실행할 SQL문\n UPDATE MEMBER SET " + param + " WHERE ID = "+ id);
+		if( IsNumberService.isNumberic(value)) {
+			if(key.equals("LAST_LOGIN"))
+				value = String.format("TO_DATE('%s','YYYYMMDDHH24MISS')", value);
+			
+			sql = String.format("UPDATE MEMBER SET %s = %s WHERE ID = %d", key, value, id);
+		} else {
+			sql = String.format("UPDATE MEMBER SET %s = '%s' WHERE ID = %d", key, value, id);
+		}
+		
+		System.out.println("dao.jdbc.admin.jdbc.JdbcMemberDao -> update() 에서 메시지 실행할 SQL문\n" + sql);
+		
+		// UPDATE MEMBER SET FINAL_CONNECTION = TO_DATE('20201203164741','YYYYMMDDHH24MISS') WHERE NAME = 'tester94';
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
 			PreparedStatement st = con.prepareStatement(sql);
-//			st.setString(1, param);
-//			st.setInt(2, id);
-				
+			
 			result = st.executeUpdate();
-			System.out.println("JdbcMemberDao -> update() 에서 메시지 실행된 명령줄: " + result);
 
 			st.close();
 			con.close();
@@ -259,51 +313,6 @@ public class JdbcMemberDao implements MemberDao {
 		}
 		return result;
 	}
-	
-//	@Override
-//	public int update(int id, String key, String value) {
-//		int result = 0;
-//		
-//		if( id == 0 ||
-//			key == null || value == null ||
-//			key.equals("") || value.equals(""))
-//			return result;
-//
-//		String url = DBContext.URL;
-//		String sql = "UPDATE MEMBER SET";
-//		
-//		if(key.equals("last_login")) {
-//			sql += String.format(" %s = TO_DATE('%s','YYYYMMDDHH24MISS')", key, value);
-//		} else {
-//			if( IsNumberService.isNumberic(value) )
-//				sql += String.format(" %s = %s", key, value);
-//			else
-//				sql += String.format(" %s = '%s'", key, value);
-//		}
-//		
-//		sql += String.format(" WHERE ID = %d", id);
-//		System.out.println("dao.jdbc.admin.jdbc.JdbcMemberDao -> update() 에서 메시지 실행할 SQL문\n" + sql);
-//		
-//		// UPDATE MEMBER SET FINAL_CONNECTION = TO_DATE('20201203164741','YYYYMMDDHH24MISS') WHERE NAME = 'tester94';
-//		
-//		try {
-//			Class.forName("oracle.jdbc.driver.OracleDriver");
-//			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
-//			PreparedStatement st = con.prepareStatement(sql);
-//			
-//			result = st.executeUpdate();
-//			System.out.println("JdbcMemberDao -> editMember() 에서 메시지 실행된 명령줄: " + result);
-//
-//			st.close();
-//			con.close();
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} catch (ClassNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//		return result;
-//	}
 	
 	@Override
 	public int totalCount() {

@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
     <!-- 하단 메뉴 -->
     <link rel="stylesheet" href="/css/user/alert.css">
-    <link rel="stylesheet" href="/css/user/bottom-menu.css">
+    <link rel="stylesheet" href="/css/user/bottomMenu.css">
     <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/xeicon.min.css">
     <div class="bottom-container">
         <!-- 알림창 -->
         <!-- 
@@ -28,17 +29,57 @@
 
    		<!-- // 하단 메뉴 버튼 -->
         <div class="bottom-menu">
-            <div class="bottom-btn top-scroll-btn circle">
-                <div class="arrow">
-                    <div></div>
-                    <div></div>                    
+            <div class="bottom-menu-inner">
+                <div class="bottom-btn chat-toggle circle pointer reveal">
+                    <i class="xi-speech"></i>
                 </div>
-                <svg id="top-scroll" width="30" height="30" style="stroke-dashoffset: 95;">
-                    <circle cx="15" cy="15" r="15"></circle>
-                </svg>
+                <div class="bottom-btn top-scroll-btn circle pointer">
+                    <div class="arrow">
+                        <div></div>
+                        <div></div>                    
+                    </div>
+                    <svg id="top-scroll" width="30" height="30" style="stroke-dashoffset: 95;">
+                        <circle cx="15" cy="15" r="15"></circle>
+                    </svg>
+                </div>
             </div>
         </div>
-        <script src="/js/user/topScroll.js"></script>
+        <script src="/js/user/bottomMenu.js"></script>
     	<!-- // 하단 메뉴 버튼 -->
+    	
+   		<!-- // 채팅 -->
+        <div class="chat-container d-none">
+            <div class="chat-inner">
+            	<div class="chat">
+                    <div class="chat-header-box">
+                        <div class="chat-menu-button pointer"><i class=" xi-angle-left left"></i></div>
+                        <div class="chat-other"><span class="other-name">테스트</span></div>
+                        <div class="chat-menu-button pointer"><i class="chat-close-btn xi-close"></i></div>
+                    </div>
+                    <div class="chat-message-box">
+                        <div class="other-message">상대</div>
+                        <div class="my-message">내꺼</div>
+                        <div class="my-message">내꺼</div>
+                        <div class="my-message">내꺼</div>
+                        <div class="other-message">상대</div>
+                        <div class="other-message">상대</div>
+                        <div class="other-message">상대</div>
+                        <div class="my-message">내꺼</div>
+                        <div class="other-message">상대</div>
+                        <div class="other-message">상대</div>
+                        <div class="my-message">내꺼</div>
+                        <div class="my-message">내꺼</div>
+                    </div>
+                    <div class="chat-input-box">
+                        <div class="chat-input">
+                            <input type="text">
+                        </div>
+                        <div class="chat-send pointer"><i class="xi-send"></i></div>
+                    </div>
+            	</div>
+            </div>
+        </div>
+        <script src="/js/chat.js"></script>
+    	<!-- // 채팅 -->
     </div>
     <!-- // 하단 메뉴 -->

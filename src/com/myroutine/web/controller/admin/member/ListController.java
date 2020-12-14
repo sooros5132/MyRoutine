@@ -59,7 +59,7 @@ public class ListController extends HttpServlet {
 		int end = size * page + size;
 		
 		MemberService service = new MemberService();
-		List<Member> memberList = service.getList(size, page, key, value, rule, searchOption);
+		List<Member> memberList = service.getList(page, size, rule, key, value, searchOption);
 		int totalCount = service.totalCount();
 		
 		request.setAttribute("memberList", memberList);

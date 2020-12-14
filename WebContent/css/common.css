@@ -39,6 +39,9 @@
 .reveal{opacity: 1;pointer-events: all;}
 .circle{border-radius: 50% 50%;}
 .d-none{display:none;}
+.left{margin-left:auto;}
+.right{margin-left:right;}
+.pointer{cursor:pointer;}
 
 .border-decoration{
     box-sizing: border-box;

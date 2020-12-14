@@ -1,6 +1,6 @@
 // 탑 버튼 설정
 (function(){
-    window.addEventListener('scroll', (e)=>{
+    window.addEventListener("scroll", (e)=>{
         let scrollLen = window.pageYOffset / (document.body.offsetHeight - window.innerHeight);
         let topBtnNode = document.getElementById("top-scroll").parentElement;
         
@@ -24,4 +24,20 @@
     document.getElementById("top-scroll").addEventListener("click", ()=>{
         window.scrollTo({top: 0, behavior: 'smooth'});
     })
+
+	window.addEventListener("load", (e)=>{
+		let chatBox = document.querySelector(".chat-container");
+		let chatToggle = document.querySelector(".chat-toggle");
+		let chatCloseBtn = document.querySelector(".chat-close-btn");
+	    chatToggle.addEventListener("click", ()=>{
+	        if(chatBox.classList.contains("d-none")){
+				chatBox.classList.remove("d-none");
+				return;
+			}
+			chatBox.classList.add("d-none");
+	    })
+		chatCloseBtn.addEventListener("click", ()=>{
+			chatBox.classList.add("d-none");
+	    });
+	});
 }());

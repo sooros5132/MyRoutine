@@ -47,27 +47,38 @@
         }
 
         let memberTable = document.querySelector(".member-list .member-list-table");
+
         // 전체 선택 체크박스
-        memberTable.querySelector(".all-member-select").addEventListener("click", (e)=>{
-            let memberList = document.querySelectorAll(".member-select");
-            if( memberList ){
-                memberList.forEach(member => {
-                    member.checked = e.target.checked;
-                });
-            }
-        });
+        // memberTable.querySelector(".all-member-select").addEventListener("click", (e)=>{
+        //     let memberList = document.querySelectorAll(".member-select");
+        //     if( memberList ){
+        //         memberList.forEach(member => {
+        //             member.checked = e.target.checked;
+        //         });
+        //     }
+        // });
+
+        // 제일 왼쪽 선택 도우미
+        // let memberSelects = document.querySelectorAll(".member-list .member-select");
+        // memberSelects.forEach(input => {
+        //     input.parentElement.addEventListener("click", (e)=>{
+        //         if(input.checked)
+        //             input.checked = false;
+        //         else
+        //             input.checked = true;
+        //     })
+        // });
 
         // 초기 Input들 세팅
         let lastLoginNodes = memberTable.querySelectorAll("tbody .member-last-login");
         lastLoginNodes.forEach(lastLogin => {
-            let updateBtn = lastLogin.querySelector(".update-btn");
+            let updateBtn = lastLogin.querySelector(".update-btn i");
             let parentTrElement = lastLogin.parentElement.parentElement;
             let memberId = parentTrElement.dataset.memberId;
             updateBtn.addEventListener("click", (e)=>{
 
                 confirmCheck = confirm(confirmStr);
                 if( !confirmCheck ){
-                    alertOpen({setText: `취소되었습니다.`,activeTime: 10,alertColor: ""});
                     e.preventDefault();
                     return;
                 }
@@ -88,9 +99,9 @@
         inputs.forEach(input => {
             
             // 인풋들 개별값임
-            let parentTrElement;
-            let parentTdElement;
-            let memberId;
+            let parentTrElement = input.parentElement.parentElement.parentElement.parentElement;
+            let parentTdElement = input.parentElement.parentElement.parentElement;
+            let memberId = parentTrElement.dataset.memberId;
             let dataKey = input.name;
             let dataValue;
             let confirmCheck;
@@ -113,37 +124,36 @@
 			
             switch( input.type ){
                 case "checkbox":{
-                    parentTdElement = input.parentElement;
-                    parentTrElement = input.parentElement.parentElement;
-                    memberId = parentTrElement.dataset.memberId;
-
                     // 서버에서 받아온게 트루였다면 체크
-                    let originChecked = input.dataset.origin == "true";
+                    let originChecked = input.dataset.origin == "1";
                     if( originChecked ) {
                         input.checked = originChecked;
                     }
-                    input.addEventListener("click", (e)=>{
+                    
+                    dataUpdateBox = input.parentElement.parentElement;
+                    let updateBtn = dataUpdateBox.querySelector(".update-btn i");
+                    updateBtn.addEventListener("click", (e)=>{
+                        let changeCheck = parentTdElement.classList.contains("changed");
+                        if( !changeCheck ){
+                            e.preventDefault();
+                            return;
+                        }
                         confirmCheck = confirm(confirmStr);
                         dataValue = 0;
                         if( input.checked )
                             dataValue = 1;
                         dataSend(e);
                     });
-
                     break;
                 }
                 case "tel":
                 case "date":
                 case "text":{
-                    parentTdElement = input.parentElement.parentElement.parentElement;
-                    parentTrElement = input.parentElement.parentElement.parentElement.parentElement;
-                    memberId = parentTrElement.dataset.memberId;
-
                     dataUpdateBox = input.parentElement.parentElement;
-                    let updateBtn = dataUpdateBox.querySelector(".update-btn");
+                    let updateBtn = dataUpdateBox.querySelector(".update-btn i");
                     updateBtn.addEventListener("click", (e)=>{
-                        let activeCheck = !updateBtn.parentElement.classList.contains("active");
-                        if( activeCheck ){
+                        let changeCheck = parentTdElement.classList.contains("changed");
+                        if( !changeCheck ){
                             e.preventDefault();
                             return;
                         }
@@ -154,28 +164,18 @@
                     break;
                 }
                 case "select-one":{
-                    parentTdElement = input.parentElement.parentElement.parentElement;
-                    parentTrElement = input.parentElement.parentElement.parentElement.parentElement;
-                    memberId = parentTrElement.dataset.memberId;
                     dataValue = input.dataset.origin;
 
                     // 초기 seleted 세팅 
                     input.querySelector(`option[value="${dataValue}"]`).selected = true;
-                    ruleToString(dataValue);
-                    
-                    input.addEventListener("change", (e) =>{
-                        let parentDataUpdateBox = input.parentElement.parentElement;
-                        if( input.value != input.dataset.origin )
-                            parentDataUpdateBox.classList.add("active");
-                        else 
-                            parentDataUpdateBox.classList.remove("active");
-                    });
+                    let memberStatus = parentTrElement.querySelector(".member-status");
+                    memberStatus.textContent = ruleToString(dataValue);
                     
                     dataUpdateBox = input.parentElement.parentElement;
-                    let updateBtn = dataUpdateBox.querySelector(".update-btn");
+                    let updateBtn = dataUpdateBox.querySelector(".update-btn i");
                     updateBtn.addEventListener("click", (e)=>{
-                        let activeCheck = !updateBtn.parentElement.classList.contains("active");
-                        if( activeCheck ){
+                        let changeCheck = parentTdElement.classList.contains("changed");
+                        if( !changeCheck ){
                             e.preventDefault();
                             return;
                         }
@@ -191,7 +191,6 @@
             // 이벤트 취소시켜야 해서 이벤트 객체 받아와야함
             let dataSend = function(e){
                 if(!confirmCheck){
-                    alertOpen({setText: `취소되었습니다.`,activeTime: 10,alertColor: ""});
                     e.preventDefault();
                     return;
                 }
@@ -203,19 +202,22 @@
                     // 변경되고 이벤트
                     switch( input.type ){
                         case "checkbox":{
-                            input.dataset.origin = input.checked;
+                            let newData = 0;
+                            if( input.checked )
+                                newData = 1;
+                            input.dataset.origin = newData;
                             break;
                         }
                         case "tel":
                         case "date":
                         case "text":{
                             input.dataset.origin = input.value;
-                            dataUpdateBox.classList.remove("active");
                             break;
                         }
                         case "select-one":{
                             input.dataset.origin = input.value;
-                            ruleToString(input.value);
+                            let memberStatus = parentTrElement.querySelector(".member-status");
+                            memberStatus.textContent = ruleToString(input.value);
                             break;
                         }
                     }
@@ -229,57 +231,110 @@
                         }, 2900);
                         return;
                     }
+                    parentTdElement.classList.remove("fail");
+                    parentTdElement.classList.remove("changed");
                     highlight(parentTdElement);
                 })
-                .catch((error) => console.log(error));
+                .catch((error) => {
+                    parentTdElement.classList.add("fail");
+                });
             }
 
-            function ruleToString(num){
-                let changeStr;
-                let parentNextElement = parentTrElement.nextElementSibling;
-                let memberStatus = parentTrElement.querySelector(".member-status")
-                let block = parentNextElement.querySelector(".member-status-block input[type=checkbox]");
-                let withdraw = parentNextElement.querySelector(".member-status-withdraw");
-                num = parseInt(num);
-
-                block.checked = "";
-                withdraw.textContent = "NO";
-
-                switch(num){
-                    case 1:{
-                        changeStr = "회원";
-                        break;
-                    }
-                    case 7:{
-                        changeStr = "차단";
-                        block.checked = true;
-                        break;
-                    }
-                    case 8:{
-                        changeStr = "탈퇴";
-                        withdraw.textContent = "YES";
-                        break;
-                    }
-                    case 9:{
-                        changeStr = "관리자";
-                        break;
-                    }
-                }
-                memberStatus.textContent = changeStr;
-            }
         });
 
         // 데이터 바뀜 체크
-        let textInputs = memberTable.querySelectorAll("tbody input[type=text], tbody input[type=tel], tbody input[type=date]");
+        let textInputs = memberTable.querySelectorAll("tbody input[type=text], tbody input[type=tel], tbody input[type=date], tbody input[type=checkbox], tbody select");
         textInputs.forEach(input => {
             input.addEventListener("input", (e)=>{
-                let parentChangeBox = input.parentElement.parentElement;
-                if( input.value != input.dataset.origin )
-                    parentChangeBox.classList.add("active");
+                let parentTdElement = input.parentElement.parentElement.parentElement;
+                let originData = input.dataset.origin;
+                
+                parentTdElement.classList.remove("fail");
+
+                if(input.type == "checkbox"){
+                    originData = input.dataset.origin == "1";
+
+                    if( input.checked != originData )
+                        parentTdElement.classList.add("changed");
+                    else 
+                        parentTdElement.classList.remove("changed");
+
+                    return;
+                }
+                if( input.value != originData )
+                    parentTdElement.classList.add("changed");
                 else 
-                    parentChangeBox.classList.remove("active");
+                    parentTdElement.classList.remove("changed");
             });
         });
+
+        // 일괄 변경 버튼 이벤트
+        let updateAllBtn = document.querySelector(".update-all-btn");
+        updateAllBtn.addEventListener("click", ()=>{
+            let updateBtns = memberTable.querySelectorAll("tbody td.changed .update-btn");
+            if(updateBtns.length == 0)
+                return;
+            
+            let confirmCheck = confirm("변경된 데이터들을 일괄 변경 하시겠습니까??");
+            if( confirmCheck ){
+                let resultCount = 0;
+                updateBtns.forEach(updateBtn => {
+                    let parentTrElement = updateBtn.parentElement.parentElement.parentElement;
+                    let parentTdElement = updateBtn.parentElement.parentElement;
+                    let input = parentTdElement.querySelector(`input[type="text"], input[type="tel"], input[type="checkbox"], input[type="date"], select`);
+                    let memberId = parentTrElement.dataset.memberId;
+                    let dataKey = input.name;
+                    let dataValue;
+                    switch( input.type ){
+                        case "checkbox":{
+                            dataValue = 0;
+                            if( input.checked )
+                                dataValue = 1;
+                            break;
+                        }
+                        case "tel":
+                        case "date":
+                        case "text":
+                        case "select-one":{
+                            dataValue = input.value;
+                            break;
+                        }
+                    }
+                    console.log(input);
+                    memberUpdatePromise({id:memberId, key:dataKey, value:dataValue})
+                    .then((data) => {
+                        if(!data)
+                            return;
+                        // 변경되고 이벤트
+                        switch( input.type ){
+                            case "checkbox":{
+                                input.dataset.origin = input.checked;
+                                break;
+                            }
+                            case "tel":
+                            case "date":
+                            case "text":{
+                                input.dataset.origin = input.value;
+                                break;
+                            }
+                            case "select-one":{
+                                console.log(data);
+                                input.dataset.origin = input.value;
+                                let memberStatus = parentTrElement.querySelector(".member-status");
+                                memberStatus.textContent = ruleToString(input.value);
+                                break;
+                            }
+                        }
+                        parentTdElement.classList.remove("changed");
+                        highlight(parentTdElement);
+                        alertOpen({setText: `${++resultCount}개가 변경되었습니다.`,activeTime: 20,alertColor: "#30baa1"});
+                    })
+                    .catch((error) => {
+                        parentTdElement.classList.add("fail");
+                    });
+                });
+            }
+        })
     });
 
     const memberUpdatePromise = ({id = "", key="", value=""}) => {
@@ -292,17 +347,17 @@
                     //console.log(xhr);
                     if( xhr.responseText == "" ){
                         alertOpen({setText: `실패하였습니다.`,activeTime: 20,alertColor: "#ff0000"});
-                        resolve(false);
+                        reject(xhr.status);
                         return;
                     }
                     
                     let data = JSON.parse(xhr.responseText);
-                    if( data == "" || data == null ||  data?.result == "fail" ){
+                    if( data == "" || data == null ||  data.result == "fail" ){
                         alertOpen({setText: `실패하였습니다.`,activeTime: 20,alertColor: "#ff0000"});
-                        resolve(false);
+                        reject(xhr.status);
                         return;
                     }
-                    if( data?.result == "sussess" ){
+                    if( data.result == "sussess" ){
                         resolve(data.datas);
                         alertOpen({setText: `변경되었습니다.`,activeTime: 20,alertColor: "#30baa1"});
                     }
@@ -322,4 +377,30 @@
         element.offsetWidth;
         element.classList.add("new-update");
     }
+    
+    let ruleToString = function(num){
+        let changeStr = "";
+
+        num = parseInt(num);
+        switch(num){
+            case 1:{
+                changeStr = "회원";
+                break;
+            }
+            case 7:{
+                changeStr = "차단";
+                break;
+            }
+            case 8:{
+                changeStr = "탈퇴";
+                break;
+            }
+            case 9:{
+                changeStr = "관리자";
+                break;
+            }
+        }
+        return changeStr;
+    }
+
 }());

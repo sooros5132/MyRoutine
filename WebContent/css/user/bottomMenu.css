@@ -1,0 +1,165 @@
+/* 하단 메뉴 */ 
+.bottom-container{
+    position: fixed;
+    bottom: -40px;
+    left: 0px;
+    width: 100%;
+    height: 40px;
+    transition: bottom .5s;
+}
+
+.bottom-container.alert-active{
+    bottom: 0px;
+}
+
+.bottom-container .bottom-menu{
+    margin: 0 auto;
+    position: relative;
+    --max-width: 1200px;
+}
+
+.bottom-menu-inner{
+    position: absolute;
+    top:-80px;
+    right:15px;
+    width:30px;
+    height:65px;
+    --overflow: hidden;
+    transition: bottom .5s;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.bottom-btn{
+    opacity: 0;
+    transition: opacity .5s;
+    background: #333333;
+}
+
+.bottom-btn svg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    fill: transparent;
+    stroke: #f1718c;
+    stroke-width: 2px;
+    stroke-dasharray: 95;
+    transform: rotate(-90deg);
+    overflow: initial;
+}
+
+.chat-toggle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    text-align:center;
+    margin-top: 5px;
+    color: #30baa1;
+}
+
+.chat-container .chat-inner{
+    position: relative;
+    --margin: 0 auto;
+    --max-width: 1200px;
+}
+.chat-container .chat{
+    position: absolute;
+    top: -400px;
+    right: 60px;
+    width: 300px;
+    height: 400px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 18px 18px 0 0;
+    backdrop-filter: blur(20px);
+}
+.chat-container .chat-header-box{
+    display: flex;
+    height:40px;
+    justify-content: center;
+    align-items: center;
+    background: rgba(19,19,19,0.5);
+    color: #efefef;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 18px 18px 0 0;
+    box-sizing: border-box;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.chat-container .chat-header-box div{
+    flex: 1 0 auto;
+}
+
+.chat-container .chat-header-box .other-name{
+    cursor: pointer;
+}
+
+.chat-container .chat-header-box .chat-menu-button{
+    flex-basis:40px;
+    flex-grow: 0;
+}
+.chat-container .chat-message-box{
+    height: 320px;
+    padding: 10px 12px;
+    box-sizing: border-box;
+    background: rgba(19,19,19,0.2);
+    overflow-y:auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.chat-container .chat-message-box div{
+    flex: 0 0 auto;
+    margin: 2px 0;
+    padding: 5px 9px;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #efefef;
+}
+
+.chat-container .chat-message-box .my-message{
+    margin-left: auto;
+    background: #33b9a3;
+    color: #ffffff;
+}
+
+.chat-container .chat-input-box{
+    height: 40px;
+    display: flex;
+}
+
+.chat-container .chat-input-box div{
+    flex: 1 0 auto;
+}
+.chat-container .chat-input-box div.chat-send{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 40px;
+    flex-grow: 0;
+    color:#30baa1;
+    background: rgba(19,19,19,0.9);
+    text-align: center;
+    font-size: 24px;
+}
+
+.chat-container .chat-input-box input{
+    display:block;
+    width:100%;
+    height:100%;
+    border: 0;
+    background: rgba(19,19,19,0.9);
+    color: #ffffff;
+    overflow: hidden;
+    outline: none;
+    border-radius: 0;
+    -webkit-appearance:none;
+    padding-left: 12px;
+    box-sizing: border-box;
+}
+/* // 하단 메뉴 */ 

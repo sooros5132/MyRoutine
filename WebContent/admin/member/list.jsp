@@ -88,7 +88,7 @@
                                                 <input type="radio" name="key" id="phone" value="phone" <c:if test="${key == 'phone'}">checked</c:if>>
                                                 <label for="phone">핸드폰번호</label>
                                                 <input type="radio" name="key" id="open_info" value="open_info" <c:if test="${key == 'open_info'}">checked</c:if>>
-                                                <label for="open_info">정보공개</label>
+                                                <label for="open_info">정보공개(0, 1)</label>
                                                 <input type="radio" name="key" id="none" value="" <c:if test="${key != 'email' && key != 'nickname' && key != 'name' && key != 'phone' && key != 'open_info'}">checked</c:if>>
                                                 <label for="none">선택안함</label>
                                             </td>
@@ -107,7 +107,7 @@
                                                     <option value="8" <c:if test="${rule == 8}">selected</c:if>>탈퇴</option>
                                                     <option value="9" <c:if test="${rule == 9}">selected</c:if>>관리자</option>
                                                 </select>
-                                                <input type="text" name="value" value="" placeholder="검색 내용">
+                                                <input type="text" name="value" value="${value}" placeholder="검색 내용">
                                                 <input type="submit" value="검색">
                                             </td>
                                         </tr>
@@ -140,38 +140,33 @@
                     <div style="text-align:right;"><span>삭제 기능 꺼둠</span></div>
                     <table class="member-list-table">
                         <colgroup>
-                            <col style="width: 3%">
+                            <!-- <col style="width: 3%"> -->
                             <col style="width: 5%">
                             <col style="width: auto">
                             <col style="width: 4%">
                             <col style="width: 12%">
-                            <col style="width: 8%">
-                            <col style="width: 13%">
-                            <col style="width: 5%">
-                            <col style="width: 5%">
-                            <col style="width: 12%">
+                            <col style="width: 15%">
+                            <col style="width: 14%">
+                            <col style="width: 16%">
                             <col style="width: 5%">
                         </colgroup>
                         <thead>
                             <tr>
-                                <th rowspan="2"><input type="checkbox" class="all-member-select"></th>
+                                <!-- <th rowspan="2"><input type="checkbox" class="all-member-select"></th> -->
                                 <th rowspan="2">ID</th>
                                 <th>이메일</th>
                                 <th>성별</th>
                                 <th>이름</th>
-                                <th>메일인증</th>
                                 <th>회원상태</th> <!-- 회원, 관리자, 정지, 탈퇴 표시-->
-                                <th colspan="2">권한 변경</th> <!-- 여기서 관리자 권한 부여 -->
+                                <th>권한 변경</th> <!-- 여기서 관리자 권한 부여 -->
                                 <th>가입일</th>
                                 <th rowspan="2">강제<br>삭제</th>
                             </tr>
                             <tr>
                                 <th>닉네임</th>
                                 <th colspan="2">핸드폰번호</th>
-                                <th>정보 공개</th>
                                 <th>생년월일</th>
-                                <th>탈퇴</th>
-                                <th>차단</th>
+                                <th>정보 공개</th>
                                 <th>최종접속</th>
                             </tr>
                         </thead>
@@ -179,7 +174,7 @@
 <c:if test="${memberList eq '[]'}"><tr style="line-height: 300px;font-size: 70px;color: #ddd;"><td colspan="11">검색 결과가 없습니다</td></tr></c:if>
 <c:forEach var="m" items="${memberList}" varStatus="status">
 <tr class="<c:choose><c:when test="${status.index % 2 == 0}">odd</c:when><c:otherwise>even</c:otherwise></c:choose>" data-member-id="${m.id}">
-	<td rowspan="2"><input type="checkbox" class="member-select"></td>
+	<!-- <td rowspan="2"><input type="checkbox" class="member-select"></td> -->
     <td class="member-detail" rowspan="2"><div>${m.id}</div></th>
 	<td>
 	    <div class="data-update-box">
@@ -194,9 +189,8 @@
 	        <div class="change-icon update-btn"><i class="xi-check"></i></div>
 	    </div>
 	</td>
-	<td>NO</td>
 	<td class="member-status"></td>
-	<td colspan="2">
+	<td>
 	    <div class="data-update-box">
 	        <div class="data-box">
 	            <select class="data-input" data-origin="${m.rule}" name="rule">
@@ -225,19 +219,22 @@
 	        <div class="change-icon update-btn"><i class="xi-check"></i></div>
 	    </div>
 	</td>
-	<td><input class="data-input" type="checkbox" data-origin="${m.openInfo == 1}" name="open_info"></td>
 	<td>
 	    <div class="data-update-box">
 	        <div class="data-box"><input class="data-input" type="date" value="${m.birthday}" data-origin="${m.birthday}" name="birthday"></div>
 	        <div class="change-icon update-btn"><i class="xi-check"></i></div>
 	    </div>
 	</td>
-	<td class="member-status-withdraw"></td>
-	<td class="member-status-block"><input class="data-input" type="checkbox" data-origin="${m.rule == 7}" name="rule"></td>
+	<td>
+		<div class="data-update-box">
+	        <div class="data-box"><input class="data-input" type="checkbox" data-origin="${m.openInfo}" name="open_info"></div>
+	        <div class="change-icon update-btn"><i class="xi-check"></i></div>
+	    </div>
+    </td>
 	<td>
 	    <div class="data-update-box active member-last-login">
 	        <div class="data-box"><fmt:formatDate value="${m.lastLogin}" pattern="yyyy-MM-dd HH:mm"/></div>
-	        <div class="change-icon update-btn"><i class="xi-renew"></i></div>
+	        <div class="change-icon update-btn changed"><i class="xi-renew"></i></div>
 	    </div>
 	</td>
 </tr>
@@ -251,9 +248,10 @@
 </c:if>
                         </tbody>
                     </table>
+                    <div><span>변경한 값들 <input type="button" class="update-all-btn" value="일괄 변경"></span></div>
                     <div class="member-list-paging">
                     	<div>
-						    <!-- 페이지 수 -->
+						    <!-- 보여질 페이지 번호들 최대 수 -->
 						    <c:set var="pagings" value="9"/>
 						    <!-- 페이지 절반 -->
 						    <fmt:parseNumber var="pagingHalf" integerOnly="true" value="${(pagings / 2) / 1 }" />
@@ -307,9 +305,6 @@
 						    
 						    <a class="p-prev-next paging <c:if test="${page >= totalPage}">disable</c:if>" data-page="${page+1}"><i class="xi-angle-right-min"></i></a>
 						    <a class="p-prev-next p-first-end paging <c:if test="${page >= totalPage}">disable</c:if>" <c:if test="${page <= 1}">disable</c:if> data-page="<fmt:parseNumber integerOnly="true" value="${totalPage}" />"><i class="xi-angle-right-min"></i><i class="xi-angle-right-min"></i></a>
-						    <%--
-						    <div>memberList: ${totalCount}, start: ${startPage}, end: ${endPage}, totalPage: ${totalPage}, pagingHalf: ${pagingHalf}</div>
-						    --%>
                     	</div>
                     </div>
                     
