@@ -28,16 +28,16 @@ let loader3;
     }
 
     // 테스트용 제거 ==================================================
-    // let windowLoaded = false;
-    // window.addEventListener("load",  (e)=>{
-    //     windowLoaded = true;
-    // });
+    let windowLoaded = false;
+    window.addEventListener("load",  (e)=>{
+        windowLoaded = true;
+    });
     // 테스트용 제거 ==================================================
     loader = function (){
         // 로드 리스너 등록
-        // window.addEventListener("load",  (e)=>{
-        //     loaderEnd();
-        // });
+        window.addEventListener("load",  (e)=>{
+            loaderEnd();
+        });
 
         //== 로더 시작 준비
         let className = "loading-container-" + (new Date().getTime());
@@ -109,8 +109,8 @@ let loader3;
         }
 
         // 테스트용 제거 ==================================================
-        // if(windowLoaded)
-        //     loaderEnd();
+        if(windowLoaded)
+            loaderEnd();
         // 테스트용 제거 ==================================================
     }
 
@@ -186,8 +186,8 @@ let loader3;
 
 }());
 
+window.addEventListener("load", (e)=>{
+});
 // 개발할땐 끄기 --------------------------------------------
-// window.addEventListener("load", (e)=>{
-//     loader();
-//     loader3();
-// });
+//loader();
+loader3();
