@@ -35,10 +35,7 @@ public class ListController extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ExerciseService service = new ExerciseService();
 		List<Exercise> list = service.getList();
-		
-		
-		
-		
+
 		req.setAttribute("list", list);
 		req.getRequestDispatcher("/admin/exercise/list.jsp").forward(req, resp);
 	}

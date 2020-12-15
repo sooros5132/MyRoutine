@@ -59,5 +59,4 @@ public class SignUpController extends HttpServlet {
 			request.getRequestDispatcher("put.jsp").forward(request, response);
 		}
 	}
-	
 }
