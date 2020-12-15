@@ -53,7 +53,7 @@ public class JdbcMemberDao implements MemberDao {
 		// 검색
 		if(!key.equals("") && !value.equals("")) {
 			if( !searchOption.equals("") ) {
-				if( searchOption.equals("same") ) {
+				if( searchOption.toUpperCase().equals("SAME") ) {
 					sql += String.format(" WHERE %s = '%s'", key, value);
 					existKeyAndValue = true;
 				}
@@ -101,20 +101,7 @@ public class JdbcMemberDao implements MemberDao {
 				Date lastLogin = rs.getDate("last_login");
 				String gender = rs.getString("gender");
 			    
-				Member m = new Member(
-				    id,
-				    email,
-				    name,
-				    nickname,
-				    pwd,
-				    phone,
-				    rule,
-				    regdate,
-				    birthday,
-				    openInfo,
-				    lastLogin,
-				    gender
-				);
+				Member m = new Member(id, email, name, nickname, pwd, phone, rule, regdate, birthday, openInfo, lastLogin, gender);
 				
 				list.add(m);
 //				System.out.println("dao.jdbc.admin.jdbc.JdbcMemberDao -> getList() 에서 메시지 실행된 결과: \n" + m.toString());
@@ -159,21 +146,8 @@ public class JdbcMemberDao implements MemberDao {
 				int openInfo = rs.getInt("open_info");
 				Date lastLogin = rs.getDate("last_login");
 				String gender = rs.getString("gender");
-			    
-				m = new Member(
-				    id,
-				    email,
-				    name,
-				    nickname,
-				    pwd,
-				    phone,
-				    rule,
-				    regdate,
-				    birthday,
-				    openInfo,
-				    lastLogin,
-				    gender
-				);
+
+				m = new Member(id, email, name, nickname, pwd, phone, rule, regdate, birthday, openInfo, lastLogin, gender);
 			}
 			
 			rs.close();
@@ -218,57 +192,6 @@ public class JdbcMemberDao implements MemberDao {
 		}
 		return result;
 	}
-
-//	@Override
-//	public int update(int id, Map<String, String> datas) {
-//		int result = 0;
-//		
-//		if( id == 0 || datas.isEmpty())
-//			return result;
-//
-//		List<String> args = new ArrayList<String>();
-//		
-//		datas.entrySet().forEach((entry) -> {
-//			String key = entry.getKey().toUpperCase();
-//			String value = entry.getValue();
-//
-//			if(key.equals("LAST_LOGIN")) {
-//				args.add(String.format("%s = TO_DATE('%s','YYYYMMDDHH24MISS')", key, value));
-//			} else {
-//				if( IsNumberService.isNumberic(value) )
-//					args.add(String.format("%s = %s", key, value));
-//				else
-//					args.add(String.format("%s = '%s'", key, value));
-//			}
-//		});
-//		
-//		String param = String.join(",", args);
-//		
-//		String url = DBContext.URL;
-////		String sql = "UPDATE MEMBER SET ? WHERE ID = ?";
-//		String sql = String.format("UPDATE MEMBER SET %s WHERE ID = %d", args, id);
-//		
-//		System.out.println("dao.jdbc.admin.jdbc.JdbcMemberDao -> update() 에서 메시지 실행할 SQL문\n UPDATE MEMBER SET " + param + " WHERE ID = "+ id);
-//		
-//		try {
-//			Class.forName("oracle.jdbc.driver.OracleDriver");
-//			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
-//			PreparedStatement st = con.prepareStatement(sql);
-////			st.setString(1, param);
-////			st.setInt(2, id);
-//			
-//			result = st.executeUpdate();
-//			System.out.println("JdbcMemberDao -> update() 에서 메시지 실행된 명령줄: " + result);
-//
-//			st.close();
-//			con.close();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} catch (ClassNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//		return result;
-//	}
 	
 	@Override
 	public int update(int id, String key, String value) {

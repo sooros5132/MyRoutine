@@ -12,14 +12,14 @@ public class TimeService {
 	}
 
 	// 2020-12-03 16:47:41
-	public static String getCreationTime() {
+	public static String getDate() {
 		SimpleDateFormat formatter = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss", Locale.KOREA );
 		String dTime = formatter.format ( currentTime );
 		return dTime;
 	}
 	
 	// 20201203164741
-	public static String getCreationTimeNoSeparator() {
+	public static String getDateNoSeparator() {
 		SimpleDateFormat formatter = new SimpleDateFormat ( "yyyyMMddHHmmss", Locale.KOREA );
 		String dTime = formatter.format ( currentTime );
 		return dTime;

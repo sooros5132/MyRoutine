@@ -1,33 +1,33 @@
-package com.myroutine.web.entity.user;
+package com.myroutine.web.dao.entity;
 
 import java.sql.Date;
 
-public class Chat {
-	
+public class ChatView {
+
 	private int id;
-	private String contents;
+	private String centents;
 	private int requester;
 	private Date deleteDate;
     private Date registrantionDate;
     private int regMemberId;
+	private String fileName;
+	private String fileRoute;
 	
-    public Chat() {
+	public ChatView() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Chat(int regMemberId, int requester, String contents) {
-		this.regMemberId = regMemberId;
-		this.requester = requester;
-		this.contents = contents;
-	}
-
-	public Chat(int id, String contents, int requester, Date deleteDate, Date registrantionDate, int regMemberId) {
+	public ChatView(int id, String centents, int requester, Date deleteDate, Date registrantionDate, int regMemberId,
+			String fileName, String fileRoute) {
+		super();
 		this.id = id;
-		this.contents = contents;
+		this.centents = centents;
 		this.requester = requester;
 		this.deleteDate = deleteDate;
 		this.registrantionDate = registrantionDate;
 		this.regMemberId = regMemberId;
+		this.fileName = fileName;
+		this.fileRoute = fileRoute;
 	}
 
 	public int getId() {
@@ -38,12 +38,12 @@ public class Chat {
 		this.id = id;
 	}
 
-	public String getContents() {
-		return contents;
+	public String getCentents() {
+		return centents;
 	}
 
-	public void setContents(String contents) {
-		this.contents = contents;
+	public void setCentents(String centents) {
+		this.centents = centents;
 	}
 
 	public int getRequester() {
@@ -78,12 +78,27 @@ public class Chat {
 		this.regMemberId = regMemberId;
 	}
 
-	@Override
-	public String toString() {
-		return "Chat [id=" + id + ", contents=" + contents + ", requester=" + requester + ", deleteDate=" + deleteDate
-				+ ", registrantionDate=" + registrantionDate + ", regMemberId=" + regMemberId + "]";
+	public String getFileName() {
+		return fileName;
 	}
 
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getFileRoute() {
+		return fileRoute;
+	}
+
+	public void setFileRoute(String fileRoute) {
+		this.fileRoute = fileRoute;
+	}
+
+	@Override
+	public String toString() {
+		return "ChatView [id=" + id + ", centents=" + centents + ", requester=" + requester + ", deleteDate="
+				+ deleteDate + ", registrantionDate=" + registrantionDate + ", regMemberId=" + regMemberId
+				+ ", fileName=" + fileName + ", fileRoute=" + fileRoute + "]";
+	}
 	
-    
 }

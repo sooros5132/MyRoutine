@@ -14,18 +14,42 @@ public class MemberService {
 	
 	public int put(Member m) {
 		int result = 0;
+		result = memberDao.insert(m);
+		return result;
+	}
+
+	public Member get(int id) {
+		return memberDao.get(id);
+	}
+	
+	// login, dupCheck, recoveryPwd, recoveryEmail
+	public Member get(String key, String value) {
+		return memberDao.get(key, value);
+	}
+	
+	public int login(String email, String pwd) {
+		int result = 0;
 		
-		result = memberDao.put(m);
+		String resultEmail = memberDao.get("email", email).getEmail();
+		String resultPwd = memberDao.get("email", email).getPwd();
+		
+		if( !resultEmail.equals("") )
+			result++;
+		if( !resultPwd.equals("") )
+			result++;
 		
 		return result;
 	}
-	
+
 	public int dupCheck(String key, String value) {
 		int result = 0;
 		
-		result = memberDao.dupCheck(key, value);
+		Member m = memberDao.get(key, value);
 		
-		return result;
+		if( memberDao != null )
+			result++;
+		
+		return 0;
 	}
 	
 }

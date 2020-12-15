@@ -1,17 +1,87 @@
 package com.myroutine.web.dao.jdbc.user.member;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.myroutine.web.dao.jdbc.DBContext;
 import com.myroutine.web.entity.Member;
+import com.myroutine.web.service.IsNumberService;
 
 public class JdbcMemberDao implements MemberDao{
 
 	@Override
-	public int put(Member m) {
+	public Member get(int id) {
+		return get("id", Integer.toString(id));
+	}
+	
+	@Override
+	public Member get(String field, String query) {
+		Member m = null;
+
+		if( field == null || field.equals("") ||
+			query == null || query.equals("")) {
+			return m;
+		}
+		
+		String url = DBContext.URL;
+		String sql = 
+			String.format(
+				"SELECT FROM MEMBER WHERE %s = '%s'",
+				field, query
+			);
+		
+		if(IsNumberService.isInteger(query))
+			sql = String.format(
+					"SELECT FROM MEMBER WHERE %s = %s",
+					field, field, query
+				);
+		
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+			PreparedStatement st = con.prepareStatement(sql);
+			ResultSet rs = st.executeQuery(sql);
+
+			int id = rs.getInt("id");
+			String email = rs.getString("email");
+			String name = rs.getString("name");
+			String nickname = rs.getString("nickname");
+			String pwd = rs.getString("pwd");
+			String phone = rs.getString("phone");
+			int rule = rs.getInt("rule");
+			Date regdate = rs.getDate("regdate");
+			Date birthday = rs.getDate("birthday");
+			int openInfo = rs.getInt("open_info");
+			Date lastLogin = rs.getDate("last_login");
+			String gender = rs.getString("gender");
+		    
+			m = new Member(id, email, name, nickname, pwd, phone, rule, regdate, birthday, openInfo, lastLogin, gender);
+			
+			st.close();
+			con.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return m;
+	}
+	
+	@Override
+	public Member get(int id, String field, String query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public int insert(Member m) {
 		int result = 0;
 		String email = m.getEmail();
 		String name = m.getName();
@@ -51,54 +121,5 @@ public class JdbcMemberDao implements MemberDao{
 		return result;
 	}
 
-	@Override
-	public int login(String email, String pwd) {
-		// TODO Auto-generated method stub
-		System.out.println("dao.jdbc.user.JdbcMemberDao -> login() 구현안됨");
-		return 0;
-	}
-
-	@Override
-	public int recoveryPwd(String email) {
-		// TODO Auto-generated method stub
-		System.out.println("dao.jdbc.user.JdbcMemberDao -> recoveryPwd() 구현안됨");
-		return 0;
-	}
-	
-	@Override
-	public int dupCheck(String key, String value) {
-
-		int result = 0;
-
-		if( key == null || key.equals("") ||
-			value == null || value.equals("")) {
-			return result;
-		}
-		
-		String url = DBContext.URL;
-		String sql = 
-			String.format(
-				"SELECT ROWNUM, %s FROM MEMBER WHERE %s = '%s'",
-				key, key, value
-			);
-		
-
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
-			PreparedStatement st = con.prepareStatement(sql);
-			result = st.executeUpdate();
-
-			st.close();
-			con.close();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
 	
 }

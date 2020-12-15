@@ -36,7 +36,6 @@ public class EditController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		int id = 0;
-		int result = 0;
 		String idCheck = request.getParameter("id");
 
 		// DISCONNECT CHECK -----------------------------------------
@@ -46,6 +45,7 @@ public class EditController extends HttpServlet {
 		}
 		
 		// SETTING --------------------------------------------------
+		int result = 0;
 		id = Integer.parseInt(idCheck);
 
 //		삭제 기능 잠시 꺼둠 
@@ -67,7 +67,7 @@ public class EditController extends HttpServlet {
 			}
 			if( key.equals("last_login")) {
 				TimeService.setNowDate();
-				temp = TimeService.getCreationTimeNoSeparator();
+				temp = TimeService.getDateNoSeparator();
 			}
 			datas.put(key, temp);
 			return false;
@@ -87,7 +87,7 @@ public class EditController extends HttpServlet {
 		}
 		
 		if(datas.get("last_login") != null)
-			results.add("\"last_login\":\"" + TimeService.getCreationTime() + "\"");
+			results.add("\"last_login\":\"" + TimeService.getDate() + "\"");
 		
 		results.add("\"updateKeys\":[\"" + String.join("\",\"",keys) + "\"]");
 		results.add("\"updateLines\":" + result);
