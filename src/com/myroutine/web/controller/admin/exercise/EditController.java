@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.myroutine.web.entity.admin.Exercise;
+import com.myroutine.web.entity.admin.exercise.Exercise;
 import com.myroutine.web.service.admin.exercise.ExerciseService;
 
 
@@ -42,11 +42,11 @@ public class EditController extends HttpServlet{
 		System.out.println(name);
 		
 		if(div1.equals("re")) {
-			div1 ="��Ȱ�";
+			div1 ="��Ȱ�";
 			div2_ = request.getParameterValues("re-list");
 			
 		}else if(div1.equals("ex")) {
-			div1 ="�Ϲݿ";
+			div1 ="�Ϲݿ";
 			div2_ = request.getParameterValues("ex-list");
 		}
 		

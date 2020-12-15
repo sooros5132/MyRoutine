@@ -46,11 +46,11 @@ public class ListController extends HttpServlet {
 		if( searchOption == null )
 			searchOption = "";
 		
-		if(size < 0)
+		if(size < 1)
 			size = 20;
 		if(size > 100)
 			size = 20;
-		if(page < 0)
+		if(page < 1)
 			page = 1;
 		if( rule < 0 && 9 < rule)
 			rule = 0;

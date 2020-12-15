@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.myroutine.web.entity.admin.Exercise;
-import com.myroutine.web.entity.admin.exercise.BodyPart;
+import com.myroutine.web.entity.admin.exercise.Exercise;
 import com.myroutine.web.entity.admin.exercise.ExerciseBodyPart;
-import com.myroutine.web.entity.admin.exercise.File;
 import com.myroutine.web.service.admin.exercise.ExerciseService;
 
 @WebServlet("/admin/exercise/add")
@@ -45,7 +43,7 @@ public class AddController extends HttpServlet {
 		
 		
 		
-		int memberId  = 1; //ÀÓ½Ã °íÁ¤ //String memberId = request.getParameter("memberId");
+		int memberId  = 1; //ï¿½Ó½ï¿½ ï¿½ï¿½ï¿½ï¿½ //String memberId = request.getParameter("memberId");
 		int bodyPart = 1;
 		
 		String[] files= request.getParameterValues("file");
@@ -75,7 +73,7 @@ public class AddController extends HttpServlet {
 		
 
 		
-		//¸ñ·ÏÆäÀÌÁö·Î ÀÌµ¿
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 //		response.sendRedirect("list");
 	}
 }

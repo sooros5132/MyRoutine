@@ -62,5 +62,4 @@ public class SignUpController extends HttpServlet {
 		request.setAttribute("result", result);
 		request.getRequestDispatcher("put.jsp").forward(request, response);
 	}
-	
 }

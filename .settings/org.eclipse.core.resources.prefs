@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
 encoding//WebContent/css/admin/notice/reg.css=UTF-8
+encoding//src/com/myroutine/web/controller/admin/member/EditController.java=UTF-8
+encoding//src/com/myroutine/web/controller/user/account/SignUpController.java=UTF-8
+encoding//src/com/myroutine/web/dao/jdbc/JdbcExerciseDao.java=UTF-8
