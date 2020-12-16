@@ -11,31 +11,31 @@
 
             <div>
                 <input required name="email" type="email" id="userEmail" class="user-info"/>
-                <div class="input-label">이메일</div>
+                <label class="input-label">이메일</label>
                 <div class="input-msg error-msg"></div>
             </div>
             
             <div>
                 <input required name="name" type="text" id="userName" class="user-info"/>
-                <div class="input-label">이름</div>
+                <label class="input-label">이름</label>
                 <div class="input-msg error-msg"></div>
             </div>
 
             <div>
                 <input required name="nickname" type="text" id="userNickname" class="user-info"/>
-                <div class="input-label">닉네임</div>
+                <label class="input-label">닉네임</label>
                 <div class="input-msg error-msg"></div>
             </div>
             
             <div>
                 <input required name="pwd" type="password" id="userPwd" class="user-info"/>
-                <div class="input-label">비밀번호</div>
+                <label class="input-label">비밀번호</label>
                 <div class="input-msg error-msg"></div>
             </div>
             
             <div>
                 <input required name="userPwdChk" type="password" id="userPwdChk" class="user-info"/>
-                <div class="input-label">비밀번호 확인</div>
+                <label class="input-label">비밀번호 확인</label>
                 <div class="input-msg error-msg"></div>
             </div>
 

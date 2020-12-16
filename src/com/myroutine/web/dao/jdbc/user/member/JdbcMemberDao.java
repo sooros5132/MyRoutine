@@ -30,13 +30,13 @@ public class JdbcMemberDao implements MemberDao{
 		String url = DBContext.URL;
 		String sql = 
 			String.format(
-				"SELECT FROM MEMBER WHERE %s = '%s'",
+				"SELECT * FROM MEMBER WHERE %s = '%s'",
 				field, query
 			);
 		
 		if(IsNumberService.isInteger(query))
 			sql = String.format(
-					"SELECT FROM MEMBER WHERE %s = %s",
+					"SELECT * FROM MEMBER WHERE %s = %s",
 					field, field, query
 				);
 		
@@ -47,21 +47,22 @@ public class JdbcMemberDao implements MemberDao{
 			PreparedStatement st = con.prepareStatement(sql);
 			ResultSet rs = st.executeQuery(sql);
 
-			int id = rs.getInt("id");
-			String email = rs.getString("email");
-			String name = rs.getString("name");
-			String nickname = rs.getString("nickname");
-			String pwd = rs.getString("pwd");
-			String phone = rs.getString("phone");
-			int rule = rs.getInt("rule");
-			Date regdate = rs.getDate("regdate");
-			Date birthday = rs.getDate("birthday");
-			int openInfo = rs.getInt("open_info");
-			Date lastLogin = rs.getDate("last_login");
-			String gender = rs.getString("gender");
-		    
-			m = new Member(id, email, name, nickname, pwd, phone, rule, regdate, birthday, openInfo, lastLogin, gender);
-			
+			if(rs.next()) {
+				int id = rs.getInt("id");
+				String email = rs.getString("email");
+				String name = rs.getString("name");
+				String nickname = rs.getString("nickname");
+				String pwd = rs.getString("pwd");
+				String phone = rs.getString("phone");
+				int rule = rs.getInt("rule");
+				Date regdate = rs.getDate("regdate");
+				Date birthday = rs.getDate("birthday");
+				int openInfo = rs.getInt("open_info");
+				Date lastLogin = rs.getDate("last_login");
+				String gender = rs.getString("gender");
+			    
+				m = new Member(id, email, name, nickname, pwd, phone, rule, regdate, birthday, openInfo, lastLogin, gender);
+			}
 			st.close();
 			con.close();
 			

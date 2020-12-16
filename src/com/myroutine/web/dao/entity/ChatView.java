@@ -5,7 +5,7 @@ import java.sql.Date;
 public class ChatView {
 
 	private int id;
-	private String centents;
+	private String contents;
 	private int requester;
 	private Date deleteDate;
     private Date registrantionDate;
@@ -17,11 +17,11 @@ public class ChatView {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ChatView(int id, String centents, int requester, Date deleteDate, Date registrantionDate, int regMemberId,
+	public ChatView(int id, String contents, int requester, Date deleteDate, Date registrantionDate, int regMemberId,
 			String fileName, String fileRoute) {
 		super();
 		this.id = id;
-		this.centents = centents;
+		this.contents = contents;
 		this.requester = requester;
 		this.deleteDate = deleteDate;
 		this.registrantionDate = registrantionDate;
@@ -38,12 +38,12 @@ public class ChatView {
 		this.id = id;
 	}
 
-	public String getCentents() {
-		return centents;
+	public String getContents() {
+		return contents;
 	}
 
-	public void setCentents(String centents) {
-		this.centents = centents;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 
 	public int getRequester() {
@@ -96,7 +96,7 @@ public class ChatView {
 
 	@Override
 	public String toString() {
-		return "ChatView [id=" + id + ", centents=" + centents + ", requester=" + requester + ", deleteDate="
+		return "ChatView [id=" + id + ", contents=" + contents + ", requester=" + requester + ", deleteDate="
 				+ deleteDate + ", registrantionDate=" + registrantionDate + ", regMemberId=" + regMemberId
 				+ ", fileName=" + fileName + ", fileRoute=" + fileRoute + "]";
 	}

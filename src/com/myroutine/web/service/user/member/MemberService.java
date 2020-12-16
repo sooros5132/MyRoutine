@@ -45,11 +45,11 @@ public class MemberService {
 		int result = 0;
 		
 		Member m = memberDao.get(key, value);
-		
-		if( memberDao != null )
+
+		if( m != null )
 			result++;
-		
-		return 0;
+
+		return result;
 	}
 	
 }
