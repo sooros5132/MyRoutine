@@ -28,46 +28,54 @@ public class JdbcChatViewDao implements ChatViewDao{
 	}
 
 	@Override
-	public List<ChatView> getList(int id, int startIndex, int endIndex, String query) {
+	public List<ChatView> getList(int memberId, int startIndex, int endIndex, String query) {
 		List<ChatView> list = new ArrayList<ChatView>();
 
-		if ( id == 0 )
+		if ( memberId == 0 )
 			return list;
 
-		query = String.format("%%%s%%", query);
 		String url = DBContext.URL;
-		String sql = "SELECT * FROM ( "
+//		String sql = "SELECT * FROM ( "
+//						+ "SELECT ROW_NUMBER() OVER (ORDER BY C.REGISTRANTION_DATE DESC) NUM, C.* "
+//						+ "FROM CHAT_VIEW C "
+//						+ "WHERE CONTENTS LIKE ? AND REG_MEMBER_ID = ? "
+//						   + "OR CONTENTS LIKE ? AND REQUESTER = ? ) "
+//				   + "WHERE NUM BETWEEN ? AND ?";
+
+		String sql = String.format("SELECT * FROM ( "
 						+ "SELECT ROW_NUMBER() OVER (ORDER BY C.REGISTRANTION_DATE DESC) NUM, C.* "
-						+ "FROM CHAT C "
-						+ "WHERE CONTENTS LIKE ? AND REG_MEMBER_ID = ? "
-						   + "OR CONTENTS LIKE ? AND REQUESTER = ? ) "
-				   + "WHERE NUM BETWEEN ? AND ?";
-		
-		System.out.println(".dao.jdbc.user.chat.JdbcChatViewDao -> getList() 에서 메시지 실행할 SQL문\n" + sql);
+						+ "FROM CHAT_VIEW C "
+						+ "WHERE CONTENTS LIKE '%%%s%%' AND REG_MEMBER_ID = %d "
+						   + "OR CONTENTS LIKE '%%%s%%' AND REQUESTER = %d ) "
+				   + "WHERE NUM BETWEEN %d AND %d", query, memberId, query, memberId, startIndex, endIndex);
+
+		System.out.println("dao.jdbc.user.chat.JdbcChatViewDao -> getList() 에서 메시지 실행할 SQL문\n" + sql);
 		
 		try {
 			// Class.forName = 문자열을 클래스로
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
 			PreparedStatement st = con.prepareStatement(sql);
-			st.setString(1, query);
-			st.setInt(2, id);
-			st.setString(3, query);
-			st.setInt(4, id);
-			st.setInt(5, startIndex);
-			st.setInt(6, endIndex);
+//			st.setString(1, query);
+//			st.setInt(2, id);
+//			st.setString(3, query);
+//			st.setInt(4, id);
+//			st.setInt(5, startIndex);
+//			st.setInt(6, endIndex);
+			
 			ResultSet rs = st.executeQuery(sql);
 			
 			while(rs.next()) {
+				int chatId = rs.getInt("id");
 			    String contents = rs.getString("contents");
-			    int requester = rs.getInt("requester");
-			    Date deleteDate = rs.getDate("delete_date");
-			    Date registrantionDate = rs.getDate("registrantion_date");
+			    String regMemberName = rs.getString("reg_member_name");
+			    String requesterName = rs.getString("requester_name");
 			    int regMemberId = rs.getInt("reg_member_id");
-			    String fileName = rs.getString("file_name");
-			    String fileRoute = rs.getString("file_route");
+			    int requester = rs.getInt("requester");
+			    Date registrantionDate = rs.getDate("registrantion_date");
+			    Date deleteDate = rs.getDate("delete_date");
 			    
-				ChatView c = new ChatView(id, contents, requester, deleteDate, registrantionDate, regMemberId, fileName, fileRoute);
+				ChatView c = new ChatView(chatId, contents, regMemberName, requesterName, regMemberId, requester, registrantionDate, deleteDate);
 
 				list.add(c);
 			}

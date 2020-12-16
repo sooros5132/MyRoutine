@@ -28,4 +28,7 @@ public class TimeService {
 	public static void setNowDate() {
 		currentTime = new Date(System.currentTimeMillis());
 	}
+	public static void setDate(Date date) {
+		currentTime = date;
+	}
 }

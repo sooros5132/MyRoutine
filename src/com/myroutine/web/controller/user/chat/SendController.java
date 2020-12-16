@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,6 +50,10 @@ public class SendController extends HttpServlet {
 		int requester = Integer.parseInt(requesterTemp);
 		ChatService service = new ChatService();
 		List<String> results = new ArrayList<String>();
+		
+//		List<Map<String, String>> list = new ArrayList<Map<String,String>>(); 
+		
+//		for(Map<String, String> chat : )
 		
 		// UPDATE --------------------------------------------
 		Chat chat = new Chat(regMemberId, requester, contents);

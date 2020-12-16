@@ -6,28 +6,36 @@ public class ChatView {
 
 	private int id;
 	private String contents;
-	private int requester;
-	private Date deleteDate;
-    private Date registrantionDate;
+	private String regMemberName;
+	private String requesterName;
     private int regMemberId;
-	private String fileName;
-	private String fileRoute;
+    private int requester;
+    private Date registrantionDate;
+	private Date deleteDate;
 	
 	public ChatView() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public ChatView(String contents, String regMemberName, String requesterName, Date registrantionDate, Date deleteDate) {
+		this.contents = contents;
+		this.regMemberName = regMemberName;
+		this.requesterName = requesterName;
+		this.registrantionDate = registrantionDate;
+		this.deleteDate = deleteDate;
+	}
 
-	public ChatView(int id, String contents, int requester, Date deleteDate, Date registrantionDate, int regMemberId,
-			String fileName, String fileRoute) {
+	public ChatView(int id, String contents, String regMemberName, String requesterName, int regMemberId, int requester,
+			Date registrantionDate, Date deleteDate) {
 		super();
 		this.id = id;
 		this.contents = contents;
-		this.requester = requester;
-		this.deleteDate = deleteDate;
-		this.registrantionDate = registrantionDate;
+		this.regMemberName = regMemberName;
+		this.requesterName = requesterName;
 		this.regMemberId = regMemberId;
-		this.fileName = fileName;
-		this.fileRoute = fileRoute;
+		this.requester = requester;
+		this.registrantionDate = registrantionDate;
+		this.deleteDate = deleteDate;
 	}
 
 	public int getId() {
@@ -46,28 +54,20 @@ public class ChatView {
 		this.contents = contents;
 	}
 
-	public int getRequester() {
-		return requester;
+	public String getRegMemberName() {
+		return regMemberName;
 	}
 
-	public void setRequester(int requester) {
-		this.requester = requester;
+	public void setRegMemberName(String regMemberName) {
+		this.regMemberName = regMemberName;
 	}
 
-	public Date getDeleteDate() {
-		return deleteDate;
+	public String getRequesterName() {
+		return requesterName;
 	}
 
-	public void setDeleteDate(Date deleteDate) {
-		this.deleteDate = deleteDate;
-	}
-
-	public Date getRegistrantionDate() {
-		return registrantionDate;
-	}
-
-	public void setRegistrantionDate(Date registrantionDate) {
-		this.registrantionDate = registrantionDate;
+	public void setRequesterName(String requesterName) {
+		this.requesterName = requesterName;
 	}
 
 	public int getRegMemberId() {
@@ -78,27 +78,35 @@ public class ChatView {
 		this.regMemberId = regMemberId;
 	}
 
-	public String getFileName() {
-		return fileName;
+	public int getRequester() {
+		return requester;
 	}
 
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setRequester(int requester) {
+		this.requester = requester;
 	}
 
-	public String getFileRoute() {
-		return fileRoute;
+	public Date getRegistrantionDate() {
+		return registrantionDate;
 	}
 
-	public void setFileRoute(String fileRoute) {
-		this.fileRoute = fileRoute;
+	public void setRegistrantionDate(Date registrantionDate) {
+		this.registrantionDate = registrantionDate;
+	}
+
+	public Date getDeleteDate() {
+		return deleteDate;
+	}
+
+	public void setDeleteDate(Date deleteDate) {
+		this.deleteDate = deleteDate;
 	}
 
 	@Override
 	public String toString() {
-		return "ChatView [id=" + id + ", contents=" + contents + ", requester=" + requester + ", deleteDate="
-				+ deleteDate + ", registrantionDate=" + registrantionDate + ", regMemberId=" + regMemberId
-				+ ", fileName=" + fileName + ", fileRoute=" + fileRoute + "]";
+		return "ChatView [id=" + id + ", contents=" + contents + ", regMemberName=" + regMemberName + ", requesterName="
+				+ requesterName + ", regMemberId=" + regMemberId + ", requester=" + requester + ", registrantionDate="
+				+ registrantionDate + ", deleteDate=" + deleteDate + "]";
 	}
-	
+
 }

@@ -35,7 +35,6 @@ public class EditController extends HttpServlet {
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 		
-		int id = 0;
 		String idCheck = request.getParameter("id");
 
 		// DISCONNECT CHECK -----------------------------------------
@@ -46,7 +45,7 @@ public class EditController extends HttpServlet {
 		
 		// SETTING --------------------------------------------------
 		int result = 0;
-		id = Integer.parseInt(idCheck);
+		int id = Integer.parseInt(idCheck);
 
 //		삭제 기능 잠시 꺼둠 
 //		활성화 -> actions배열에 delete 추가
@@ -91,8 +90,10 @@ public class EditController extends HttpServlet {
 		
 		results.add("\"updateKeys\":[\"" + String.join("\",\"",keys) + "\"]");
 		results.add("\"updateLines\":" + result);
-		
-		out.print("{\"result\":\"sussess\",");
+
+		// JSON OUT -------------------------------------------------
+		out.print("{");
+		out.print("\"result\":\"sussess\",");
 		out.print("\"datas\":{");
 		out.print(String.join(",",results));
 		out.print("}");
