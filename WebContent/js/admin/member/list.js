@@ -366,7 +366,7 @@
                 }
             }
             xhr.onerror = () => reject(xhr.status);
-            xhr.open('POST', '/admin/member/edit');
+            xhr.open('POST', '/api/member/edit');
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
             xhr.send(formData); // 폼 데이터 객체 전송
         });

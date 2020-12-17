@@ -1,4 +1,4 @@
-package com.myroutine.web.entity.user;
+package com.myroutine.web.entity.user.chat;
 
 import java.sql.Date;
 

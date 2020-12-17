@@ -2,7 +2,7 @@ package com.myroutine.web.service.user.member;
 
 import com.myroutine.web.dao.jdbc.user.member.JdbcMemberDao;
 import com.myroutine.web.dao.jdbc.user.member.MemberDao;
-import com.myroutine.web.entity.Member;
+import com.myroutine.web.entity.user.member.Member;
 
 public class MemberService {
 

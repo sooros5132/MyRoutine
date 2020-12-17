@@ -1,10 +1,10 @@
-package com.myroutine.web.service.user;
+package com.myroutine.web.service.user.chat;
 
 import java.util.List;
 import java.util.Set;
 
 import com.myroutine.web.dao.jdbc.user.chat.JdbcChatFileDao;
-import com.myroutine.web.entity.user.ChatFile;
+import com.myroutine.web.entity.user.chat.ChatFile;
 
 public class ChatFileService {
 

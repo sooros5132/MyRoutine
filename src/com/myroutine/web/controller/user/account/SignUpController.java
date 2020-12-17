@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.myroutine.web.entity.Member;
+import com.myroutine.web.entity.user.member.Member;
 import com.myroutine.web.service.user.member.MemberService;
 
 

@@ -1,4 +1,4 @@
-package com.myroutine.web.controller.user.chat;
+package com.myroutine.web.controller.api.chat;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,12 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.myroutine.web.dao.entity.ChatView;
-import com.myroutine.web.entity.user.ChatFile;
-import com.myroutine.web.service.TimeService;
-import com.myroutine.web.service.user.ChatFileService;
-import com.myroutine.web.service.user.ChatViewService;
+import com.myroutine.web.entity.user.chat.ChatFile;
+import com.myroutine.web.service.user.chat.ChatFileService;
+import com.myroutine.web.service.user.chat.ChatService;
 
-@WebServlet("/chat/get")
+// == /api/chat/get?memberId=449
+@WebServlet("/api/chat/get")
 public class ListController extends HttpServlet {
 
 	@Override
@@ -33,28 +33,31 @@ public class ListController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// JSON SETTING ---------------------------------------------
 		response.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json");
+		response.setContentType("text/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
 
 		// DISCONNECT CHECK -----------------------------------------
 		String idCheck = request.getParameter("memberId");
+		String otherIdCheck = request.getParameter("otherMemberId");
 		
-		if( idCheck == null || idCheck.equals("") ) {
+		if( idCheck == null || otherIdCheck == null ||
+			idCheck.equals("") || otherIdCheck.equals("") ||
+			idCheck.equals(otherIdCheck)) {
 			out.print("{\"result\": \"fail\"}");
 			return;
 		}
 
 		// SETTING --------------------------------------------------
-		int result = 0;
 		int memberId = Integer.parseInt(idCheck);
+		int otherMemberId= Integer.parseInt(otherIdCheck);
 		
 		// GET ------------------------------------------------------
-		ChatViewService service = new ChatViewService();
-		List<ChatView> list = service.getList(memberId);
-
+		ChatService service = new ChatService();
+		List<ChatView> list = service.getList(memberId, otherMemberId);
+		
 		if( list.isEmpty() ) {
-			out.print("{\"result\": \"fail\"}");
+			out.print("{\"result\": \"empty\"}");
 			out.close();
 			return;
 		}
@@ -73,15 +76,42 @@ public class ListController extends HttpServlet {
 //		out.println(fileList);
 		
 		// OUT SETTING -------------------------------------------------
-		List<String> results = new ArrayList<String>();
 		
+		// 아이디가 맞으면 chat파일들 담고 해당 인덱스 삭제
+		// fileList.removeIf( )
+		// {1, 1, 3} -> 3 삭제 -> {1, 1}
+		// {1, 1} -> 2 없음 통과 -> {1, 1}
+		// {1, 1} -> 1, 1 삭제 -> 0개 -> {}
+		
+		List<String> results = new ArrayList<String>();
 		for(ChatView c : list) {
+			List<String> fileJsonTemp = new ArrayList<String>();
 			SimpleDateFormat formatter = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss", Locale.KOREA );
 			String regDate = formatter.format ( c.getRegistrantionDate() );
-			results.add(String.format("\"id\":%d,\"regMemberName\":\"%s\",\"requesterName\":\"%s\",\"contents\":\"%s\",\"registrantionDate\":\"%s\"",
-					c.getId(), c.getRegMemberName(), c.getRequesterName(), c.getContents(), regDate));
+
+			fileList.removeIf( cf -> {
+				if( c.getId() == cf.getChatId() ) {
+					fileJsonTemp.add(String.format("{\"id\":%d,\"name\":\"%s\",\"route\":\"%s\",\"chatId\":%d}",
+							cf.getId(), cf.getName(), cf.getRoute(), cf.getChatId()));
+					return true;
+				}
+				return false;
+			});
+			
+
+			// chat 정보들 담기
+			String jsonTemp = String.format("\"id\":%d,\"regMemberId\":\"%s\",\"requester\":\"%s\",\"regMemberName\":\"%s\",\"requesterName\":\"%s\",\"contents\":\"%s\",\"registrantionDate\":\"%s\",",
+					c.getId(), c.getRegMemberId(), c.getRequester(), c.getRegMemberName(), c.getRequesterName(), c.getContents(), regDate);
+			// chat File 정보들 합치기
+			jsonTemp += "\"files\":[" + String.join(",", fileJsonTemp) + "]";
+			
+			results.add(jsonTemp); 
 		}
-//		
+//		for(ChatFile cf : fileList) {
+//			results.add(String.format("{\"id\":%d,\"name\":\"%s\",\"route\":\"%s\",\"chatId\":\"%d\"}",
+//					cf.getId(), cf.getName(), cf.getRoute(), cf.getChatId()));
+//		}
+		
 //		// JSON OUT -------------------------------------------------
 		out.print("{");
 		out.print("\"result\":\"sussess\",");

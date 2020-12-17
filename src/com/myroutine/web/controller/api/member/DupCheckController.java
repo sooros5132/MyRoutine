@@ -1,4 +1,4 @@
-package com.myroutine.web.controller.user.account;
+package com.myroutine.web.controller.api.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.myroutine.web.service.user.member.MemberService;
 
 
-@WebServlet("/account/check")
-public class MemberDupCheckController extends HttpServlet {
+@WebServlet("/api/account/dupCheck")
+public class DupCheckController extends HttpServlet {
 	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		response.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json");
+		response.setContentType("text/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
 		String key = request.getParameter("key");

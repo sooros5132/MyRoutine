@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.myroutine.web.dao.jdbc.DBContext;
-import com.myroutine.web.entity.Member;
+import com.myroutine.web.entity.user.member.Member;
 import com.myroutine.web.service.IsNumberService;
 import com.myroutine.web.service.TimeService;
 

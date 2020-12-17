@@ -3,7 +3,7 @@ package com.myroutine.web.dao.jdbc.user.chat;
 import java.util.List;
 import java.util.Set;
 
-import com.myroutine.web.entity.user.ChatFile;
+import com.myroutine.web.entity.user.chat.ChatFile;
 
 public interface ChatFileDao {
 

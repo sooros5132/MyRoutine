@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.myroutine.web.dao.jdbc.admin.member.JdbcMemberDao;
 import com.myroutine.web.dao.jdbc.admin.member.MemberDao;
-import com.myroutine.web.entity.Member;
+import com.myroutine.web.entity.user.member.Member;
 
 public class MemberService {
 

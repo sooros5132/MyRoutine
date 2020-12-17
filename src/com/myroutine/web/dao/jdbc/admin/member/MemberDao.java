@@ -3,7 +3,7 @@ package com.myroutine.web.dao.jdbc.admin.member;
 import java.util.List;
 import java.util.Map;
 
-import com.myroutine.web.entity.Member;
+import com.myroutine.web.entity.user.member.Member;
 
 public interface MemberDao {
 	List<Member> getList();

@@ -1,4 +1,4 @@
-package com.myroutine.web.controller.admin.member;
+package com.myroutine.web.controller.api.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +17,8 @@ import com.myroutine.web.service.IsNumberService;
 import com.myroutine.web.service.TimeService;
 import com.myroutine.web.service.admin.member.MemberService;
 
-@WebServlet("/admin/member/edit")
+// == /api/member/edit?id=489&nickname=asdaaaaaaa
+@WebServlet("/api/member/edit")
 public class EditController extends HttpServlet {
 	
 	@Override
@@ -32,7 +33,7 @@ public class EditController extends HttpServlet {
 
 		// JSON SETTING ---------------------------------------------
 		response.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json");
+		response.setContentType("text/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
 		String idCheck = request.getParameter("id");

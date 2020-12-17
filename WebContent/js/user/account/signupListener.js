@@ -236,7 +236,7 @@
                 console.error(xhr.responseText);
             }
         };
-        xhr.open('POST', '/account/check');
+        xhr.open('POST', '/api/account/dupCheck');
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
         xhr.send(formData); // 폼 데이터 객체 전송   
     }

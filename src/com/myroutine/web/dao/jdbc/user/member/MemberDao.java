@@ -2,7 +2,7 @@ package com.myroutine.web.dao.jdbc.user.member;
 
 import java.util.List;
 
-import com.myroutine.web.entity.Member;
+import com.myroutine.web.entity.user.member.Member;
 
 public interface MemberDao {
 	

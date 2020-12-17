@@ -1,4 +1,4 @@
-package com.myroutine.web.controller.user.chat;
+package com.myroutine.web.controller.api.chat;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,11 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.myroutine.web.entity.user.Chat;
+import com.myroutine.web.entity.user.chat.Chat;
 import com.myroutine.web.service.TimeService;
-import com.myroutine.web.service.user.ChatService;
+import com.myroutine.web.service.user.chat.ChatService;
 
-@WebServlet("/chat/send")
+// == /api/chat/send?content=등록 테스트 메시지~&reg_member_id=449&requester=448
+@WebServlet("/api/chat/send")
 public class SendController extends HttpServlet {
 	
 	@Override
@@ -29,12 +30,12 @@ public class SendController extends HttpServlet {
 
 		// JSON SETTING ---------------------------------------------
 		response.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json");
+		response.setContentType("text/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		String contents = request.getParameter("contents");
-		String regMemberIdTemp = request.getParameter("reg_member_id");
-		String requesterTemp = request.getParameter("requester");
+		String contents = request.getParameter("content");
+		String regMemberIdTemp = request.getParameter("memberId");
+		String requesterTemp = request.getParameter("otherMemberId");
 
 		// DISCONNECT CHECK -----------------------------------------
 		if( regMemberIdTemp == null || requesterTemp == null || contents == null ||
@@ -66,7 +67,7 @@ public class SendController extends HttpServlet {
 			out.close();
 			return;
 		}
-		out.print("{\"result\":\"sussess\"}");
+		out.print("{\"result\":\"sussess\", \"datas\":[{\"regDate\": \""+TimeService.getDate()+"\"}]}");
 		out.close();
 		
 	}

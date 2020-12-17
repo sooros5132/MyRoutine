@@ -13,9 +13,9 @@ import java.util.Set;
 
 import com.myroutine.web.dao.entity.ChatView;
 import com.myroutine.web.dao.jdbc.DBContext;
-import com.myroutine.web.entity.Member;
-import com.myroutine.web.entity.user.Chat;
-import com.myroutine.web.entity.user.ChatFile;
+import com.myroutine.web.entity.user.chat.Chat;
+import com.myroutine.web.entity.user.chat.ChatFile;
+import com.myroutine.web.entity.user.member.Member;
 
 public class JdbcChatFileDao implements ChatFileDao{
 

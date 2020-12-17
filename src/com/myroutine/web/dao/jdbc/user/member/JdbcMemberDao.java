@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.myroutine.web.dao.jdbc.DBContext;
-import com.myroutine.web.entity.Member;
+import com.myroutine.web.entity.user.member.Member;
 import com.myroutine.web.service.IsNumberService;
 
 public class JdbcMemberDao implements MemberDao{
