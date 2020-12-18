@@ -6,6 +6,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.myroutine.web.dao.jdbc.DBContext;
 import com.myroutine.web.entity.user.member.Member;
@@ -73,6 +76,66 @@ public class JdbcMemberDao implements MemberDao{
 		}
 		
 		return m;
+	}
+
+
+	@Override
+	public List<Member> getList(String field, String query) {
+		return getList(1, 20, field, query);
+	}
+	
+	@Override
+	public List<Member> getList(int startIndex, int endIndex, String field, String query) {
+		List<Member> list = new ArrayList<Member>();
+		
+
+		String url = DBContext.URL;
+		String sql = String.format("SELECT * FROM ( "
+				+ "SELECT * FROM ( "
+				+ "SELECT ROW_NUMBER() OVER (ORDER BY ID DESC) NUM, M.* "
+				+ "FROM MEMBER M WHERE %s LIKE '%%%s%%' "
+				+ ") WHERE NUM <= %d "
+				+ ") WHERE NUM >= %d", field, query, endIndex, startIndex);
+
+		System.out.println("dao.jdbc.admin.jdbc.JdbcMemberDao -> getList() 에서 메시지 실행할 SQL문\n" + sql);
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+			PreparedStatement st = con.prepareStatement(sql);
+			ResultSet rs = st.executeQuery(sql);
+			
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String email = rs.getString("email");
+				String name = rs.getString("name");
+				String nickname = rs.getString("nickname");
+				String pwd = rs.getString("pwd");
+				String phone = rs.getString("phone");
+				int rule = rs.getInt("rule");
+				Date regdate = rs.getDate("regdate");
+				Date birthday = rs.getDate("birthday");
+				int openInfo = rs.getInt("open_info");
+				Date lastLogin = rs.getDate("last_login");
+				String gender = rs.getString("gender");
+			    
+				Member m = new Member(id, email, name, nickname, pwd, phone, rule, regdate, birthday, openInfo, lastLogin, gender);
+				
+				list.add(m);
+//				System.out.println("dao.jdbc.admin.jdbc.JdbcMemberDao -> getList() 에서 메시지 실행된 결과: \n" + m.toString());
+			}
+			
+			rs.close();
+			st.close();
+			con.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 	@Override

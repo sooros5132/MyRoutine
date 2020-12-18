@@ -42,7 +42,7 @@ public class JdbcMemberDao implements MemberDao {
 	
 	@Override
 	public List<Member> getList(int startIndex, int endIndex, int searchRule, String key, String value, String searchOption) {
-		List<Member> list = new ArrayList<>();
+		List<Member> list = new ArrayList<Member>();
 
 		String url = DBContext.URL;
 //		String sql = String.format("SELECT * FROM ( SELECT ROWNUM NUM, MEMBER.* FROM MEMBER WHERE %s LIKE '%%%s%%' ORDER BY ID DESC) WHERE NUM BETWEEN %d AND %d", key, value, start, end);

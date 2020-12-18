@@ -10,5 +10,8 @@ public interface MemberDao {
 	// login, dupCheck, recoveryPwd, recoveryEmail
 	Member get(int id);
 	Member get(String field, String query);
+	List<Member> getList(String field, String query);
+	List<Member> getList(int startIndex, int endIndex, String field, String query);
+	
 	Member get(int id, String field, String query);
 }

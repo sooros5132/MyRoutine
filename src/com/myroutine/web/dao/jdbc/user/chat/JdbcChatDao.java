@@ -154,17 +154,25 @@ public class JdbcChatDao implements ChatDao {
 //						   + "OR CONTENTS LIKE ? AND REQUESTER = ? ) "
 //				   + "WHERE NUM BETWEEN ? AND ?";
 
-		String sql = String.format("SELECT * FROM ("
-				+ " SELECT C.*, REQ_M.NICKNAME REQUESTER_NAME, REG_M.NICKNAME REG_MEMBER_NAME"
-				+ " FROM (SELECT * FROM CHAT WHERE REQUESTER IN (%d, %d) AND REG_MEMBER_ID IN (%d, %d)", memberId, otherMemberId, memberId, otherMemberId);
-				
+		String sql = String.format(
+					"SELECT C.*, REG_M.NICKNAME REG_MEMBER_NAME, REQ_M.NICKNAME REQUESTER_NAME " + 
+					"FROM ( " + 
+						"( " + 
+						"SELECT * " + 
+						"FROM ( " + 
+							"SELECT * " + 
+							"FROM ( " + 
+								"SELECT ROW_NUMBER() OVER (ORDER BY REGISTRANTION_DATE DESC) NUM, CHAT.* FROM CHAT "
+								+ "WHERE REQUESTER IN (%d, %d) AND REG_MEMBER_ID IN (%d, %d) "
+						  								, memberId, otherMemberId, memberId, otherMemberId);
 		if( query != null && !query.equals("") )
-			sql += " AND CONTENTS LIKE '%" + query + "%'";
-		
-		sql += String.format(" ORDER BY REGISTRANTION_DATE ASC) C"
-				+ " LEFT JOIN MEMBER REQ_M ON C.REQUESTER = REQ_M.ID"
-				+ " LEFT JOIN MEMBER REG_M ON C.REG_MEMBER_ID = REG_M.ID )"
-				+ " WHERE ROWNUM BETWEEN %d AND %d", startIndex, endIndex);
+						   	  sql += "AND CONTENTS LIKE '%" + query + "%' ";
+		sql += String.format(	") WHERE NUM <= %d " + 
+							") WHERE NUM >= %d " + 
+						") C " + 
+					"LEFT JOIN MEMBER REQ_M ON C.REQUESTER = REQ_M.ID " + 
+					"LEFT JOIN MEMBER REG_M ON C.REG_MEMBER_ID = REG_M.ID " + 
+					") ORDER BY REGISTRANTION_DATE ASC", endIndex, startIndex);
 
 		System.out.println("dao.jdbc.user.chat.JdbcChatViewDao -> getList() 에서 메시지 실행할 SQL문\n" + sql);
 		

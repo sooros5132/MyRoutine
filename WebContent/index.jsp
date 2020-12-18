@@ -19,6 +19,7 @@
             <h1 class="d-none">배경영상</h1>
             <div style="width: 100%; font-size: 0;">
                 <!-- <iframe class="main-video" style="width: 1200px; height: 675px;" src="https://www.youtube.com/embed/9B1U3O8G7Bo?controls=0&autoplay=1&loop=1&disablekb=1&" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                <!-- <iframe class="main-video" style="width:100%" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
                 <iframe class="main-video" style="width:100%" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </section>
@@ -79,17 +80,19 @@
                 "LJgaulCeCbI", // 3조
                 "g22QkE7Mj6Q", // 4조
                 "cQloq2nnEXU", // 5조
-                "s7acHgkTCuU" // 6조
+                "s7acHgkTCuU", // 6조
             ]
             let randomNum = Math.floor( Math.random() * videoSrc.length );
             let videoFrame = document.querySelector(".main-video");
             let videoMinSize = 300;
             let moblieSize = 768;
             videoFrame.style.height = `${'${window.innerWidth/100*56.25}px'}`;
-            videoFrame.setAttribute('src',`https://www.youtube.com/embed/${'${videoSrc[randomNum]}'}/?controls=1&autoplay=0&loop=1&disablekb=1`);
+            // videoFrame.setAttribute('src',`https://www.youtube-nocookie.com/embed/${'${videoSrc[randomNum]}'}/?controls=1&autoplay=0&loop=1&disablekb=1`);
+            
             // https://www.youtube.com/embed/kRT174IdxuM?rel=0&loop=1&playsinline=1&playlist=kRT174IdxuM&controls=0&showinfo=0&enablejsapi=1&origin=https%3A%2F%2Fmarshall-ku.com&widgetid=1
 
             window.addEventListener("load",  (e)=>{
+                videoFrame.setAttribute('src',`https://www.youtube-nocookie.com/embed/H-AcDBLqxi4?start=344&controls=0&autoplay=1&loop=1&mute=1&enablejsapi=1`);
                 if( window.innerWidth > videoMinSize ){
                     videoFrame.style.height = `${'${window.innerWidth/100*56.25}px'}`;
                 } else {

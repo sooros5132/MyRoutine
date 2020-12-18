@@ -52,9 +52,20 @@ public class ListController extends HttpServlet {
 		int memberId = Integer.parseInt(idCheck);
 		int otherMemberId= Integer.parseInt(otherIdCheck);
 		
+		int page = 1;
+		int size = 20;
+		String page_ = request.getParameter("page");
+		String size_ = request.getParameter("size");
+		
+		if( page_ != null && size_ != null &&
+			!page_.equals("") && !size_.equals("")) {
+			page = Integer.parseInt(page_);
+			size = Integer.parseInt(size_);
+		}
+		
 		// GET ------------------------------------------------------
 		ChatService service = new ChatService();
-		List<ChatView> list = service.getList(memberId, otherMemberId);
+		List<ChatView> list = service.getList(memberId, otherMemberId, page, size);
 		
 		if( list.isEmpty() ) {
 			out.print("{\"result\": \"empty\"}");
@@ -86,8 +97,9 @@ public class ListController extends HttpServlet {
 		List<String> results = new ArrayList<String>();
 		for(ChatView c : list) {
 			List<String> fileJsonTemp = new ArrayList<String>();
-			SimpleDateFormat formatter = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss", Locale.KOREA );
-			String regDate = formatter.format ( c.getRegistrantionDate() );
+			SimpleDateFormat formatter1 = new SimpleDateFormat ( "yyyy-MM-dd", Locale.KOREA );
+			SimpleDateFormat formatter2 = new SimpleDateFormat ( "HH:mm:ss", Locale.KOREA );
+			String regDate = formatter1.format ( c.getRegistrantionDate() ) + "T" + formatter2.format ( c.getRegistrantionDate() );
 
 			fileList.removeIf( cf -> {
 				if( c.getId() == cf.getChatId() ) {

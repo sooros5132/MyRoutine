@@ -35,12 +35,15 @@ public class ChatService {
 		return getList(memberId, otherMemberId, 1, 20, "");
 	}
 
-	public List<ChatView> getList(int memberId, int otherMemberId, int startIndex, int endIndex) {
-		return getList(memberId, otherMemberId, startIndex, endIndex, "");
+	public List<ChatView> getList(int memberId, int otherMemberId, int page, int size) {
+		return getList(memberId, otherMemberId, page, size, "");
 	}
 	
-	public List<ChatView> getList(int memberId, int otherMemberId, int startIndex, int endIndex, String query) {
+	public List<ChatView> getList(int memberId, int otherMemberId, int page, int size, String query) {
 		List<ChatView> list = new ArrayList<ChatView>();
+		
+		int startIndex = 1 + (page - 1) * size;
+		int endIndex = page * size;
 		
 		list = chatDao.getList(memberId, otherMemberId, startIndex, endIndex, query);
 		
