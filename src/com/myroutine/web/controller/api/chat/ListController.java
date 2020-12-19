@@ -79,7 +79,7 @@ public class ListController extends HttpServlet {
 		for(ChatView c : list)
 			idList.add(Integer.toString(c.getId()));
 
-		System.out.println(String.join(",", idList));
+//		System.out.println(String.join(",", idList));
 		
 		List<ChatFile> fileList = fileService.getList(idList);
 		

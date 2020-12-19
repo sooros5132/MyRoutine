@@ -64,9 +64,8 @@ public class ListController extends HttpServlet {
 		for(FriendView f : list) {
 			
 			String jsonTemp = String.format(
-					"\"id\":%d,\"nickname\":\"%s\",\"state\":\"%s\"",
-					f.getId(), f.getNickname(), f.getState());
-			
+				"\"id\":%d,\"nickname\":\"%s\",\"state\":\"%s\"",
+				f.getId(), f.getNickname(), f.getState());
 			results.add(jsonTemp); 
 		}
 		

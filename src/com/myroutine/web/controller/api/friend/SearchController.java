@@ -1,4 +1,4 @@
-package com.myroutine.web.controller.api.member;
+package com.myroutine.web.controller.api.friend;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +16,7 @@ import com.myroutine.web.entity.user.member.Member;
 import com.myroutine.web.service.user.friend.FriendService;
 import com.myroutine.web.service.user.member.MemberService;
 
-@WebServlet("/api/member/search")
+@WebServlet("/api/friend/search")
 public class SearchController extends HttpServlet {
 
 	@Override
@@ -35,22 +35,26 @@ public class SearchController extends HttpServlet {
 		// SETTING ---------------------------------------------------
 		int page = 1;
 		int size = 20;
-		String nickname = request.getParameter("nickname");
-		
+		int memberId = 0;
+
+		String memberId_ = request.getParameter("memberId");
 		String page_ = request.getParameter("page");
 		String size_ = request.getParameter("size");
-		if( page_ != null && size_ != null &&
-			!page_.equals("") && !size_.equals("")) {
+		
+		if( memberId_ != null && page_ != null && size_ != null &&
+			!memberId_.equals("") && !page_.equals("") && !size_.equals("")) {
+			memberId = Integer.parseInt(memberId_);
 			page = Integer.parseInt(page_);
 			size = Integer.parseInt(size_);
 		}
+		String nickname = request.getParameter("nickname");
 
 		// GET ------------------------------------------------------
-		MemberService service = new MemberService();
-		List<Member> list = service.getList(page, size, "nickname", nickname);
-		System.out.println(list);
+		FriendService service = new FriendService();
+		List<Member> list = service.getAddAbleMemberList(memberId, nickname, page, size);
+		
 		if( list.isEmpty() ) {
-			out.print("{\"result\": \"fail\"}");
+			out.print("{\"result\": \"empty\"}");
 			out.close();
 			return;
 		}

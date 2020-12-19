@@ -11,6 +11,7 @@
     flex-direction: column;
     width: 300px;
     height: 400px;
+    min-height: 260px;
     background-color:rgb(36, 37, 38);
     border-radius: 18px 18px 0 0;
     --backdrop-filter: blur(20px);
@@ -18,7 +19,7 @@
     box-sizing: border-box;
     overflow: hidden;
 }
-.chat .chat-header-box{
+.chat .chat-top-style{
     display: flex;
     flex-basis:50px;
     justify-content: center;
@@ -33,15 +34,15 @@
     overflow-x: auto;
     overflow-y: hidden;
 }
-.chat .chat-header-box > div{
+.chat .chat-top-style > div{
     flex: 1 0 auto;
 }
 .chat > div {
     flex: 0 0 0;
 }
-.chat .chat-header-box .chat-header-text{
+/*.chat .chat-header-box .chat-header-text{
     cursor: pointer;
-}
+}*/
 
 .chat .chat-header-box .chat-menu-button{
     flex-basis: 50px;
@@ -49,6 +50,14 @@
 }
 .chat .chat-header-box .chat-menu-button i{
     padding: 6px;
+}
+.chat .chat-top-alert-box{
+	background-color: #00dc8b;
+	color: #ffffff;
+	transition: flex-basis .5s;
+}
+.chat .chat-top-alert-box .chat-input-btn{
+	color: #ffffff;
 }
 .chat .chat-message-box{
     flex-basis: auto;
@@ -69,6 +78,7 @@
 
 .chat .chat-message-inner > div{
     flex: 0 0 auto;
+    max-width: 75%;
     box-sizing: border-box;
     margin: 2px 0;
     padding: 5px 9px;
@@ -85,7 +95,7 @@
 
 .chat .chat-message-box .my-message{
     margin-left: auto;
-    background: #33b9a3;
+    background: #30baa1;
     color: #ffffff;
     text-align: right;
 }
@@ -135,6 +145,11 @@
     box-sizing: border-box;
 }
 
+.chat .friend-box-style{
+    flex: auto;
+    overflow-y: auto;
+}
+
 .chat .chat-friend-list{
     overflow-y: auto;
     flex-grow: 1;
@@ -148,6 +163,11 @@
     align-items: center;
     padding: 0 15px;
     word-break: break-all;
+    border-bottom: 1px solid #505050;
+    cursor:pointer;
+}
+.chat .chat-friend-list > li:last-child{
+	border:0;
 }
 
 /*.chat .chat-friend-list > li > div{
@@ -155,12 +175,14 @@
 }*/
 
 .chat .chat-friend-list .profile-image{
-	flex-basis: 50px;
+	flex-basis: 40px;
 	height: 50px;
 	margin-right: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 40px;
+    color: #ddd;
 }
 
 .chat .chat-friend-list .profile-image img{
@@ -183,21 +205,32 @@
 }
 
 .chat .add-friend-btn{
-    flex-basis: 24px;
-    font-size: 24px;
+	flex-basis: 26px;
+    font-size: 26px;
     text-align: center;
 }
 
 .no-more-chat{
     border-top: 1px dashed #ddd;
 }
-.chat-alert{
+
+.chat div.chat-alert{
+	margin: 16px 0;
 	width: 100%;
-	background: transparent !important;;
+	background: transparent;
 	text-align: center;
 	color: #ddd;
 }
 
+.chat li.friend-search-text{
+    width: 100%;
+	color: #ddd;
+	text-align: center;
+	padding-top: 40px;
+}
+.friend-add-confirm{
+	transition: opacity .5s;
+}
 @media screen and (max-width:500px){
     .chat-container .chat{
         position: fixed;
