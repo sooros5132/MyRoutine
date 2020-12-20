@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
     	<link rel="stylesheet" href="/css/chat.css">
 		<div class="chat-container d-none">
-            <div class="chat-inner">
-            	<div class="chat">
+           	<div class="chat">
+            	<div class="chat-inner">
 		          	<div class="friend-add-confirm confirm-container position-absolute position-center d-none">
 						<div class="confirm-inner position-absolute position-center">
 							<div class="confirm-text-box"></div>
@@ -20,6 +20,7 @@
                         <div class="chat-menu-button pointer chat-header-right-btn"><i class="xi-close"></i></div>
                     </div>
                     <div class="chat-top-alert-box chat-top-style pointer smaller">
+                    	<div class="top-alert-btn chat-input-btn pointer hide"><i class="xi-arrow-right"></i></div>
                     	<div class="top-alert-text">친구 요청이 있습니다</div>
                     	<div class="top-alert-btn chat-input-btn pointer"><i class="xi-arrow-right"></i></div>
                     </div>
@@ -27,6 +28,13 @@
                     	<div class="chat-message-inner chat-content-box">
 	                        <!-- <div class="other-message">상대</div>
 	                        <div class="my-message">내꺼</div> -->
+	                        <div class="other-message">
+	                        	<div class="profile-img"><i class="xi-profile"></i></div>
+	                        	<div>
+	                        		<div>8</div>
+	                        		<div class="message-reg-date">12-18 13:02</div>
+	                       		</div>
+                       		</div>
                         </div>
                     </div>
                     <div class="chat-send-box chat-input-box d-none">
@@ -36,22 +44,20 @@
                         </div>
                     </div>
                     <div class="my-friend-box friend-box-style">
-                    	<ul class="my-friend-list chat-friend-list">
-                    		<div style="height: 100%;">불러오는중입니다</div>
+                    	<ul class="my-friend-list chat-friend-list max-width">
                     	</ul>
                     </div>
                     <div class="new-friend-box friend-box-style d-none">
-                    	<ul class="new-friend-list chat-friend-list">
-                    		<div style="height: 100%;">불러오는중입니다</div>
+                    	<ul class="new-friend-list chat-friend-list max-width">
                     	</ul>
                     </div>
                     <div class="chat-friend-search d-none">
                     	<div class="chat-friend-search-inner chat-content-box">
-                    		<ul class="search-friend-list chat-friend-list">
+                    		<ul class="search-friend-list chat-friend-list max-width">
                     			<!-- <li class="friend-search-result">
                     				<div class="profile-image"><img src=""></div>
                     				<div class="friend-nickname">퉁퉁이</div>
-                    				<div class="add-friend-btn"><i class="xi-plus"></i></div>
+                    				<div class="action-friend-btn"><i class="xi-plus"></i></div>
                     			</li> -->
                     		</ul>
                     	</div>

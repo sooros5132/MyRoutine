@@ -83,12 +83,6 @@
                     dupCheck({"key": key, "value": value, "input": input});
                 }
                 
-                // 모두 입력 됐을 시
-                if( !pwdSameCheck() ){
-                    submitBtn.classList.add("active");
-                } else {
-                    submitBtn.classList.remove("active");
-                }
             }
 
             if( e.target.type == "password"){
@@ -106,8 +100,10 @@
                         alertColor: "#007a8e"
                     });
                 }
-                pwdSameCheck();
+                pwdSameCheck()
             }
+            
+            submitActiveCheck();
         });
 
         // label 클릭시
@@ -192,18 +188,18 @@
             inputMsg.textContent = "비밀번호가 다릅니다.";
             return false;
         }
+    
+        // 자동 선택
+        setTimeout(()=>{
+            signUpFormInputs.forEach(input => {
+                let textLen = input.value.length;
+                if( textLen != 0 ){
+                    input.parentElement.classList.add("input-active");
+                }
+            });
+        }, 100);
         
     });
-    
-    // 자동 선택
-    setTimeout(()=>{
-        signUpFormInputs.forEach(input => {
-            let textLen = input.value.length;
-            if( textLen != 0 ){
-                input.parentElement.classList.add("input-active");
-            }
-        });
-    }, 100);
     
     // 중복 검사
     let dupCheck = function ({key="", value="", input=""}){
@@ -232,6 +228,7 @@
                 inputMsg.innerHTML = `<span style="color:#28B49B">사용 가능한 ${inputLabel.textContent}입니다<span>`;
                 alertOpen({setText: `사용 가능한 ${inputLabel.textContent}입니다`,activeTime: 20,alertColor: ""});
                 
+                submitActiveCheck();
             } else {
                 console.error(xhr.responseText);
             }
@@ -239,6 +236,18 @@
         xhr.open('POST', '/api/account/dupCheck');
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
         xhr.send(formData); // 폼 데이터 객체 전송   
+    }
+    
+    let submitActiveCheck = function(){
+        for(let i = 0; i < signUpFormInputs.length; i++){
+            if( signUpFormInputs[i].parentElement.classList.contains("input-error") || 
+                signUpFormInputs[i].value.length == 0 ||
+                dupChecking ){
+                submitBtn.classList.remove("active");
+                return;
+            }
+        }
+        submitBtn.classList.add("active");
     }
 }());
 

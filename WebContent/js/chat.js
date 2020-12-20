@@ -6,15 +6,15 @@ window.addEventListener("load", (e)=>{
 	let chatRightBth = chatBox.querySelector(".chat-header-right-btn > i");
 	let chatLeftBtn = chatBox.querySelector(".chat-header-left-btn > i");
 
-	// 채팅창 =================================================
+	// 채팅창 ========================================================================
 	let chatMessageBox = chatBox.querySelector(".chat-message-box");
 	let chatMessageBoxInner = chatMessageBox.querySelector(".chat-message-inner");
 
-	// 헤더 ===================================================
+	// 헤더 ==========================================================================
 	let chatHeaderBox = chatBox.querySelector(".chat-header-box");
 	let chatHeaderText = chatHeaderBox.querySelector(".chat-header-text");
 
-	// 친구 목록 ==============================================
+	// 친구 목록 =====================================================================
 	let chatFriendList = chatBox.querySelector(".my-friend-box");
 	let chatFriendListInner = chatFriendList.querySelector(".my-friend-list");
 	
@@ -25,12 +25,12 @@ window.addEventListener("load", (e)=>{
 	let newFriendList = chatBox.querySelector(".new-friend-box");
 	let newFriendListInner = newFriendList.querySelector(".new-friend-list");
 
-	// 상단 알림 박스
+	// 상단 알림 박스 ================================================================
 	let topAlertBox = chatBox.querySelector(".chat-top-alert-box");
 	let topAlertText = topAlertBox.querySelector(".top-alert-text");
 	let topAlertBtn = topAlertBox.querySelector(".top-alert-btn");
 
-	// 회원 검색 ==============================================
+	// 회원 검색 =====================================================================
 	let chatFriendSearch = chatBox.querySelector(".chat-friend-search");
 	let searchFriendList = chatFriendSearch.querySelector(".search-friend-list");
 
@@ -38,9 +38,9 @@ window.addEventListener("load", (e)=>{
 	let friendSearchInput = friendSearchBox.querySelector(".friend-search-input");
 	let friendSearchBtn = friendSearchBox.querySelector(".friend-search-btn");
 
-	let friendAddBtn = friendSearchBox.querySelector("add-friend-btn");
+	let friendAddBtn = friendSearchBox.querySelector("action-friend-btn");
 
-	// 사용자 입력 박스
+	// 사용자 입력 박스 ==============================================================
 	let confirmBox = chatBox.querySelector(".friend-add-confirm");
 	let confirmTextBox = confirmBox.querySelector(".confirm-text-box");
 	let confirmBtnBox = confirmBox.querySelector(".confirm-btn-box");
@@ -49,19 +49,27 @@ window.addEventListener("load", (e)=>{
 	let confirmOkBtn = confirmBtnBox.querySelector(".confirm-ok-btn");
 
 
-	// 텍스트 =======================================================
-	let loadingText = `<li class="chat-alert" style="padding-top: 30px;">불러오는 중입니다</li>`;
-	let noMoreText = `<div class="chat-alert">마지막 입니다</div>`;
+	// 텍스트 =======================================================================
+	let loadingText = `<div class="chat-alert" style="padding-top: 30px;">불러오는 중입니다</div>`;
+	let noMoreText = `<li class="chat-alert">마지막 입니다</li>`;
 	let dashedNode = `<div class="chat-alert" style="border-top: 1px dashed #ddd;border-radius:0"></div>`;
-	let friendSearchText = `<li class="friend-search-text">닉네임으로 검색해주세요</li>`;
-	let friendSearching = `<li class="friend-search-text">검색중입니다.</li>`;
+	let friendSearchText = `<li class="friend-search-text chat-alert">닉네임으로 검색해주세요</li>`;
+	let noMoreChatText = `<li class="chat-alert">메시지가 없습니다.</li>`;
+	let friendSearching = `<li class="friend-search-text chat-alert">검색중입니다.</li>`;
+	let friendDeleteText = `<div class="chat-alert friend-delete" data-action="delete"><span class="pointer reject">친구 삭제</span></div>`;
 	let failText = `<div class="chat-alert">실패하였습니다</div>`;
 	let notKnowErrorText = `<div class="chat-alert">알 수 없는 오류입니다</div>`;
 	
 	// ======================================================================================
+	// ======================================================================================
+	// ======================================================================================
+	// ======================================================================================
 	// 테스트 나중에 로그인 배우면 값 바꾸기
 	let memberId = 449;
 	let otherMemberId = 0;
+	// ======================================================================================
+	// ======================================================================================
+	// ======================================================================================
 	// ======================================================================================
 
 	// 채팅에 필요한 변수들
@@ -81,7 +89,7 @@ window.addEventListener("load", (e)=>{
 	let friendActionId = 0;
 	let friendElement = null;
 
-	// 상단 알림 버튼 ==================================================
+	// 상단 알림 버튼 ===========================================================
 	topAlertBox.addEventListener("click", (e)=>{
 		topAlertBox.classList.add("smaller");
 
@@ -92,8 +100,30 @@ window.addEventListener("load", (e)=>{
 	});
 	
 	chatBox.addEventListener("click", (e)=>{
-		if(chatHeaderText.textContent != "친구 목록")
+		if(chatHeaderText.textContent != "친구 목록"){
 			topAlertBox.classList.add("smaller");
+		}
+		// console.log(e.target);
+		if(e.target.tagName == "SPAN" && e.target.parentElement.classList.contains("friend-delete")){
+			let target = e.target.parentElement;
+			let friendList = chatFriendListInner.querySelectorAll(".action-friend-btn");
+			if(target.classList.contains("active")){
+				friendList.forEach(f => {
+					f.classList.add("d-none");
+					f.parentElement.classList.remove("shake");
+				});
+				target.classList.remove("active");
+			} else {
+				friendList.forEach(f => {
+					f.classList.remove("d-none");
+					let p = f.parentElement;
+					p.style.animationDelay = `-${(Math.random() * 5).toFixed(2)}s`;
+					f.parentElement.classList.add("shake");
+				});
+				target.classList.add("active");
+			}
+			
+		}
 	})
 	// let topAlertBox = chatBox.querySelector(".chat-top-alert-box");
 	// let topAlertText = topAlertBox.querySelector(".top-alert-text");
@@ -165,7 +195,27 @@ window.addEventListener("load", (e)=>{
 		if (!chatFriendListInner.contains(target)) return;
 		
 		
+		// target   = li 태그
+		// e.target = 클릭한 태그
+		console.log(target)
+		console.log(target.dataset.friendId)
+		otherMemberId = target.dataset.friendId;
 		let friendNickname = target.querySelector(".friend-nickname").textContent;
+
+		if( e.target.classList.contains("action-friend-btn") || 
+			e.target.classList.contains("xi-close") ){
+
+			confirmTextBox.innerHTML = `<span class="bold">${friendNickname}</span>님을 삭제하시겠습니까??<br><br>채팅기록은 삭제되지 않습니다.`;
+			confirmYesBtn.dataset.action = "delete";
+			confirmYesBtn.classList.add("reject-box");
+			confirmYesBtn.textContent = "삭제";
+			
+			friendElement = target;
+			friendActionId = target.dataset.friendId;
+			confirmBox.classList.remove("d-none");
+			return;
+		}
+		
 		chatHeaderText.textContent = friendNickname;
 		chatLeftBtn.className = "xi-angle-left";
 		chatFriendList.classList.add("d-none");
@@ -173,7 +223,6 @@ window.addEventListener("load", (e)=>{
 		chatMessageBox.classList.remove("d-none");
 		
 		chatMessageBoxInner.innerHTML = "";
-		otherMemberId = target.dataset.friendId;
 		getChatList({"memberId": memberId, "otherMemberId": otherMemberId});
 	});
 
@@ -227,7 +276,7 @@ window.addEventListener("load", (e)=>{
 		if (!target) return; 
 		if (!chatFriendSearch.contains(target)) return;
 
-		if(!target.classList.contains("add-friend-btn")) return;
+		if(!target.classList.contains("action-friend-btn")) return;
 
 		let friendId = target.dataset.friendId;
 		let action = target.dataset.action;
@@ -261,7 +310,7 @@ window.addEventListener("load", (e)=>{
 		if (!target) return; 
 		if (!newFriendList.contains(target)) return;
 
-		if(!target.classList.contains("add-friend-btn")) return;
+		if(!target.classList.contains("action-friend-btn")) return;
 
 		let friendId = target.dataset.friendId;
 		let action = target.dataset.action;
@@ -282,6 +331,7 @@ window.addEventListener("load", (e)=>{
 			confirmTextBox.innerHTML = `<span class="bold">${addFriendNickname}</span>님의 친구 요청을 거절할까요??`;
 			confirmYesBtn.classList.add("reject-box");
 			confirmYesBtn.dataset.action = "reject";
+			confirmYesBtn.textContent = "거절";
 		}
 		showConfirmOkBtn(false);
 		confirmBox.classList.remove("d-none");
@@ -323,12 +373,17 @@ window.addEventListener("load", (e)=>{
 					addFriendReject({"memberId": memberId, "otherMemberId": friendActionId});
 					return;
 				}
+				case "delete": {
+					friendDelete({"memberId": memberId, "otherMemberId": friendActionId});
+					return;
+				}
 			}
 			confirmActionClear();
 			return;
 		}
 	})
 
+	// 친구 기능 =============================================================================================
 	function addFriend({memberId = 0, otherMemberId = 0}){
 		getXHR({"notEncodeParams": `memberId=${memberId}&otherMemberId=${otherMemberId}`, "method": "POST", "url": "/api/friend/add"})
 		.then((xhr) => {
@@ -353,7 +408,7 @@ window.addEventListener("load", (e)=>{
 				let addFriendNickname = confirmTextBox.querySelector("span").textContent;
 				confirmTextBox.innerHTML = `<span class="bold">${addFriendNickname}</span>님한테 요청을 보냈습니다`;
 
-				let current = friendElement.querySelector(".add-friend-btn");
+				let current = friendElement.querySelector(".action-friend-btn");
 				current.dataset.action = "cancel";
 				current.querySelector("i").className = "xi-check";
 			}
@@ -412,14 +467,33 @@ window.addEventListener("load", (e)=>{
 				}
 				let addFriendNickname = confirmTextBox.querySelector("span").textContent;
 				confirmTextBox.innerHTML = `<span class="bold">${addFriendNickname}</span>님 한테 보낸 요청을 취소하였습니다`;
-				let current = friendElement.querySelector(".add-friend-btn");
+				let current = friendElement.querySelector(".action-friend-btn");
 				current.dataset.action = "add";
 				current.querySelector("i").className = "xi-plus";
 			}
 		})
 		.catch((xhr) => console.log(xhr));
 	}
+	function friendDelete({memberId = 0, otherMemberId = 0}){
+		getXHR({"notEncodeParams": `memberId=${memberId}&otherMemberId=${otherMemberId}`, "method": "POST", "url": "/api/friend/delete"})
+		.then((xhr) => {
+			if( xhr.status === 200 || xhr.status === 201 ){
+				let result = JSON.parse(xhr.responseText);
+				
+				showConfirmOkBtn(true);
 
+				if( result?.result != "sussess" || result?.datas[0].result == 0 ){
+					confirmTextBox.textContent = `실패하였습니다`;
+					return;
+				}
+				let addFriendNickname = confirmTextBox.querySelector("span").textContent;
+				confirmTextBox.innerHTML = `<span class="bold">${addFriendNickname}</span>님이랑 이제 모르는 사이입니다.`;
+				friendElement.remove();
+			}
+		})
+		.catch((xhr) => console.log(xhr));
+	}
+	// 사용자 입력 초기화 =============================================================================================
 	function showConfirmOkBtn(showOkBtn){
 		if(showOkBtn){
 			confirmYesBtn.classList.add("d-none");
@@ -430,6 +504,7 @@ window.addEventListener("load", (e)=>{
 			confirmNoBtn.classList.remove("d-none");
 			confirmOkBtn.classList.add("d-none");
 		}
+		confirmActionClear()
 	}
 	function confirmActionClear(){
 		confirmYesBtn.dataset.action = "";
@@ -441,9 +516,9 @@ window.addEventListener("load", (e)=>{
 		confirmYesBtn.classList.remove("reject-box");
 	}
 
+	// 닉네임 검색 =============================================================================================
 	function nicknameSearch({memberId = memberId, nickname = "", page = 1, size = searchSize}){
 		
-
 		if(prevSearchNickname != nickname){
 			searchPage = 0;
 			searchFriendList.innerHTML = "";
@@ -489,14 +564,13 @@ window.addEventListener("load", (e)=>{
 				// console.log(friendListData);
 				let insertNode = "";
 				friendListData.forEach(f => {
-					insertNode += `<li class="friend-search-result"><div class="profile-image"><i class="xi-profile"></i></div><div class="friend-nickname">${f.nickname}</div><div class="add-friend-btn" data-friend-id="${f.id}" data-action="add"><i class="xi-plus"></i></div></li>`;
+					insertNode += `<li class="friend-search-result"><div class="profile-image"><i class="xi-profile"></i></div><div class="friend-nickname">${f.nickname}</div><div class="action-friend-btn" data-friend-id="${f.id}" data-action="add"><i class="xi-plus"></i></div></li>`;
 				});
 
-				searchFriendList.insertAdjacentHTML("beforeend", insertNode);
+				searchFriendList.insertAdjacentHTML("beforeend", insertNode)
 				
 				if( friendListData.length != searchSize ){
 					noMoreSearchingResult = true;
-					searchFriendList.insertAdjacentHTML("beforeend", dashedNode);
 					searchFriendList.insertAdjacentHTML("beforeend", noMoreText);
 				} else {
 					noMoreSearchingResult = false;
@@ -509,6 +583,8 @@ window.addEventListener("load", (e)=>{
 		})
 		.catch((xhr) => console.log(xhr));
 	}
+
+	// 친구 목록 불러오기 =============================================================================================
 	function getFriendList({reqId = 0, state = 0}){
 
 		chatFriendListInner.innerHTML = "";
@@ -533,11 +609,13 @@ window.addEventListener("load", (e)=>{
 				friendListData.forEach(f => {
 					let temp = `<li class="friend-detail" data-friend-id="${f.id}"><div class="profile-image"><i class="xi-profile"></i></div><div class="friend-nickname">${f.nickname}</div>`;
 					if( f.state == 1 )
-						friendNode += `${temp}</li>`
+						friendNode += `${temp}<div class="action-friend-btn reject d-none" data-friend-id="${f.id}" data-action="delete"><i class="xi-close"></i></div></li>`
 					else if(f.state == 2)
-						newFriendNode += `${temp}<div class="add-friend-btn resolve" data-friend-id="${f.id}" data-action="resolve"><i class="xi-plus"></i></div><div class="add-friend-btn reject" data-friend-id="${f.id}" data-action="reject"><i class="xi-close"></i></div></li>`;
+						newFriendNode += `${temp}<div class="action-friend-btn resolve" data-friend-id="${f.id}" data-action="resolve"><i class="xi-plus"></i></div><div class="action-friend-btn reject" data-friend-id="${f.id}" data-action="reject"><i class="xi-close"></i></div></li>`;
 				});
 				chatFriendListInner.insertAdjacentHTML("beforeend", friendNode);
+				chatFriendListInner.insertAdjacentHTML("beforeend", friendDeleteText);
+				
 				newFriendListInner.insertAdjacentHTML("beforeend", newFriendNode);
 				if( newFriendNode && chatHeaderText.textContent == "친구 목록" ){
 					topAlertBox.classList.remove("smaller");
@@ -547,6 +625,7 @@ window.addEventListener("load", (e)=>{
 		.catch((xhr) => console.log(xhr));
 	}
 
+	// 채팅 기록 불러오기 =============================================================================================
 	function getChatList({memberId = 0, otherMemberId = 0}){
 
 		if(prevMember != otherMemberId){
@@ -586,7 +665,7 @@ window.addEventListener("load", (e)=>{
 				}
 				if(chatData.result == "empty"){
 					topNode.remove();
-					chatMessageBoxInner.insertAdjacentHTML("afterbegin", `<div class="chat-alert">메시지가 없습니다.</div>`);
+					chatMessageBoxInner.insertAdjacentHTML("afterbegin", noMoreChatText);
 					return;
 				}
 				if(chatData.result != "sussess"){
@@ -597,20 +676,46 @@ window.addEventListener("load", (e)=>{
 
 				chatData = chatData.datas;
 				let insertNode = "";
+				let continueMessage = true;
+
+				let friendMessages = "";
+				let myMessages = "";
+				let prevRegMember = "";
+
 				chatData.forEach(c => {
 					let whoSent = "my";
-					if(c.regMemberId == otherMemberId)
-						whoSent = "other";
 					let regDate = new Date(c.registrantionDate);
 					let regDateFmt = MMddHHmm(regDate);
-					insertNode += `<div class="${whoSent}-message"><div>${c.contents}</div><div class="message-regDate">${regDateFmt}</div></div>`;
-				});
-				chatMessageBoxInner.insertAdjacentHTML("afterbegin", insertNode);
 
+					if(c.regMemberId != memberId){
+					// 상대방이 보낸 메시지
+						whoSent = "friend";
+						if( prevRegMember != whoSent ){
+							insertNode += `</div>`;
+							insertNode += `<div class="other-message"><div class="profile-image"><i class="xi-profile"></i></div><div class="other-message-content">`;
+						}
+						insertNode += `<div class="message"><div><div>${c.contents}</div><div class="message-reg-date">${regDateFmt}</div></div></div>`; 
+					} else {
+					// 내가 보낸 메시지
+						if( prevRegMember != whoSent ){
+							insertNode += `</div></div>`;
+							insertNode += `<div class="my-message">`
+						}
+						insertNode += `<div class="message"><div><div>${c.contents}</div><div class="message-reg-date">${regDateFmt}</div></div></div>`;
+					}
+					prevRegMember = whoSent;
+				});
+
+				if( prevRegMember != "friend" )
+					insertNode += `</div>`;
+				else 
+					insertNode += `</div></div>`;
+
+				chatMessageBoxInner.insertAdjacentHTML("afterbegin", insertNode);
+				
 				
 				if( chatData.length != chatSize ){
 					noMoreChat = true;
-					chatMessageBoxInner.insertAdjacentHTML("afterbegin", dashedNode);
 					chatMessageBoxInner.insertAdjacentHTML("afterbegin", noMoreText);
 				} else {
 					noMoreChat = false;
@@ -634,6 +739,7 @@ window.addEventListener("load", (e)=>{
 		.catch((error) => console.log(error));
 	}
 
+	// 메시지 전송 =============================================================================================
 	function sendMessage({memberId = 0, otherMemberId = 0, content = ""}){
 		chatMessageInput.value = "";
 		getXHR({"notEncodeParams": `memberId=${memberId}&otherMemberId=${otherMemberId}&content=${content}`, "method": "POST", "url": "/api/chat/send"})
@@ -653,7 +759,7 @@ window.addEventListener("load", (e)=>{
 				let regDate = new Date(sendResult.regDate);
 				
 				let regDateFmt = MMddHHmm(regDate);
-				let insertNode = `<div class="my-message"><div>${content}</div><div class="message-regDate">${regDateFmt}</div></div>`;
+				let insertNode = `<div class="my-message"><div>${content}</div><div class="message-reg-date">${regDateFmt}</div></div>`;
 
 				if( chatMessageBox.scrollTop + chatMessageBox.offsetHeight == chatMessageBox.scrollHeight )
 					scrollFixedUnder = true;
@@ -701,6 +807,4 @@ window.addEventListener("load", (e)=>{
 			xhr.send(formData);
         });
     };
-	getChatMore = getChatList
 });
-let getChatMore;

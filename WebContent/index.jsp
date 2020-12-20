@@ -34,6 +34,10 @@
 		            <br>
 		            <br>
 		            <a href="/admin/member/list">회원관리 구경하러 가자~</a>
+		            <br>
+		            <br>
+		            <br>
+		            <span onclick="document.querySelector('.chat-toggle-btn').click()"><i class="xi-speech" style="color:var(--mainColor)"></i> 채팅도 가능 해볼까??</span>
 	            </div>
             </div>
             <jsp:include page="/WEB-INF/jsp/user/account/login.jsp" />
