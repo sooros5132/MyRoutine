@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,9 @@ import com.myroutine.web.dao.jdbc.DBContext;
 import com.myroutine.web.entity.user.chat.Chat;
 import com.myroutine.web.entity.user.chat.ChatFile;
 import com.myroutine.web.entity.user.member.Member;
+import com.myroutine.web.service.TimeService;
+
+import oracle.jdbc.OraclePreparedStatement;
 
 public class JdbcChatFileDao implements ChatFileDao{
 
@@ -113,10 +117,79 @@ public class JdbcChatFileDao implements ChatFileDao{
 		return list;
 	}
 
+	// 영향 받은 아이디값을 리턴함
 	@Override
 	public int insert(ChatFile cf) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		
+		if( cf == null )
+			return result;
+
+		String url = DBContext.URL;
+		String sql =  String.format("INSERT INTO "
+					+ "CHAT_FILE(NAME, ROUTE) "
+					+ "VALUES('%s', '%s') RETURNING ID INTO ?", cf.getName(), cf.getRoute());
+
+		System.out.println("dao.jdbc.user.chat.JdbcChatFileDao -> insert() 에서 메시지 실행할 SQL문\n" + sql);
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+			OraclePreparedStatement st = (OraclePreparedStatement) con.prepareStatement(sql);
+			st.registerReturnParameter(1, Types.INTEGER);
+			
+			st.execute();
+			
+			ResultSet rs = st.getReturnResultSet();
+			
+			rs.next();
+			result = rs.getInt(1);
+			
+			st.close();
+			con.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
+	public int update(int id, String field, String query) {
+		int result = 0;
+		
+		if( id == 0 )
+			return result;
+
+		String url = DBContext.URL;
+		String sql =  String.format("UPDATE CHAT_FILE SET %s = '%s' WHERE ID = %d", field, query, id);
+		
+		int chatId = 0;
+		if( field.toUpperCase().equals("CHAT_ID")) {
+			chatId = Integer.parseInt(query);
+			sql = String.format("UPDATE CHAT_FILE SET %s = %d WHERE ID = %d", field, chatId, id);
+		}
+
+		System.out.println("dao.jdbc.user.chat.JdbcChatFileDao -> insert() 에서 메시지 실행할 SQL문\n" + sql);
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			result = st.executeUpdate(sql);
+			
+			st.close();
+			con.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override

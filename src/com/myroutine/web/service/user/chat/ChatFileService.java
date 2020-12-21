@@ -30,13 +30,14 @@ public class ChatFileService {
 	}
 
 	public int insert(ChatFile cf) {
-		// TODO Auto-generated method stub
-		return 0;
+		return chatFileDao.insert(cf);
 	}
 
 	public int delete(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return chatFileDao.delete(id);
 	}
-	
+
+	public int update(int id, String field, String query) {
+		return chatFileDao.update(id, field, query);
+	}
 }

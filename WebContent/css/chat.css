@@ -68,6 +68,8 @@
 .chat .chat-message-inner{
     display: flex;
     flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
     box-sizing: border-box;
     color: #ffffff;
     word-break: break-all;
@@ -77,14 +79,14 @@
     /* display: flex;
     flex: 0 0 auto; */
     max-width: 75%;
-    margin: 15px 0;
+    margin: 10px 0;
     align-items: flex-end;
     box-sizing: border-box;
 }
 
 .chat .chat-message-inner .my-message{
     margin-left: auto;
-    margin-right: 20px;
+    margin-right: 10px;
     text-align: left;
 }
 
@@ -97,35 +99,29 @@
 }
 .chat .chat-message-inner .profile-image{
     font-size: 35px;
-    padding: 0 10px 3px;
+    padding: 0 10px;
+    height: 40px;
 }
 
 .chat .chat-message-inner .message{
     display: flex;
 }
 
-.chat .chat-message-inner .message > div{
+.chat .chat-message-inner .message > .message-content{
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     padding: 6px 10px;
-    margin: 6px 0;
+    margin: 6px 0 0;
     border-radius: 6px;
     font-size: 16px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
-.chat .chat-message-inner .message > div > div{
+/* .chat .chat-message-inner .message > .message-content > div{
     display: flex;
-}
-.chat .chat-message-inner .my-message .message > div{margin-left: auto;background: #30baa1}
-.chat .chat-message-inner .other-message .message > div{margin-right: auto;background: rgb(60, 64, 68)}
-
-.chat .chat-message-inner .message > div:last-child{
-    margin-bottom: 0;
-}
-
-.chat .chat-message-inner {
-}
-
+} */
+.chat .chat-message-inner .my-message .message > .message-content{margin-left: auto;background: #30baa1}
+.chat .chat-message-inner .other-message .message > .message-content{align-items: flex-start;margin-right: auto;background: rgb(60, 64, 68)}
 
 .chat .chat-message-inner .message-reg-date{
 	font-size: 10px;
@@ -135,27 +131,71 @@
 .chat .chat-message-inner .my-message .message-reg-date{
     text-align: right;
 }
+.chat .chat-message-inner .message .message-option{
+    display: flex;
+    flex: 0 0 20px;
+    width: 20px;
+    align-items: flex-end;
+    justify-content: center;
+    font-size: 16px;
+}
+.chat .chat-message-inner .message-files,
+.chat .chat-message-inner .message-images{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0;
+}
+.chat .chat-message-inner .message-files .message-file{
+    flex: 1 1 100%;
+}
+.chat .chat-message-inner .my-message .message-files .message-file{
+	text-align: right;
+}
+
+.chat .chat-message-inner .message-images .message-image{
+    flex: 1 1 33.333333%;
+}
+.chat .chat-message-inner .message-images .message-image img{
+	width: 100%;
+	height: 100%;
+    object-fit: contain;
+    max-height: 100px;
+    border: 4px solid transparent;
+}
+
+
+.chat .chat-send-box .upload-list{
+    display: flex;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    color: #ffffff;
+    background: linear-gradient(to right, rgb(48 186 161 / .5) 0%, rgb(0 0 0 / 0%) 0%);
+    border-bottom: 1px solid #4a4a4a;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
 
 .chat .chat-input-box{
     flex-basis: 50px;
     border-top: 1px solid #4a4a4a;
+    position: relative;
 }
     
 .chat .chat-input-inner{
     display: flex;
 }
 
-.chat .chat-input-inner > div{
+.chat .chat-input-inner > *{
     flex: 1 0 auto;
     height: 50px;
 }
-
-.chat div.chat-input-btn{
+.chat .chat-input-btn{
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-basis: 50px;
-    flex-grow: 0;
+    flex: 0 0 50px;
     color:#30baa1;
     text-align: center;
     font-size: 24px;
@@ -259,14 +299,25 @@
 	text-align: center;
 	color: #ddd;
     box-shadow: none;
+    box-sizing: border-box;
+    cursor: initial;
 }
 
-.chat li.friend-search-text{
-    width: 100%;
-	color: #ddd;
-	text-align: center;
-	padding: 40px 0 40px 0;
+.chat div.friend-search-text{
+    position: absolute;
+    bottom: 51px;
+    left:0;
+    line-height: 50px;
+    margin: 50px 0 0;
+    padding: 0;
+    font-size: 18px;
+    font-weight:bold;
+    color: #fff;
+    background: rgb(49 51 53);
+    z-index: 1;
+    word-break: break-all;
 }
+
 .friend-delete{
     padding: 50px 0;
     font-size: 20px;
@@ -277,6 +328,18 @@
 }
 .friend-add-confirm{
 	transition: opacity .5s;
+}
+.top-alert-text{
+	font-size: 18px;
+}
+.file-uploader{
+    width: 100%;
+    height: 50px;
+    background: rgb(48 186 161 / 0.3);
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: -1;
 }
 
 @media screen and (max-width:768px){

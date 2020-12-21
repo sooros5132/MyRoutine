@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +15,12 @@ import com.myroutine.web.dao.jdbc.DBContext;
 import com.myroutine.web.entity.user.chat.Chat;
 import com.myroutine.web.service.TimeService;
 
+import oracle.jdbc.OraclePreparedStatement;
+
 public class JdbcChatDao implements ChatDao {
 
+	
+	// 영향 받은 아이디값을 리턴함
 	@Override
 	public int insert(Chat chat) {
 		int result = 0;
@@ -33,19 +38,21 @@ public class JdbcChatDao implements ChatDao {
 		String url = DBContext.URL;
 		String sql =  String.format("INSERT INTO "
 					+ "CHAT(reg_member_id, requester, contents, registrantion_date) "
-					+ "VALUES(%d, %d, '%s', TO_DATE('%s','YYYYMMDDHH24MISS'))", regMemberId, requester, contents, nowDate);
+					+ "VALUES(%d, %d, '%s', TO_DATE('%s','YYYYMMDDHH24MISS')) RETURNING ID INTO ?", regMemberId, requester, contents, nowDate);
 
 		System.out.println("dao.jdbc.user.chat.JdbcChatDao -> insert() 에서 메시지 실행할 SQL문\n" + sql);
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
-			PreparedStatement st = con.prepareStatement(sql);
+			OraclePreparedStatement st = (OraclePreparedStatement) con.prepareStatement(sql);
+			st.registerReturnParameter(1, Types.INTEGER);
 			
-			result = st.executeUpdate(sql);
+			st.execute();
+			ResultSet rs = st.getReturnResultSet();
+			rs.next();
+			result = rs.getInt(1);
 			
-//			System.out.println("dao.jdbc.user.chat.JdbcChatDao -> insert() 에서 메시지" + rs.toString());
-
 			st.close();
 			con.close();
 			

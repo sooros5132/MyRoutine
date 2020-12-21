@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.myroutine.web.entity.user.chat.Chat;
 import com.myroutine.web.service.TimeService;
+import com.myroutine.web.service.user.chat.ChatFileService;
 import com.myroutine.web.service.user.chat.ChatService;
 
 // == /api/chat/send?content=등록 테스트 메시지~&reg_member_id=449&requester=448
@@ -51,15 +52,27 @@ public class SendController extends HttpServlet {
 		int requester = Integer.parseInt(requesterTemp);
 		ChatService service = new ChatService();
 		List<String> results = new ArrayList<String>();
+
+		// UPDATE --------------------------------------------
+		Chat chat = new Chat(regMemberId, requester, contents);
+		System.out.println(chat.toString());
+		result = service.send(chat);
+		
+		String[] fileIds = request.getParameterValues("chatFilesId");
+		if( fileIds != null ) {
+
+			ChatFileService cfService = new ChatFileService();
+			
+			for(String f : fileIds) {
+				cfService.update(Integer.parseInt(f), "CHAT_ID", Integer.toString(result));
+			}
+			
+		}
 		
 //		List<Map<String, String>> list = new ArrayList<Map<String,String>>(); 
 		
 //		for(Map<String, String> chat : )
 		
-		// UPDATE --------------------------------------------
-		Chat chat = new Chat(regMemberId, requester, contents);
-		System.out.println(chat.toString());
-		result = service.send(chat);
 
 		// RESULT --------------------------------------------
 		if( result == 0 ) {
@@ -67,7 +80,7 @@ public class SendController extends HttpServlet {
 			out.close();
 			return;
 		}
-		out.print("{\"result\":\"sussess\", \"datas\":[{\"regDate\": \""+TimeService.getDate()+"\"}]}");
+		out.print("{\"result\":\"sussess\", \"datas\":[{\"id\":"+result+",\"regDate\": \""+TimeService.getFullDate()+"\"}]}");
 		out.close();
 		
 	}

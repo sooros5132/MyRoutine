@@ -83,11 +83,11 @@
 
 
 @media screen and (min-width:768px){
-    .header:hover{
+    /* .header:hover{
         background: rgba(0,0,0,0.3);
         -webkit-backdrop-filter: blur(20px) saturate(180%);
         backdrop-filter: blur(20px) saturate(180%);
-    }
+    } */
     .header-container li a:hover{
         background: rgba(255,255,255,0.1);
     }
@@ -118,7 +118,7 @@
 
     .header.active{
         height:100%;
-        background: rgba(0,0,0,0.3);
+        background: rgba(0,0,0,0.5);
         overflow-y: auto;
     }
 

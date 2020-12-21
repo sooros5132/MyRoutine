@@ -13,5 +13,6 @@ public interface ChatFileDao {
 	
 	int insert(ChatFile cf);
 	int delete(int id);
+	int update(int id, String field, String query);
 	
 }

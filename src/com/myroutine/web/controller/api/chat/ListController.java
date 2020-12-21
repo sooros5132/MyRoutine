@@ -100,6 +100,7 @@ public class ListController extends HttpServlet {
 			SimpleDateFormat formatter1 = new SimpleDateFormat ( "yyyy-MM-dd", Locale.KOREA );
 			SimpleDateFormat formatter2 = new SimpleDateFormat ( "HH:mm:ss", Locale.KOREA );
 			String regDate = formatter1.format ( c.getRegistrantionDate() ) + "T" + formatter2.format ( c.getRegistrantionDate() );
+			String deleteDate = "";
 
 			fileList.removeIf( cf -> {
 				if( c.getId() == cf.getChatId() ) {
@@ -110,12 +111,20 @@ public class ListController extends HttpServlet {
 				return false;
 			});
 			
+			String jsonTemp = "";
 
 			// chat 정보들 담기
-			String jsonTemp = String.format("\"id\":%d,\"regMemberId\":\"%s\",\"requester\":\"%s\",\"regMemberName\":\"%s\",\"requesterName\":\"%s\",\"contents\":\"%s\",\"registrantionDate\":\"%s\",",
-					c.getId(), c.getRegMemberId(), c.getRequester(), c.getRegMemberName(), c.getRequesterName(), c.getContents(), regDate);
 			// chat File 정보들 합치기
-			jsonTemp += "\"files\":[" + String.join(",", fileJsonTemp) + "]";
+			
+			if( c.getDeleteDate() == null || c.getDeleteDate().equals("") ) {
+				jsonTemp = String.format("\"id\":%d,\"regMemberId\":\"%s\",\"requester\":\"%s\",\"regMemberName\":\"%s\",\"requesterName\":\"%s\",\"contents\":\"%s\",\"registrantionDate\":\"%s\",",
+						c.getId(), c.getRegMemberId(), c.getRequester(), c.getRegMemberName(), c.getRequesterName(), c.getContents(), regDate);
+				jsonTemp += "\"files\":[" + String.join(",", fileJsonTemp) + "]";
+			} else {
+				deleteDate = formatter1.format ( c.getDeleteDate() ) + "T" + formatter2.format ( c.getDeleteDate() );
+				jsonTemp = String.format("\"id\":%d,\"regMemberId\":\"%s\",\"deleteDate\":\"%s\"",
+						c.getId(), c.getRegMemberId(), deleteDate);	
+			}
 			
 			results.add(jsonTemp); 
 		}

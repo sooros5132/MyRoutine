@@ -47,7 +47,7 @@
         <script src="/js/user/bottomMenu.js"></script>
     	<!-- // 하단 메뉴 버튼 -->
     	
-   		<!-- // 채팅 -->
+   		<!-- 채팅 -->
 		<jsp:include page="/WEB-INF/jsp/chat.jsp" />
     	<!-- // 채팅 -->
     </div>

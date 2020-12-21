@@ -87,7 +87,7 @@ public class EditController extends HttpServlet {
 		}
 		
 		if(datas.get("last_login") != null)
-			results.add("\"last_login\":\"" + TimeService.getDate() + "\"");
+			results.add("\"last_login\":\"" + TimeService.getFullDate() + "\"");
 		
 		results.add("\"updateKeys\":[\"" + String.join("\",\"",keys) + "\"]");
 		results.add("\"updateLines\":" + result);

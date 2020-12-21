@@ -1,7 +1,18 @@
 window.addEventListener("load", (e)=>{
 
+	// 하단 메뉴 메시지 버튼 ==================================================
 	let chatToggleBtn = document.querySelector(".chat-toggle-btn");
+	
+	chatToggleBtn.addEventListener("click", ()=>{
+		if(chatBox.classList.contains("d-none")){
+			chatBox.classList.remove("d-none");
+			getFriendList({"reqId": memberId, "state": 0});
+			return;
+		}
+		chatBox.classList.add("d-none");
+	})
 
+	// 채팅 ========================================================================
 	let chatBox = document.querySelector(".chat-container");
 	let chatRightBth = chatBox.querySelector(".chat-header-right-btn > i");
 	let chatLeftBtn = chatBox.querySelector(".chat-header-left-btn > i");
@@ -21,6 +32,11 @@ window.addEventListener("load", (e)=>{
 	let chatSendBox = chatBox.querySelector(".chat-send-box");
 	let chatMessageInput = chatSendBox.querySelector(".message-input");
 	let messageSendBtn = chatSendBox.querySelector(".chat-send-btn");
+
+	let uploadBox = chatSendBox.querySelector(".upload-container");
+	let messageFileBtn = chatSendBox.querySelector(".chat-file-btn");
+	let messageFileInput = chatSendBox.querySelector(".send-file");
+	let fileUploadBtn = chatSendBox.querySelector(".upload-btn");
 	
 	let newFriendList = chatBox.querySelector(".new-friend-box");
 	let newFriendListInner = newFriendList.querySelector(".new-friend-list");
@@ -52,13 +68,16 @@ window.addEventListener("load", (e)=>{
 	// 텍스트 =======================================================================
 	let loadingText = `<div class="chat-alert" style="padding-top: 30px;">불러오는 중입니다</div>`;
 	let noMoreText = `<li class="chat-alert">마지막 입니다</li>`;
-	let dashedNode = `<div class="chat-alert" style="border-top: 1px dashed #ddd;border-radius:0"></div>`;
-	let friendSearchText = `<li class="friend-search-text chat-alert">닉네임으로 검색해주세요</li>`;
+	let dashedNode = `<div class="chat-alert" style="border-top: 1px dashed #ddd;width:100%;"></div>`;
+	let friendSearchText = `<div class="friend-search-text chat-alert">닉네임으로 검색해주세요</div>`;
+	let friendSearching = `<div class="friend-search-text chat-alert">검색중입니다.</div>`;
 	let noMoreChatText = `<li class="chat-alert">메시지가 없습니다.</li>`;
-	let friendSearching = `<li class="friend-search-text chat-alert">검색중입니다.</li>`;
 	let friendDeleteText = `<div class="chat-alert friend-delete" data-action="delete"><span class="pointer reject">친구 삭제</span></div>`;
 	let failText = `<div class="chat-alert">실패하였습니다</div>`;
 	let notKnowErrorText = `<div class="chat-alert">알 수 없는 오류입니다</div>`;
+
+	// 이미지 형식 Reg
+	let imgRegex = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/;
 	
 	// ======================================================================================
 	// ======================================================================================
@@ -78,7 +97,11 @@ window.addEventListener("load", (e)=>{
 	let prevMember = 0;
 	let noMoreChat = false;
 	let chatLoading = false;
-	
+	let fileUploading = false;
+	let uploadedFiles = {};
+	// 채팅 지울때 필요한 Node
+	let currentChat = "";
+
 	// 검색에 필요한 변수들
 	let searchPage = 1;
 	let searchSize = 20;
@@ -88,6 +111,8 @@ window.addEventListener("load", (e)=>{
 
 	let friendActionId = 0;
 	let friendElement = null;
+
+	
 
 	// 상단 알림 버튼 ===========================================================
 	topAlertBox.addEventListener("click", (e)=>{
@@ -129,15 +154,6 @@ window.addEventListener("load", (e)=>{
 	// let topAlertText = topAlertBox.querySelector(".top-alert-text");
 	// let topAlertBtn = topAlertBox.querySelector(".top-alert-btn");
 
-	// 하단 메뉴 메시지 버튼 ==================================================
-    chatToggleBtn.addEventListener("click", ()=>{
-        if(chatBox.classList.contains("d-none")){
-			chatBox.classList.remove("d-none");
-			getFriendList({"reqId": memberId, "state": 0});
-			return;
-		}
-		chatBox.classList.add("d-none");
-    })
 
 	// 헤더 버튼 이벤트 =======================================================
 	chatLeftBtn.addEventListener("click", (e)=>{
@@ -197,8 +213,8 @@ window.addEventListener("load", (e)=>{
 		
 		// target   = li 태그
 		// e.target = 클릭한 태그
-		console.log(target)
-		console.log(target.dataset.friendId)
+		// console.log(target)
+		// console.log(target.dataset.friendId)
 		otherMemberId = target.dataset.friendId;
 		let friendNickname = target.querySelector(".friend-nickname").textContent;
 
@@ -226,11 +242,63 @@ window.addEventListener("load", (e)=>{
 		getChatList({"memberId": memberId, "otherMemberId": otherMemberId});
 	});
 
-	// 채팅창 이벤트 =======================================================
+	// 채팅 input 이벤트 =======================================================
 	messageSendBtn.addEventListener("click", (e)=>{
 		// if(confirm("전송하시겠습니까??"))
 			sendMessage({"memberId": memberId, "otherMemberId": otherMemberId, "content": chatMessageInput.value});
 	});
+	
+	messageFileInput.addEventListener("change", (e)=>{
+
+		let files = e.target.files;
+		let fileLength = files.length;
+		let fileNamesTemp = [];
+
+		if( fileLength == 0 ){
+			// uploadBox.classList.add("d-none");
+			return;
+		}
+		if( fileLength > 5 ){
+			alert("업로드 제한은 개당 10MB 최대 5개입니다.");
+			e.preventDefault();
+			return;
+		}
+		for(let i = 0; i < fileLength; i++){
+			fileNamesTemp.push(files[i].name);
+			if( files[i].size > 1024*1024*10 ){
+				alert("업로드 제한은 개당 10MB 최대 5개입니다.");
+				e.preventDefault();
+				return;
+			}
+		}
+
+		if( fileLength != 0){
+			uploadBox.classList.remove("d-none");
+			let fileNames = fileNamesTemp.join(", ");
+			chatSendBox.querySelector(".upload-list .file-names").textContent = fileNames;
+			uploadedFiles = {};
+		}
+
+		uploadBox.querySelector(".upload-list").style.background = `linear-gradient(to right, rgba(48, 186, 161, 0.5) 0%, rgb(0 0 0 / 0%) 0%)`;
+		fileUploadBtn.firstElementChild.className = "xi-arrow-up";
+	})
+
+	fileUploadBtn.addEventListener("click", (e)=>{
+		
+		let files = messageFileInput.files;
+		let fileLength = Object.keys(files).length;
+
+		if(fileUploadBtn.firstElementChild.classList.contains("xi-close")){
+			uploadBox.classList.add("d-none");
+			uploadedFiles = {};
+			uploadBox.querySelector(".upload-list").style.background = `linear-gradient(to right, rgba(48, 186, 161, 0.5) 0%, rgb(0 0 0 / 0%) 0%)`;
+			fileUploadBtn.firstElementChild.className = "xi-arrow-up";
+			return;
+		}
+		if(fileLength != 0){
+			uploadFiles(files);
+		}
+	})
 
 	chatMessageInput.addEventListener("keypress", (e)=>{
 		if(!e.target.classList.contains("message-input")) return;
@@ -241,6 +309,7 @@ window.addEventListener("load", (e)=>{
 					sendMessage({"memberId": memberId, "otherMemberId": otherMemberId, "content": chatMessageInput.value});
 	});
 
+	// 채팅창 이벤트 =======================================================
 	chatMessageBox.addEventListener("scroll", (e)=>{
 		if( chatMessageBox.scrollTop + chatMessageBox.offsetHeight == chatMessageBox.scrollHeight )
 			scrollFixedUnder = true;
@@ -248,6 +317,47 @@ window.addEventListener("load", (e)=>{
 			getChatList({"memberId": memberId, "otherMemberId": otherMemberId});
 		}
 	})
+
+	chatMessageBox.addEventListener("mouseover", (e)=>{
+		let target = e.target.closest("div.message");
+		if (!target) return; 
+		if (!chatMessageBox.contains(target)) return;
+
+		let current = target.querySelector(".message-option > div");
+		if( current ){
+			current.classList.remove("d-none");
+			current.parentElement.classList.add("mouseover");
+		}
+	});
+
+	chatMessageBox.addEventListener("mouseout", (e)=>{
+		let target = e.target.closest("div.message");
+		if (!target) return; 
+		if (!chatMessageBox.contains(target)) return;
+
+		let current = target.querySelector(".message-option > div");
+		if( current ){
+			current.classList.add("d-none");
+			current.parentElement.classList.remove("mouseover");
+		}
+	});
+	chatMessageBoxInner.addEventListener("click", (e)=>{
+		let target = e.target.closest("div.message-option.mouseover > div");
+		if (!target) return; 
+		if (!chatMessageBoxInner.contains(target)) return;
+		
+		currentChat = target.parentElement;
+
+		let chatTextContent = currentChat.parentElement.querySelector(".message-content .message-detail").textContent;
+		confirmTextBox.innerHTML = `<div class="nowrap bold">${chatTextContent}</div><div class="confirm-text">메시지를 삭제하시겠습니까??<br><br>삭제된 문구로 변경됩니다.<div>`;
+
+		confirmYesBtn.dataset.action = "chat-delete";
+		confirmYesBtn.dataset.chatId = currentChat.dataset.chatId;
+		confirmYesBtn.classList.add("reject-box");
+		confirmYesBtn.textContent = "삭제";
+		confirmBox.classList.remove("d-none");
+		return;
+	});
 
 	// 회원 닉네임 검색 이벤트 ===============================================
 	friendSearchBtn.addEventListener("click", (e)=>{
@@ -348,6 +458,8 @@ window.addEventListener("load", (e)=>{
 
 	// 사용자 입력창 =============================================================
 	confirmBox.addEventListener("click", (e)=>{
+		if( e.target === confirmOkBtn)
+			showConfirmOkBtn(false)
 		if( e.target.classList.contains("friend-add-confirm") || 
 			e.target === confirmOkBtn || 
 			e.target === confirmNoBtn ){
@@ -376,6 +488,9 @@ window.addEventListener("load", (e)=>{
 				case "delete": {
 					friendDelete({"memberId": memberId, "otherMemberId": friendActionId});
 					return;
+				}
+				case "chat-delete":{
+					chatDelete({"chatId": confirmYesBtn.dataset.chatId});
 				}
 			}
 			confirmActionClear();
@@ -650,6 +765,10 @@ window.addEventListener("load", (e)=>{
 		prevMember = otherMemberId;
 
 		chatMessageBoxInner.insertAdjacentHTML("afterbegin", friendSearching);
+
+		// 스크롤이 생겼다면 그 Y 좌표를 기억하고 다시 돌려놓기 위함
+		let prevHeight = chatMessageBox.scrollHeight;
+
 		let topNode = chatMessageBoxInner.children[0];
 
 		getXHR({"notEncodeParams": `memberId=${memberId}&otherMemberId=${otherMemberId}&page=${chatPage}&size=${chatSize}`, "method": "POST", "url": "/api/chat/get"})
@@ -657,62 +776,98 @@ window.addEventListener("load", (e)=>{
 			if( xhr.status === 200 || xhr.status === 201 ){
 				chatLoading = false;
 				let chatData = JSON.parse(xhr.responseText);
-	
+
+				topNode.remove();
+
 				if(chatData?.result == "fail"){
-					topNode.remove();
 					chatMessageBoxInner.insertAdjacentHTML("afterbegin", failText);
 					return;
 				}
 				if(chatData.result == "empty"){
-					topNode.remove();
 					chatMessageBoxInner.insertAdjacentHTML("afterbegin", noMoreChatText);
 					return;
 				}
 				if(chatData.result != "sussess"){
-					topNode.remove();
 					chatMessageBoxInner.insertAdjacentHTML("afterbegin", notKnowErrorText);
 					return;
 				}
 
 				chatData = chatData.datas;
-				let insertNode = "";
-				let continueMessage = true;
+				
+		
 
-				let friendMessages = "";
-				let myMessages = "";
+				// 최상단에 로딩 제외 끼울 노드 검색 내껀지 상대껀지 children[1]
+				// 최상단노드가 반복도는 노드와와 같다면 그 안에다가 꼽음
+				// 없다면 새로 만들고 그 안에 꽂는다.
+				let whoSent = "my";
 				let prevRegMember = "";
+				
+				let creatOtherNode = `<div class="other-message"><div class="profile-image"><i class="xi-profile"></i></div><div class="other-message-content message-content"></div></div>`;
+				let creatMyNode = `<div class="my-message"></div>`;
 
-				chatData.forEach(c => {
-					let whoSent = "my";
+				let dataLen = chatData.length;
+				for(let i = 0; i < dataLen; i++){
+					let c = chatData[dataLen-1-i];
 					let regDate = new Date(c.registrantionDate);
 					let regDateFmt = MMddHHmm(regDate);
+					let insertNode = `<div class="message"><div class="message-content">`;
+					if( c.files != undefined && c.files.length != 0 ){
+						let files = `<div class="message-files">`;
+						let images = `<div class="message-images">`;
+						let fileCount = 0;
+						let imageCount = 0;
+						c.files.forEach(f=>{
+							if( imgRegex.test(f.name) ){
+								images += `<div class="message-image" data-file-id="${f.id}"><img src="${f.route}" alt="${f.name}"></div>`;
+								imageCount++;
+							} else {
+								files += `<div class="message-file" data-file-id="${f.id}"><a href="${f.route}" target="_blank" download="${f.name}">${f.name}</a></div>`;
+								fileCount++;
+							}
+						})
+						
+						files += `</div>`;
+						images += `</div>`;
 
+						if( imageCount != 0 ){
+							insertNode += `<div class="bold">Images</div>`;
+							insertNode += images;
+							insertNode += dashedNode;
+						}
+						if( fileCount != 0 ){
+							insertNode += `<div class="bold">Files</div>`;
+							insertNode += files;
+							insertNode += dashedNode;
+						}
+					}
+					insertNode += `<div class="message-detail">${c.contents}</div><div class="message-reg-date">${regDateFmt}</div></div>`;
 					if(c.regMemberId != memberId){
-					// 상대방이 보낸 메시지
-						whoSent = "friend";
-						if( prevRegMember != whoSent ){
-							insertNode += `</div>`;
-							insertNode += `<div class="other-message"><div class="profile-image"><i class="xi-profile"></i></div><div class="other-message-content">`;
+						whoSent = "other";
+						if(!chatMessageBoxInner.firstElementChild?.classList.contains("other-message")){
+							chatMessageBoxInner.insertAdjacentHTML("afterbegin", creatOtherNode);
 						}
-						insertNode += `<div class="message"><div><div>${c.contents}</div><div class="message-reg-date">${regDateFmt}</div></div></div>`; 
-					} else {
-					// 내가 보낸 메시지
-						if( prevRegMember != whoSent ){
-							insertNode += `</div></div>`;
-							insertNode += `<div class="my-message">`
+						if( c?.deleteDate == undefined || c.deleteDate == "" ){
+							insertNode += `</div>`; 
+							chatMessageBoxInner.firstElementChild.querySelector(".other-message-content").insertAdjacentHTML("afterbegin", insertNode);
+						} else {
+							insertNode = `<div class="message"><div class="message-content"><div class="translucent">삭제된 메시지입니다</div></div><div class="message-option"></div></div>`
+							chatMessageBoxInner.firstElementChild.querySelector(".other-message-content").insertAdjacentHTML("afterbegin", insertNode);
 						}
-						insertNode += `<div class="message"><div><div>${c.contents}</div><div class="message-reg-date">${regDateFmt}</div></div></div>`;
+					}else{
+						whoSent = "my";
+						if(!chatMessageBoxInner.firstElementChild?.classList.contains("my-message")){
+							chatMessageBoxInner.insertAdjacentHTML("afterbegin", creatMyNode);
+						}
+						if( c?.deleteDate == undefined || c.deleteDate == "" ){
+							insertNode += `<div class="message-option reject" data-chat-id="${c.id}" data-chat-action="delete"><div class="d-none"><i class="xi-close"></i></div></div></div>`; 
+							chatMessageBoxInner.firstElementChild.insertAdjacentHTML("afterbegin", insertNode);
+						} else {
+							insertNode = `<div class="message"><div class="message-content"><div class="translucent">삭제된 메시지입니다</div></div><div class="message-option"></div></div>`
+							chatMessageBoxInner.firstElementChild.insertAdjacentHTML("afterbegin", insertNode);
+						}
 					}
 					prevRegMember = whoSent;
-				});
-
-				if( prevRegMember != "friend" )
-					insertNode += `</div>`;
-				else 
-					insertNode += `</div></div>`;
-
-				chatMessageBoxInner.insertAdjacentHTML("afterbegin", insertNode);
-				
+				}
 				
 				if( chatData.length != chatSize ){
 					noMoreChat = true;
@@ -722,9 +877,16 @@ window.addEventListener("load", (e)=>{
 				}
 
 				// 불러오기로 스크롤 고정 후 node 삭제
-				if( chatPage > 1 && !scrollFixedUnder )
-					chatMessageBox.scrollTop =  topNode.offsetTop - topNode.offsetHeight - 21;
-				topNode.remove();
+				// if( chatPage > 1 && !scrollFixedUnder )
+				// 	chatMessageBox.scrollTop =  topNode.offsetTop - topNode.offsetHeight - 21;
+				// topNode.remove();
+
+				// 스크롤이 생겼다면 그 위치를 기억하고 다시 돌려놓음
+				if( chatMessageBox.scrollHeight > chatMessageBox.offsetHeight &&
+					chatMessageBox.scrollTop <= 100 ){
+					chatMessageBox.scrollTop = chatMessageBox.scrollHeight - prevHeight;
+				}
+				
 
 				if( scrollFixedUnder ){
 					chatMessageBox.scrollTop = chatMessageBox.scrollHeight;
@@ -738,17 +900,60 @@ window.addEventListener("load", (e)=>{
 		})
 		.catch((error) => console.log(error));
 	}
+	// 메시지 삭제
+	function chatDelete({chatId = 0}){
+		if(chatId == 0)
+			return;
+		getXHR({"notEncodeParams": `chatId=${chatId}`, "method": "POST", "url": "/api/chat/delete"})
+		.then((xhr) => {
+			if( xhr.status === 200 || xhr.status === 201 ){
+				let result = JSON.parse(xhr.responseText);
+				
+				showConfirmOkBtn(true);
+
+				if( result?.result != "sussess" || result?.datas[0].result == 0 ){
+					confirmTextBox.textContent = `실패하였습니다`;
+					return;
+				}
+				let chatTextContent = confirmTextBox.querySelector("div.nowrap")?.textContent;
+				confirmTextBox.innerHTML = `<div class="nowrap bold">${chatTextContent}</div><div class="confirm-text">메시지가 삭제되었습니다.<div>`;
+				currentChat.parentElement.innerHTML = `<div class="message-content"><div class="translucent">삭제된 메시지입니다</div></div><div class="message-option"></div>`;
+			}
+		})
+		.catch((xhr) => console.log(xhr));
+	}
 
 	// 메시지 전송 =============================================================================================
 	function sendMessage({memberId = 0, otherMemberId = 0, content = ""}){
+
+		if(memberId == 0 || otherMemberId == 0 || content == "")
+			return;
+
+		if(fileUploading){
+			confirmTextBox.textContent = `파일 업로드중엔 채팅할 수 없습니다.`;
+			showConfirmOkBtn(true);
+			confirmBox.classList.remove("d-none");
+			return;
+		}
+
+		let param = `memberId=${memberId}&otherMemberId=${otherMemberId}&content=${content}`
+
+		// 업로드한 파일이 있다면 파람에 추가해서 보냄
+		let filesLen = Object.keys(uploadedFiles).length;
+		if( filesLen != 0 ){
+			uploadedFiles.forEach(cf=>{
+				param += `&chatFilesId=${cf.id}`;
+			})
+		}
 		chatMessageInput.value = "";
-		getXHR({"notEncodeParams": `memberId=${memberId}&otherMemberId=${otherMemberId}&content=${content}`, "method": "POST", "url": "/api/chat/send"})
+
+		getXHR({"notEncodeParams": param, "method": "POST", "url": "/api/chat/send"})
 		.then((xhr) => {
 			if( xhr.status === 200 || xhr.status === 201 ){
 				let sendResult = JSON.parse(xhr.responseText);
 	
 				if(sendResult?.result == "fail"){
-					chatMessageBoxInner.insertAdjacentHTML("afterbegin", `<div class="my-message"><div class="send-retry">실패, 다시 보내기</div><div>${content}</div></div>`);
+					chatMessageBoxInner.insertAdjacentHTML("beforeend", `<div class="my-message"><div class="message"><div class="message-content"><div class="message-detail">${content}</div><div class="message-reg-date"></div></div></div><br>전송실패</div>`);
 					return;
 				}
 				if(sendResult.result != "sussess"){
@@ -757,21 +962,115 @@ window.addEventListener("load", (e)=>{
 				sendResult = sendResult.datas[0];
 
 				let regDate = new Date(sendResult.regDate);
-				
 				let regDateFmt = MMddHHmm(regDate);
-				let insertNode = `<div class="my-message"><div>${content}</div><div class="message-reg-date">${regDateFmt}</div></div>`;
 
+				// let insertNode = `<div class="message"><div class="message-content">`; 
+				let insertNode = `<div class="message"><div class="message-content">`;
+				
+				if( filesLen != 0 ){
+					let files = `<div class="message-files">`;
+					let images = `<div class="message-images">`;
+					let fileCount = 0;
+					let imageCount = 0;
+					uploadedFiles.forEach(f=>{
+						if( imgRegex.test(f.name) ){
+							images += `<div class="message-image" data-file-id="${f.id}"><img src="${f.route}" alt="${f.name}"></div>`;
+							imageCount++;
+						} else {
+							files += `<div class="message-file" data-file-id="${f.id}"><a href="${f.route}" target="_blank" download="${f.name}">${f.name}</a></div>`;
+							fileCount++;
+						}
+					})
+					
+					files += `</div>`;
+					images += `</div>`;
+
+					if( imageCount != 0 ){
+						insertNode += `<div class="bold">Images</div>`;
+						insertNode += images;
+						insertNode += dashedNode;
+					}
+					if( fileCount != 0 ){
+						insertNode += `<div class="bold">Files</div>`;
+						insertNode += files;
+						insertNode += dashedNode;
+					}
+				}
+				insertNode += `<div class="message-detail">${content}</div><div class="message-reg-date">${regDateFmt}</div></div><div class="message-option reject" data-chat-id="${sendResult.id}" data-chat-action="delete"><div class="d-none"><i class="xi-close"></i></div></div></div>`;
+				
+				let creatMyNode = `<div class="my-message"></div>`;
+				let lastNode = chatMessageBoxInner.lastElementChild;
+				
+				if(!lastNode.classList.contains("my-message"))
+					chatMessageBoxInner.insertAdjacentHTML("beforeend", creatMyNode);
+				
 				if( chatMessageBox.scrollTop + chatMessageBox.offsetHeight == chatMessageBox.scrollHeight )
 					scrollFixedUnder = true;
-
-				chatMessageBoxInner.insertAdjacentHTML("beforeend", insertNode);
-
+				
+				uploadBox.classList.add("d-none");
+				uploadedFiles = {};
+				chatMessageBoxInner.lastElementChild.insertAdjacentHTML("beforeend", insertNode);
 				chatMessageBox.scrollTop = chatMessageBox.scrollHeight;
 			}
 		})
 		.catch((error) => console.log(error));
 	}
 
+	// 파일 업로드 ========================================================================================
+	function uploadFiles(files){
+		
+		let fileLength = Object.keys(files).length;
+		if( fileLength == 0 || fileUploading){
+			return;
+		}
+		fileUploading = true;
+		let uploadPromise = new Promise((resolve, reject) => {
+			let xhr = new XMLHttpRequest();
+			let formData = new FormData();
+			for(let i = 0; i < fileLength; i++){
+				formData.append("files", files[i]);
+			}
+			formData.append("memberId" , memberId);
+			xhr.onload = function() {
+				if(xhr.readyState == 4){
+					fileUploading = false;
+					console.log(xhr);
+					return resolve(xhr);
+				}
+			}
+			xhr.upload.onprogress = function(e) {
+				let percent = e.loaded * 100 / e.total;
+				uploadBox.querySelector(".upload-list").style.background = `linear-gradient(to right, rgba(48, 186, 161, 0.5) ${percent}%, rgb(0 0 0 / 0%) 0%)`;
+			};
+			xhr.onerror = () => reject(xhr);
+			xhr.open("POST", "/api/chat/upload");
+			xhr.send(formData);
+		});
+
+		uploadPromise
+		.then((xhr) => {
+			if( xhr.status === 200 || xhr.status === 201 ){
+				
+				let uploadResult = JSON.parse(xhr.responseText);
+	
+				if(uploadResult.result != "sussess"){
+					uploadBox.querySelector(".upload-list").style.background = `#e44e4e`;
+					chatSendBox.querySelector(".upload-list .file-names").textContent = `업로드 실패`;
+					uploadedFiles = {};
+					return;
+				}
+				uploadedFiles = uploadResult.datas;
+				fileUploadBtn.firstElementChild.className = "xi-close";
+
+			} else if ( xhr.status === 500 ){
+				chatSendBox.querySelector(".upload-list .file-names").textContent = `업로드 실패`;
+				uploadBox.querySelector(".upload-list").style.background = `#e44e4e`;
+				uploadedFiles = {};
+			}
+			
+		})
+		.catch((error) => console.log(error));
+	}
 	function MMddHHmm(date){
 		let month = "" + (date.getMonth() + 1),
 		day = "" + date.getDate(),
@@ -803,8 +1102,13 @@ window.addEventListener("load", (e)=>{
 			}
 			xhr.onerror = () => reject(xhr);
 			xhr.open(method, url);
-			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 			xhr.send(formData);
         });
-    };
+	};
+	
+	// 아이폰 스크롤 바운스 막기
+	// chatMessageBoxInner.ontouchmove = function(event){
+	// 	event.preventDefault();
+	// }
 });

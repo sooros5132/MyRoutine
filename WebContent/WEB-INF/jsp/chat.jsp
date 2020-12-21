@@ -38,8 +38,19 @@
                         </div>
                     </div>
                     <div class="chat-send-box chat-input-box d-none">
+                    	<div div class="upload-container d-none">
+	                    	<div class="upload-list">
+	                    		<div class="upload-btn chat-input-btn pointer"><i class="xi-arrow-up"></i></div>
+	                    		<div class="file-names nowrap"></div>
+	                   		</div>
+                    	</div>
                     	<div class="chat-input-inner">
-	                        <div class="chat-input"><input type="text" name="content" class="message-input"></div>
+                        	<label class="chat-file-btn chat-input-btn pointer" for="send-file">
+	                        	<i class="xi-paperclip"></i>
+	                        	<input type="file" name="files" style="display:none" id="send-file" class="send-file" multiple>
+                        	</label>
+                        	<!-- <form enctype="multipart/form-data" method="POST" id="upload-form"><input type="file" name="files" style="display:none" id="send-file" class="send-file" multiple></form> -->
+	                        <div class="chat-input"><input type="text" name="content" autocomplete="off" class="message-input" placeholder="내용"></div>
                         	<div class="chat-send-btn chat-input-btn pointer"><i class="xi-send"></i></div>
                         </div>
                     </div>

@@ -19,9 +19,11 @@
             topBtnNode.classList.add("reveal");
             document.getElementById("top-scroll").setAttribute("style", `stroke-dashoffset: ${125-(125*scrollLen)};`);
         }
+
     });
 
     document.getElementById("top-scroll").addEventListener("click", ()=>{
         window.scrollTo({top: 0, behavior: 'smooth'});
     })
+
 }());

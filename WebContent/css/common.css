@@ -104,8 +104,9 @@
 .resolve{color:#30baa1;}
 .reject-box{background: #e44e4e;color: #ffffff;}
 .resolve-box{background: #30baa1;color: #ffffff;}
-.smaller{flex-basis:0 !important;height:0 !important;border: 0 !important;;padding:0 !important;;margin:0 !important;overflow: hidden;}
-
+.smaller{flex-basis:0 !important;height:0 !important;border: 0 !important;padding:0 !important;overflow: hidden;}
+.translucent{opacity:0.5}
+.nowrap{text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
 .position-absolute{
     position: absolute;
 }
@@ -218,4 +219,23 @@
     transform: translate(-0.5px, -1.5px) rotate(1.5deg); }
   0%, 100% {
     transform: translate(0, 0) rotate(0); }
+}
+
+.ripple{
+	animation: ripple 0.6s linear infinite;
+}
+
+@keyframes ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255,255,255, 0.1),
+                0 0 0 20px rgba(255,255,255, 0.1),
+                0 0 0 40px rgba(255,255,255, 0.1),
+                0 0 0 60px rgba(255,255,255, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba(255,255,255, 0.1),
+                0 0 0 40px rgba(255,255,255, 0.1),
+                0 0 0 60px rgba(255,255,255, 0.1),
+                0 0 0 80px rgba(255,255,255, 0);
+  }
 }
