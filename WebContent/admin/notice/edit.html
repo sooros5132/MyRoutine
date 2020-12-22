@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="../../css/admin/common.css">
     <link rel="stylesheet" href="../../css/xeicon.min.css">
     <link rel="stylesheet" href="../../css/admin/notice/detail.css">
-    <script src="../../js/admin/notice/notice.js"></script>
-
+     <script src="../../js/admin/notice/notice.js"></script>
 </head>
 
 <body>
@@ -58,6 +57,7 @@
             <!-- main(개별 컨턴츠 넣는곳) -->
             <main id="notice" class="main">
                 <h1>공지사항</h1>
+            <form action="edit" method="post">
                 <table class="notice-list">
                     <colgroup>
                         <col style="width: 200px;">
@@ -74,7 +74,7 @@
                     <tbody>
                         <tr>
                             <td>제목</td>
-                            <td colspan="3">운영</td>
+                            <td colspan="3"><input class="title" type="text" name="title" value="${n.title}"></td>
                         </tr>
 
                         <tr>
@@ -96,18 +96,16 @@
                 </table>
 
                 <section class="detail_text">
-                    <textarea name="" id="" cols="30" rows="10">
-
-                    </textarea>
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
                 </section>
 
 
                 <section class="list-box">
-                    <a class="btn-button" href="notice.html">목록</a>
-                    <a class="btn-button" href="edit.jsp">수정</a>
-                    <a class="btn-button del-button" href="">삭제</a>
+                    <input type="hidden" name="id" value="${n.id}">
+                    <a class="btn-button" href="detail?id=${n.id}">취소</a>
+                    <input class="btn-button" value="저장" type="submit">
                 </section>
-
+            </form>
 
                 <section class="next-list">
                     <table>
@@ -118,12 +116,12 @@
                         </colgroup>
 
                         <tr>
-                            <td class="move-icon"><a href=""><i class="xi-angle-up-min"></i></a> 이전글</td>
+                            <td>이전글</td>
                             <td>운영</td>
                             <td>2020-11-15</td>
                         </tr>
                         <tr>
-                            <td class="move-icon"><a href=""><i class="xi-angle-down-min"></i></a> 다음글</td>
+                            <td>다음글</td>
                             <td>공지사항입니다</td>
                             <td>2020-11-16</td>
                         </tr>
