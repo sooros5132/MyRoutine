@@ -79,12 +79,12 @@
             //     "GywDFkY3z-c", // LEE SUHYUN - ‘ALIEN’ M/V
             //     "dyRsYk0LyA8", // BLACKPINK – ‘Lovesick Girls’ M/V
             //     "iDjQSdN_ig8", // [MV] OH MY GIRL(오마이걸) _ Nonstop(살짝 설렜어)
-                "cQloq2nnEXU", // 1조
+                "Op2wX3MVIEk", // 1조
                 "ttmzTf6XhlA", // 2조
                 "LJgaulCeCbI", // 3조
                 "g22QkE7Mj6Q", // 4조
                 "cQloq2nnEXU", // 5조
-                "s7acHgkTCuU", // 6조
+                "s7acHgkTCuU" // 6조
             ]
             let randomNum = Math.floor( Math.random() * videoSrc.length );
             let videoFrame = document.querySelector(".main-video");

@@ -784,6 +784,7 @@ window.addEventListener("load", (e)=>{
 					return;
 				}
 				if(chatData.result == "empty"){
+					noMoreChat = true;
 					chatMessageBoxInner.insertAdjacentHTML("afterbegin", noMoreChatText);
 					return;
 				}
@@ -947,7 +948,7 @@ window.addEventListener("load", (e)=>{
 		}
 		chatMessageInput.value = "";
 
-		getXHR({"notEncodeParams": param, "method": "POST", "url": "/api/chat/send"})
+		getXHR({"notEncodeParams": param, "method": "POST", "url": "/api/chat/send1"})
 		.then((xhr) => {
 			if( xhr.status === 200 || xhr.status === 201 ){
 				let sendResult = JSON.parse(xhr.responseText);
@@ -1034,7 +1035,7 @@ window.addEventListener("load", (e)=>{
 			xhr.onload = function() {
 				if(xhr.readyState == 4){
 					fileUploading = false;
-					console.log(xhr);
+					messageFileInput.value = "";
 					return resolve(xhr);
 				}
 			}
