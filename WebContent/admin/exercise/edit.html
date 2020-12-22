@@ -328,7 +328,7 @@
                         </div>
                         <div class="btn-box">
                             <button class="btn del">삭제</button>
-                            <button class="btn">수정</button>
+                            <button class="btn edit">수정</button>
                             <button class="btn cancel">닫기</button>
                         </div>
                     </form>
@@ -361,10 +361,38 @@
     <script>
         window.addEventListener('load', ()=>{
             //삭제 버튼 클릭시
+            let delBtn = document.querySelector('.del');
+            delBtn.addEventListener('click', (e)=>{
+            	e.preventDefault();
+            	let delAnswer = confirm("정말로 삭제하시겠습니까?");
+            	if(delAnswer == true){
+            		window.location.href="delete?";
+                }else {
+					return false;
+                }
+            });
             
             //수정버튼 클릭시
-
+			let editBtn = document.querySelector('.edit');
+            let editForm = document.querySelector('.edit-form');
+            editBtn.addEventListener('click', (e)=>{
+            	e.preventDefault();
+            	editForm.method="POST";
+            	editForm.submit();
+            });
+            
             //닫기 버튼 클릭시
+            let cancelBtn = document.querySelector('.cancel');
+/*          cancelBtn.addEventListener('click', (e)=>{
+           		e.preventDefault();
+            	let closeAnswer = confirm("정말로 닫으시겠습니까?");
+                if(closeAnswer == true){
+                	window.history.back();
+                }else {
+					return false;
+                } 
+            });*/
+           
         });
     </script>
 </body>

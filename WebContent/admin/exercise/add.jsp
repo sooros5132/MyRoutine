@@ -71,7 +71,7 @@
                  <!-- section -->
                  <section>
                      <h2 class="con-tit">운동 등록</h2>
-                    <form class="add-form" action="add" method="POST">
+                    <form class="add-form" action="add" method="POST" enctype="multipart/form-data">
                         <legend class="hide">운동 등록 폼</legend>
                         <div class="table-box">
                             <table class="admin-from-table">
@@ -101,8 +101,8 @@
                                         <th>항목</th>
                                         <td>
                                             <ul class="radio-list-box">
-                                                <li>
-                                               <input id="re" class="ex-menu" type="radio" name="category" value="1" checked>
+                                               	<li>
+                                               	<input id="re" class="ex-menu" type="radio" name="category" value="1" checked>
                                                     <label for="re">
                                                         <span class="radio"></span>
                                                         재활 운동
@@ -142,7 +142,7 @@
                                                         <input id="re-list3" type="checkbox" name="body-part-re" value="3">
                                                         <label for="re-list3">
                                                             <span class="check"></span>
-                                                            팔(손목)
+                                                            팔
                                                         </label>
                                                     </li>
                                                     <li>
@@ -184,7 +184,7 @@
                                                         <input id="re-list9" type="checkbox" name="body-part-re" value="9">
                                                         <label for="re-list9">
                                                             <span class="check"></span>
-                                                            발목
+                                                           	엉덩이
                                                         </label>
                                                     </li>
                                                     <li>
@@ -194,6 +194,13 @@
                                                             뒷허벅지
                                                         </label>
                                                     </li>
+                                                    <li>
+                                                       <input id="re-list11" type="checkbox" name="body-part-re" value="15">
+                                                       <label for="re-list11">
+                                                           <span class="check"></span>
+                                                           손목
+                                                       </label>
+                                                   </li>
                                                 </ul>
                                             </div>
                                             <!-- //ex_con -->
@@ -222,7 +229,7 @@
                                                         </label>
                                                     </li>
 													  <li>
-                                                        <input id="ex-list4" type="checkbox" name="bbody-part-ex" value="12">
+                                                        <input id="ex-list4" type="checkbox" name="body-part-ex" value="12">
                                                         <label for="ex-list4">
                                                             <span class="check"></span>
                                                            	배
@@ -282,14 +289,22 @@
                                                            	뒷허벅지
                                                         </label>
                                                     </li>
-                                                      <li>
-                                                        <input id="ex-list12" type="checkbox" name="body-part-ex" value="13">
-                                                        <label for="ex-list12">
-                                                            <span class="check"></span>
-                                                           	종아리
-                                                        </label>
-                                                    </li>
-													
+                                                    <li>
+                                                       <input id="ex-list12" type="checkbox" name="body-part-ex" value="13">
+                                                       <label for="ex-list12">
+                                                           <span class="check"></span>
+                                                          	종아리
+                                                       </label>
+                                                   </li>
+                                                   <li>
+                                                       <input id="ex-list13" type="checkbox" name="body-part-ex" value="14">
+                                                       <label for="ex-list13">
+                                                           <span class="check"></span>
+                                                          	전신
+                                                       </label>
+                                                   </li>
+												
+												
                                                 </ul>
                                             </div>
                                             <!-- //ex_con -->
@@ -306,7 +321,7 @@
                                     <tr>
                                         <th>추천 횟수(초)</th>
                                         <td>
-                                            <input type="text" name="recommand">
+                                            <input type="text" name="recommend">
                                         </td>
                                     </tr>
                                     <tr>
@@ -337,7 +352,7 @@
                             </table>
                         </div>
                         <div class="btn-box">
-                            <button class="btn">등록</button>
+                            <button class="btn add">등록</button>
                             <button class="btn cancel">닫기</button>
                         </div>
                          
@@ -354,8 +369,75 @@
         </footer>
         <!-- //footer -->
     </div>
+	<script>
+        window.addEventListener('load', ()=>{
+            //등록버튼 클릭시
+            let btn = document.querySelector(".btn.add");
+            let addForm = document.querySelector(".add-form");
+            let isChecked = false;
+           
+            btn.addEventListener('click', (e)=>{
+                e.preventDefault();
+                console.log("aaaa");
+                isChecked = formCheck();
+                console.log(isChecked +"isChecked" )
+                if(isChecked == true){
+                	console.log("gogo`")
+                    addForm.method="POST";
+                    addForm.submit();
+                }
+            })
+            
+            //(첨부파일 제외하고) 폼 비었는지 확인 
+            function formCheck(){
+                let exName = document.querySelector('input[name=name]');
+                
+                let exEngName = document.querySelector('input[name=eng-name]');
+                
+                let category = document.querySelector('input[name=category]:checked');
 
-      <script>
+     
+                
+                let contents = document.querySelector('textarea[name=contents]');
+                let recommend = document.querySelector('input[name=recommend]');
+
+                if(exName.value.trim()==''){
+                    alert('운동이름이 비어있습니다.\n운동이름을 입력해 주세요');
+                    exName.focus();
+                    return false;
+                }
+                if(category.getAttribute('value') == '1'){
+                    let reList = document.querySelectorAll('input[name=body-part-re]:checked');
+                    if(reList.length <= 0){
+                        console.log(reList.length);
+                        alert('재활 운동 부위를 1개 이상 선택해 주세요.');
+                        return false;
+                    } 
+                }else if(category.getAttribute('value') == '2'){
+                    let exList = document.querySelectorAll('input[name=body-part-ex]:checked');
+                    if(exList.length <= 0){
+                        console.log(exList.length);
+                        alert('일반 운동 부위를 1개 이상 선택해 주세요.');
+                        return false;
+                    } 
+                }
+
+                if(contents.value.trim()==''){
+                    alert('설명이 비어있습니다,\n운동 설명을 입력해 주세요.');
+                    contents.focus();
+                    return false;
+                }
+                if(recommend.value.trim()==''){
+                    alert('추천횟수가 비어있습니다.\n추천횟수를 입력해 주세요.');
+                    recommend.focus();
+                    return false;
+                }
+                
+                return true;
+            }
+        });
+    </script>
+<!-- 	<script>
         window.addEventListener('load', ()=>{
             //등록버튼 클릭시
             let btn = document.querySelector(".btn");
@@ -366,6 +448,6 @@
                 addForm.submit();
             })
         });
-    </script>
+    </script> -->
 </body>
 </html>

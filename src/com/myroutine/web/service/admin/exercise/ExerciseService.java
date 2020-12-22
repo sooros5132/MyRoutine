@@ -3,37 +3,51 @@ package com.myroutine.web.service.admin.exercise;
 import java.util.List;
 
 import com.myroutine.web.dao.ExerciseDao;
-import com.myroutine.web.entity.admin.Exercise;
+import com.myroutine.web.dao.jdbc.JdbcExerciseDao;
+import com.myroutine.web.entity.admin.exercise.Exercise;
+import com.myroutine.web.entity.admin.exercise.ExerciseBodyPart;
+import com.myroutine.web.entity.admin.exercise.ExerciseFile;
 
 public class ExerciseService {
 	private ExerciseDao exerciseDao;
 	
 	
+	public ExerciseService() {
+		exerciseDao = new JdbcExerciseDao();
+	}
 	
-	//¿îµ¿ µî·Ï
-	public int insert(Exercise ex) {
-		int result = 0;
+	//ìš´ë™ ë“±ë¡
+	public int insert(Exercise exercise) {
+		int result = exerciseDao.insert(exercise);
+		int id = exerciseDao.getLast();
+		
+		return id;
+	}
+	
+	//ìš´ë™ ìˆ˜ì •
+	public int update(Exercise exercise) {
+		int result = exerciseDao.update(exercise);
+		return result;
+		
+	}
+	
+	//ìš´ë™ ì‚­ì œ
+	public int delete(int id) {
+		int result = exerciseDao.delete(id);
 		return result;
 	}
 	
-	//¿îµ¿ ¼öÁ¤
-		public int update(Exercise ex) {
-			int result = 0;
-			return result;
-			
-		}
-		
-	//¿îµ¿ ¸®½ºÆ® ºÒ·¯¿À±â
+	
+	//ìš´ë™ ë¦¬ìŠ¤íŠ¸ ë¶ˆëŸ¬ì˜¤ê¸°
 	public List<Exercise> getList() {
-		
-		return exerciseDao.getList();
+		return null;
 	}
 
-	//¿îµ¿ Á¤º¸ ºÒ·¯¿À±â
-	public Exercise get(int id) {
-		return exerciseDao.get(id);
+	//ìš´ë™ ì •ë³´ ë¶ˆëŸ¬ì˜¤ê¸°
+	public Exercise get(int id) {	
+		Exercise exercise = exerciseDao.get(id);
+		return exercise;
 	}
-	
-	
+
 
 }

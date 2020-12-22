@@ -25,7 +25,7 @@ public class JdbcRoutineDao implements RoutineDao {
 			
 			st.setString(1,routine.getName());
 			
-			result = st.executeUpdate(); //insert, update, delete ¹®ÀåÀÏ ¶§
+			result = st.executeUpdate(); //insert, update, delete ë¬¸ì¥ì¼ ë•Œ
 			
 			st.close();
 			con.close();
