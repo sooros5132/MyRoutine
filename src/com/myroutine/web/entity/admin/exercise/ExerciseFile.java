@@ -1,15 +1,15 @@
 package com.myroutine.web.entity.admin.exercise;
 
-public class File {
+public class ExerciseFile {
 	private int id;
 	private String name;
 	private String route;
 	private int exerciseId;
 	
-	public File() {
+	public ExerciseFile() {
 	}
 	
-	public File(int id, String name, String route, int exerciseId) {
+	public ExerciseFile(int id, String name, String route, int exerciseId) {
 		this.id = id;
 		this.name = name;
 		this.route = route;
@@ -40,6 +40,11 @@ public class File {
 	}
 	public void setExerciseId(int exerciseId) {
 		this.exerciseId = exerciseId;
+	}
+
+	@Override
+	public String toString() {
+		return "ExerciseFile [id=" + id + ", name=" + name + ", route=" + route + ", exerciseId=" + exerciseId + "]";
 	}
 	
 	

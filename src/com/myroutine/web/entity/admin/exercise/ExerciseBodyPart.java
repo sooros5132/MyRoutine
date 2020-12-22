@@ -30,4 +30,10 @@ public class ExerciseBodyPart {
 		this.exerciseId = exerciseId;
 	}
 
+	@Override
+	public String toString() {
+		return "ExerciseBodyPart [bodyPartId=" + bodyPartId + ", exerciseId=" + exerciseId + "]";
+	}
+	
+
 }

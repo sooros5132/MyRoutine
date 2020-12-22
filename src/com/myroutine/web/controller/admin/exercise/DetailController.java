@@ -1,6 +1,7 @@
 package com.myroutine.web.controller.admin.exercise;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,21 +9,39 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.myroutine.web.dao.entity.ExerciseBodyPartView;
+import com.myroutine.web.dao.entity.ExerciseView;
 import com.myroutine.web.entity.admin.exercise.Exercise;
+import com.myroutine.web.entity.admin.exercise.ExerciseBodyPart;
+import com.myroutine.web.entity.admin.exercise.ExerciseFile;
+import com.myroutine.web.service.admin.exercise.ExerciseBodyPartService;
+import com.myroutine.web.service.admin.exercise.ExerciseFileService;
 import com.myroutine.web.service.admin.exercise.ExerciseService;
 
 @WebServlet("/admin/exercise/detail")
 public class DetailController extends HttpServlet{
-//	¿îµ¿ÆäÀÌÁö name À» ±âÁØÀ¸·Î ÆäÀÌÁö ¶ç¿ìÁö? 
-//	name ÇÏ³ª¸¸ ¹Ş´Â°Å getÀ¸·Î ¹ŞÀ»°Å¾ß
+//	ìš´ë™í˜ì´ì§€ name ì„ ê¸°ì¤€ìœ¼ë¡œ í˜ì´ì§€ ë„ìš°ì§€? 
+//	name í•˜ë‚˜ë§Œ ë°›ëŠ”ê±° getìœ¼ë¡œ ë°›ì„ê±°ì•¼
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int id = Integer.parseInt(req.getParameter("id"));
+//		int bodyPartId = Integer.parseInt(req.getParameter("id"));
+//		ì•„ì´ë””ì— ì •ë³´ê°€ ë‹¤ ìˆì–´ì•¼ë˜ë‚˜?
 		ExerciseService service = new ExerciseService();
-		Exercise ex =service.get(id);
+		ExerciseBodyPartService ebpService  = new ExerciseBodyPartService();
+		ExerciseFileService fileService = new ExerciseFileService();
 		
-		System.out.println(id);
+		Exercise ex =service.get(id);
+		List<ExerciseBodyPartView> ebpv = ebpService.getViewBodyPartList(id);
+		List<ExerciseFile> ef = fileService.getFileList(id);
+		
+		System.out.println("========ë””í…Œì¼ì»¨íŠ¸ë¡¤ëŸ¬"+id);
 		req.setAttribute("ex", ex);
+		req.setAttribute("ebpv", ebpv);
+		req.setAttribute("fileList", ef);
+		System.out.println(ex);
+		System.out.println(ebpv);
+		System.out.println(ef);
 		
 		req.getRequestDispatcher("detail.jsp").forward(req, resp);
 	}

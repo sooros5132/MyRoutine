@@ -1,8 +1,8 @@
 window.addEventListener('load',function(){
     var btnLeft = document.querySelector(".btn-left");
     var btnRight = document.querySelector(".btn-right");
-    var current = document.querySelector(".current");
     var showRoom = document.querySelector(".show-room");
+	var current = showRoom.querySelector("img")
 
     var index = 0;
     btnLeft.onclick=function(){

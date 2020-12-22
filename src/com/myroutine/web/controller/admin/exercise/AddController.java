@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.myroutine.web.entity.admin.Exercise;
 import com.myroutine.web.entity.admin.exercise.BodyPart;
 import com.myroutine.web.entity.admin.exercise.ExerciseBodyPart;
-import com.myroutine.web.entity.admin.exercise.File;
+import com.myroutine.web.entity.admin.exercise.ExerciseFile;
 import com.myroutine.web.service.admin.exercise.ExerciseService;
 
 @WebServlet("/admin/exercise/add")

@@ -23,8 +23,8 @@ public class NoticeService {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(url, "TEAMONE", "11111");
-			Statement st = con.createStatement(); //¹®Àå½ÇÇà
-			ResultSet rs = st.executeQuery(sql);  //°á°úÁıÇÕ
+			Statement st = con.createStatement(); //ë¬¸ì¥ì‹¤í–‰
+			ResultSet rs = st.executeQuery(sql);  //ê²°ê³¼ì§‘í•©
 			
 			while (rs.next()) {
 
@@ -50,7 +50,7 @@ public class NoticeService {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} // µå¶óÀÌ¹ö »ı¼º
+		} // ë“œë¼ì´ë²„ ìƒì„±
         catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

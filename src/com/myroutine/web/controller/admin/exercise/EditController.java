@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.myroutine.web.entity.admin.Exercise;
+import com.myroutine.web.entity.admin.exercise.Exercise;
 import com.myroutine.web.service.admin.exercise.ExerciseService;
 
 
@@ -18,10 +18,10 @@ public class EditController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("name");
+		int id = Integer.parseInt(request.getParameter("id"));
 		ExerciseService service = new ExerciseService();
 		
-		Exercise ex = service.get(name);
+		Exercise ex = service.get(id);
 		
 		request.setAttribute("ex", ex);
 		request.getRequestDispatcher("/admin/exercise/edit.jsp").forward(request, response);
@@ -42,11 +42,11 @@ public class EditController extends HttpServlet{
 		System.out.println(name);
 		
 		if(div1.equals("re")) {
-			div1 ="��Ȱ�";
+			div1 ="재활운동";
 			div2_ = request.getParameterValues("re-list");
 			
 		}else if(div1.equals("ex")) {
-			div1 ="�Ϲݿ";
+			div1 ="일반운동";
 			div2_ = request.getParameterValues("ex-list");
 		}
 		

@@ -16,8 +16,8 @@ import com.myroutine.web.service.admin.exercise.ExerciseServiceBackup;
 public class ListControllerBackup extends HttpServlet{
 	
 	 
-	//¿îµ¿ÆäÀÌÁö name À» ±âÁØÀ¸·Î ÆäÀÌÁö ¶ç¿ìÁö? 
-	//name ÇÏ³ª¸¸ ¹Ş´Â°Å getÀ¸·Î ¹ŞÀ»°Å¾ß
+	//ìš´ë™í˜ì´ì§€ name ì„ ê¸°ì¤€ìœ¼ë¡œ í˜ì´ì§€ ë„ìš°ì§€? 
+	//name í•˜ë‚˜ë§Œ ë°›ëŠ”ê±° getìœ¼ë¡œ ë°›ì„ê±°ì•¼
 //	@Override
 //	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //		String name = req.getParameter("name");
@@ -33,9 +33,6 @@ public class ListControllerBackup extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ExerciseServiceBackup service = new ExerciseServiceBackup();
 		List<ExerciseBackup> list = service.getList();
-		
-		
-		
 		
 		req.setAttribute("list", list);
 		req.getRequestDispatcher("/admin/exercise/listBackup.jsp").forward(req, resp);

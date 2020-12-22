@@ -68,9 +68,9 @@
                         <div class="btn-left"></div>
                         <div class="cliper">
                             <div class="show-room">
-                           		<img src="../../image/exercise/${ex.engName}1.jpg" alt="${ex.engName}1" class="current">
-                                <img src="../../image/exercise/${ex.engName}2.jpg" alt="${ex.engName}2">
-                                <img src="../../image/exercise/${ex.engName}3.jpg" alt="${ex.engName}3">
+                            <c:forEach var="f" items="${fileList}">
+                           		<img src="${f.route}/${f.name}" alt="${f.name}">
+                            </c:forEach>
                             </div>
                         </div>
                         <div class="btn-right"></div>
@@ -86,13 +86,18 @@
                             </div>
                         </div>
                         <div class="part-box-left">
-                            <div class="part">
+                            <!--<div class="part">
                                 <div class="label">종류</div>
-                                <div class="content">${ex.div1}</div>
-                            </div>
+                                <div class="content">${ex.categoryId}</div>
+                            </div>-->
                             <div class="part">
                                 <div class="label">부위</div>
-                                <div class="content">${ex.div2}</div>
+                                <div class="content">
+                                <c:forEach var="bp" items="${ebpv}">
+                                	${bp.bodyPartName}
+                                </c:forEach>
+                                
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -107,16 +112,20 @@
                     <div class="description-box">
                         <div class="label">운동 설명 및 방법</div>
                         <div class="text-content">
-                            ${ex.des}
+                            ${ex.contents}
                         </div>
                     </div>
                     <div class="recomand-box">
                         <div class="label">추천 회수(초)</div>
-                        <div class="text-content">${ex.rec}</div>
+                        <div class="text-content">${ex.recommend}</div>
                     </div>
                     <div class="recomand-box">
                         <div class="label">파일목록</div>
-                        <div class="text-content">${ex.files}</div>
+                        <div class="text-content">
+                        	<c:forEach var="f" items="${fileList}">
+                        		<a download href="${f.route}/${f.name}">${f.name}</a>
+                        	</c:forEach>
+                        </div>
                     </div>
                     <div class="button-box">
                         <button name="kbs" value="asd">수정하기</button>

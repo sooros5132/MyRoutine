@@ -13,8 +13,8 @@ import com.myroutine.web.entity.admin.exercise.ExerciseBackup;
 import com.myroutine.web.service.admin.exercise.ExerciseServiceBackup;
 @WebServlet("/admin/exercise/detailBackup")
 public class DetailControllerBackup extends HttpServlet{
-//	¿îµ¿ÆäÀÌÁö name À» ±âÁØÀ¸·Î ÆäÀÌÁö ¶ç¿ìÁö? 
-//	name ÇÏ³ª¸¸ ¹Ş´Â°Å getÀ¸·Î ¹ŞÀ»°Å¾ß
+//	ìš´ë™í˜ì´ì§€ name ì„ ê¸°ì¤€ìœ¼ë¡œ í˜ì´ì§€ ë„ìš°ì§€? 
+//	name í•˜ë‚˜ë§Œ ë°›ëŠ”ê±° getìœ¼ë¡œ ë°›ì„ê±°ì•¼
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String name = req.getParameter("name");

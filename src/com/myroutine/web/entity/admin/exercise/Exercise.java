@@ -6,26 +6,27 @@ public class Exercise {
 	private int id;
 	private String name;
 	private String contents;
-	private String recommend;
 	private Date regDate;
 	private String engName;
-	private int categoryId;
+	private String recommend;
 	private int memberId;
+	private int categoryId;
+	
 	public Exercise() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Exercise(int id, String name, String contents, String recommend, Date regDate, String engName,
-			int categoryId, int memberId) {
-		super();
+	public Exercise(int id, String name, String contents, Date regDate, String engName, String recommend
+			,int memberId,int categoryId) {
 		this.id = id;
 		this.name = name;
 		this.contents = contents;
-		this.recommend = recommend;
 		this.regDate = regDate;
 		this.engName = engName;
-		this.categoryId = categoryId;
+		this.recommend = recommend;
 		this.memberId = memberId;
+		this.categoryId = categoryId;
+		
 	}
 	public int getId() {
 		return id;

@@ -1,6 +1,5 @@
 package com.myroutine.web.dao.jdbc;
 
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,19 +11,21 @@ import java.util.Date;
 import java.util.List;
 
 import com.myroutine.web.dao.ExerciseDao;
+import com.myroutine.web.dao.entity.ExerciseListView;
 import com.myroutine.web.dao.entity.ExerciseView;
 import com.myroutine.web.entity.admin.exercise.Exercise;
 
 public class JdbcExerciseDao implements ExerciseDao {
 
-	// øÓµø¡§∫∏
+	// Ïö¥ÎèôÏ†ïÎ≥¥
 	@Override
 	public Exercise get(int id) {
 		Exercise ex = null;
 
 		String url = DBContext.URL;
 		String sql = "SELECT * FROM EXERCISE WHERE ID= '" + id + "'";
-
+		System.out.println("======Ï†úÎîîÎπÑÏî®_Ïö¥Îèô_Îã§Ïò§");
+		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
@@ -34,18 +35,20 @@ public class JdbcExerciseDao implements ExerciseDao {
 			if (rs.next()) {
 				String name = rs.getString("name");
 				String contents = rs.getString("contents");
-				String recommend = rs.getNString("recommend");
 				Date regdate = rs.getDate("regdate");
-				String engName = rs.getNString("engname");
-				int categoryId = rs.getInt("categoryId");
-				int memberId = rs.getInt("memberId");
+				String engName = rs.getString("eng_name");
+				String recommend = rs.getString("recommend");
+				int categoryId = rs.getInt("category_id");
+				int memberId = rs.getInt("member_id");
 
-				ex = new Exercise(id, name, contents, recommend, regdate, engName, categoryId,memberId);
+				ex = new Exercise(id, name, contents, regdate, engName,recommend, categoryId,memberId);
+				System.out.println(ex);
 			}
-
+			//Î∂ÄÏúÑÎ•º Î∞õÏïÑÏôÄÏÑú Ï°∞Ïù∏ÏúºÎ°ú ÏÉùÏÑ±ÏûêÏóê ÎÑ£Ïñ¥
 			rs.close();
 			st.close();
 			con.close();
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -55,20 +58,128 @@ public class JdbcExerciseDao implements ExerciseDao {
 		return ex;
 	}
 
+	public ExerciseView getView(int id) {
+		
+		ExerciseView exv = null;
+//		 String sql = "SELECT  c.*, m.nickname writer_name, cc.type category_type, cf.files, cf.route file_path "
+//	               + " FROM COMMUNITY c"
+//	               + "      Left join member m on m.id =c.writer_id"
+//	               + "      Left join COMMUNITY_CATEGORY cc on c.category_id = cc.id"
+//	               + "     Left join COMMUNITY_FILE_VIEW cf on cf.community_id = c.id"
+//	               + " where c.id="+id;   
+		 
+		String url = DBContext.URL;
+		String sql = "SELECT de.*,e.contents FROM "+
+						"(SELECT distinct ev.id ,ev.name,ev.eng_name , ev.regdate, ev.recommend, ev.member_id, ev.category_id "+
+						",(SELECT listagg(body_part_id,',') within group (order by body_part_id) FROM (select distinct body_part_id,id from exercise_view where id='"+id+"')) body_part_id "+
+						",(SELECT listagg(file_name,',') within group (order by file_name) FROM (select distinct file_name,id from exercise_view where id='"+id+"')) file_name "+
+						",(SELECT listagg(file_route,',') within group (order by file_route) FROM (select distinct file_route,id from exercise_view where id='"+id+"')) file_route "+
+						"FROM exercise_view ev) de "+
+						"left join exercise e on e.id = de.id "+
+						"where de.id='"+id+"' ";
+		System.out.println("Ï†úÎîîÎπÑÏî®Îã§Ïò§");
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+//			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+//			PreparedStatement st = con.prepareStatement(sql);
+//			st.setInt(1, id);
+//			st.setInt(2, id);
+//			st.setInt(3, id);
+//			st.setInt(4, id);
+//			ResultSet rs = st.executeQuery(sql);
+			
+//			st.setString(1, exercise.getName());
+//			st.setString(2, exercise.getContents());
+//			st.setString(3, exercise.getEngName());
+//			st.setString(4, exercise.getRecommend());
+//			st.setInt(5, exercise.getMemberId());
+//			st.setInt(6, exercise.getCategoryId());
+			
+
+
+			if (rs.next()) {
+				String name = rs.getString("name");
+				String contents = rs.getString("contents");
+				Date regDate = rs.getDate("regdate");
+				String engName = rs.getString("eng_name");
+				String recommend = rs.getString("recommend");
+				int categoryId = rs.getInt("category_id");
+				int memberId = rs.getInt("member_id");
+				String bodyPartId = rs.getString("body_part_id");
+				String fileName= rs.getString("file_name");
+				String fileRoute= rs.getString("file_route");
+				
+				System.out.println("name :"+ name);
+				System.out.println("eng_name :"+ engName);
+				System.out.println("memberId :"+ memberId);
+				System.out.println("bodyPartId:"+ bodyPartId);
+				List<String> bodyPartIdList = new ArrayList<String>(); 
+				List<String> fileNameList = new ArrayList<String>();
+				
+				String[] bodyPartIds = bodyPartId.split(",");
+				String[] fileNames = fileName.split(",");
+				
+				for(int i=0;i<bodyPartIds.length;i++)
+					bodyPartIdList.add(bodyPartIds[i]);
+				
+				for(int i=0;i<bodyPartIds.length;i++)
+					fileNameList.add(fileNames[i]);	
+				
+
+				exv = new ExerciseView(
+						id, 
+						name,
+						contents, 
+						regDate, 
+						engName,
+						recommend, 
+						categoryId,
+						memberId,
+						bodyPartIdList,
+						fileNameList,
+						fileRoute
+						);
+			}
+			//Î∂ÄÏúÑÎ•º Î∞õÏïÑÏôÄÏÑú Ï°∞Ïù∏ÏúºÎ°ú ÏÉùÏÑ±ÏûêÏóê ÎÑ£Ïñ¥
+			rs.close();
+			st.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return exv;
+		
+	}
+	
 	@Override
 	public List<Exercise> getList(String[] parts) {
+		String partStrJoin=String.join(",", parts);
 		List<Exercise> list = new ArrayList<>();
 		String url = DBContext.URL;
-		String sql =null;
-		switch(parts.length) {
-		case 0:
-			sql = "SELECT * FROM EXERCISE";
-		case 1:
-			sql = "SELECT * FROM EXERCISE join EXERCISE_BODY_PART on\r\n" + 
-					"exercise.id = exercise_body_part.exercise_id\r\n" + 
-					"where exercise_body_part.body_part_id=?";
-		
-		}					
+		String sql = "SELECT E.EXERCISE_ID ID, E.NAME, EF.NAME EF_NAME, EF.ROUTE EF_ROUTE FROM ( "+
+			    "SELECT IDS.EXERCISE_ID, E.NAME, MIN(EF.ID) EF_ID "+
+			    "FROM ( "+
+			        "SELECT EXERCISE_ID  "+
+			        "FROM ( "+
+			            "SELECT EXERCISE_ID "+
+			            "FROM exercise_body_part "+
+			            "WHERE BODY_PART_ID IN ("+partStrJoin+") "+
+			        ") "+
+			        "GROUP BY EXERCISE_ID "+
+			        "HAVING COUNT(EXERCISE_ID) = "+partStrJoin.length() +
+			    ") IDS "+
+			    "LEFT JOIN EXERCISE E ON E.ID = IDS.EXERCISE_ID "+
+			    "LEFT JOIN EXERCISE_FILE EF ON ef.exercise_id = ids.EXERCISE_ID "+
+			    "GROUP BY IDS.EXERCISE_ID, E.NAME "+
+			") E "+
+			"LEFT JOIN EXERCISE_FILE EF ON EF.ID = E.EF_ID";
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -79,22 +190,14 @@ public class JdbcExerciseDao implements ExerciseDao {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
-				String contents = rs.getString("contents");
-				String recommend = rs.getNString("recommend");
-				Date regDate = rs.getDate("regdate");
-				String engName = rs.getNString("engname");
-				int categoryId = rs.getInt("categoryId");
-				int memberId = rs.getInt("memberId");
+				String efName = rs.getString("ef_Name");
+				String efRoute = rs.getString("ef_Route");
 
 				Exercise ex = new Exercise();
 				ex.setId(id);
 				ex.setName(name);
-				ex.setContents(contents);
-				ex.setRecommend(recommend);
-				ex.setRegDate(regDate);
-				ex.setEngName(engName);
-				ex.setCategoryId(categoryId);
-				ex.setMemberId(memberId);
+				ex.setContents(efName);
+				ex.setRecommend(efRoute);
 				list.add(ex);
 			}
 
@@ -110,8 +213,6 @@ public class JdbcExerciseDao implements ExerciseDao {
 		return list;
 	}
 
-	
-	
 	@Override
 	public List<Exercise> getList() {
 		List<Exercise> list = new ArrayList<>();
@@ -119,6 +220,7 @@ public class JdbcExerciseDao implements ExerciseDao {
 		String url = DBContext.URL;
 		String sql = "SELECT * FROM EXERCISE";
 		
+		System.out.println("Ï†úÏù¥ÎîîÎπÑÏî® Í≤üÎ¶¨Ïä§Ìä∏");
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -130,22 +232,23 @@ public class JdbcExerciseDao implements ExerciseDao {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
 				String contents = rs.getString("contents");
-				String recommend = rs.getNString("recommend");
 				Date regDate = rs.getDate("regdate");
-				String engName = rs.getNString("engname");
-				int categoryId = rs.getInt("categoryId");
-				int memberId = rs.getInt("memberId");
+				String engName = rs.getNString("eng_name");
+				String recommend = rs.getNString("recommend");
+				int categoryId = rs.getInt("category_id");
+				int memberId = rs.getInt("member_id");
 
 				Exercise ex = new Exercise();
 				ex.setId(id);
 				ex.setName(name);
 				ex.setContents(contents);
-				ex.setRecommend(recommend);
 				ex.setRegDate(regDate);
 				ex.setEngName(engName);
+				ex.setRecommend(recommend);
 				ex.setCategoryId(categoryId);
 				ex.setMemberId(memberId);
 				list.add(ex);
+				System.out.print(list);
 			}
 
 			rs.close();
@@ -157,10 +260,10 @@ public class JdbcExerciseDao implements ExerciseDao {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return list;
 	}
 
-	// øÓµø√ﬂ∞°
+	// Ïö¥ÎèôÏ∂îÍ∞Ä
 	@Override
 	public int insert(Exercise exercise) {
 		int result = 0;
@@ -180,11 +283,11 @@ public class JdbcExerciseDao implements ExerciseDao {
 			st.setInt(5, exercise.getMemberId());
 			st.setInt(6, exercise.getCategoryId());
 
-			result = st.executeUpdate(); // insert, update, delete πÆ¿Â¿œ ∂ß
+			result = st.executeUpdate(); // insert, update, delete Î¨∏Ïû•Ïùº Îïå
 
 			st.close();
 			con.close();
-			System.out.println("øÓµø √ﬂ∞° øœ∑·");
+			System.out.println("Ïö¥Îèô Ï∂îÍ∞Ä ÏôÑÎ£å");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -196,7 +299,7 @@ public class JdbcExerciseDao implements ExerciseDao {
 		return result;
 	}
 
-	// øÓµøºˆ¡§
+	// Ïö¥ÎèôÏàòÏ†ï
 	@Override
 	public int update(Exercise exercise) {
 		int result = 0;
@@ -216,11 +319,11 @@ public class JdbcExerciseDao implements ExerciseDao {
 			// st.setInt(7, exercise.getCategoryId());
 			st.setInt(6, exercise.getId());
 
-			result = st.executeUpdate(); // insert, update, delete πÆ¿Â¿œ ∂ß
+			result = st.executeUpdate(); // insert, update, delete Î¨∏Ïû•Ïùº Îïå
 
 			st.close();
 			con.close();
-			System.out.println("ºˆ¡§ øœ∑·");
+			System.out.println("ÏàòÏ†ï ÏôÑÎ£å");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -238,17 +341,11 @@ public class JdbcExerciseDao implements ExerciseDao {
 
 	@Override
 	public List<ExerciseView> getViewList() {
-		return getViewList(); //ø‰∞Ì º±ª˝¥‘ ø÷ ø©∑Ø ¿Œ¿⁄ ¿¸¥ﬁ ∏¯«œ¡ˆ
+		return getViewList(); //ÏöîÍ≥† ÏÑ†ÏÉùÎãò Ïôú Ïó¨Îü¨ Ïù∏Ïûê Ï†ÑÎã¨ Î™ªÌïòÏßÄ
 	}
 
 	@Override
 	public List<ExerciseView> getViewList(String[] parts) {
-		return getViewList(parts,"TITLE","");
-		
-	}
-
-	@Override
-	public List<ExerciseView> getViewList(String[] parts, String title, String query) {
 		List<ExerciseView> list = new ArrayList<>();
 		String bodyParts = String.join(",", parts);
 		
@@ -280,20 +377,37 @@ public class JdbcExerciseDao implements ExerciseDao {
 				String engName = rs.getNString("eng_name");
 				int categoryId = rs.getInt("category_id");
 				int memberId = rs.getInt("memberId");
-				String fileName = rs.getString("file_name");
-				String fileRoute = rs.getNString("file_route");
+				String bodyPartId = rs.getString("body_part_id");
+				String fileName= rs.getString("file_name");
+				String fileRoute= rs.getString("file_route");
+				
+				List<String> bodyPartIdList = new ArrayList<String>(); 
+				List<String> fileNameList = new ArrayList<String>();
+				
+				String[] bodyPartIds = bodyPartId.split(",");
+				String[] fileNames = fileName.split(",");
+				
+				for(int i=0;i<bodyPartIds.length;i++)
+					bodyPartIdList.add(bodyPartIds[i]);
+				
+				for(int i=0;i<bodyPartIds.length;i++)
+					fileNameList.add(fileNames[i]);	
+				
 
-				ExerciseView exv = new ExerciseView();
-				exv.setId(id);
-				exv.setName(name);
-				exv.setContents(contents);
-				exv.setRecommend(recommend);
-				exv.setRegDate(regDate);
-				exv.setEngName(engName);
-				exv.setCategoryId(categoryId);
-				exv.setMemberId(memberId);
-				exv.setFileName(fileName);
-				exv.setFileRoute(fileRoute);
+				ExerciseView exv = new ExerciseView(
+						id, 
+						name,
+						contents, 
+						regDate, 
+						engName,
+						recommend, 
+						categoryId,
+						memberId,
+						bodyPartIdList,
+						fileNameList,
+						fileRoute
+						);
+				System.out.println(exv);
 				list.add(exv);
 			}
 
@@ -308,6 +422,126 @@ public class JdbcExerciseDao implements ExerciseDao {
 		}
 		return list;
 	}
+	
+
+	@Override
+	public List<ExerciseView> getViewList(String[] parts, String[] files) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ExerciseView> getViewList(String[] parts, String[] files, String[] routes) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ExerciseView> getViewList(String[] parts, String[] files, String[] routes, String title, String query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public List<ExerciseListView> getListView() {
+		List<ExerciseListView> list = new ArrayList<>();
+
+		String url = DBContext.URL;
+		String sql = "SELECT * FROM EXERCISE_LIST_VIEW";
+		
+		System.out.println("Ï†úÏù¥ÎîîÎπÑÏî® Í≤üÎ¶¨Ïä§Ìä∏");
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				String efName = rs.getString("ef_name");
+				String efRoute = rs.getString("ef_route");
+
+				ExerciseListView exlv = new ExerciseListView(id,name,efName,efRoute);
+				System.out.println(list);
+				list.add(exlv);
+			}
+
+			rs.close();
+			st.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	@Override
+	public List<ExerciseListView> getListView(String[] parts) {
+		String partStrJoin=String.join(",", parts);
+		
+		List<ExerciseListView> list = new ArrayList<>();
+		String url = DBContext.URL;
+		String sql = "SELECT E.EXERCISE_ID ID, E.NAME, EF.NAME EF_NAME, EF.ROUTE EF_ROUTE FROM ( "+
+			    "SELECT IDS.EXERCISE_ID, E.NAME, MIN(EF.ID) EF_ID "+
+			    "FROM ( "+
+			        "SELECT EXERCISE_ID  "+
+			        "FROM ( "+
+			            "SELECT EXERCISE_ID "+
+			            "FROM exercise_body_part "+
+			            "WHERE BODY_PART_ID IN ("+partStrJoin+") "+
+			        ") "+
+			        "GROUP BY EXERCISE_ID "+
+			        "HAVING COUNT(EXERCISE_ID) = "+parts.length +
+			    ") IDS "+
+			    "LEFT JOIN EXERCISE E ON E.ID = IDS.EXERCISE_ID "+
+			    "LEFT JOIN EXERCISE_FILE EF ON ef.exercise_id = ids.EXERCISE_ID "+
+			    "GROUP BY IDS.EXERCISE_ID, E.NAME "+
+			") E "+
+			"LEFT JOIN EXERCISE_FILE EF ON EF.ID = E.EF_ID";
+
+		System.out.println(sql);
+		
+		System.out.println("===Ïö¥Îèô Î¶¨Ïä§Ìä∏ Î∑∞");
+		System.out.println(partStrJoin);
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			System.out.println(partStrJoin);
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				String efName = rs.getString("ef_name");
+				String efRoute = rs.getString("ef_route");
+				System.out.println(partStrJoin);
+
+				ExerciseListView exlv = new ExerciseListView(id,name,efName,efRoute);
+				System.out.println(exlv);
+				list.add(exlv);
+			}
+			
+			rs.close();
+			st.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+
+	}
+
+	
 
 
 }

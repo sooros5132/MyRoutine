@@ -60,52 +60,62 @@
 
             <!-- main(개별 컨턴츠 넣는곳) -->
             <main class="main">
-
+            
+			
                 <div class="content-container">
+                <c:if test=""></c:if>
+                
                     <div class="input-container">
-                    <form action="/admin/exercise/list">
-                        <div class="check-label">
-                            부위
-                        </div>
-                        <div class="check-list">
-                            <input type="checkbox" name="part" value="1">
-                            목
-                            <input type="checkbox" name="part" value="2">
-                            어깨
-                            <input type="checkbox" name="part" value="15">
-                            손목
-                            <input type="checkbox" name="part" value="4">
-                            허리
-                            <input type="checkbox" name="part" value="6">
-                            무릎
-                            
-      
-                            <!-- and 검색 or 검색 / 라디오 or 셀렉트
-                            데이터베이스에서 한다. -->
-                        </div>
-                    </form>
-
-                        <div class="search-container">
-                            <select name="" id="">
-                                <option selected>제목</option>
-                                <option>내용</option>
+                    	<form action="/admin/exercise/list" method="get" class="a">
+                        	
+                            <div class="check-label">
+                                부위
+                            </div>
+                            <div class="check-list">
+                            	<input type="checkbox" id="1" name="part" value="1">
+                            	<label for="1">목</label>
+                            	<input type="checkbox" id="2" name="part" value="2">
+                            	<label for="2">어깨</label>
+                            	<input type="checkbox" id="15" name="part" value="15">
+                            	<label for="15">손목</label>
+                            	<input type="checkbox" id="4" name="part" value="4">
+                            	<label for="4">허리</label>
+                            	<input type="checkbox" id="6" name="part" value="6">
+                                <label for="6">무릎</label>
+                            </div>
+                            <select>
+                                <option>and</option>
+                                <option>or</option>
                             </select>
-                            <input type="text" class="search-input" placeholder="검색">
-                            <input type="submit" class = "submit-input" name="" id="" value="검색">
-                        </div>
+                            <input type="submit" class="submit-input" value="검색">
+                            
+                            
+
+
+                            <!-- <div class="search-container">
+                                <select name="" id="">
+                                    <option selected>제목</option>
+                                    <option>내용</option>
+                                </select>
+                                <input type="text" class="search-input" placeholder="검색">
+                                
+                            </div> -->
+                        </form>
                     </div>
-                    <c:forEach var="ex" items="${list}">
+                    
+                    <%//부위 운동 파일 %>
                     <div class="exercise-list">
+                    <c:forEach var="ex" items="${list}">
                         <div class="list-box">
-                            <a href="detail?name=${ex.name}" class="img-box ">
-                                <img src="../../image/exercise/${ex.engName}1.jpg" height="134px" width="150px" alt="">
+                            <a href="detail?id=${ex.id}" class="img-box ">
+                                 <img src="${ex.efRoute}/${ex.efName}" height="134px" width="150px" alt="${ex.efName}"> 
                             </a>
                             <div class="name">
-                                <a href="detail?name=${ex.name}">${ex.name}</a>
+                                <a href="detail?id=${ex.id}">${ex.name}</a>
                             </div>
                         </div>
-                    </div>
                     </c:forEach>
+                    </div>
                 </div>
             </main>
             <!-- //main(개별 컨턴츠 넣는곳) -->
