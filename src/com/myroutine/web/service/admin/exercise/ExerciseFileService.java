@@ -14,8 +14,8 @@ public class ExerciseFileService {
 	
 	public ExerciseFileService() {
 		//exerciseFileDao = new JdbcExerciseFileDao();
-		//ÀÌ·¸°Ô ExerciseService»ı¼ºÀÚ¿¡¼­ °´Ã¼ ¼±¾ğÇÏ¸é
-		//¾Æ·¡ ¸ğµç ÇÔ¼öµé¿¡¼­ Àú °´Ã¼¸¦ ¾µ¼ö ÀÖ´Ù.
+		//ì´ë ‡ê²Œ ExerciseServiceìƒì„±ìì—ì„œ ê°ì²´ ì„ ì–¸í•˜ë©´
+		//ì•„ë˜ ëª¨ë“  í•¨ìˆ˜ë“¤ì—ì„œ ì € ê°ì²´ë¥¼ ì“¸ìˆ˜ ìˆë‹¤.
 	}
 	
 	

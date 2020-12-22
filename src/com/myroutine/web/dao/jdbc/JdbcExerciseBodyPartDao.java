@@ -18,7 +18,7 @@ public class JdbcExerciseBodyPartDao implements ExerciseBodyPartDao {
 	@Override
 	public List<ExerciseBodyPart> getBodyPartList(int exerciseId) {
 		
-		System.out.println("======Á¦ÀÌµğºñ¾¾_¹ÙµğÆÄÆ®_´Ù¿À");
+		System.out.println("======ì œì´ë””ë¹„ì”¨_ë°”ë””íŒŒíŠ¸_ë‹¤ì˜¤");
 		List<ExerciseBodyPart> list = new ArrayList<>();
 		String url = DBContext.URL;
 		String sql =	"select * from exercise_body_part where exercise_id='"+exerciseId+"'";
@@ -55,7 +55,7 @@ public class JdbcExerciseBodyPartDao implements ExerciseBodyPartDao {
 	
 	@Override
 	public List<ExerciseBodyPartView> getViewBodyPartList(int exerciseId) {
-		System.out.println("======Á¦ÀÌµğºñ¾¾_¹ÙµğÆÄÆ®_ºä_´Ù¿À");
+		System.out.println("======ì œì´ë””ë¹„ì”¨_ë°”ë””íŒŒíŠ¸_ë·°_ë‹¤ì˜¤");
 		List<ExerciseBodyPartView> list = new ArrayList<>();
 		String url = DBContext.URL;
 		String sql =	"select * from exercise_body_part_view "+

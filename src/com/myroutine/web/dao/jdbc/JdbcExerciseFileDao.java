@@ -17,7 +17,7 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 
 	@Override
 	public List<ExerciseFile> getFileList(int exerciseId) {
-		System.out.println("======Á¦ÀÌµğºñ¾¾_ÆÄÀÏ_´Ù¿À");
+		System.out.println("======ì œì´ë””ë¹„ì”¨_íŒŒì¼_ë‹¤ì˜¤");
 		List<ExerciseFile> list = new ArrayList<>();
 		String url = DBContext.URL;
 		String sql =	"select * from exercise_file where exercise_id='"+exerciseId+"'";

@@ -19,7 +19,7 @@ public class BodyPartService {
 		String url = DBContext.URL;
 		String sql = "SELECT * FROM Body_Part";
 		
-		System.out.println("¹ÙµğÆÄÆ® °Ù¸®½ºÆ®");
+		System.out.println("ë°”ë””íŒŒíŠ¸ ê²Ÿë¦¬ìŠ¤íŠ¸");
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -53,7 +53,7 @@ public class BodyPartService {
 		String url = DBContext.URL;
 		String sql = "SELECT * FROM Body_Part WHERE id = '"+id+"'";
 		
-		System.out.println("¹ÙµğÆÄÆ® °Ù ¾ÆÀÌµğ");
+		System.out.println("ë°”ë””íŒŒíŠ¸ ê²Ÿ ì•„ì´ë””");
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");

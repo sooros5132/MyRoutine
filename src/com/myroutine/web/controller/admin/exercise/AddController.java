@@ -45,7 +45,7 @@ public class AddController extends HttpServlet {
 		
 		
 		
-		int memberId  = 1; //ÀÓ½Ã °íÁ¤ //String memberId = request.getParameter("memberId");
+		int memberId  = 1; //ì„ì‹œ ê³ ì • //String memberId = request.getParameter("memberId");
 		int bodyPart = 1;
 		
 		String[] files= request.getParameterValues("file");
@@ -75,7 +75,7 @@ public class AddController extends HttpServlet {
 		
 
 		
-		//¸ñ·ÏÆäÀÌÁö·Î ÀÌµ¿
+		//ëª©ë¡í˜ì´ì§€ë¡œ ì´ë™
 //		response.sendRedirect("list");
 	}
 }
