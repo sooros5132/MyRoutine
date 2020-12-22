@@ -38,6 +38,7 @@ public class DetailController extends HttpServlet {
 		int result = service.hitUp(id);
 		
 		
+		
 		request.setAttribute("n", n);
 		request.setAttribute("nv", nv);
 		request.setAttribute("prev", prev);
