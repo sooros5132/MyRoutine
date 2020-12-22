@@ -1,7 +1,15 @@
-package com.myroutine.web.service.user;
+package com.myroutine.web.service;
 
 public class IsNumberService {
-	static boolean isNumberic(String s) { //숫자 판별 함수
+	
+//	public static void main(String[] args) {
+//		System.out.println(isNumberic(""));  // false
+//		System.out.println(isNumberic(null));// false
+//		System.out.println(isInteger(""));   // false
+//		System.out.println(isInteger(null)); // false
+//	}
+	
+	public static boolean isNumberic(String s) { //숫자 판별 함수
 		try {
 	     	Double.parseDouble(s);
 	    	return true;
@@ -10,7 +18,7 @@ public class IsNumberService {
 	    }
 	}
 
-	static boolean isInteger(String s) { //정수 판별 함수
+	public static boolean isInteger(String s) { //정수 판별 함수
 		try {
 	     	Integer.parseInt(s);
 	    	return true;

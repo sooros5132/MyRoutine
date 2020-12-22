@@ -23,7 +23,7 @@ let alertOpen;
             
             // 백그라운드 컬러 설정
             alertNode.style.background = alertColor;
-            barNode.style.background = alertColor;
+            //barNode.style.background = alertColor;
     
             alertText.textContent = setText;
             setTimeout(()=>{

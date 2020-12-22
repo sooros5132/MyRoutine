@@ -100,7 +100,7 @@ public class EditController extends HttpServlet {
 		System.out.println(exercise.toString());
 		exerciseService.update(exercise);
 		
-			
+
 		//운동 부위 수정(월래 정보 전부 삭제하고 다시 등록)
 		ExerciseBodyPartService ebpService = new ExerciseBodyPartService();
 		//1.운동 부위 삭제

@@ -6,14 +6,16 @@
     min-width: 300px;
     font-size: 24px;
     font-weight: bold;
-    text-shadow: 1px 1px 3px #333;
-    border-bottom: 1px solid #28B49B;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.9);
+    border-bottom: 1px solid #30baa1;
     color: #eee;
     /* background: linear-gradient(to bottom, #00000066, #00000011); */
-    background: rgba(0,0,0,0.1);
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.25);
+    background: rgba(0,0,0,0.8);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
     transition: background 0.5s;
     z-index: 1;
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
 }
 
 
@@ -54,14 +56,14 @@
     text-align: center;
     box-sizing: border-box;
     line-height: 80px;
-    /* border-right: 1px solid #28B49B; */
+    /* border-right: 1px solid #30baa1; */
 }
 
 .main-menu-container li div,
 .member-container li div{
     box-sizing: border-box;
     height: 80px;
-    border-bottom: 5px solid #28B49B;
+    border-bottom: 5px solid #30baa1;
 }
 
 .main-menu-container li:last-child,
@@ -81,11 +83,11 @@
 
 
 @media screen and (min-width:768px){
-    .header:hover{
+    /* .header:hover{
         background: rgba(0,0,0,0.3);
-        -webkit-backdrop-filter: blur(8px);
-        backdrop-filter: blur(8px);
-    }
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        backdrop-filter: blur(20px) saturate(180%);
+    } */
     .header-container li a:hover{
         background: rgba(255,255,255,0.1);
     }
@@ -110,8 +112,8 @@
         transition: background 0.5s, height 0.5s;
         background: transparent;
         /* backdrop-filter:blur(8px) saturate(180%); */
-        -webkit-backdrop-filter: blur(8px) saturate(140%);
-        backdrop-filter: blur(8px) saturate(140%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        backdrop-filter: blur(20px) saturate(180%);
     }
 
     .header.active{
@@ -200,7 +202,7 @@
         flex: 0 0 2px;
         width: 100%;
         height: 2px;
-        background: #28B49B;
+        background: #30baa1;
         transition: transform 0.5s;
         box-shadow: 0px 1px 3px #333;
     }

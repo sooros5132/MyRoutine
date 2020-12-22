@@ -24,3 +24,6 @@ encoding//src/com/myroutine/web/service/admin/exercise/ExerciseBodyPartService.j
 encoding//src/com/myroutine/web/service/admin/exercise/ExerciseService.java=UTF-8
 encoding//src/com/myroutine/web/service/admin/exercise/ExerciseServiceBackup.java=UTF-8
 encoding//src/com/myroutine/web/service/user/IsNumberService.java=UTF-8
+encoding//src/com/myroutine/web/controller/api/member/EditController.java=UTF-8
+encoding//src/com/myroutine/web/controller/user/account/SignUpController.java=UTF-8
+encoding//src/com/myroutine/web/dao/jdbc/JdbcExerciseDao.java=UTF-8

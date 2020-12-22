@@ -1,46 +1,32 @@
 package com.myroutine.web.dao.jdbc;
 
-import java.io.InputStream;
-import java.io.Reader;
-import java.math.BigDecimal;
-import java.net.URL;
-import java.sql.Array;
-import java.sql.Blob;
-import java.sql.Clob;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.NClob;
 import java.sql.PreparedStatement;
-import java.sql.Ref;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.RowId;
 import java.sql.SQLException;
-import java.sql.SQLWarning;
-import java.sql.SQLXML;
 import java.sql.Statement;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import com.myroutine.web.dao.ExerciseDao;
-import com.myroutine.web.entity.admin.exercise.BodyPart;
 import com.myroutine.web.entity.admin.exercise.Exercise;
-import com.myroutine.web.entity.admin.exercise.ExerciseBodyPart;
+
 
 public class JdbcExerciseDao implements ExerciseDao {
-	
+
 	//운동정보
+
 	@Override
 	public Exercise get(int id) {
 		Exercise ex = null;
 
 		String url = DBContext.URL;
+
 		String sql = "SELECT * FROM EXERCISE WHERE ID=?";
+
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -80,6 +66,7 @@ public class JdbcExerciseDao implements ExerciseDao {
 						categoryId
 						
 				    ) ;
+
 			}
 
 			rs.close();
@@ -96,11 +83,19 @@ public class JdbcExerciseDao implements ExerciseDao {
 	
 	
 	@Override
-	public List<Exercise> getList() {
+	public List<Exercise> getList(String[] parts) {
 		List<Exercise> list = new ArrayList<>();
-
 		String url = DBContext.URL;
-		String sql = "SELECT * FROM EXERCISE" ;
+		String sql =null;
+		switch(parts.length) {
+		case 0:
+			sql = "SELECT * FROM EXERCISE";
+		case 1:
+			sql = "SELECT * FROM EXERCISE join EXERCISE_BODY_PART on\r\n" + 
+					"exercise.id = exercise_body_part.exercise_id\r\n" + 
+					"where exercise_body_part.body_part_id=?";
+		
+		}					
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -110,11 +105,11 @@ public class JdbcExerciseDao implements ExerciseDao {
 
 			while (rs.next()) {
 				int id = rs.getInt("id");
-				String name=rs.getString("name");
-				String contents= rs.getString("contents");
-				String recommend= rs.getNString("recommend");
-				Date regDate= rs.getDate("regdate");
-				String engName=rs.getNString("engname");
+				String name = rs.getString("name");
+				String contents = rs.getString("contents");
+				String recommend = rs.getNString("recommend");
+				Date regDate = rs.getDate("regdate");
+				String engName = rs.getNString("engname");
 				int categoryId = rs.getInt("categoryId");
 				int memberId = rs.getInt("memberId");
 
@@ -128,6 +123,7 @@ public class JdbcExerciseDao implements ExerciseDao {
 						ex.setMemberId(memberId);
 						ex.setCategoryId(categoryId);
 						list.add(ex);
+
 			}
 
 			rs.close();
@@ -143,6 +139,7 @@ public class JdbcExerciseDao implements ExerciseDao {
 	}
 
 	
+
 	//운동추가
 	@Override
 	public int insert(Exercise exercise) {
@@ -229,10 +226,11 @@ public class JdbcExerciseDao implements ExerciseDao {
 			st.setInt(7, exercise.getId());
 
 			result = st.executeUpdate(); //insert, update, delete 문장일 때
-			
+	
 			st.close();
 			con.close();
 			System.out.println("수정 완료");
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -244,6 +242,7 @@ public class JdbcExerciseDao implements ExerciseDao {
 	}
 
 	
+
 	//운동 ID얻기
 	@Override
 	public int getLast() {
@@ -264,6 +263,7 @@ public class JdbcExerciseDao implements ExerciseDao {
 			}
 			System.out.println("id " + id);
 			rs.close();
+
 			st.close();
 			con.close();
 
@@ -275,5 +275,11 @@ public class JdbcExerciseDao implements ExerciseDao {
 		return id;
 	}
 
+
+	@Override
+	public List<Exercise> getList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

@@ -15,20 +15,25 @@
 .bottom-container .bottom-menu{
     margin: 0 auto;
     position: relative;
-    max-width: 1200px;
+    --max-width: 1200px;
+}
+
+.bottom-menu-inner{
+    position: absolute;
+    top:-95px;
+    right:15px;
+    width:40px;
+    height:85px;
+    --overflow: hidden;
+    transition: bottom .5s;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .bottom-btn{
-    position: absolute;
-    top:-40px;
-    right:15px;
-    width:30px;
-    height:30px;
-    overflow: hidden;
     opacity: 0;
+    transition: opacity .5s;
     background: #333333;
-    transition: opacity .5s, bottom .5s;
-    cursor: pointer;
 }
 
 .bottom-btn svg{
@@ -38,7 +43,21 @@
     fill: transparent;
     stroke: #f1718c;
     stroke-width: 3px;
-    stroke-dasharray: 95;
+    stroke-dasharray: 125;
     transform: rotate(-90deg);
+    overflow: initial;
 }
+
+.chat-toggle-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    font-size: 22px;
+    text-align:center;
+    margin-top: 5px;
+    color: #30baa1;
+}
+
 /* // 하단 메뉴 */ 

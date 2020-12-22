@@ -111,9 +111,12 @@
     transition: background-color 0s, font-size 0.1s, top 0.1s;
 }
 
-.account-inner .error-msg{
+.account-inner .input-msg{
     padding-left: 10px;
     font-size: 12px;
+}
+
+.account-inner .error-msg{
     color: #b91515;
 }
 

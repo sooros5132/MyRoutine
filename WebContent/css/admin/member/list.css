@@ -1,28 +1,30 @@
-
-.member-list > h1{
-    font-size: 30px; 
-    color: #30baa1;
+.member-search-container table{
+    width: 100%;
+    margin: 30px 0;
+    border-collapse:collapse;
+    border-spacing:0;
+}
+.member-search-container tr{
+    height: 34px;
+}
+.member-search-container tr td:first-child{
+    --border-right: 1px solid #ddd;
+    text-align: right;
+    background: #30baa1;
+    padding-right: 12px;
+    color: #ffffff;
     font-weight: bold;
 }
-
-
-.member-list > table{
-    min-width: 1000px;
-    width: 100%;
-    border-spacing: 0px;
-    border-collapse: collapse;
-    font-size: 14px;
+.member-search-container tr td:last-child{
+    background: #f9f9f9;
+    padding-left: 16px;
+}
+.member-search-container tr:first-child,
+.member-search-container tr:last-child{
+    height:10px;
 }
 
-.member-list-setting{
-    display: flex;
-}
-
-.member-list-setting .member-list-size{
-    margin-left: auto;
-}
-
-.member-list > table tbody select{
+.member-list select{
     width: 100%;
     padding-left: 2px;
     -webkit-appearance: auto;
@@ -30,8 +32,32 @@
     appearance: auto;
 }
 
+.member-list > h1{
+    font-size: 30px; 
+    color: #30baa1;
+    font-weight: bold;
+}
+
+.member-list > table{
+	position: relative;
+    min-width: 1000px;
+    width: 100%;
+    border-spacing: 0px;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+/* .member-list-setting{
+    display: flex;
+}
+
+.member-list-setting .member-list-size{
+    margin-left: auto;
+} */
+
+
 .member-list > table tr{
-    line-height: 30px;
+    height: 34px;
     text-align: center;
 }
 
@@ -43,12 +69,19 @@
 .member-list > table thead th{
     border: 1px solid #ddd;
 }
+
 .member-list > table tbody tr td{
     border: 1px solid #ddd;
     border-top: 0;
 }
+.member-list > table tbody tr td.changed{
+	background: rgba(48, 186, 161, 0.2);
+}
+.member-list > table tbody tr td.fail{
+	background: rgba(255, 0, 0, 0.2);
+}
 .member-list > table tbody tr.even{
-    background-color: #f9f9f9;
+    background-color: rgb(240, 240, 240, 0.3);
 }
 .member-list > table .data-update-box{
     display: flex;
@@ -61,13 +94,14 @@
 .member-list > table .data-update-box .change-icon{
     flex-basis: 30px;
     background: transparent;
-    font-size: 16px;
+    font-size: 20px;
     color: #ddd;
 }
-.member-list > table .data-update-box.active .change-icon{
+.member-list > table tbody .change-icon.changed,
+.member-list > table td.changed .data-update-box .change-icon{
     color: #30baa1;
 }
-.member-list > table .data-update-box .change-icon:hover{
+.member-list > table .data-update-box .change-icon i:hover{
     background-color: #eee;
 }
 .member-list > table .data-update-box input{
@@ -79,6 +113,10 @@
     font-size: 14px;
     background-color: transparent;
     box-sizing: border-box;
+    border: 1px solid transparent;
+}
+.member-list > table .data-update-box input[type="checkbox"]{
+	height:initial;
 }
 .member-list > table .data-update-box input:hover,
 .member-list > table .data-update-box input:focus{
@@ -86,6 +124,10 @@
     border: 1px solid #30baa1;
 }
 
+.member-list > table .member-detail:hover{
+    background-color: #eee;
+   	cursor: pointer;
+}
 .member-list > table td{
 	background: transparent;
 }
@@ -95,6 +137,58 @@
 .member-list > table tr.delete{
 	background: rgba(196, 62, 9, 0.7) !important;
 	animation: element-delete 3s linear 1;
+}
+
+
+.page-number td{
+	position: absolute;
+	top: 68px;
+	left: 0;
+	width: 100%;;
+	color: #f9f9f9;
+	font-size: 0;
+	font-weight: bold;
+	text-align: center;
+	border: 0 !important;
+	transform: translateY(-6%);
+	z-index: -1;
+}
+
+.member-list-paging > div{
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	padding: 10px 0;
+}
+.member-list-paging a{
+	width: 30px;
+	margin: 0 2px;
+	cursor: pointer;
+	text-align: center;
+	padding: 4px 0;
+}
+.member-list-paging a.disable{
+	color: #dddddd;
+	cursor: initial;
+}
+.member-list-paging a.now-page{
+	background: #30baa1;
+	color: #ffffff;
+}
+.member-list-paging a:not(.disable):hover{ 
+	background: #4bdec3;
+	color: #ffffff;
+}
+.member-list-paging .p-prev-next{
+	display: flex;
+	justify-content: center;
+}
+.member-list-paging .p-first-end i:first-child{
+	transform: translateX(5px);
+}
+.member-list-paging .p-first-end i:last-child{
+	transform: translateX(-5px);
 }
 
 @keyframes highlight {

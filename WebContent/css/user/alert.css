@@ -16,8 +16,8 @@
     height: 40px;
     bottom: 0;
     left:0;
-    background-color: rgb(68, 62, 148);
-    filter: brightness(0.8);
+    background-color: rgba(0,0,0,0.2);
+    /* filter: brightness(0.8); */
     /* background-color: rgba(70, 141, 167, 0.2); */
     /* transition: 10s linear; */
 }

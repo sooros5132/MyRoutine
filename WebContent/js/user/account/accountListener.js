@@ -1,6 +1,5 @@
 (function(){
     let formInput = document.querySelectorAll(".account-inner .user-info");
-    let pwdInput = document.querySelectorAll("input[type=password]");
 
     // 자동 선택
     window.addEventListener("load", (e)=>{
@@ -11,28 +10,30 @@
                     input.parentElement.classList.add("input-active");
                 }
             });
-        }, 10);
+        }, 100);
     });
     
-    if( pwdInput ){
-        pwdInput.forEach(input => {
-            input.addEventListener("input", (e) => {
-                var keyCode = 0;
-                var shiftKey=false;
-                keyCode=e.keyCode;
-                shiftKey=e.shiftKey;
-                if (((keyCode >= 65 && keyCode <= 90)&& !shiftKey)||((keyCode >= 97 && keyCode <= 122)&& shiftKey))
-                {
-                    alertOpen({
-                        setText: "CapsLock키가 눌려있습니다",
-                        activeTime: 3,
-                        alertColor: "#007a8e"
-                    });
-                    return;
-                }
-            });
-        });
-    }
+    // let pwdInput = document.querySelectorAll("input[type=password]");
+    // if( pwdInput ){
+    //     pwdInput.forEach(input => {
+    //         // keydown으로 해야 작동함
+    //         input.addEventListener("keydown", (e) => {
+    //             var keyCode = 0;
+    //             var shiftKey=false;
+    //             keyCode=e.keyCode;
+    //             shiftKey=e.shiftKey;
+    //             if (((keyCode >= 65 && keyCode <= 90)&& !shiftKey)||((keyCode >= 97 && keyCode <= 122)&& shiftKey))
+    //             {
+    //                 alertOpen({
+    //                     setText: "CapsLock키가 눌려있습니다",
+    //                     activeTime: 3,
+    //                     alertColor: "#007a8e"
+    //                 });
+    //                 return;
+    //             }
+    //         });
+    //     });
+    // }
     
     formInput.forEach(input => {
         let inputLabel = input.parentElement.querySelector(".input-label");

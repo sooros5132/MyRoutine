@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../../css/xeicon.min.css">
     <link rel="stylesheet" href="../../css/admin/exercise/list.css">
 
-    <script src="../js/admin_common.js"></script>
+    <script src="../../js/admin_common.js"></script>
 </head>
 
 <body>
@@ -47,8 +47,8 @@
                         <li data-type="true">
                             <a href="#">재활운동 관리<i class="xi-angle-right-min"></i></a>
                             <ul class="dep2">
-                                <li><a href="https:\\www.naver.com">재활 보기</a></li>
-                                <li><a href="https:\\www.naver.com">재활 등록</a></li>
+                                <li><a href="/admin/exercise/list">재활 보기</a></li>
+                                <li><a href="/admin/exercise/add">재활 등록</a></li>
                             </ul>
                         </li>
                         <li><a href="https:\\www.naver.com">홈트레이닝 관리</a></li>
@@ -63,24 +63,27 @@
 
                 <div class="content-container">
                     <div class="input-container">
+                    <form action="/admin/exercise/list">
                         <div class="check-label">
                             부위
                         </div>
                         <div class="check-list">
-                            <input type="checkbox" name="목">
+                            <input type="checkbox" name="part" value="1">
                             목
-                            <input type="checkbox" name="어깨">
+                            <input type="checkbox" name="part" value="2">
                             어깨
-                            <input type="checkbox" name="손목">
+                            <input type="checkbox" name="part" value="15">
                             손목
-                            <input type="checkbox" name="허리">
+                            <input type="checkbox" name="part" value="4">
                             허리
-                            <input type="checkbox" name="다리">
-                            다리
+                            <input type="checkbox" name="part" value="6">
+                            무릎
+                            
       
                             <!-- and 검색 or 검색 / 라디오 or 셀렉트
                             데이터베이스에서 한다. -->
                         </div>
+                    </form>
 
                         <div class="search-container">
                             <select name="" id="">

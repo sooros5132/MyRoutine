@@ -1,11 +1,11 @@
-package com.myroutine.web.entity.user;
+package com.myroutine.web.entity.user.chat;
 
 import java.sql.Date;
 
 public class Chat {
 	
 	private int id;
-	private String centents;
+	private String contents;
 	private int requester;
 	private Date deleteDate;
     private Date registrantionDate;
@@ -15,9 +15,15 @@ public class Chat {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Chat(int id, String centents, int requester, Date deleteDate, Date registrantionDate, int regMemberId) {
+	public Chat(int regMemberId, int requester, String contents) {
+		this.regMemberId = regMemberId;
+		this.requester = requester;
+		this.contents = contents;
+	}
+
+	public Chat(int id, String contents, int requester, Date deleteDate, Date registrantionDate, int regMemberId) {
 		this.id = id;
-		this.centents = centents;
+		this.contents = contents;
 		this.requester = requester;
 		this.deleteDate = deleteDate;
 		this.registrantionDate = registrantionDate;
@@ -32,12 +38,12 @@ public class Chat {
 		this.id = id;
 	}
 
-	public String getCentents() {
-		return centents;
+	public String getContents() {
+		return contents;
 	}
 
-	public void setCentents(String centents) {
-		this.centents = centents;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 
 	public int getRequester() {
@@ -74,8 +80,10 @@ public class Chat {
 
 	@Override
 	public String toString() {
-		return "Chat [id=" + id + ", centents=" + centents + ", requester=" + requester + ", deleteDate=" + deleteDate
+		return "Chat [id=" + id + ", contents=" + contents + ", requester=" + requester + ", deleteDate=" + deleteDate
 				+ ", registrantionDate=" + registrantionDate + ", regMemberId=" + regMemberId + "]";
 	}
+
+	
     
 }

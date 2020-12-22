@@ -1,6 +1,6 @@
 // 탑 버튼 설정
 (function(){
-    window.addEventListener('scroll', (e)=>{
+    window.addEventListener("scroll", (e)=>{
         let scrollLen = window.pageYOffset / (document.body.offsetHeight - window.innerHeight);
         let topBtnNode = document.getElementById("top-scroll").parentElement;
         
@@ -17,11 +17,13 @@
         } else {
             topBtnNode.classList.remove("d-none");
             topBtnNode.classList.add("reveal");
-            document.getElementById("top-scroll").setAttribute("style", `stroke-dashoffset: ${95-(95*scrollLen)};`);
+            document.getElementById("top-scroll").setAttribute("style", `stroke-dashoffset: ${125-(125*scrollLen)};`);
         }
+
     });
 
     document.getElementById("top-scroll").addEventListener("click", ()=>{
         window.scrollTo({top: 0, behavior: 'smooth'});
     })
+
 }());

@@ -19,6 +19,7 @@
             <h1 class="d-none">배경영상</h1>
             <div style="width: 100%; font-size: 0;">
                 <!-- <iframe class="main-video" style="width: 1200px; height: 675px;" src="https://www.youtube.com/embed/9B1U3O8G7Bo?controls=0&autoplay=1&loop=1&disablekb=1&" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                <!-- <iframe class="main-video" style="width:100%" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
                 <iframe class="main-video" style="width:100%" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </section>
@@ -33,6 +34,10 @@
 		            <br>
 		            <br>
 		            <a href="/admin/member/list">회원관리 구경하러 가자~</a>
+		            <br>
+		            <br>
+		            <br>
+		            <span onclick="document.querySelector('.chat-toggle-btn').click()"><i class="xi-speech" style="color:var(--mainColor)"></i> 채팅도 가능 해볼까??</span>
 	            </div>
             </div>
             <jsp:include page="/WEB-INF/jsp/user/account/login.jsp" />
@@ -59,7 +64,7 @@
         .taebo-game-img{
             width: 520px;
             height: 635px;
-            background: url(/TB_40_2.png) no-repeat;
+            background: url(/image/TB_40_2.png) no-repeat;
             transform: scale(0.7);
         }
     </style>
@@ -74,7 +79,7 @@
             //     "GywDFkY3z-c", // LEE SUHYUN - ‘ALIEN’ M/V
             //     "dyRsYk0LyA8", // BLACKPINK – ‘Lovesick Girls’ M/V
             //     "iDjQSdN_ig8", // [MV] OH MY GIRL(오마이걸) _ Nonstop(살짝 설렜어)
-                "cQloq2nnEXU", // 1조
+                "Op2wX3MVIEk", // 1조
                 "ttmzTf6XhlA", // 2조
                 "LJgaulCeCbI", // 3조
                 "g22QkE7Mj6Q", // 4조
@@ -86,10 +91,12 @@
             let videoMinSize = 300;
             let moblieSize = 768;
             videoFrame.style.height = `${'${window.innerWidth/100*56.25}px'}`;
-            videoFrame.setAttribute('src',`https://www.youtube.com/embed/${'${videoSrc[randomNum]}'}/?controls=1&autoplay=0&loop=1&disablekb=1`);
+            // videoFrame.setAttribute('src',`https://www.youtube-nocookie.com/embed/${'${videoSrc[randomNum]}'}/?controls=1&autoplay=0&loop=1&disablekb=1`);
+            
             // https://www.youtube.com/embed/kRT174IdxuM?rel=0&loop=1&playsinline=1&playlist=kRT174IdxuM&controls=0&showinfo=0&enablejsapi=1&origin=https%3A%2F%2Fmarshall-ku.com&widgetid=1
 
             window.addEventListener("load",  (e)=>{
+                videoFrame.setAttribute('src',`https://www.youtube-nocookie.com/embed/H-AcDBLqxi4?start=344&controls=0&autoplay=1&loop=1&mute=1&enablejsapi=1`);
                 if( window.innerWidth > videoMinSize ){
                     videoFrame.style.height = `${'${window.innerWidth/100*56.25}px'}`;
                 } else {

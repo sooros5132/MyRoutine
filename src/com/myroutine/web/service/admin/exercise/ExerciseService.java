@@ -8,10 +8,10 @@ import com.myroutine.web.entity.admin.exercise.Exercise;
 import com.myroutine.web.entity.admin.exercise.ExerciseBodyPart;
 import com.myroutine.web.entity.admin.exercise.ExerciseFile;
 
+
 public class ExerciseService {
 	private ExerciseDao exerciseDao;
-	
-	
+
 	public ExerciseService() {
 		exerciseDao = new JdbcExerciseDao();
 	}
@@ -37,17 +37,17 @@ public class ExerciseService {
 		return result;
 	}
 	
-	
+
 	//운동 리스트 불러오기
 	public List<Exercise> getList() {
 		return null;
 	}
 
+
 	//운동 정보 불러오기
 	public Exercise get(int id) {	
 		Exercise exercise = exerciseDao.get(id);
 		return exercise;
+
 	}
-
-
 }
