@@ -1,0 +1,158 @@
+.title-div{
+	display: flex;
+	border: 1px solide red;
+	height: 40px;
+	justify-content: space-between;
+}
+.report {
+	cursor:pointer;
+	width:48px;
+	height:28px;
+	text-align: center;
+}
+.comn-report {
+	cursor:pointer;
+	width:48px;
+	height:28px;
+	text-align: center;
+}
+.title{
+    font-size: 20px;
+    color: #bbb;
+}
+
+.con-tit {
+	margin-bottom:14px; 
+	font-size:22px; 
+	font-weight:bold; 
+	color:#30baa1;
+}
+
+.textarea {
+    width:100%; 
+    min-height: 400px;
+    padding:10px; 
+    border:1px solid #bbb;
+    overflow-y: auto;
+}
+
+.textarea:focus, 
+.textarea:active, 
+.textarea:hover {
+    border-width:1px; 
+    outline:#bbb;
+}
+
+.div-ap{
+    display: inline-flex;
+    width: 100%;
+    padding-top: 10px;
+}
+
+.div-ap .ap-text{
+    width: 100%;
+    height: 70px;
+    padding-top: 10px;
+    border: 1px solid #bbb;
+}
+
+.div-ap .ap-text:focus, 
+.div-ap .ap-text:active, 
+.div-ap .ap-text:hover {
+    width: 100%;
+    padding-top: 10px;
+    border: 1px solid #000000;
+}
+.div-ap .ap-btn{
+    width: 60px;
+    color: #30baa1; 
+}
+
+.div-ap .ap-btn:focus{
+    color: #fff;
+    background:#30baa1; 
+    outline: #30BAA1;
+}
+
+.table{
+    padding: 5px 2px;
+    width: 100%;
+}
+.btn-box{
+    padding:30px 10px; 
+    text-align:right;
+}
+
+.btn-box .btn {
+    display:inline-block; 
+  
+    line-height:46px; 
+    background:#30baa1; 
+
+    text-align:center; 
+    font-weight:bold;
+}
+
+.btn-box .btn a{
+    color:#fff; 
+}
+
+
+.list_view{
+    text-align: right;
+}
+
+.comt{
+    width: 100%;
+    margin-top: 10px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+table tr td{
+    border-bottom: 1px solid #30baa1; 
+    text-align: left;    
+    padding : 16px 20px;
+}
+.content{
+	height: 300px;
+}
+.list_btn{
+    background:#30baa1; 
+    color:#fff;
+    border:none;
+    position:relative;
+    height:60px;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+    margin-top: 5px;
+    border-radius: 3px;
+  }
+  .list_btn:hover{
+    background:#fff;
+    color:#30baa1;
+  }
+  .list_btn:before,.list_btn:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #30baa1;
+    transition:400ms ease all;
+  }
+  .list_btn:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  .list_btn:hover:before,.list_btn:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }
+  
+
