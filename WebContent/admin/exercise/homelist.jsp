@@ -105,6 +105,9 @@
                                 
                             </div> -->
                         </form>
+                        <div class="button-box">
+                        	<button >등록</button>
+                        </div>
                     </div>
                     
                     <%//부위 운동 파일 %>

@@ -22,41 +22,33 @@ public interface ExerciseDao {
 	int delete(int id);
 	
 	//운동 상세보기
-
 	Exercise get(int id);
+	
+	//모든 운동 개수 가지고오기
+	int getCount();
 	
 	//운동리스트
 	List<Exercise> getList();
-		
-	List<Exercise> getList(String[] parts);
-	
-	ExerciseView getView(int id);
-	
-	List<ExerciseView> getViewList();
-	
-	List<ExerciseView> getViewList(String[] parts);
-	
-	List<ExerciseView> getViewList(String[] parts,String[] files);
-	
-	List<ExerciseView> getViewList(String[] parts,String[] files, String[] routes);
-	
-	List<ExerciseView> getViewList(String[] parts,String[] files, String[] routes, String title, String query);
-	
 
 	//운동 아이디 얻기
 	int getLast();
 
+	//운동 리스트 불러오는 함수들 다 기능이 다름
+	//재활
 	List<ExerciseListView> getListView();
 	
 	List<ExerciseListView> getAndListView(String[] parts);
 	
 	List<ExerciseListView> getOrListView(String[] parts);
 
+	//홈트
 	List<ExerciseListView> getHomeListView();
 	
 	List<ExerciseListView> getAndHomeListView(String[] parts);
 	
 	List<ExerciseListView> getOrHomeListView(String[] parts);
 
+	
+	
 	
 	}

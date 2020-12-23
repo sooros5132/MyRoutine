@@ -25,10 +25,10 @@
             <h1 class="logo"><a href="#"><img src="../../image/common/logo.png" alt="마이루틴"></a></h1>
             <nav class="gnb">
                 <ul>
-                    <li><a href="#" class="active"><i class="xi-calendar-list"></i>운동 관리</a></li>
-                    <li><a href="#"><i class="xi-group"></i>회원 관리</a></li>
-                    <li><a href="#"><i class="xi-forum"></i>커뮤니티 관리</a></li>
-                    <li><a href="#"><i class="xi-comment"></i>공지사항 관리</a></li>
+                    <li><a href="/admin/exercise/list" class="active"><i class="xi-calendar-list"></i>운동 관리</a></li>
+                    <li><a href="/admin/exercise/member"><i class="xi-group"></i>회원 관리</a></li>
+                    <li><a href="/admin/exercise/community"><i class="xi-forum"></i>커뮤니티 관리</a></li>
+                    <li><a href="/admin/exercise/notice"><i class="xi-comment"></i>공지사항 관리</a></li>
                 </ul>
             </nav>
 
@@ -48,13 +48,11 @@
                     <ul class="dep1">
                         <!-- 하위 메뉴가 있으면 li태그에 data-type:true 넣어주세요 -->
                         <li data-type="true">
-                            <a href="#">재활운동 관리<i class="xi-angle-right-min"></i></a>
-                            <ul class="dep2">
-                                <li><a href="https:\\www.naver.com">재활 보기</a></li>
-                                <li><a href="https:\\www.naver.com">재활 등록</a></li>
-                            </ul>
+                         <li>
+                            <a href="/admin/exercise/list">재활운동 관리<i class="xi-angle-right-min"></i></a>
+                            
                         </li>
-                        <li><a href="https:\\www.naver.com">홈트레이닝 관리</a></li>
+                        <li><a href="/admin/exercise/homelist">홈트레이닝 관리</a></li>
                    
                     </ul>
                 </nav>

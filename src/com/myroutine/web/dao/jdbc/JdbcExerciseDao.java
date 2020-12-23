@@ -19,7 +19,7 @@ import com.myroutine.web.entity.admin.exercise.Exercise;
 public class JdbcExerciseDao implements ExerciseDao {
 
 
-	// 운동정보
+	// 운동정보 (디테일)
 	@Override
 	public Exercise get(int id) {
 		Exercise ex = null;
@@ -81,78 +81,6 @@ public class JdbcExerciseDao implements ExerciseDao {
 		}
 		return ex;
 	}
-
-//	public ExerciseView getView(int id) {
-//		
-//		ExerciseView exv = null;		 
-//		String url = DBContext.URL;
-//		String sql = "SELECT de.*,e.contents FROM "+
-//						"(SELECT distinct ev.id ,ev.name,ev.eng_name , ev.regdate, ev.recommend, ev.member_id, ev.category_id "+
-//						",(SELECT listagg(body_part_id,',') within group (order by body_part_id) FROM (select distinct body_part_id,id from exercise_view where id='"+id+"')) body_part_id "+
-//						",(SELECT listagg(file_name,',') within group (order by file_name) FROM (select distinct file_name,id from exercise_view where id='"+id+"')) file_name "+
-//						",(SELECT listagg(file_route,',') within group (order by file_route) FROM (select distinct file_route,id from exercise_view where id='"+id+"')) file_route "+
-//						"FROM exercise_view ev) de "+
-//						"left join exercise e on e.id = de.id "+
-//						"where de.id='"+id+"' ";
-//		System.out.println("제디비씨다오");
-//		
-//		try {
-//			Class.forName("oracle.jdbc.driver.OracleDriver");
-//			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
-//			Statement st = con.createStatement();
-//			ResultSet rs = st.executeQuery(sql);
-//			if (rs.next()) {
-//				String name = rs.getString("name");
-//				String contents = rs.getString("contents");
-//				Date regDate = rs.getDate("regdate");
-//				String engName = rs.getString("eng_name");
-//				String recommend = rs.getString("recommend");
-//				int categoryId = rs.getInt("category_id");
-//				int memberId = rs.getInt("member_id");
-//				String bodyPartId = rs.getString("body_part_id");
-//				String fileName= rs.getString("file_name");
-//				String fileRoute= rs.getString("file_route");
-	
-//				List<String> bodyPartIdList = new ArrayList<String>(); 
-//				List<String> fileNameList = new ArrayList<String>();
-//				
-//				String[] bodyPartIds = bodyPartId.split(",");
-//				String[] fileNames = fileName.split(",");
-//				
-//				for(int i=0;i<bodyPartIds.length;i++)
-//					bodyPartIdList.add(bodyPartIds[i]);
-//				
-//				for(int i=0;i<bodyPartIds.length;i++)
-//					fileNameList.add(fileNames[i]);	
-//				
-//
-//				exv = new ExerciseView(
-//						id, 
-//						name,
-//						contents, 
-//						regDate, 
-//						engName,
-//						recommend, 
-//						categoryId,
-//						memberId,
-//						bodyPartIdList,
-//						fileNameList,
-//						fileRoute
-//						);
-//			}
-//			//부위를 받아와서 조인으로 생성자에 넣어
-//			rs.close();
-//			st.close();
-//			con.close();
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} catch (ClassNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//		return exv;
-//		
-//	}
 
 	@Override
 	public List<Exercise> getList() {
@@ -305,15 +233,6 @@ public class JdbcExerciseDao implements ExerciseDao {
 		return result;
 	}
 
-	
-
-	//운동 ID얻기
-	@Override
-	public List<ExerciseView> getViewList() {
-		return getViewList(); //요고 선생님 왜 여러 인자 전달 못하지
-	}
-
-@Override
 public int getLast() {
    int id = 0;
 
@@ -344,88 +263,7 @@ public int getLast() {
    return id;
 }
 
-
-//	@Override
-//	public List<ExerciseView> getViewList(String[] parts) {
-//		List<ExerciseView> list = new ArrayList<>();
-//		String bodyParts = String.join(",", parts);
-//		
-//		String url = DBContext.URL;
-//		String sql = "SELECT ROWNUM, E.* FROM (SELECT * FROM EXERCISE ORDER BY REGDATE DESC) E  WHERE ROWNUM = 1";
-//
-//		try {
-//			Class.forName("oracle.jdbc.driver.OracleDriver");
-//			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
-//			Statement st = con.createStatement();
-//			ResultSet rs = st.executeQuery(sql);
-//
-//			while (rs.next()) {
-//				int id = rs.getInt("id");
-//				String name = rs.getString("name");
-//				String contents = rs.getString("contents");
-//				String recommend = rs.getNString("recommend");
-//				Date regDate = rs.getDate("regdate");
-//				String engName = rs.getNString("eng_name");
-//				int categoryId = rs.getInt("category_id");
-//				int memberId = rs.getInt("memberId");
-//				String bodyPartId = rs.getString("body_part_id");
-//				String fileName= rs.getString("file_name");
-//				String fileRoute= rs.getString("file_route");
-//				
-//				List<String> bodyPartIdList = new ArrayList<String>(); 
-//				List<String> fileNameList = new ArrayList<String>();
-//				
-//				String[] bodyPartIds = bodyPartId.split(",");
-//				String[] fileNames = fileName.split(",");
-//				
-//				for(int i=0;i<bodyPartIds.length;i++)
-//					bodyPartIdList.add(bodyPartIds[i]);
-//				
-//				for(int i=0;i<bodyPartIds.length;i++)
-//					fileNameList.add(fileNames[i]);	
-//				
-//
-//				ExerciseView exv = new ExerciseView(
-//						id, 
-//						name,
-//						contents, 
-//						regDate, 
-//						engName,
-//						recommend, 
-//						categoryId,
-//						memberId,
-//						bodyPartIdList,
-//						fileNameList,
-//						fileRoute
-//						);
-//				System.out.println(exv);
-//				list.add(exv);
-//
-//			}
-//			System.out.println("id " + id);
-//			rs.close();
-//
-//			st.close();
-//			con.close();
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} catch (ClassNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//		return id;
-//	}
 	
-
-//	@Override
-//	public List<ExerciseView> getViewList(String[] parts, String[] files) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
-	
-	//재활 리스트의 정보를 받아오는 함수
-	@Override
 	//재활 리스트의 정보를 받아오는 함수
 	public List<ExerciseListView> getListView() {
 		List<ExerciseListView> list = new ArrayList<>();
@@ -756,38 +594,32 @@ public int getLast() {
 			}
 
 	@Override
-	public List<Exercise> getList(String[] parts) {
-		// TODO Auto-generated method stub
-		return null;
+	
+public int getCount() {
+		int count=0;
+
+		String url = DBContext.URL;
+		String sql = "SELECT COUNT(*) FROM EXERCISE ";
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+			PreparedStatement st = con.prepareStatement(sql);			
+			ResultSet rs = st.executeQuery();
+			
+			if(rs.next())
+	             count = rs.getInt("count");
+			rs.close();
+			st.close();
+			con.close();
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
 
-	@Override
-	public ExerciseView getView(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ExerciseView> getViewList(String[] parts) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ExerciseView> getViewList(String[] parts, String[] files) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ExerciseView> getViewList(String[] parts, String[] files, String[] routes) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ExerciseView> getViewList(String[] parts, String[] files, String[] routes, String title, String query) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

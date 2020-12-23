@@ -20,9 +20,6 @@ import com.myroutine.web.service.admin.exercise.ExerciseServiceBackup;
 @WebServlet("/admin/exercise/homelist")
 public class HomeListController extends HttpServlet{
 	
-	 
-	//운동페이지 name 을 기준으로 페이지 띄우지?
-	//name 하나만 받는거 get으로 받을거야
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String[] parts = req.getParameterValues("part");
@@ -34,8 +31,6 @@ public class HomeListController extends HttpServlet{
 			 list = service.getHomeListView();
 			req.setAttribute("list", list);
 		} else if (parts != null && !parts.equals("")) {
-//			for (int i = 0; i < parts.length; i++)
-//				System.out.println(parts[i]);
 			if(option.equals("and")) {
 				 list = service.getAndHomeListView(parts);
 			}

@@ -47,23 +47,15 @@ public class ExerciseService {
 		return result;
 	}
 
-	public List<Exercise> getList(String[] parts) {
-		List<Exercise> result = exerciseDao.getList(parts);
-		return result;
-}
 	
-	// 운동 정보 불러오기
+	// 운동 정보 불러오기(디테일)
 	public Exercise get(int id) {
 		Exercise result =exerciseDao.get(id); 
-		System.out.println("=======운동서비스");
 		return result;
 	}
-	
-	public ExerciseView getView(int id) {
-		ExerciseView result = exerciseDao.getView(id);
-		
-		System.out.println("겟 뷰");
-		System.out.println("겟 뷰의 result : "+result);
+	//운동 개수
+	public int getCount() {
+		int result = exerciseDao.getCount();
 		return result;
 	}
 	

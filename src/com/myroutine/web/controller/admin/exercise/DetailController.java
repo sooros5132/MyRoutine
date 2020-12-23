@@ -21,13 +21,11 @@ import com.myroutine.web.service.admin.exercise.ExerciseService;
 
 @WebServlet("/admin/exercise/detail")
 public class DetailController extends HttpServlet{
-//	운동페이지 name 을 기준으로 페이지 띄우지? 
-//	name 하나만 받는거 get으로 받을거야
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int id = Integer.parseInt(req.getParameter("id"));
-//		int bodyPartId = Integer.parseInt(req.getParameter("id"));
-//		아이디에 정보가 다 있어야되나?
+
 		ExerciseService service = new ExerciseService();
 		ExerciseBodyPartService ebpService  = new ExerciseBodyPartService();
 		ExerciseFileService fileService = new ExerciseFileService();
