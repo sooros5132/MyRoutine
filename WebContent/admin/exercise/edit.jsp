@@ -262,7 +262,7 @@
             	e.preventDefault();
             	let delAnswer = confirm("정말로 삭제하시겠습니까?");
             	if(delAnswer == true){
-            		window.location.href="delete?id=${ex.id}";
+            		// window.location = "./list";
                 }else {
 					return false;
                 }
@@ -285,7 +285,8 @@
                e.preventDefault();
                let closeAnswer = confirm("정말로 닫으시겠습니까?");
                if(closeAnswer == true){
-                	window.history.back();
+            	   window.location = "./detail?id=" + ${ex.id};
+                	
                }else {
        				return false;
                } 

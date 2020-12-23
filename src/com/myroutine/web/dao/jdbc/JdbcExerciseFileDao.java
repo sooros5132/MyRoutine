@@ -90,8 +90,6 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 	
 
 	//파일 삭제
-=======
-
 	@Override
 	public int delete(String fileNameStr, int id) {
 		int result=0;

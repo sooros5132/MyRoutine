@@ -355,6 +355,17 @@
                 
                 return true;
             }
+            
+            
+            //닫기버튼 클릭시
+
+            let cancel = document.querySelector(".btn.cancel");
+            
+            cancel.addEventListener('click', (e)=>{
+                e.preventDefault();
+                alert("a");
+                window.location = "./list";
+            });
         });
     </script>
 <!-- 	<script>

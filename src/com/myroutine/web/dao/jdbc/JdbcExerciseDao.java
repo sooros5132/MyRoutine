@@ -64,7 +64,7 @@ public class JdbcExerciseDao implements ExerciseDao {
 						
 				    ) ;
 
-				ex = new Exercise(id, name, contents, regdate, engName,recommend, categoryId,memberId);
+				//ex = new Exercise(id, name, contents, regdate, engName,recommend, ,memberId), categoryId;
 				System.out.println(ex);
 			}
 			//부위를 받아와서 조인으로 생성자에 넣어

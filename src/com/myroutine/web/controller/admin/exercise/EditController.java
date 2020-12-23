@@ -218,5 +218,8 @@ public class EditController extends HttpServlet {
 				exerciseFileService.insert(exerciseFile);
 			}
 		}
+		
+		
+		response.sendRedirect("detail?" + id);
 	}
 }
