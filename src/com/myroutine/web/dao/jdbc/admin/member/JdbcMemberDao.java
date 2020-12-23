@@ -242,8 +242,38 @@ public class JdbcMemberDao implements MemberDao {
 		int result = 0;
 
 		String url = DBContext.URL;
-		String sql = "SELECT COUNT(NUM) CNT FROM (" + sqlTemp + ")";
+		String sql = "SELECT COUNT(ID) CNT FROM MEMBER";
 		System.out.println("dao.jdbc.admin.jdbc.JdbcMemberDao -> totalCount() 에서 메시지 실행할 SQL문\n" + sql);
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			
+			if(rs.next()) {
+				result = rs.getInt("CNT");
+			}
+			
+			rs.close();
+			st.close();
+			con.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public int searchCount() {
+		int result = 0;
+
+		String url = DBContext.URL;
+		String sql = "SELECT COUNT(NUM) CNT FROM (" + sqlTemp + ")";
+		System.out.println("dao.jdbc.admin.jdbc.JdbcMemberDao -> searchCount() 에서 메시지 실행할 SQL문\n" + sql);
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);

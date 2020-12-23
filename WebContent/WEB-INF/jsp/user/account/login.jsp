@@ -56,7 +56,7 @@
 	                <label for="userPwd" class="input-label">비밀번호</label>
 	                <div class="input-msg error-msg"></div>
 	            </div>
-                <input required type="hidden" name="return-url" value="${returnUrl}"/>
+                <input required type="hidden" name="return-url" class="return-url" value="${returnUrl}"/>
 	            
 	            <input type="submit" id="login-submit-btn" class="submit-btn" value="로그인">
 	            <div class="recovery"><span><a href="/account/recoveryEmail.html">이메일</a></span> / <span><a href="/account/recoveryPwd.html">비밀번호</a> 찾기</span></div>

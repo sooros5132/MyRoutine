@@ -46,7 +46,7 @@
                         	<div class="chat-send-btn chat-input-btn pointer"><i class="xi-send"></i></div>
                         </div>
                     </div>
-                    <div class="my-friend-box friend-box-style">
+                    <div class="my-friend-box friend-box-style d-none">
                     	<ul class="my-friend-list chat-friend-list max-width">
                     	</ul>
                     </div>
@@ -69,6 +69,23 @@
                    		<div class="chat-input-inner">
 	                        <div class="chat-input"><input class="friend-search-input" type="text" name="nickname" placeholder="닉네임"></div>
 	                       	<div class="friend-search-btn chat-input-btn pointer"><i class="xi-search"></i></div>
+                       	</div>
+                   	</div>
+                   	<div class="login-input-box friend-box-style d-none">
+                   		<div class="chat-input-inner">
+                   			<div class="chat-alert bold">로그인</div>
+	                   		<div class="login-inner">
+	                   			<div class="user-email">
+	                   				<input class="user-info" type="text" placeholder="이메일" name="email">
+	                   			</div>
+	                   			<div class="user-pwd">
+	                   				<input class="user-info" type="password" placeholder="비밀번호" name="pwd">
+	                   			</div>
+	                   			<div class="login-alert d-none">일치하는 정보가 없습니다.</div>
+	                   			<div class="submit">
+	                   				<input class="pointer" type="submit" value="로그인">
+	                   			</div>
+	                   		</div>
                        	</div>
                    	</div>
             	</div>
