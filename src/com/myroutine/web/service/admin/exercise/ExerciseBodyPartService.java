@@ -3,16 +3,27 @@ package com.myroutine.web.service.admin.exercise;
 import java.util.List;
 
 import com.myroutine.web.dao.ExerciseBodyPartDao;
+import com.myroutine.web.dao.entity.ExerciseBodyPartView;
 import com.myroutine.web.dao.jdbc.JdbcExerciseBodyPartDao;
 import com.myroutine.web.entity.admin.exercise.ExerciseBodyPart;
 
 public class ExerciseBodyPartService {
+	
 	private ExerciseBodyPartDao exerciseBodyPartDao;
-	
-	
 	public ExerciseBodyPartService() {
-		exerciseBodyPartDao = new JdbcExerciseBodyPartDao();
+		exerciseBodyPartDao= new JdbcExerciseBodyPartDao();
 	}
+	
+	
+	public List<ExerciseBodyPart> getBodyPartList(int exerciseId) {
+		List<ExerciseBodyPart> result = exerciseBodyPartDao.getBodyPartList(exerciseId);
+		return result;
+	}
+	
+	public List<ExerciseBodyPartView> getViewBodyPartList(int exerciseId) {
+		List<ExerciseBodyPartView> result = exerciseBodyPartDao.getViewBodyPartList(exerciseId);
+		return result;
+	}	
 	
 	//운동 부위 등록
 	public int insert(ExerciseBodyPart exerciseBodyPart) {
@@ -35,10 +46,4 @@ public class ExerciseBodyPartService {
 		List<ExerciseBodyPart> list = exerciseBodyPartDao.getList(id);
 		return list;
 	}
-
-	//운동부위 수정
-	//	public int update(ExerciseBodyPart ebp) {
-	//		int result = exerciseBodyPartDao.update(ebp);
-	//		return result;		
-	//	}
 }

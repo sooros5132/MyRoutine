@@ -91,8 +91,8 @@
                             <input type="submit" class = "submit-input" name="" id="" value="검색">
                         </div>
                     </div>
-                    <c:forEach var="ex" items="${list}">
                     <div class="exercise-list">
+                    <c:forEach var="ex" items="${list}">
                         <div class="list-box">
                             <a href="detailBackup?name=${ex.name}" class="img-box ">
                                 <img src="../../image/exercise/${ex.engName}1.jpg" height="134px" width="150px" alt="">
@@ -101,8 +101,8 @@
                                 <a href="detailBackup?name=${ex.name}">${ex.name}</a>
                             </div>
                         </div>
-                    </div>
                     </c:forEach>
+                    </div>
                 </div>
             </main>
             <!-- //main(개별 컨턴츠 넣는곳) -->

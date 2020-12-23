@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     	<link rel="stylesheet" href="/css/chat.css">
 		<div class="chat-container d-none">
            	<div class="chat">
@@ -74,3 +75,10 @@
             </div>
         </div>
         <script src="/js/chat.js"></script>
+        <c:if test="${sessionScope.memberId != null && sessionScope.memberId != ''}">
+	        <script>
+		        window.addEventListener("load", (e)=>{
+		        	setMemberId(${sessionScope.memberId});
+		        });
+	        </script>
+        </c:if>

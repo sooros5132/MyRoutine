@@ -45,6 +45,7 @@ public class AddController extends HttpServlet {
 		String engName = request.getParameter("eng-name");
 		String recommand = request.getParameter("recommend");
 		int categoryId = Integer.parseInt(request.getParameter("category"));
+
 		ExerciseService exService = new ExerciseService();
 		Exercise exercise = new Exercise(name, contents, engName, recommand, memberId, categoryId);
 		System.out.println(exercise.toString());
@@ -123,9 +124,9 @@ public class AddController extends HttpServlet {
 				exerciseFileService.insert(exerciseFile);
 			}
 		}		
-		
+
 		//목록페이지로 이동
-		response.sendRedirect("list");
+		response.sendRedirect("detail?" + id);
 
 	}
 }

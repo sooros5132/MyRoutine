@@ -12,11 +12,10 @@ public class Exercise {
 	private int memberId;
 	private int categoryId;
 	
-	
-	
 	public Exercise() {
 		// TODO Auto-generated constructor stub
 	}
+
 	//운동 등록시 사용
 	public Exercise(String name, String contents, String engName, String recommend, int memberId,
 			int categoryId) {

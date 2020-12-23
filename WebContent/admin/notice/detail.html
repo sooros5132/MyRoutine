@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/admin/common.css">
     <link rel="stylesheet" href="../../css/xeicon.min.css">
     <link rel="stylesheet" href="../../css/admin/notice/detail.css">
+    <script src="../../js/admin/notice/notice.js"></script>
 
 </head>
 
@@ -42,15 +43,13 @@
                     <ul class="dep1">
                         <!-- 하위 메뉴가 있으면 li태그에 data-type:true 넣어주세요 -->
                         <li data-type="true">
-                            <a href="#">재활관리<i class="xi-angle-right-min"></i></a>
+                            <a href="#">공지사항<i class="xi-angle-right-min"></i></a>
                             <ul class="dep2">
-                                <li><a href="https:\\www.naver.com">재활 보기</a></li>
-                                <li><a href="https:\\www.naver.com">재활 등록</a></li>
+                                <li><a href="list.jsp">공지 목록</a></li>
+                                <li><a href="reg.jsp">공지 등록</a></li>
                             </ul>
                         </li>
-                        <li><a href="https:\\www.naver.com">재활관리2</a></li>
-                        <li><a href="https:\\www.naver.com">재활관리2</a></li>
-                        <li><a href="https:\\www.naver.com">재활관리2</a></li>
+                        <li><a href="#">커뮤니티<i class="xi-angle-right-min"></i></a></li>
                     </ul>
                 </nav>
             </aside>
@@ -104,7 +103,9 @@
 
 
                 <section class="list-box">
-                    <a href="notice.html">목록</a>
+                    <a class="btn-button" href="notice.html">목록</a>
+                    <a class="btn-button" href="edit.jsp">수정</a>
+                    <a class="btn-button del-button" href="">삭제</a>
                 </section>
 
 
@@ -117,12 +118,12 @@
                         </colgroup>
 
                         <tr>
-                            <td>이전글</td>
+                            <td class="move-icon"><a href=""><i class="xi-angle-up-min"></i></a> 이전글</td>
                             <td>운영</td>
                             <td>2020-11-15</td>
                         </tr>
                         <tr>
-                            <td>다음글</td>
+                            <td class="move-icon"><a href=""><i class="xi-angle-down-min"></i></a> 다음글</td>
                             <td>공지사항입니다</td>
                             <td>2020-11-16</td>
                         </tr>

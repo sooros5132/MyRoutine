@@ -10,136 +10,120 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.myroutine.web.dao.NoticeDao;
+import com.myroutine.web.dao.entity.NoticeView;
+import com.myroutine.web.dao.jdbc.DBContext;
+import com.myroutine.web.dao.jdbc.JdbcNoticeDao;
 import com.myroutine.web.entity.admin.notice.Notice;
 
 public class NoticeService {
-	public List<Notice> getList() {
+	private NoticeDao noticeDao;
 
-		String url = "jdbc:oracle:thin:@hi.namoolab.com:1521/xepdb1";
-		String sql = "SELECT * FROM NOTICE";
-
-		List<Notice> list = new ArrayList();
-
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url, "TEAMONE", "11111");
-			Statement st = con.createStatement(); //문장실행
-			ResultSet rs = st.executeQuery(sql);  //결과집합
-			
-			while (rs.next()) {
-
-				int id = rs.getInt("id");
-				String title = rs.getString("title");
-				String content = rs.getString("content");
-				Date regdate = rs.getDate("regdate");
-				String files = rs.getString("files");
-				String open = rs.getString("open");
-				String hits = rs.getString("hits");
-				String writerId = rs.getString("writer_id");
-				
-				Notice n = new Notice(id,title,content,regdate,files,open,hits,writerId);
-				
-				list.add(n);
-
-			}
-			
-			rs.close();
-			st.close();
-			con.close();
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} // 드라이버 생성
-        catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
-
-		return list;
+	public NoticeService() {
+		noticeDao = new JdbcNoticeDao();
 	}
 	
 	public Notice get(int id) {
-		
-		Notice n = null;
-		
-		String url = "jdbc:oracle:thin:@hi.namoolab.com:1521/xepdb1";
-		String sql = "SELECT * FROM NOTICE WHERE ID="+id;
-		
-		List<Notice> list = new ArrayList();
-		
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url,"TEAMONE", "11111");
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
-			
-			
-			while(rs.next()) {
-				String title = rs.getString("title");
-				String content = rs.getString("content");
-				Date regdate = rs.getDate("regdate");
-				String files = rs.getString("files");
-				String open = rs.getString("open");
-				String hits = rs.getString("hits");
-				String writerId = rs.getString("writer_id");
-				
-				n = new Notice(id,title,content,regdate,files,open,hits,writerId);
-				
-				list.add(n);
-						
-			}
-			rs.close();
-			st.close();
-			con.close();
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		return n;
-		
+
+		return noticeDao.get(id);
+
 	}
 
+	public NoticeView getView(int id) {
+		
+		return noticeDao.getView(id);
+	}
+	
+	
+	
 	public int insert(Notice notice) {
-		int result =0;
-		
-		String url = "jdbc:oracle:thin:@hi.namoolab.com:1521/xepdb1 ";
-		String sql = "INSERT INTO NOTICE(TITLE,CONTENT) VALUES(?,?)";
-		
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url,"TEAMONE","11111");
-			
-			PreparedStatement st = con.prepareStatement(sql);
-			st.setString(1, notice.getTitle());
-			st.setString(2, notice.getTitle());
-			
-			
-			result = st.executeUpdate(); 
-			
-			
-			st.close();
-			con.close();
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+
+		return noticeDao.insert(notice);
+
+	}
+
+	public int update(Notice notice) {
+
+		return noticeDao.update(notice);
+	}
+
+	public int delete(int id) {
+
+		return noticeDao.delete(id);
+	}
+	
+	public List<Notice> getList() {
+
+		return noticeDao.getList();
+	}
+	public List<Notice> getList(int page) {
+
+		return noticeDao.getList(page);
+	}
+
+
+	public List<Notice> getList(int page, int size) {
+
+		return noticeDao.getList(page, size);
+	}
+
+
+	public List<Notice> getList(String field, String query, int page, int size) {
+
+		return noticeDao.getList(field, query, page, size);
+	}
+
+	
+
+	public Notice getPrev(int id) {
+
+		return noticeDao.getPrev(id);
+	}
+
+	public Notice getNext(int id) {
+
+		return noticeDao.getNext(id);
+	}
+
+	public int getLastId() {
+		Notice n = noticeDao.getLast();
+
+		return n.getId();
+	}
+
+	public int getCount() {
+		return noticeDao.getCount();
+	}
+
+
+
+
+	public int hitUp(int id) {
+       Notice notice = noticeDao.get(id);
+        
+		notice.setHit(notice.getHit()+1);
+		int result = noticeDao.updateHit(notice);
+		System.out.println(id);
 		return result;
 		
 	}
+
+
+
+
+	public int deleteAll(int[] ids) {
+	     int result = noticeDao.deleteAll(ids);
+	     return result;
+	}
+
+
+
+
+
+
+
+
+
+	
 
 }

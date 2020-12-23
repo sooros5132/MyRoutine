@@ -54,6 +54,7 @@
 	background-color: #00dc8b;
 	color: #ffffff;
 	transition: flex-basis .5s;
+	-webkit-transition: flex-basis .5s;
 }
 .chat .chat-top-alert-box .chat-input-btn{
 	color: #ffffff;

@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -38,6 +37,7 @@ public class EditController extends HttpServlet {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 		
+
 		ExerciseService exerciseService = new ExerciseService();
 		Exercise exercise = exerciseService.get(id);
 		System.out.println(exercise.toString());
@@ -106,6 +106,7 @@ public class EditController extends HttpServlet {
 		//1.운동 부위 삭제
 		ebpService.delete(id);
 		
+
 		//2운동 부위 다시 추가
 		String[] bodyParts_ = null;
 		System.out.println(categoryId);

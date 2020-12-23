@@ -52,7 +52,7 @@ public class ListController extends HttpServlet {
 		// GET ------------------------------------------------------
 		FriendService service = new FriendService();
 		List<FriendView> list = service.getViewList(reqId, state);
-		System.out.println(list);
+//		System.out.println(list);
 		if( list.isEmpty() ) {
 			out.print("{\"result\": \"fail\"}");
 			out.close();
