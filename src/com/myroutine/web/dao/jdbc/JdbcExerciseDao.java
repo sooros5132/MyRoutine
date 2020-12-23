@@ -600,7 +600,7 @@ public int getCount() {
 		int count=0;
 
 		String url = DBContext.URL;
-		String sql = "SELECT COUNT(*) FROM EXERCISE ";
+		String sql = "SELECT COUNT(*) COUNT  FROM EXERCISE ";
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);

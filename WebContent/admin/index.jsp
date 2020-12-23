@@ -88,7 +88,7 @@
                         </li>
                         <li>
                             <a href="#">
-                                <span class="count">${comunityCount}</span>
+                                <span class="count">${communityCount}</span>
                                 총 커뮤니티
                             </a>
                         </li>
@@ -108,28 +108,28 @@
                 </section>
                 <section class="notice-box">
                     <h2 class="main-tit">커뮤니티<a href="#" class="more">더보기<i class="xi-angle-right-min"></i></a></h2>
-                    <ul>
-						<c:forEach var="c" items="comunityList">  
+                    <ul><%--
+						<c:forEach var="community" items="communityList">  
                         <li>
-                            <a href="admin/notice/detail?id=${c.id}">
-                                <span class="notice-tit">${c.title}</span>
-                                <span class="notice-date">${c.regdate}</span>
+                            <a href="admin/community/detail?id=${community.id}">
+                                <span class="notice-tit">${community.title}</span>
+                                <span class="notice-date">${community.regdate}</span>
                             </a>
                         </li>
-						</c:forEach>     
+						</c:forEach> --%>     
                     </ul>
                 </section>
                 <section class="notice-box">
                     <h2 class="main-tit">공지사항<a href="#" class="more">더보기<i class="xi-angle-right-min"></i></a></h2>
-                    <ul>
-						<c:forEach var="n" items="noticeList">  
+                    <ul><%--
+						<c:forEach var="notice" items="noticeList">  
                         <li>
-                            <a href="admin/notice/detail?id=${n.id}">
-                                <span class="notice-tit">${n.title}</span>
-                                <span class="notice-date">${n.regdate}</span>
+                            <a href="admin/notice/detail?id=${notice.id}">
+                                <span class="notice-tit">${notice.title}</span>
+                                <span class="notice-date">${notice.regdate}</span>
                             </a>
                         </li>
-						</c:forEach>
+						</c:forEach> --%>     
                     </ul>
                 </section>
             </main>
