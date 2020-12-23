@@ -21,13 +21,13 @@
 				<jsp:include page="/WEB-INF/jsp/user/account/login.jsp" />
 			</c:when>
 			<c:otherwise>
-		<div class="">
-			<div class="account-inner">
+		<div>
+			<div class="account-inner" style="margin: 0 auto">
 				<svg class="svg-check-container active" width="30" height="15" xmlns="http://w3.org/2000/svg" version="1.1" viewBox="0 0 16 16">
 					<!-- <path fill="rgb(214,24,24)"xmlns="http://www.w3.org/2000/svg" d="M 15.99 14.54C 15.99 14.54 14.54 15.99 14.54 15.99 14.54 15.99 8 9.45 8 9.45 8 9.45 1.46 15.99 1.46 15.99 1.46 15.99 0.01 14.54 0.01 14.54 0.01 14.54 6.55 8 6.55 8 6.55 8 0.01 1.46 0.01 1.46 0.01 1.46 1.46 0.01 1.46 0.01 1.46 0.01 8 6.55 8 6.55 8 6.55 14.54 0.01 14.54 0.01 14.54 0.01 15.99 1.46 15.99 1.46 15.99 1.46 9.45 8 9.45 8 9.45 8 15.99 14.54 15.99 14.54Z" /> -->
 					<path fill="rgb(214,24,24)" xmlns="http://www.w3.org/2000/svg" d="M15.988,14.543l-1.445,1.445L0.012,1.457,1.457,0.012ZM14.543,0.012l1.445,1.445L1.457,15.988,0.012,14.543Z"/>
 				</svg>
-				<div>이미 로그인이 되어있습니다.</div>
+				<div style="text-align: center;">로그인이 되어있습니다.</div>
 			</div>
 		</div>
 			</c:otherwise>

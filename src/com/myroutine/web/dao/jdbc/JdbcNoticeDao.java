@@ -577,6 +577,39 @@ public class JdbcNoticeDao implements NoticeDao{
 		
 	}
 
+	public int getCount2() {
+		int count =0;		
+			
+			   String sql = "SELECT COUNT(*) COUNT FROM NOTICE";
+			   
+			   String url = DBContext.URL;
+			   try {
+			         Class.forName("oracle.jdbc.driver.OracleDriver");
+			         Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+			         Statement st = con.createStatement();
+
+			         ResultSet rs = st.executeQuery(sql);
+			         
+			         if(rs.next())
+			             count = rs.getInt("count");
+
+			         rs.close();
+			         st.close();
+			         con.close();
+			         
+			         
+			         
+			      } catch (SQLException e) {
+			         // TODO Auto-generated catch block
+			         e.printStackTrace();
+			      } catch (ClassNotFoundException e) {
+			         // TODO Auto-generated catch block
+			         e.printStackTrace();
+			      }
+		      return count;
+	}
+
+
 
 
 

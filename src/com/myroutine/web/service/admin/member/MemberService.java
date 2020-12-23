@@ -82,6 +82,14 @@ public class MemberService {
 		return result;
 	}
 
+	public int searchCount() {
+		int result = 0;
+		
+		result = memberDao.searchCount();
+		
+		return result;
+	}
+
 	public int totalCount() {
 		int result = 0;
 		

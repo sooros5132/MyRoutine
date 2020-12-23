@@ -1,9 +1,7 @@
-package com.myroutine.web.controller.user.account;
+package com.myroutine.web.dao.jdbc.user.account;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,38 +13,9 @@ import javax.servlet.http.HttpSession;
 import com.myroutine.web.entity.user.member.Member;
 import com.myroutine.web.service.user.member.MemberService;
 
-@WebServlet("/account/login")
-public class LoginController extends HttpServlet {
+@WebServlet("/api/account/login")
+public class LoginController extends HttpServlet{
 
-	private MemberService service;
-	
-	public LoginController() {
-		service = new MemberService();
-	}
-	
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String returnURL = request.getParameter("return-url");
-		URI referer = null;
-		try {
-			String temp = request.getHeader("referer");
-			if( temp != null && !temp.equals("")) {
-				referer = new URI(temp);
-			}
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		if( returnURL != null && !returnURL.equals("") ) {
-			request.setAttribute("returnUrl", returnURL);
-		} else if ( referer != null) {
-			request.setAttribute("returnUrl", referer.getPath());
-		}
-		
-		request.getRequestDispatcher("login.jsp").forward(request, response);
-	}
-	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
@@ -84,7 +53,7 @@ public class LoginController extends HttpServlet {
 //			} else {
 //				response.sendRedirect("/");	
 //			}
-			out.print("{\"result\": \"sussess\"}");
+			out.print("{\"result\": \"sussess\", \"datas\":[{\"memberId\": "+m.getId()+"}]}");
 			out.close();
 		} else {
 			out.print("{\"result\": \"fail\"}");

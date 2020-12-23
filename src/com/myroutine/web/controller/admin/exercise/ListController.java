@@ -30,8 +30,6 @@ public class ListController extends HttpServlet {
 		ExerciseService service = new ExerciseService();
 		List<ExerciseListView> list =null;
 
-
-		
 		if (parts == null) {
 			 list = service.getListView();
 			req.setAttribute("list", list);

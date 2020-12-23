@@ -20,7 +20,6 @@ public class MyRoutineSecurityFilter implements Filter {
 	private final static String[] authURLs = {
 			"/admin/",
 //			"/member/login",
-			"/chat/"
 	};
 
 	@Override
@@ -44,15 +43,18 @@ public class MyRoutineSecurityFilter implements Filter {
 				break;
 			}
 		
-		if( requireAuth && session.getAttribute("email") == null) {
-			response.sendRedirect("/account/login?return-url=" + uri);
-			return;
+		if( requireAuth ) {
+			if( session.getAttribute("memberId") == null ) {
+				response.sendRedirect("/account/login?return-url=" + uri);
+				return;
+			}
+			int rule = (int)session.getAttribute("rule");
+			if( rule != 9) {
+				response.setStatus(403);
+				request.getRequestDispatcher("/error/403.html").forward(request, response);
+				return;
+			}
 		}
-
-//		if(session.getAttribute("role").equals("admin")) {
-//			response.sendRedirect("/error/error?errorNo=403");
-//			return;
-//		}
 
 		chain.doFilter(request, response);
 	}

@@ -117,7 +117,9 @@ public class NoticeService {
 	}
 
 
-
+	public int getCount2() {
+		return noticeDao.getCount2();
+	}
 
 
 

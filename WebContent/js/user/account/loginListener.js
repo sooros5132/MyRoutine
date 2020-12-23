@@ -125,7 +125,7 @@
             alertColor: "#30baa1"
 		});
 		
-		let returnUrl = accountBox.querySelector(".return-url")?.value || "";
+		let returnUrl = accountBox.querySelector(".return-url").value;
 		let email = accountBox.querySelector("#userEmail").value
 		let pwd = accountBox.querySelector("#userPwd").value;
 		loginSubmit({"email": email, "pwd": pwd, "returnUrl": returnUrl});
@@ -145,6 +145,7 @@
 				if( result?.result != "sussess" ){
 					alertOpen({setText: "일치하는 정보가 없습니다.",activeTime: 20,alertColor: "#ff0000"});
 					submitBtn.classList.add("error");
+					submitBtn.classList.remove("active");
 					return;
 				}
 
