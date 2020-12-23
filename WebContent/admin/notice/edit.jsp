@@ -1,3 +1,11 @@
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
+    
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -9,7 +17,6 @@
     <link rel="stylesheet" href="../../css/admin/common.css">
     <link rel="stylesheet" href="../../css/xeicon.min.css">
     <link rel="stylesheet" href="../../css/admin/notice/detail.css">
-    <script src="../../js/admin/notice/notice.js"></script>
 
 </head>
 
@@ -23,7 +30,7 @@
                     <li><a href="#"><i class="xi-calendar-list"></i>운동 관리</a></li>
                     <li><a href="#"><i class="xi-group"></i>회원 관리</a></li>
                     <li><a href="#"><i class="xi-forum"></i>커뮤니티 관리</a></li>
-                    <li><a href="#" class="active"><i class="xi-comment"></i>공지사항 관리</a></li>
+                    <li><a href="../notice/list?p=" class="active"><i class="xi-comment"></i>공지사항 관리</a></li>
                 </ul>
             </nav>
 
@@ -45,8 +52,8 @@
                         <li data-type="true">
                             <a href="#">공지사항<i class="xi-angle-right-min"></i></a>
                             <ul class="dep2">
-                                <li><a href="list.jsp">공지 목록</a></li>
-                                <li><a href="reg.jsp">공지 등록</a></li>
+                                <li><a href="list">공지 목록</a></li>
+                                <li><a href="reg">공지 등록</a></li>
                             </ul>
                         </li>
                         <li><a href="#">커뮤니티<i class="xi-angle-right-min"></i></a></li>
@@ -58,6 +65,8 @@
             <!-- main(개별 컨턴츠 넣는곳) -->
             <main id="notice" class="main">
                 <h1>공지사항</h1>
+                
+                <form action="edit" method="post">
                 <table class="notice-list">
                     <colgroup>
                         <col style="width: 200px;">
@@ -74,40 +83,50 @@
                     <tbody>
                         <tr>
                             <td>제목</td>
-                            <td colspan="3">운영</td>
+                            <td colspan="3">
+                              <input class="title" type="text" name="title" value="${n.title}">
+                            
+                            </td>
                         </tr>
 
                         <tr>
                             <td>등록일</td>
-                            <td colspan="3">2020-11-30</td>
+                            <td colspan="3">
+                               ${n.regdate }
+                            </td>
                         </tr>
                         <tr>
                             <td>첨부파일</td>
-                            <td>detal.html</td>
+                            
+                            <td>
+                            <c:forTokens var="fileName" items="${nv.fileName}" delims="," varStatus="st">
+                            ${fileName}  
+                            <c:if test="${!st.last}">/</c:if>
+                            </c:forTokens>
+                            </td>
+                            
                             <td>작성자</td>
-                            <td>jinwoo</td>
+                            <td>${n.memberId}</td>
                         </tr>
                         <tr>
                             <td>조회수</td>
-                            <td colspan="3">500</td>
+                            <td colspan="3">${n.hit}</td>
                         </tr>
 
                     </tbody>
                 </table>
 
                 <section class="detail_text">
-                    <textarea name="" id="" cols="30" rows="10">
-
-                    </textarea>
+                    <textarea name="contents" value="${n.contents}" cols="30" rows="10">${n.contents }</textarea>
                 </section>
 
 
                 <section class="list-box">
-                    <a class="btn-button" href="notice.html">목록</a>
-                    <a class="btn-button" href="edit.jsp">수정</a>
-                    <a class="btn-button del-button" href="">삭제</a>
+                    <input type="hidden" name="id" value="${n.id}">
+                    <a class="btn-button" href="detail?id=${n.id}">취소</a>
+                    <input class="btn-button" value="저장" type="submit">
                 </section>
-
+           </form>
 
                 <section class="next-list">
                     <table>
@@ -118,14 +137,15 @@
                         </colgroup>
 
                         <tr>
-                            <td class="move-icon"><a href=""><i class="xi-angle-up-min"></i></a> 이전글</td>
-                            <td>운영</td>
-                            <td>2020-11-15</td>
+                            <td class="move-icon"><a href=""><i class="xi-angle-up-min"></i></a>다음글</td>
+                            <td><a href="detail?id=${next.id}">${next.title}</a></td>
+                            <td>${next.regdate}</td>
                         </tr>
                         <tr>
-                            <td class="move-icon"><a href=""><i class="xi-angle-down-min"></i></a> 다음글</td>
-                            <td>공지사항입니다</td>
-                            <td>2020-11-16</td>
+                            <td class="move-icon"><a href=""><i class="xi-angle-down-min"></i></a>이전글</td>
+                              <td><a href="detail?id=${prev.id}">${prev.title}</a></td>
+                            <td>${prev.regdate}</td>
+                          
                         </tr>
 
                     </table>

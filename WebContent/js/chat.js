@@ -948,7 +948,7 @@ window.addEventListener("load", (e)=>{
 		}
 		chatMessageInput.value = "";
 
-		getXHR({"notEncodeParams": param, "method": "POST", "url": "/api/chat/send1"})
+		getXHR({"notEncodeParams": param, "method": "POST", "url": "/api/chat/send"})
 		.then((xhr) => {
 			if( xhr.status === 200 || xhr.status === 201 ){
 				let sendResult = JSON.parse(xhr.responseText);

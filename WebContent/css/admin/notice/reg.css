@@ -92,5 +92,8 @@ table input[type="radio"]:checked+label .radio:before {
 
 /* btn-box */
 .btn-box {padding:30px 10px; text-align:right;} 
-.btn-box .btn {display:inline-block; width:90px; height:46px; font-size:20px; line-height:46px; background:#30baa1; color:#fff; text-align:center; font-weight:bold;}
+.btn-box .btn {display:inline-block; width:90px; height:46px; font-size:20px; 
+    line-height:46px; background:#30baa1;
+     color:#fff; text-align:center; 
+     font-weight:bold; cursor: pointer;}
 .btn-box .btn.cancel {background:#dedede; color:#505050;}
