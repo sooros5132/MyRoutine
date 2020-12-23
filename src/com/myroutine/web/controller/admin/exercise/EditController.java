@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.myroutine.web.entity.admin.exercise.Exercise;
@@ -38,6 +38,7 @@ public class EditController extends HttpServlet {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 		
+
 		ExerciseService exerciseService = new ExerciseService();
 		Exercise exercise = exerciseService.get(id);
 		System.out.println(exercise.toString());
@@ -85,8 +86,9 @@ public class EditController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("aaa");
-		int memberId  = 21; //임시로 고정 //String memberId = request.getParameter("memberId");
+		
+		HttpSession session = request.getSession();
+		int memberId  =  Integer.parseInt((String) session.getAttribute("memberId"));
 		
 		//운동정보 수정
 		int id = Integer.parseInt(request.getParameter("id"));
@@ -106,6 +108,7 @@ public class EditController extends HttpServlet {
 		//1.운동 부위 삭제
 		ebpService.delete(id);
 		
+
 		//2운동 부위 다시 추가
 		String[] bodyParts_ = null;
 		System.out.println(categoryId);
@@ -217,5 +220,8 @@ public class EditController extends HttpServlet {
 				exerciseFileService.insert(exerciseFile);
 			}
 		}
+		
+		
+		response.sendRedirect("detail?id=" + id);
 	}
 }

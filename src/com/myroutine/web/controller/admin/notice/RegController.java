@@ -1,18 +1,38 @@
 package com.myroutine.web.controller.admin.notice;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
+import com.myroutine.web.dao.entity.NoticeView;
 import com.myroutine.web.entity.admin.notice.Notice;
+import com.myroutine.web.entity.admin.notice.NoticeFile;
+import com.myroutine.web.service.admin.notice.NoticeFileService;
 import com.myroutine.web.service.admin.notice.NoticeService;
 
 @WebServlet("/admin/notice/reg")
+@MultipartConfig(
+   
+    fileSizeThreshold=1024*1024, 
+    maxFileSize=1024*1024*5, 
+    maxRequestSize=1024*1024*5*5)
+
 public class RegController extends HttpServlet {
+	private NoticeService service;
+	
+	public RegController() {
+           service = new NoticeService();  
+	}
 	
 @Override
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,15 +42,114 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 
 @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	   String title = request.getParameter("title");
-	   String content = request.getParameter("content");
-	   Notice notice = new Notice(title,content);
+
+	
+	
+	String title = request.getParameter("title");
+	//String file = request.getParameter("file");
+	
+	
+	String contents = request.getParameter("contents");
+	String isOpen = request.getParameter("open");
+	
+	Notice notice = new Notice(title,contents);
+	
+	//Part filePart = request.getPart("file"); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	Collection <Part> fileParts = request.getParts();
+	
+	String fileNames ="";
+	//StringBuilder builder = new StringBuilder();
+	String pathTemp ="";
+	
+	for(Part p: fileParts) {
+		if(p.getName().equals("files")&& p.getSize()>0) {
+			Part filePart = p;
+			
+			String fileName = filePart.getSubmittedFileName();
+			fileNames += fileName;
+			fileNames += ",";
+			//builder.append(fileName);
+			//builder.append(",");
+			  
+			   //System.out.println(file);
+			   
+			  //int newId = service.getLastId()+1;
+			   
+			  
+			  pathTemp = request.getServletContext().getRealPath("/upload/");
+		
+			  
+			  File path = new File(pathTemp);
+			  
+			  if(!path.exists())
+				  path.mkdirs();
+			  
+			  String filePath = pathTemp +File.separator+ fileName;
+		
+			  
+			  
+			  InputStream fis = filePart.getInputStream();
+			  FileOutputStream fos = new FileOutputStream(filePath);
+			  
+			  byte[] buf = new byte[1024];
+			  int size =0;
+			  while((size = fis.read(buf))!=-1) //ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -1ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½
+				  fos.write(buf,0,size);   // 0ï¿½ï¿½Â°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½é¼­ ï¿½ï¿½ï¿½
+			   
+			  
+			  fos.close();
+			  fis.close();
+			 
+			
+		}
+	}
+	
+	
 	   
-	   //µ¥ÀÌÅÍÀÔ·Â
+	   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô·ï¿½
+	   
+	    boolean openInfo = false;
+	    
+	    switch(isOpen) {
+	      case "ê³µê°œ":
+	    	  if(isOpen !=null)
+	    	  openInfo = true;
+	    	  break;
+	      case "ë¹„ê³µê°œ":
+	    	  openInfo = false;
+	    
+	    }
+//	    if(isOpen !=null)
+//	    	openInfo= true;
+	
+	   notice.setMemberId("admin");
+	   notice.setOpenInfo(openInfo);
+	   
+	   
+	   
 	   NoticeService service = new NoticeService();
 	   service.insert(notice);
+	    
 	   
-	   //ÆäÀÌÁö ÀÌµ¿
+	   //builder.delete(builder.length()-1, builder.length());
+	   
+	   
+	   NoticeFile noticeFile= new NoticeFile();
+	   noticeFile.setName(fileNames);
+	   //noticeFile.setName(builder.toString());
+	   noticeFile.setRoute(pathTemp);
+	
+	   
+	   int id = service.getLastId(); 
+	   noticeFile.setNoticeId(id);
+	   
+	   
+	   NoticeFileService nfservice = new NoticeFileService();
+	   nfservice.insert(noticeFile);
+	   
+	  
+	   
+	   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	   response.sendRedirect("list");
 	
 	}

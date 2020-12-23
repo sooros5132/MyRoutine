@@ -83,6 +83,10 @@
 .account-inner .submit-btn.active{
     background-color: #28B49B;
 }
+.account-inner .submit-btn.error{
+    background: #e44e4e;
+    color: #ffffff;;
+}
 
 .account-inner > div{
     position: relative;

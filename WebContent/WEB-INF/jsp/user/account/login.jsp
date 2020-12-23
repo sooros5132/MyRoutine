@@ -50,19 +50,20 @@
 	                <label for="userId" class="input-label">이메일</label>
 	                <div class="input-msg error-msg"></div>
 	            </div>
-	
+
 	            <div>
-	                <input required type="password" id="userPwd" name="userPwd" class="user-info"/>
+	                <input required type="password" id="userPwd" name="pwd" class="user-info"/>
 	                <label for="userPwd" class="input-label">비밀번호</label>
 	                <div class="input-msg error-msg"></div>
 	            </div>
+                <input required type="hidden" name="return-url" class="return-url" value="${returnUrl}"/>
 	            
 	            <input type="submit" id="login-submit-btn" class="submit-btn" value="로그인">
-	            <div class="recovery"><span><a href="/account/recoveryEmail">이메일</a></span> / <span><a href="/account/recoveryPwd">비밀번호</a> 찾기</span></div>
+	            <div class="recovery"><span><a href="/account/recoveryEmail.html">이메일</a></span> / <span><a href="/account/recoveryPwd.html">비밀번호</a> 찾기</span></div>
 	
-	            <div id="signup-btn" class="account-btn"><a href="/account/signUp">회원가입</a></div>
+	            <div id="signup-btn" class="account-btn"><a href="/account/signUp.html">회원가입</a></div>
 	        </div>
 	    </form>
 	</section>
-	<script src="/js/user/account/accountListener.js"></script>
+	<script src="/js/user/account/loginListener.js"></script>
     <!-- // 로그인 -->

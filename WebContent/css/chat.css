@@ -54,6 +54,7 @@
 	background-color: #00dc8b;
 	color: #ffffff;
 	transition: flex-basis .5s;
+	-webkit-transition: flex-basis .5s;
 }
 .chat .chat-top-alert-box .chat-input-btn{
 	color: #ffffff;
@@ -195,7 +196,7 @@
 }
 
 .chat .chat-input-inner .chat-input-btn{
-    background: rgb(49 51 53);
+    background: rgb(49, 51, 53);
 }
 
 .chat .chat-input-btn{
@@ -245,7 +246,7 @@
     margin: 12px 20px;
     border-radius: 12px 12px;
     word-break: break-all;
-    background: rgb(49 51 53);
+    background: rgb(49, 51, 53);
     cursor:pointer;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
@@ -320,9 +321,63 @@
     font-size: 18px;
     font-weight:bold;
     color: #fff;
-    background: rgb(49 51 53);
+    background: rgb(49, 51, 53);
     z-index: 1;
     word-break: break-all;
+}
+
+
+.chat .login-input-box{
+	flex-direction: column;
+}
+
+.chat .login-input-box .chat-input-inner{
+    flex-direction: column;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.chat .login-input-box .login-inner{
+	height: 100%;
+    padding: 26px;
+}
+
+.chat .login-input-box .login-inner > div{
+	margin: 20px 0;
+}
+
+.chat .login-input-box input{
+    height: 40px;
+    background: rgb(49, 51, 53);
+    border: 1px solid #4a4a4a;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.chat .login-input-box .chat-alert{
+	flex: 0 0 100%;
+	margin: 0;
+	padding-top: 30px;
+	font-size: 30px;
+}
+.chat .login-input-box .login-alert{
+	margin:0;
+	padding:0;
+	color: #e44e4e;
+}
+.chat .login-input-box input[type="submit"]{
+	padding-left: 0;
+    background: #4a4a4a;
+    font-size: 16px;
+}
+
+.chat .login-input-box input[type="submit"].active{
+	background: #30baa1;
+}
+
+.chat .login-input-box input[type="submit"].error{
+	background: #e44e4e;
+	color: #ffffff;
 }
 
 .friend-delete{

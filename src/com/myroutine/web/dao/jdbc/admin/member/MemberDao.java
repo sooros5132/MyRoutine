@@ -17,4 +17,5 @@ public interface MemberDao {
 	int update(int id, String key, String value);
 	// int update(int id, Map<String, String> datas);
 	int totalCount();
+	int searchCount();
 }

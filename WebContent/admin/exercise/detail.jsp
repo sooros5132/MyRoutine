@@ -20,24 +20,7 @@
 
 <body>
     <div class="wrapper">
-        <!-- header -->
-        <header class="header">
-            <h1 class="logo"><a href="#"><img src="../../image/common/logo.png" alt="마이루틴"></a></h1>
-            <nav class="gnb">
-                <ul>
-                    <li><a href="#" class="active"><i class="xi-calendar-list"></i>운동 관리</a></li>
-                    <li><a href="#"><i class="xi-group"></i>회원 관리</a></li>
-                    <li><a href="#"><i class="xi-forum"></i>커뮤니티 관리</a></li>
-                    <li><a href="#"><i class="xi-comment"></i>공지사항 관리</a></li>
-                </ul>
-            </nav>
-
-            <div class="header-util">
-                <span class="admin">황병준님</span>
-                <a class="logout-btn" href="#">로그아웃</a>
-            </div>
-        </header>
-        <!-- //header -->
+    	<jsp:include page="/WEB-INF/jsp/admin/header.jsp"></jsp:include>
 
 
         <div class="body">
@@ -48,13 +31,11 @@
                     <ul class="dep1">
                         <!-- 하위 메뉴가 있으면 li태그에 data-type:true 넣어주세요 -->
                         <li data-type="true">
-                            <a href="#">재활운동 관리<i class="xi-angle-right-min"></i></a>
-                            <ul class="dep2">
-                                <li><a href="https:\\www.naver.com">재활 보기</a></li>
-                                <li><a href="https:\\www.naver.com">재활 등록</a></li>
-                            </ul>
+                         <li>
+                            <a href="/admin/exercise/list">재활운동 관리<i class="xi-angle-right-min"></i></a>
+                            
                         </li>
-                        <li><a href="https:\\www.naver.com">홈트레이닝 관리</a></li>
+                        <li><a href="/admin/exercise/homelist">홈트레이닝 관리</a></li>
                    
                     </ul>
                 </nav>
@@ -68,9 +49,9 @@
                         <div class="btn-left"></div>
                         <div class="cliper">
                             <div class="show-room">
-                           		<img src="../../image/exercise/${ex.engName}1.jpg" alt="${ex.engName}1" class="current">
-                                <img src="../../image/exercise/${ex.engName}2.jpg" alt="${ex.engName}2">
-                                <img src="../../image/exercise/${ex.engName}3.jpg" alt="${ex.engName}3">
+                            <c:forEach var="f" items="${fileList}">
+                           		<img src="${f.route}/${f.name}" alt="${f.name}">
+                            </c:forEach>
                             </div>
                         </div>
                         <div class="btn-right"></div>
@@ -86,20 +67,25 @@
                             </div>
                         </div>
                         <div class="part-box-left">
-                            <div class="part">
+                            <!--<div class="part">
                                 <div class="label">종류</div>
-                                <div class="content">${ex.div1}</div>
-                            </div>
+                                <div class="content">${ex.categoryId}</div>
+                            </div>-->
                             <div class="part">
                                 <div class="label">부위</div>
-                                <div class="content">${ex.div2}</div>
+                                <div class="content">
+                                <c:forEach var="bp" items="${ebpv}">
+                                	${bp.bodyPartName}
+                                </c:forEach>
+                                
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="part-box-left">
                         <div class="part">
                             <div class="label">등록 날짜</div>
-                            <div class="content">${ex.regDate}</div>
+                            <div class="content">${ex.regdate}</div>
                         </div>
                     </div>
                     
@@ -107,16 +93,20 @@
                     <div class="description-box">
                         <div class="label">운동 설명 및 방법</div>
                         <div class="text-content">
-                            ${ex.des}
+                            ${ex.contents}
                         </div>
                     </div>
                     <div class="recomand-box">
                         <div class="label">추천 회수(초)</div>
-                        <div class="text-content">${ex.rec}</div>
+                        <div class="text-content">${ex.recommend}</div>
                     </div>
                     <div class="recomand-box">
                         <div class="label">파일목록</div>
-                        <div class="text-content">${ex.files}</div>
+                        <div class="text-content">
+                        	<c:forEach var="f" items="${fileList}">
+                        		<a download href="${f.route}/${f.name}">${f.name}</a>
+                        	</c:forEach>
+                        </div>
                     </div>
                     <div class="button-box">
                         <button name="kbs" value="asd">수정하기</button>

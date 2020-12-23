@@ -1,4 +1,28 @@
 window.addEventListener("load", () => {
+    let gnb = document.querySelector(".gnb");
+    let ul = gnb.querySelector("ul")
+    var current = ul.querySelector(".active");
+
+    ul.onmouseover = function(e){
+       let target = e.target;
+
+       if(target.nodeName !='A') return;
+
+      current.classList.remove("active");
+        current = target;
+        //current.classList.add("active");   
+    }
+    ul.onclick =function(e){
+       let target = e.target;
+       if(target.nodeName =="A" || target.nodeName =='I') 
+          target.classList.add("active");
+
+
+    }
+
+  
+
+
 
    //관리자 페이지 사이드 보기
    let snb = document.querySelector('.snb');

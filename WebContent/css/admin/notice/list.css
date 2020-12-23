@@ -58,14 +58,8 @@ table .del-all>td{
  }
 
 
-table  .del-all >input{
-    padding:10px;
-    width:50px;
-    border: none;
-    letter-spacing:2px;
-    border-radius: 2px;
-    font-weight: bold;
-    font-size: 20px;
+table  .del-all input{
+  cursor: pointer;
 }
 
 
@@ -104,11 +98,65 @@ table  .del-all >input{
   display: inline-block;
     
 }
-.number{
-    
+.number-list .number{
     font-size:20px;
     font-weight: bold;
     color:#30baa1;
     border: 1px solid #30baa1;
     padding:5px;
+    
 }
+
+
+
+.number-list .number2{
+    border: 1px solid #fff;
+    color: #fff;
+    background:#30baa1;
+}
+
+.number-list .prev,
+.number-list .next{
+    cursor: pointer;
+}
+
+.search-form{
+   margin:0 0 20px 0;
+   text-align: right;
+  
+
+   
+}
+.search-form input{
+    padding:5px 10px;
+    outline: none;
+    height:40px;
+    font-size: 17px;
+    vertical-align: middle;
+}
+.search-form .option{
+    width:100px;
+    height:40px;
+    outline: none;
+    vertical-align: middle;
+    text-indent: 10px;
+    font-size:16px;
+    
+}
+.search-form input[type="text"]{
+    width:300px;
+}
+.search-form input[type="submit"]{
+    background: #30baa1;
+    border:none;
+    color:#fff;
+    font-weight: bold;
+    cursor: pointer;
+    
+}
+
+.notice-list > tbody input[type="button"]{
+    cursor: pointer;
+}
+
+

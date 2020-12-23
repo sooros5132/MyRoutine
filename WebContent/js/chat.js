@@ -1,16 +1,5 @@
+let setMemberId;
 window.addEventListener("load", (e)=>{
-
-	// 하단 메뉴 메시지 버튼 ==================================================
-	let chatToggleBtn = document.querySelector(".chat-toggle-btn");
-	
-	chatToggleBtn.addEventListener("click", ()=>{
-		if(chatBox.classList.contains("d-none")){
-			chatBox.classList.remove("d-none");
-			getFriendList({"reqId": memberId, "state": 0});
-			return;
-		}
-		chatBox.classList.add("d-none");
-	})
 
 	// 채팅 ========================================================================
 	let chatBox = document.querySelector(".chat-container");
@@ -64,8 +53,17 @@ window.addEventListener("load", (e)=>{
 	let confirmNoBtn = confirmBtnBox.querySelector(".confirm-no-btn");
 	let confirmOkBtn = confirmBtnBox.querySelector(".confirm-ok-btn");
 
+	// 로그인 박스 ==================================================================
+	let loginBox = chatBox.querySelector(".login-input-box");
+	let loginInputs = loginBox.querySelectorAll(".user-info");
+	let loginEmailInput = loginBox.querySelector(".user-email input");
+	let loginPwdInput = loginBox.querySelector(".user-pwd input");
+	let loginSubmitBtn = loginBox.querySelector(".submit input");
+	let loginAlertNode = loginBox.querySelector(".login-alert");
+	
 
 	// 텍스트 =======================================================================
+	let loginRequireText = `<div class="chat-alert" style="padding-top: 30px;">로그인 먼저 해주세요</div>`;
 	let loadingText = `<div class="chat-alert" style="padding-top: 30px;">불러오는 중입니다</div>`;
 	let noMoreText = `<li class="chat-alert">마지막 입니다</li>`;
 	let dashedNode = `<div class="chat-alert" style="border-top: 1px dashed #ddd;width:100%;"></div>`;
@@ -77,14 +75,15 @@ window.addEventListener("load", (e)=>{
 	let notKnowErrorText = `<div class="chat-alert">알 수 없는 오류입니다</div>`;
 
 	// 이미지 형식 Reg
-	let imgRegex = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/;
+	const imgRegex = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/;
+	const emailRegex = RegExp('^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\[.]{1}[a-zA-Z]{2,3}$');
 	
 	// ======================================================================================
 	// ======================================================================================
 	// ======================================================================================
 	// ======================================================================================
 	// 테스트 나중에 로그인 배우면 값 바꾸기
-	let memberId = 449;
+	let memberId = 0;
 	let otherMemberId = 0;
 	// ======================================================================================
 	// ======================================================================================
@@ -113,7 +112,59 @@ window.addEventListener("load", (e)=>{
 	let friendElement = null;
 
 	
+	// 하단 메뉴 메시지 버튼 ==================================================
+	let chatToggleBtn = document.querySelector(".chat-toggle-btn");
+	
+	chatToggleBtn.addEventListener("click", ()=>{
+		if(chatBox.classList.contains("d-none")){
+			chatBox.classList.remove("d-none");
+			chatFriendList.classList.add("d-none");
+			loginBox.classList.add("d-none");
+			if( memberId != 0 && memberId != ""){
+				chatFriendList.classList.remove("d-none");
+				getFriendList({"reqId": memberId, "state": 0});
+			} else {
+				chatHeaderText.textContent = "마이루틴 채팅";
+				loginBox.classList.remove("d-none");
+				chatLeftBtn.classList.add("d-none");
+			}
+			return;
+		}
+		chatBox.classList.add("d-none");
+		topAlertBox.classList.add("smaller");
+	})
 
+	// 로그인 기능 =============================================================
+
+	loginBox.addEventListener("input", (e)=>{
+		if(e.target.tagName != "INPUT")
+			return;
+		if(e.target === loginSubmitBtn)
+			return;
+		
+        for(let i = 0; i < loginInputs.length; i++){
+			if( loginInputs[i].value.length == 0 ){
+				loginSubmitBtn.classList.remove("active");
+				return;
+			}
+        }
+		loginSubmitBtn.classList.add("active");
+		
+	})
+
+	loginSubmitBtn.addEventListener("click", (e)=>{
+		if(loginSubmitBtn.classList.contains("active")){
+			let emailValue = loginEmailInput.value;
+
+			if( !emailRegex.test(emailValue) ){
+				loginAlertNode.classList.remove("d-none");
+				loginAlertNode.textContent = "이메일 형식을 확인해주세요";
+				loginEmailInput.focus();
+				return;
+			}
+			loginSubmit({"email": emailValue, "pwd": loginPwdInput.value});
+		}
+	});
 	// 상단 알림 버튼 ===========================================================
 	topAlertBox.addEventListener("click", (e)=>{
 		topAlertBox.classList.add("smaller");
@@ -202,6 +253,7 @@ window.addEventListener("load", (e)=>{
 	
 	chatRightBth.addEventListener("click", (e)=>{
 		chatBox.classList.add("d-none");
+		topAlertBox.classList.add("smaller");
     });
 
 	// 친구 리스트 클릭 이벤트 ==================================================
@@ -259,14 +311,18 @@ window.addEventListener("load", (e)=>{
 			return;
 		}
 		if( fileLength > 5 ){
-			alert("업로드 제한은 개당 10MB 최대 5개입니다.");
+			showConfirmOkBtn(true);
+			confirmBox.classList.remove("d-none");
+			confirmTextBox.textContent = "업로드 제한은 개당 10MB 최대 5개입니다."
 			e.preventDefault();
 			return;
 		}
 		for(let i = 0; i < fileLength; i++){
 			fileNamesTemp.push(files[i].name);
 			if( files[i].size > 1024*1024*10 ){
-				alert("업로드 제한은 개당 10MB 최대 5개입니다.");
+				showConfirmOkBtn(true);
+				confirmBox.classList.remove("d-none");
+				confirmTextBox.textContent = "업로드 제한은 개당 10MB 최대 5개입니다."
 				e.preventDefault();
 				return;
 			}
@@ -948,7 +1004,7 @@ window.addEventListener("load", (e)=>{
 		}
 		chatMessageInput.value = "";
 
-		getXHR({"notEncodeParams": param, "method": "POST", "url": "/api/chat/send1"})
+		getXHR({"notEncodeParams": param, "method": "POST", "url": "/api/chat/send"})
 		.then((xhr) => {
 			if( xhr.status === 200 || xhr.status === 201 ){
 				let sendResult = JSON.parse(xhr.responseText);
@@ -1072,6 +1128,41 @@ window.addEventListener("load", (e)=>{
 		})
 		.catch((error) => console.log(error));
 	}
+
+	// 로그인 ==============================================================================================
+	function loginSubmit({email = "", pwd = ""}){
+		getXHR({notEncodeParams: `email=${email}&pwd=${pwd}`, method: "POST", url:"/api/account/login"})
+		.then((xhr) => {
+			if( xhr.status === 200 || xhr.status === 201 ){
+				let result = JSON.parse(xhr.responseText);
+				
+				if( result?.result != "sussess" ){
+					loginSubmitBtn.classList.add("error");
+					loginSubmitBtn.classList.remove("active");
+					loginAlertNode.classList.remove("d-none");
+					loginAlertNode.textContent = "일치하는 정보가 없습니다.";
+					loginEmailInput.focus();
+					return;
+				}
+
+				let id = result.datas[0].memberId;
+				if( id != 0 && id != ""){
+					getFriendList({"reqId": id, "state": 0});
+					loginBox.classList.add("d-none");
+					chatFriendList.classList.remove("d-none");
+					chatLeftBtn.classList.remove("d-none");
+					chatHeaderText.textContent = "친구 목록";
+					memberId = id;
+					if( newFriendListInner.children.length ){
+						topAlertBox.classList.remove("d-none");
+						topAlertBox.classList.remove("smaller");
+					}
+				}
+			}
+		})
+		.catch((error) => console.log(error));
+	}
+
 	function MMddHHmm(date){
 		let month = "" + (date.getMonth() + 1),
 		day = "" + date.getDate(),
@@ -1112,4 +1203,7 @@ window.addEventListener("load", (e)=>{
 	// chatMessageBoxInner.ontouchmove = function(event){
 	// 	event.preventDefault();
 	// }
+	setMemberId = function(id){
+		memberId = id;
+	}
 });

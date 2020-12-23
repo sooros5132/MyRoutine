@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="../../css/admin/reset.css">
     <link rel="stylesheet" href="../../css/admin/common.css">
     <link rel="stylesheet" href="../../css/xeicon.min.css">
+    
     <link rel="stylesheet" href="../../css/admin/notice/list.css">
-
-    <script src="../../js/admin_common.js"></script>
+    
     <script src="../../js/admin/notice/notice.js"></script>
+    <script src="../../js/admin_common.js"></script>
+    
 </head>
 <body>
     <div class="wrapper">
@@ -42,15 +44,13 @@
                     <ul class="dep1">
                         <!-- 하위 메뉴가 있으면 li태그에 data-type:true 넣어주세요 -->
                         <li data-type="true">
-                            <a href="#">재활관리<i class="xi-angle-right-min"></i></a>
+                            <a href="#">공지사항<i class="xi-angle-right-min"></i></a>
                             <ul class="dep2">
-                                <li><a href="https:\\www.naver.com">재활 보기</a></li>
-                                <li><a href="https:\\www.naver.com">재활 등록</a></li>
+                                <li><a href="list.jsp">공지 목록</a></li>
+                                <li><a href="reg.jsp">공지 등록</a></li>
                             </ul>
                         </li>
-                        <li><a href="https:\\www.naver.com">재활관리2</a></li>
-                        <li><a href="https:\\www.naver.com">재활관리2</a></li>
-                        <li><a href="https:\\www.naver.com">재활관리2</a></li>
+                        <li><a href="#">커뮤니티<i class="xi-angle-right-min"></i></a></li>
                     </ul>
                 </nav>
             </aside>
@@ -59,6 +59,32 @@
             <!-- main(개별 컨턴츠 넣는곳) -->
             <main id="notice"class="main">
                 <h1>공지사항 목록</h1>
+                
+    <section class="search-form">
+        <h1 style="display: none;">강좌검색 폼</h1>
+        <form action="">
+            <fieldset>      
+            
+            <select class="option" name="f" >
+                <option value="제목">제목</option>
+                <option value="작성자">작성자</option>
+                 
+            </select>
+            
+            <input type="text" name="q" value="" />
+            <input type="submit" value="검색" />
+
+            <!-- <datalist id="name">
+
+                <option value="번호"></option>
+                <option value="작성자"></option>
+                <option value="제목"></option>
+                
+            </datalist> -->
+        </fieldset>
+    </form>
+</section>
+
                 <table class="notice-list">
                     <colgroup>
                       <col style="width: 50px;">
@@ -96,7 +122,9 @@
                         
                         <td>2020-11-15</td>
                         <td>
-                            <input  type="button" value="글수정">
+                            <a class="link-button" href="detail.html"></a>
+                            <input class="trigger-button" type="button"
+                            value="글수정">
                             <input type="button" class="del-button"
                             value="글삭제">
                         </td>
@@ -112,8 +140,12 @@
                         <td>부</td>
                         <td>2020-11-14</td>
                         <td>
-                            <input type="button"
+
+                            <a class="link-button" href="detail.html"></a>
+                            <input class="trigger-button" type="button"
                             value="글수정">
+
+
                             <input type="button" class="del-button"
                             value="글삭제">
                         </td>
@@ -155,7 +187,7 @@
                     
                      <tr class="del-all">
                        <td colspan="8">
-                            <input type="button" class="del-button-all" value="일괄삭제">
+                            <input type="submit" class="del-button-all" value="일괄삭제">
     
                        </td>
                        
@@ -169,11 +201,21 @@
                    
                    
                      <div class="number-list">
+                       
                         <ul>
-                            <li> <a class="number">1</a></li>
+                            <span class="number" onclick="alert('이전 없습니다')"> <i class="xi-long-arrow-left"></i></span>
+                            <span class="number prev"> <i class="xi-angle-left"></i></span>
+                            
+                            <li> <a href = "" class="number number2">1</a></li>
+                            <li> <a href = ""  class="number">2</a></li>
+                            <li> <a href = ""  class="number">3</a></li>
+                            <li> <a href = ""  class="number">4</a></li>
+                            <li> <a href = ""  class="number">5</a></li>
+                            
+                            <span  class=" next"> <i class="xi-angle-right"></i></span>
                             
                         </ul>
-                      
+                       
                    </div>
 
             </main>
@@ -186,5 +228,6 @@
         </footer>
         <!-- //footer -->
     </div>
+    
 </body>
 </html>

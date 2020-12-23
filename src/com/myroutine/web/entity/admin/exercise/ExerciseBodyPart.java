@@ -34,6 +34,4 @@ public class ExerciseBodyPart {
 	public String toString() {
 		return "ExerciseBodyPart [bodyPartId=" + bodyPartId + ", exerciseId=" + exerciseId + "]";
 	}
-
-
 }

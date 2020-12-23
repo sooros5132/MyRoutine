@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <!-- 헤더 -->
     <link rel="stylesheet" href="/css/user/header.css">
     <header class="header">
@@ -21,18 +22,31 @@
             <nav class="main-menu-container">
                 <h1 class="d-none">메인메뉴</h1>
                 <ul>
+                    <li><div><a>운동</a></div></li>
+                    <li><div><a>루틴</a></div></li>
+                    <li><div><a>커뮤니티</a></div></li>
+                    <li><div><a>고객센터</a></div></li>
+                <%--
                     <li><div onclick="loader()"><a>로딩1</a></div></li>
                     <li><div onclick="loader2()"><a>로딩2</a></div></li>
                     <li><div onclick="loader3()"><a>로딩바</a></div></li>
                     <li><div class="alert-btn"><a>알림창</a></div></li>
                     <li><div onclick="document.querySelector('.alert-close').click()"><a>알림 닫기</a></div></li>
+                --%>
                 </ul>
             </nav>
             <section class="member-container">
                 <h1 class="d-none">회원 메뉴</h1>
                 <ul>
-                    <li><div><a class="login-btn"href="/account/login">로그인</a></div></li>
-                    <li><div><a class="login-btn"href="/account/signUp">가입</a></div></li>
+					<c:choose>
+		               	<c:when test="${sessionScope.memberId == null || sessionScope.memberId == ''}">
+		                   	<li><div><a class="login-btn"href="/account/login">로그인</a></div></li>
+							<li><div><a class="login-btn"href="/account/signUp">가입</a></div></li>
+		               	</c:when>
+		               	<c:otherwise>
+		                   	<li><div><a class="logout-btn"href="/account/logout">로그아웃</a></div></li>
+		                  </c:otherwise>
+					</c:choose>
                 </ul>
             </section>
             <section class="mobile-menu-open">

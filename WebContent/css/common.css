@@ -49,8 +49,8 @@
 
 
 .confirm-container{
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     width: 100%;
     height: 100%;
     font-size: 16px;

@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.myroutine.web.entity.admin.exercise.Exercise;
@@ -38,13 +39,19 @@ public class AddController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int memberId  = 21; //임시로 고정 //String memberId = request.getParameter("memberId");
+		HttpSession session = request.getSession();
+		
+		System.out.println("aaa" +  session.getAttribute("memberId"));
+		int memberId  = (int) session.getAttribute("memberId");
+		System.out.println(memberId);
+		
 		
 		String name = request.getParameter("name");
 		String contents = request.getParameter("contents");
 		String engName = request.getParameter("eng-name");
-		String recommand = request.getParameter("recommand");
+		String recommand = request.getParameter("recommend");
 		int categoryId = Integer.parseInt(request.getParameter("category"));
+
 		ExerciseService exService = new ExerciseService();
 		Exercise exercise = new Exercise(name, contents, engName, recommand, memberId, categoryId);
 		System.out.println(exercise.toString());
@@ -100,6 +107,9 @@ public class AddController extends HttpServlet {
 				String filePath = pathTemp + fs + fileName;
 				System.out.println("filePath : " + filePath);
 				
+				String filePath2 = fs + "image" + fs + "exercise";
+				System.out.println(filePath2);
+				
 				//업로드 폴더 만들기
 				File path = new File(pathTemp);
 					if(!path.exists())
@@ -117,14 +127,14 @@ public class AddController extends HttpServlet {
 				fos.close();
 				fis.close();
 				
-				ExerciseFile exerciseFile = new ExerciseFile(fileName, filePath, id);
+				ExerciseFile exerciseFile = new ExerciseFile(fileName, filePath2, id);
 				System.out.println(exerciseFile.toString());
 				exerciseFileService.insert(exerciseFile);
 			}
 		}		
-		
+
 		//목록페이지로 이동
-		//response.sendRedirect("list");
+		response.sendRedirect("detail?id=" + id);
 
 	}
 }

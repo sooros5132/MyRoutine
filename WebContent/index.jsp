@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=no">
     <title>마이루틴</title>
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/user/reset.css">
     <link rel="stylesheet" href="css/user/common.css">
-    
     <link rel="stylesheet" href="css/user/svg.css">
+    
 </head>
 <body>
 	<jsp:include page="/WEB-INF/jsp/user/header.jsp" />
@@ -24,9 +25,12 @@
             </div>
         </section>
         <div style="min-height: 1000px; padding: 70px 0; background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);">
-            <div style="margin: 50px 10px;">
+           <div style="margin: 50px 10px;">
             	<div class="border-decoration account-inner" style="min-width: 100px; max-width: 400px;background:#ffffff; margin: 0 auto;text-align:center;padding:50px 20px;">
-	            	<span style="font-size: 20px; font-weight: bold;">새로운 기능</span>
+	            	
+		            <a href="/admin/" class="bold">관리자 페이지 -></a>
+		            <%--
+		            <span style="font-size: 20px; font-weight: bold;">새로운 기능</span>
 	            	<br>
 	            	<br>
 		            <a href="/account/signUp">/account/signUp<br>에서 가입 가능</a>
@@ -38,9 +42,12 @@
 		            <br>
 		            <br>
 		            <span onclick="document.querySelector('.chat-toggle-btn').click()"><i class="xi-speech" style="color:var(--mainColor)"></i> 채팅도 가능 해볼까??</span>
+		             --%>
 	            </div>
             </div>
-            <jsp:include page="/WEB-INF/jsp/user/account/login.jsp" />
+            <%--
+            <jsp:include page="/WEB-INF/jsp/user/account/login.jsp" /> 
+            --%>
         </div>        
     </div>
 	<!-- // 바디 -->
@@ -74,12 +81,12 @@
             // 비디오 설정
             let videoSrc = [
             //     "D1PvIWdJ8xo", //[MV] IU(아이유) _ Blueming(블루밍)
-            //     "CM4CkVFmTds", // TWICE(트와이스) "I CAN'T STOP ME" M/V
+                 "CM4CkVFmTds", // TWICE(트와이스) "I CAN'T STOP ME" M/V
             //     "AAOOKbk-knM", // (MV)유아(YooA)_숲의 아이 (Bon voyage)
             //     "GywDFkY3z-c", // LEE SUHYUN - ‘ALIEN’ M/V
             //     "dyRsYk0LyA8", // BLACKPINK – ‘Lovesick Girls’ M/V
             //     "iDjQSdN_ig8", // [MV] OH MY GIRL(오마이걸) _ Nonstop(살짝 설렜어)
-                "Op2wX3MVIEk", // 1조
+                "H-AcDBLqxi4", // 1조
                 "ttmzTf6XhlA", // 2조
                 "LJgaulCeCbI", // 3조
                 "g22QkE7Mj6Q", // 4조

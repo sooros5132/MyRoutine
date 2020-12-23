@@ -12,14 +12,14 @@
 		});
 		
 		// 헤더 알림테스트
-        let alertCnt = 0;
-        let headerAlertBtn = document.querySelector(".alert-btn");
-        headerAlertBtn.addEventListener("click", (e)=>{
-            alertOpen({
-                setText: `${++alertCnt}번 누름`,
-                activeTime: 10,
-                alertColor: ""
-            });
-        });
+        // let alertCnt = 0;
+        // let headerAlertBtn = document.querySelector(".alert-btn");
+        // headerAlertBtn.addEventListener("click", (e)=>{
+        //     alertOpen({
+        //         setText: `${++alertCnt}번 누름`,
+        //         activeTime: 10,
+        //         alertColor: ""
+        //     });
+        // });
 	});
 }());
