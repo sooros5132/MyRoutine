@@ -6,7 +6,7 @@ var noticeList = notice.querySelector(".notice-list");
 var allCheckbox = noticeList.querySelector(".overall-checkbox");
 var tbody = noticeList.querySelector("tbody");
 
-var delButtonAll = noticeList.querySelector(".del-button-all");
+//var delButtonAll = noticeList.querySelector(".del-button-all");
 
 
 
@@ -18,7 +18,7 @@ var current = ul.querySelector(".number2");
 
 
 ul.onclick =function(e){
-  e.preventDefault();
+  //e.preventDefault();
   let target = e.target;
   if(target.nodeName !='A')return;
 
@@ -95,12 +95,12 @@ tbody.onclick = function(e){
 //    }
 
   
-   delButtonAll.onclick = function(){
-       var inputs=tbody.querySelectorAll("input[type='checkbox']:checked");
+   //delButtonAll.onclick = function(){
+       //var inputs=tbody.querySelectorAll("input[type='checkbox']:checked");
        
-       for(var i=0; i<inputs.length;i++)
-          inputs[i].parentElement.parentElement.remove();
-   }
+      // for(var i=0; i<inputs.length;i++)
+         // inputs[i].parentElement.parentElement.remove();
+  // }
 
  
 

@@ -54,7 +54,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	
 	Notice notice = new Notice(title,contents);
 	
-	//Part filePart = request.getPart("file"); //´ÜÀÏ ÆÄÀÏ
+	//Part filePart = request.getPart("file"); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	Collection <Part> fileParts = request.getParts();
 	
 	String fileNames ="";
@@ -76,8 +76,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			  //int newId = service.getLastId()+1;
 			   
 			  
-			  pathTemp = request.getServletContext().getRealPath("/static/notice/2020/");
-			  System.out.println(pathTemp);     
+			  pathTemp = request.getServletContext().getRealPath("/upload/");
+		
 			  
 			  File path = new File(pathTemp);
 			  
@@ -85,7 +85,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				  path.mkdirs();
 			  
 			  String filePath = pathTemp +File.separator+ fileName;
-			  System.out.println(filePath);//°æ·Î+ÆÄÀÏ¸í
+		
 			  
 			  
 			  InputStream fis = filePart.getInputStream();
@@ -93,8 +93,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			  
 			  byte[] buf = new byte[1024];
 			  int size =0;
-			  while((size = fis.read(buf))!=-1) //¹ÝÈ¯ÇÑ °á°ú°ªÀÌ -1ÀÌ ¾Æ´Ï¸é
-				  fos.write(buf,0,size);   // 0¹øÂ°ºÎÅÍ »çÀÌÁî °³¼ö¸¸Å­ µ¹¸é¼­ Ãâ·Â
+			  while((size = fis.read(buf))!=-1) //ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -1ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½
+				  fos.write(buf,0,size);   // 0ï¿½ï¿½Â°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½é¼­ ï¿½ï¿½ï¿½
 			   
 			  
 			  fos.close();
@@ -106,16 +106,16 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	
 	
 	   
-	   //µ¥ÀÌÅÍÀÔ·Â
+	   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô·ï¿½
 	   
 	    boolean openInfo = false;
 	    
 	    switch(isOpen) {
-	      case "°ø°³":
+	      case "ê³µê°œ":
 	    	  if(isOpen !=null)
 	    	  openInfo = true;
 	    	  break;
-	      case "ºñ°ø°³":
+	      case "ë¹„ê³µê°œ":
 	    	  openInfo = false;
 	    
 	    }
@@ -138,7 +138,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	   noticeFile.setName(fileNames);
 	   //noticeFile.setName(builder.toString());
 	   noticeFile.setRoute(pathTemp);
-	   System.out.println(pathTemp);
+	
 	   
 	   int id = service.getLastId(); 
 	   noticeFile.setNoticeId(id);
@@ -149,7 +149,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	   
 	  
 	   
-	   //ÆäÀÌÁö ÀÌµ¿
+	   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	   response.sendRedirect("list");
 	
 	}

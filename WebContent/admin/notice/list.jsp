@@ -194,26 +194,32 @@
                  <c:if test="${(startNum+i)<=lastNum }">
                      <li style="display:inline-block;"> <a href="?p=${startNum+i}&f=${param.f}&q=${param.q}"
                              class=" ${(page==(startNum+i))?'number2':'' } number">${startNum+i}</a></li>
+                        
+                             
                  </c:if>
+                 
                  </c:forEach>
                 
              
                  <li>
+                   
                   
                 
                   <c:if test ="${startNum+4>= lastNum}">
                   <span  class="number next" onclick="alert('다음페이지가 없습니다')" ><i class="xi-angle-right"></i></span>
                   </c:if>
                   </li>
+               
                    
              </ul>
+             
                </div>
 
 
            </main>
            <!-- //main(개별 컨턴츠 넣는곳) -->
        </div>
-
+      
           <!-- footer -->
           <footer class="footer">
               <span>ⓒ 마이 루틴</span>
