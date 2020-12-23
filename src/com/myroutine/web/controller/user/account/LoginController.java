@@ -74,8 +74,9 @@ public class LoginController extends HttpServlet {
 		// CHECK ----------------------------------------------------
 		PrintWriter out = response.getWriter();
 		if( m != null && !email.equals("") && pwd.equals(m.getPwd())) {
-			session.setAttribute("email", email);
 			session.setAttribute("memberId", m.getId());
+			session.setAttribute("email", email);
+			session.setAttribute("nickname", m.getNickname());
 			session.setAttribute("rule", m.getRule());
 
 //			if( returnURL != null && !returnURL.equals("") ) {
