@@ -134,7 +134,7 @@ public class JdbcExerciseBodyPartDao implements ExerciseBodyPartDao{
 		List<ExerciseBodyPartView> list = new ArrayList<>();
 		String url = DBContext.URL;
 		String sql =	"select * from exercise_body_part_view "+
-						"where exercise_id=1";
+						"where exercise_id="+exerciseId;
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");

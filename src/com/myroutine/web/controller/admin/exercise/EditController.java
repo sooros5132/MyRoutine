@@ -88,7 +88,7 @@ public class EditController extends HttpServlet {
 			throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		int memberId  =  Integer.parseInt((String) session.getAttribute("memberId"));
+		int memberId  = (int) session.getAttribute("memberId");
 		
 		//운동정보 수정
 		int id = Integer.parseInt(request.getParameter("id"));
