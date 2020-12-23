@@ -37,11 +37,11 @@
 			<aside class="aside">
 				<nav class="snb">
 					<!-- <h2>서브메뉴</h2> -->
-					<ul class="dep1">
-						<!-- 하위 메뉴가 있으면 li태그에 data-type:true 넣어주세요 -->
-						<li><a href="https:\\www.naver.com">재활관리</li>
-                        <li><a href="https:\\www.naver.com">홈트레이닝관리</a></li>
-					</ul>
+					 <ul class="dep1">
+                        <!-- 하위 메뉴가 있으면 li태그에 data-type:true 넣어주세요 -->
+                        <li><a href="/admin/exercise/list">재활관리</a></li>
+                        <li><a href="/admin/exercise/homelist">홈트레이닝관리</a></li>
+                    </ul>
 				</nav>
 			</aside>
 			<!-- //aside -->
