@@ -98,10 +98,10 @@
                         
                          
                          <td>
-                          <c:forTokens var="fileName" items="${nv.fileName}" delims="," varStatus="st">
+                          <c:forTokens var="fileName"  items="${nv.fileName}" delims="," varStatus="st">
                              
                              
-                             <a download href="/static/notice/2020/${fileName}">${fileName}</a> 
+                             <a download href="/upload/${fileName}">${fileName}</a> 
                              <c:if test="${!st.last}">/</c:if>
                            </c:forTokens>
                          </td>

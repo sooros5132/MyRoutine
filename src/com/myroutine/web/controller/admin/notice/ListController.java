@@ -23,10 +23,10 @@ public class ListController extends HttpServlet {
 		String[] dels = request.getParameterValues("del-id");
 		
 		
-		int[] ids = new int[dels.length]; //담을 배열 공간 생성
+		int[] ids = new int[dels.length]; 
 		for(int i=0; i<ids.length;i++) {
 			ids[i] =  Integer.parseInt(dels[i]);
-			System.out.println(ids[i]);
+			
 		}
 		
 		NoticeFileService nfservice = new NoticeFileService();
