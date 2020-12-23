@@ -45,19 +45,19 @@ public class MemberService {
 		return list;
 	}
 	
-	public int login(String email, String pwd) {
-		int result = 0;
-		
-		String resultEmail = memberDao.get("email", email).getEmail();
-		String resultPwd = memberDao.get("email", email).getPwd();
-		
-		if( !resultEmail.equals("") )
-			result++;
-		if( !resultPwd.equals("") )
-			result++;
-		
-		return result;
-	}
+//	public int login(String email, String pwd) {
+//		int result = 0;
+//		
+//		String resultEmail = memberDao.get("email", email).getEmail();
+//		String resultPwd = memberDao.get("email", email).getPwd();
+//		
+//		if( !resultEmail.equals("") )
+//			result++;
+//		if( !resultPwd.equals("") )
+//			result++;
+//		
+//		return result;
+//	}
 
 	public int dupCheck(String key, String value) {
 		int result = 0;
@@ -69,5 +69,5 @@ public class MemberService {
 
 		return result;
 	}
-	
+
 }

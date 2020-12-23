@@ -31,7 +31,7 @@
             
             <div class="header-util">
                 <span class="admin">황병준님</span>
-                <a class="logout-btn" href="#">로그아웃</a>
+                <a class="logout-btn" href="/account/logout">로그아웃</a>
             </div>
         </header>
         <!-- //header -->

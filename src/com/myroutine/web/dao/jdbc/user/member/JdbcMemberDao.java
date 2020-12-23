@@ -21,6 +21,50 @@ public class JdbcMemberDao implements MemberDao{
 		return get("id", Integer.toString(id));
 	}
 	
+//	@Override
+//	public Member getMemberByEmail(String email) {
+//		Member m = null;
+//
+//		if( email == null || email.equals("")) {
+//			return m;
+//		}
+//		
+//		String url = DBContext.URL;
+//		String sql = String.format("SELECT * FROM MEMBER WHERE EMAIL = '%s'", email);
+//
+//		try {
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+//			PreparedStatement st = con.prepareStatement(sql);
+//			ResultSet rs = st.executeQuery(sql);
+//
+//			if(rs.next()) {
+//				int id = rs.getInt("id");
+//				String name = rs.getString("name");
+//				String nickname = rs.getString("nickname");
+//				String pwd = rs.getString("pwd");
+//				String phone = rs.getString("phone");
+//				int rule = rs.getInt("rule");
+//				Date regdate = rs.getDate("regdate");
+//				Date birthday = rs.getDate("birthday");
+//				int openInfo = rs.getInt("open_info");
+//				Date lastLogin = rs.getDate("last_login");
+//				String gender = rs.getString("gender");
+//			    
+//				m = new Member(id, email, name, nickname, pwd, phone, rule, regdate, birthday, openInfo, lastLogin, gender);
+//			}
+//			st.close();
+//			con.close();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return m;
+//	}
+	
 	@Override
 	public Member get(String field, String query) {
 		Member m = null;
@@ -40,7 +84,7 @@ public class JdbcMemberDao implements MemberDao{
 		if(IsNumberService.isInteger(query))
 			sql = String.format(
 					"SELECT * FROM MEMBER WHERE %s = %s",
-					field, field, query
+					field, query
 				);
 		
 

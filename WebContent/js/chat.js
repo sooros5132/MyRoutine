@@ -1,3 +1,4 @@
+let setMemberId;
 window.addEventListener("load", (e)=>{
 
 	// 하단 메뉴 메시지 버튼 ==================================================
@@ -10,6 +11,7 @@ window.addEventListener("load", (e)=>{
 			return;
 		}
 		chatBox.classList.add("d-none");
+		topAlertBox.classList.add("smaller");
 	})
 
 	// 채팅 ========================================================================
@@ -202,6 +204,7 @@ window.addEventListener("load", (e)=>{
 	
 	chatRightBth.addEventListener("click", (e)=>{
 		chatBox.classList.add("d-none");
+		topAlertBox.classList.add("smaller");
     });
 
 	// 친구 리스트 클릭 이벤트 ==================================================
@@ -1112,4 +1115,7 @@ window.addEventListener("load", (e)=>{
 	// chatMessageBoxInner.ontouchmove = function(event){
 	// 	event.preventDefault();
 	// }
+	setMemberId = function(id){
+		memberId = id;
+	}
 });
