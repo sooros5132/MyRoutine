@@ -17,24 +17,7 @@
 
 <body>
     <div class="wrapper">
-        <!-- header -->
-        <header class="header">
-            <h1 class="logo"><a href="#"><img src="../../image/common/logo.png" alt="마이루틴"></a></h1>
-            <nav class="gnb">
-                <ul>
-                    <li><a href="/admin/exercise/list" class="active"><i class="xi-calendar-list"></i>운동 관리</a></li>
-                    <li><a href="/admin/exercise/member"><i class="xi-group"></i>회원 관리</a></li>
-                    <li><a href="/admin/exercise/community"><i class="xi-forum"></i>커뮤니티 관리</a></li>
-                    <li><a href="/admin/exercise/notice"><i class="xi-comment"></i>공지사항 관리</a></li>
-                </ul>
-            </nav>
-
-            <div class="header-util">
-                <span class="admin">황병준님</span>
-                <a class="logout-btn" href="#">로그아웃</a>
-            </div>
-        </header>
-        <!-- //header -->
+    	<jsp:include page="/WEB-INF/jsp/admin/header.jsp"></jsp:include>
 
 
         <div class="body">

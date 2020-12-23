@@ -27,24 +27,7 @@
 </head>
 <body>
     <div class="wrapper">
-        <!-- header -->
-        <header class="header">
-            <h1 class="logo"><a href="#"><img src="../image/common/logo.png" alt="마이루틴"></a></h1>
-            <nav class="gnb">
-                <ul>
-                    <li><a href="#" class="active"><i class="xi-calendar-list"></i>운동 관리</a></li>
-                    <li><a href="#"><i class="xi-group"></i>회원 관리</a></li>
-                    <li><a href="#"><i class="xi-forum"></i>커뮤니티 관리</a></li>
-                    <li><a href="#"><i class="xi-comment"></i>공지사항 관리</a></li>
-                </ul>
-            </nav> 
-            
-            <div class="header-util">
-                <span class="admin">황병준님</span>
-                <a class="logout-btn" href="#">로그아웃</a>
-            </div>
-        </header>
-        <!-- //header -->
+    	<jsp:include page="/WEB-INF/jsp/admin/header.jsp"></jsp:include>
        
 
         <div class="body">
@@ -108,28 +91,28 @@
                 </section>
                 <section class="notice-box">
                     <h2 class="main-tit">커뮤니티<a href="#" class="more">더보기<i class="xi-angle-right-min"></i></a></h2>
-                    <ul><%--
-						<c:forEach var="community" items="communityList">  
+                    <ul>
+						<c:forEach var="community" items="${communityList}">  
                         <li>
                             <a href="admin/community/detail?id=${community.id}">
                                 <span class="notice-tit">${community.title}</span>
                                 <span class="notice-date">${community.regdate}</span>
                             </a>
                         </li>
-						</c:forEach> --%>     
+						</c:forEach>
                     </ul>
                 </section>
                 <section class="notice-box">
                     <h2 class="main-tit">공지사항<a href="#" class="more">더보기<i class="xi-angle-right-min"></i></a></h2>
-                    <ul><%--
-						<c:forEach var="notice" items="noticeList">  
+                    <ul>
+						<c:forEach var="notice" items="${noticeList}">  
                         <li>
                             <a href="admin/notice/detail?id=${notice.id}">
                                 <span class="notice-tit">${notice.title}</span>
                                 <span class="notice-date">${notice.regdate}</span>
                             </a>
                         </li>
-						</c:forEach> --%>     
+						</c:forEach>
                     </ul>
                 </section>
             </main>
@@ -159,6 +142,7 @@
         .info-box ul li:nth-of-type(2) a .count {background:#30b1ba;}
         .info-box ul li:nth-of-type(3) a .count {background:#3078ba;}
         .info-box ul li:nth-of-type(4) a .count {background:#3058ba;}
+        .info-box ul li:nth-of-type(5) a .count {background:#FFA17A;}
 
         .main-page .notice-box {width:calc(50% - 15px); margin-right:30px; margin-bottom:20px; border:1px solid #ddd; border-top:3px solid #30baa1; font-size:16px; background:#fff;}
         .main-page .notice-box:last-child {margin-right:0px;}
