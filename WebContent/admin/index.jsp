@@ -90,7 +90,7 @@
                     </ul>
                 </section>
                 <section class="notice-box">
-                    <h2 class="main-tit">커뮤니티<a href="#" class="more">더보기<i class="xi-angle-right-min"></i></a></h2>
+                    <h2 class="main-tit">커뮤니티<a href="/admin/community/list" class="more">더보기<i class="xi-angle-right-min"></i></a></h2>
                     <ul>
 						<c:forEach var="community" items="${communityList}">  
                         <li>
@@ -103,7 +103,7 @@
                     </ul>
                 </section>
                 <section class="notice-box">
-                    <h2 class="main-tit">공지사항<a href="#" class="more">더보기<i class="xi-angle-right-min"></i></a></h2>
+                    <h2 class="main-tit">공지사항<a href="/admin/notice/list" class="more">더보기<i class="xi-angle-right-min"></i></a></h2>
                     <ul>
 						<c:forEach var="notice" items="${noticeList}">  
                         <li>
