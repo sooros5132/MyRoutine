@@ -1,0 +1,56 @@
+.main .title{
+    padding-bottom: 10px;
+    width: 100%;
+    
+}
+.main .title input{
+    width: 100%;
+    font-size: 20px;
+    border: 0px;
+    border-bottom: 1px solid #000000;
+}
+
+.main .title input:focus, 
+.main .title input:active, 
+.main .title input:hover {
+    width: 100%;
+    outline: #30BAA1 
+}
+
+.main .textarea{
+    height: 400px;
+}    
+
+.main .textarea:focus, 
+.main .textarea:active, 
+.main .textarea:hover {
+    width: 100%;
+    outline: #30BAA1
+}
+
+
+.btn-box{
+    padding:10px 10px; 
+    text-align:right;
+}
+
+.select-box{
+	width: 150px;
+	height: 30px;
+	padding-left: 15px;
+	border-radius: 3px;
+}
+
+.btn-box .btn {
+    display:inline-block; 
+    width:90px; 
+    line-height:46px; 
+    background:#30baa1; 
+    text-align:center; 
+    font-weight:bold;
+    color:#fff; 
+}
+
+.btn-box .btn:hover{
+    color:#fff; 
+}

@@ -3,106 +3,143 @@ package com.myroutine.web.entity.admin.notice;
 import java.util.Date;
 
 public class Notice {
-	   private int id;
-	   private String title;
-	   private String content;
-	   private Date regdate;
-	   private String files;
-	   private String open;
-	   private String hits;
-	   private String writerId;
-	   
-	   public Notice() {
-		// TODO Auto-generated constructor stub
-	}
+   private int id;
+   private String title;
+   private String contents;
+   private boolean openInfo;
+   private int hit;
+   private String memberId;
+   private Date regdate;
+   
+   public Notice() {
+	// TODO Auto-generated constructor stub
+}
 
-	public Notice(int id, String title, String content, Date regdate, String files, String open, String hits,
-			String writer_id) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.content = content;
-		this.regdate = regdate;
-		this.files = files;
-		this.open = open;
-		this.hits = hits;
-		this.writerId = writer_id;
-	}
 
-	public Notice(String title, String content) {
-		this.title = title;
-		this.content = content;
-	}
 
-	public int getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
 
-	public String getTitle() {
-		return title;
-	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+public Notice(int id, String title, String contents, boolean openInfo, int hit, String memberId, Date regdate) {
+	
+	this.id = id;
+	this.title = title;
+	this.contents = contents;
+	this.openInfo = openInfo;
+	this.hit = hit;
+	this.memberId = memberId;
+	this.regdate = regdate;
+}
 
-	public String getContent() {
-		return content;
-	}
 
-	public void setContent(String content) {
-		this.content = content;
-	}
 
-	public Date getRegdate() {
-		return regdate;
-	}
 
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
-	}
 
-	public String getFiles() {
-		return files;
-	}
 
-	public void setFiles(String files) {
-		this.files = files;
-	}
+public Notice(String title, String contents) {
+	
+	this.title = title;
+	this.contents =contents;
+	
+}
 
-	public String getOpen() {
-		return open;
-	}
 
-	public void setOpen(String open) {
-		this.open = open;
-	}
 
-	public String getHits() {
-		return hits;
-	}
 
-	public void setHits(String hits) {
-		this.hits = hits;
-	}
 
-	public String getWriter_id() {
-		return writerId;
-	}
+public int getId() {
+	return id;
+}
 
-	public void setWriter_id(String writer_id) {
-		this.writerId = writer_id;
-	}
+public void setId(int id) {
+	this.id = id;
+}
 
-	@Override
-	public String toString() {
-		return "Notice [id=" + id + ", title=" + title + ", content=" + content + ", regdate=" + regdate + ", files="
-				+ files + ", open=" + open + ", hits=" + hits + ", writer_id=" + writerId + "]";
-	}
-	   
-	   
+public String getTitle() {
+	return title;
+}
+
+public void setTitle(String title) {
+	this.title = title;
+}
+
+public String getContents() {
+	return contents;
+}
+
+public void setContents(String contents) {
+	this.contents = contents;
+}
+
+
+
+
+
+
+
+
+public boolean isOpenInfo() {
+	return openInfo;
+}
+
+
+
+
+
+
+public void setOpenInfo(boolean openInfo) {
+	this.openInfo = openInfo;
+}
+
+
+
+
+
+
+public int getHit() {
+	return hit;
+}
+
+public void setHit(int hit) {
+	this.hit = hit;
+}
+
+public String getMemberId() {
+	return memberId;
+}
+
+public void setMemberId(String memberId) {
+	this.memberId = memberId;
+}
+
+
+public Date getRegdate() {
+	return regdate;
+}
+
+
+
+public void setRegdate(Date regdate) {
+	this.regdate = regdate;
+}
+
+
+
+
+
+
+@Override
+public String toString() {
+	return "Notice [id=" + id + ", title=" + title + ", contents=" + contents + ", openInfo=" + openInfo + ", hit="
+			+ hit + ", memberId=" + memberId + ", regdate=" + regdate + "]";
+}
+
+
+
+
+
+
+
+
+   
 }

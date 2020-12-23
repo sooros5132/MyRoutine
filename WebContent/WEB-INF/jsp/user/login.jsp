@@ -3,7 +3,7 @@
     <!-- 로그인 -->
 	<link rel="stylesheet" href="/css/user/account/accounts.css">
     <section class="account-container">
-	    <form method="POST">
+	    <form>
 	        <div class="account-inner border-decoration">
 	            <div class="account-logo">
 	                <div>
@@ -46,16 +46,17 @@
 	                </svg>
 	            </div>
 	            <div>
-	                <input required type="email" id="userId" name="userId" class="user-info"/>
+	                <input required type="email" id="userId" name="uid" class="user-info"/>
 	                <label for="userId" class="input-label">이메일</label>
 	                <div class="error-msg"></div>
 	            </div>
 	
 	            <div>
-	                <input required type="password" id="userPwd" name="userPwd" class="user-info"/>
+	                <input required type="password" id="userPwd" name="pwd" class="user-info"/>
 	                <label for="userPwd" class="input-label">비밀번호</label>
 	                <div class="error-msg"></div>
 	            </div>
+                <input required type="hidden" name="return-url" value="${returnUrl}"/>
 	            
 	            <input type="submit" id="login-submit-btn" class="submit-btn" value="로그인">
 	            <div class="recovery"><span><a href="/account/recoveryEmail.html">이메일</a></span> / <span><a href="/account/recoveryPwd.html">비밀번호</a> 찾기</span></div>

@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
     <!-- 하단 메뉴 -->
     <link rel="stylesheet" href="/css/user/alert.css">
-    <link rel="stylesheet" href="/css/user/bottom-menu.css">
+    <link rel="stylesheet" href="/css/user/bottomMenu.css">
     <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/xeicon.min.css">
     <div class="bottom-container">
         <!-- 알림창 -->
         <!-- 
@@ -28,17 +29,26 @@
 
    		<!-- // 하단 메뉴 버튼 -->
         <div class="bottom-menu">
-            <div class="bottom-btn top-scroll-btn circle">
-                <div class="arrow">
-                    <div></div>
-                    <div></div>                    
+            <div class="bottom-menu-inner">
+                <div class="bottom-btn chat-toggle-btn circle pointer reveal">
+                    <i class="xi-speech"></i>
                 </div>
-                <svg id="top-scroll" width="30" height="30" style="stroke-dashoffset: 95;">
-                    <circle cx="15" cy="15" r="15"></circle>
-                </svg>
+                <div class="bottom-btn top-scroll-btn circle pointer">
+                    <div class="arrow">
+                        <div></div>
+                        <div></div>                    
+                    </div>
+                    <svg id="top-scroll" width="40" height="40" style="stroke-dashoffset: 125;">
+                        <circle cx="20" cy="20" r="20"></circle>
+                    </svg>
+                </div>
             </div>
         </div>
-        <script src="/js/user/topScroll.js"></script>
+        <script src="/js/user/bottomMenu.js"></script>
     	<!-- // 하단 메뉴 버튼 -->
+    	
+   		<!-- 채팅 -->
+		<jsp:include page="/WEB-INF/jsp/chat.jsp" />
+    	<!-- // 채팅 -->
     </div>
     <!-- // 하단 메뉴 -->

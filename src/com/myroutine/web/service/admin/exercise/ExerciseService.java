@@ -8,32 +8,41 @@ import com.myroutine.web.dao.entity.ExerciseView;
 import com.myroutine.web.dao.jdbc.JdbcExerciseDao;
 import com.myroutine.web.entity.admin.exercise.Exercise;
 
+
+
 public class ExerciseService {
 	private ExerciseDao exerciseDao;
 
 	public ExerciseService() {
 		exerciseDao = new JdbcExerciseDao();
-		//이렇게 ExerciseService생성자에서 객체 선언하면
-		//아래 모든 함수들에서 저 객체를 쓸수 있다.
 	}
-	
-	// 운동 등록
+
+	//운동 등록
 	public int insert(Exercise exercise) {
-		return exerciseDao.insert(exercise);
+		int result = exerciseDao.insert(exercise);
+		int id = exerciseDao.getLast();
+		
+		return id;
 	}
 
-	// 운동 수정
+	//운동 수정
 	public int update(Exercise exercise) {
-		return exerciseDao.update(exercise);
+		int result = exerciseDao.update(exercise);
+		return result;
+		
 	}
 	
-	public int delete(Exercise exercise) {
-		return exerciseDao.delete(exercise);
+	//운동 삭제
+	public int delete(int id) {
+		int result = exerciseDao.delete(id);
+		return result;
 	}
+	
 
-	// 운동 리스트 불러오기
+
+	//운동 리스트 불러오기
 	public List<Exercise> getList() {
-//		exerciseDao = new JdbcExerciseDao(); 
+
 		 List<Exercise> result = exerciseDao.getList();
 		return result;
 	}
@@ -41,8 +50,7 @@ public class ExerciseService {
 	public List<Exercise> getList(String[] parts) {
 		List<Exercise> result = exerciseDao.getList(parts);
 		return result;
-	}
-
+}
 	
 	// 운동 정보 불러오기
 	public Exercise get(int id) {
@@ -91,5 +99,6 @@ public class ExerciseService {
 		return result;
 	}
 	
+
 }
 

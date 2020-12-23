@@ -1,3 +1,4 @@
+
 package com.myroutine.web.dao.entity;
 
 import java.util.Date;
@@ -6,6 +7,10 @@ import java.util.List;
 import com.myroutine.web.entity.admin.exercise.Exercise;
 
 public class ExerciseView extends Exercise{
+	public ExerciseView(int id, String name, String contents, Date regdate, String engName, String recommend, int categoryId,
+			int memberId) {
+		super(id, name, contents, regdate, engName, recommend, categoryId, memberId);
+	}
 	private List<String> bodyPartIdList;
 	private List<String> fileNameList;
 	private String fileName;
@@ -13,11 +18,6 @@ public class ExerciseView extends Exercise{
 	
 	public ExerciseView() {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-	public ExerciseView(int id, String name, String contents, Date regDate, String engName, String recommend,
-			int categoryId, int memberId) {
-		super(id, name, contents, regDate, engName,  recommend,categoryId, memberId);
 		// TODO Auto-generated constructor stub
 	}
 	//getView(int id) 에서 부위, 파일이름을 List로 가져와서 jsp에서 foreach로 풀어낼때 쓰는 생성자

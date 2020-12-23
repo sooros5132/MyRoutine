@@ -30,42 +30,13 @@ public class ListController extends HttpServlet {
 		ExerciseService service = new ExerciseService();
 		List<ExerciseListView> list =null;
 
-//		ExerciseFileService fileService = new ExerciseFileService();
-		System.out.println("두겟");
-		System.out.println(option);
-//		if (option.equals("and")) {
-//			if (parts == null) {
-//				List<ExerciseListView> list = service.getListView();
-//				req.setAttribute("list", list);
-//			} else if (parts != null || !parts.equals("")) {
-//				for (int i = 0; i < parts.length; i++)
-//					System.out.println(parts[i]);
-//				List<ExerciseListView> list = service.getAndListView(parts);
-//				req.setAttribute("list", list);
-//			}
-//		}
-//		else if(option.equals("or")){
-//			if (parts == null) {
-//				List<ExerciseListView> list = service.getListView();
-//				req.setAttribute("list", list);
-//			} else if (parts != null || !parts.equals("")) {
-//				for (int i = 0; i < parts.length; i++)
-//					System.out.println(parts[i]);
-//				List<ExerciseListView> list = service.getOrListView(parts);
-//				req.setAttribute("list", list);
-//			}
-//		}
-//		else {
-//				List<ExerciseListView> list = service.getListView();
-//				req.setAttribute("list", list);
-//			}
+
 		
 		if (parts == null) {
 			 list = service.getListView();
 			req.setAttribute("list", list);
 		} else if (parts != null && !parts.equals("")) {
-//			for (int i = 0; i < parts.length; i++)
-//				System.out.println(parts[i]);
+
 			if(option.equals("and")) {
 				 list = service.getAndListView(parts);
 			}
@@ -75,9 +46,6 @@ public class ListController extends HttpServlet {
 			System.out.println(list);
 			req.setAttribute("list", list);
 		}
-		
-//		List<Exercise> list = service.getList(part);
-//		List<ExerciseFile> ef = fileService.getFileList(part);
 
 		req.getRequestDispatcher("/admin/exercise/list.jsp").forward(req, resp);
 	}

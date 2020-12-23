@@ -1,0 +1,88 @@
+
+.title_section>.list_title{
+	display: flex;
+	justify-content: space-between; 
+	height:40
+}
+.title_section .list_title>h1{
+    padding: 12px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #30BAA1;
+}
+.title_section .list_title div{
+	height:40px;
+	padding: 12px;
+}
+
+.title_section .list_title .select{
+	text-align:center;
+	width: 150px;
+	height: 30px;
+	padding: 0px 10px;
+	border-radius: 3px;
+}
+.title_section>.list_title .search_input{
+	width: 300px;
+	border: 1px solid gray;
+	height: 30px;
+	padding: 0px 10px;
+	border-radius: 3px;
+}
+.title_section .list_title .search_btn{
+	width:50px; 
+    line-height:30px; 
+    background:#30baa1; 
+    text-align:center; 
+    border-radius: 3px;
+    color: #fff;
+}
+
+.title_section>table{
+    padding: 0px 2px;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+.title_section table thead tr th{
+    background: #30BAA1;
+    color: white;
+    text-align: left;    
+    padding : 16px 20px;
+}
+.title_section table thead tr th:nth-child(2){
+    text-align: center;
+}
+.title_section table tr td
+{
+    border: 1px solid #30BAA1;
+    padding : 16px 20px;
+    border-left-width: 0;
+    border-right-width: 0;
+}
+.btn-box{
+    padding:30px 10px; 
+    text-align:right;
+   display: flex;
+}
+
+.btn-box .box1{
+
+	width: 100%;
+	height: 100px;
+	text-align: center;
+
+}
+
+.btn-box .btn { 
+    width:90px; 
+    line-height:46px; 
+    background:#30baa1; 
+    text-align:center; 
+    font-weight:bold;
+    border-radius: 3px;
+}
+
+.btn-box .btn a{
+    color:#fff; 
+}

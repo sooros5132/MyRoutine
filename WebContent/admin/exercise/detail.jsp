@@ -104,7 +104,7 @@
                     <div class="part-box-left">
                         <div class="part">
                             <div class="label">등록 날짜</div>
-                            <div class="content">${ex.regDate}</div>
+                            <div class="content">${ex.regdate}</div>
                         </div>
                     </div>
                     

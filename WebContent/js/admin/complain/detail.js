@@ -1,0 +1,80 @@
+window.addEventListener("load",function(){
+	var apBtn = document.querySelector(".ap-btn");
+	var tbody = document.querySelector(".tbody");
+	var complainId= document.querySelector(".complain_id").value;
+	var memberId= document.querySelector(".member_id").value;
+	var cmtId= document.querySelector(".cmt-id").value;
+	
+	var report = document.querySelector(".report");
+	var commReport= document.querySelector(".comn-report");
+	var data = new FormData();
+	
+
+	report.onclick= function(){
+		var url= '/api/complain/report?complainId='+complainId;		
+		openPrompt(url);
+	}
+	
+	commReport.onclick= function(){
+		var url= '/api/complain/commReport?commentId='+cmtId;
+		openPrompt(url);
+	};
+	
+
+
+	function openPrompt(url){
+		var result  = prompt("신고사유를 입력하세요.");
+		
+		if(result!=null){
+			var request = new XMLHttpRequest();
+			request.onload = function(){
+				alert("신고되었습니다.");			
+			}
+			
+//			data.append('contents',result);
+//			data.append('memberId',memberId);//로그인한아이디넘겨야함..
+//			data.append('complainId',complainId);
+//			console.log(result, membe``rId, complainId);
+			for(let value of data.values()){
+				console.log(value);
+			}
+			
+			request.open('GET',url+'&contents='+result+'&memberId='+memberId);
+			request.send();
+			
+		}
+		
+		
+	};
+
+
+	apBtn.onclick = function(){
+
+		var request = new XMLHttpRequest();
+		request.onreadystatechange = function(e){
+			e.stopPropagation();
+			e.preventDefault();;
+			if(request.readyState==4){
+				var commList = new JSON.parse(request.responseText);
+				
+				for(var i=0; i<commList.length; i++){
+					var n = commList[i];
+					var tr ='<tr class="cmd-tr"> \
+			                 <td class="comt-list"'+n.contents+'<button class="cmt-del-btn" > X </button></td> \
+			                 <td class="comt-writer">'+n.regdate+'</td> \
+			                 <td class="comt-writer">'+n.writerName+'</td> \
+			                 <td class="comt-writer">'+n.memberId+' \
+			                 <input type="hidden" name="id" value="'+n.id+'"> \
+			                 <input type="hidden" name="detailId" value="'+m.id+'"> \
+			                 </td> \
+			                 </tr>';
+				}
+					tbody.insertAdjacentHTML(tr);							
+			}
+		}
+		
+		request.open('GET','/admin/complain/commentList',false);
+		request.send();
+	};
+	
+});

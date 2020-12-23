@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <!-- 헤더 -->
     <link rel="stylesheet" href="/css/user/header.css">
     <header class="header">
@@ -31,7 +32,14 @@
             <section class="member-container">
                 <h1 class="d-none">회원 메뉴</h1>
                 <ul>
-                    <li><div><a class="login-btn"href="/account/login">로그인</a></div></li>
+	                <c:choose>
+	                	<c:when test="${sessionScope.memberId == null || sessionScope.memberId == ''}">
+	                    	<li><div><a class="login-btn"href="/account/login">로그인</a></div></li>
+	                	</c:when>
+	                	<c:otherwise>
+	                    	<li><div><a class="logout-btn"href="/account/logout">로그아웃</a></div></li>
+	                    </c:otherwise>
+	               	</c:choose>
                     <li><div><a class="login-btn"href="/account/signUp">가입</a></div></li>
                 </ul>
             </section>
