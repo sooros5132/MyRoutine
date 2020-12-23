@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- header -->
 <header class="header">
-    <h1 class="logo"><a href="/"><img src="../../image/common/logo.png" alt="마이루틴"></a></h1>
+    <h1 class="logo"><a href="/admin"><img src="../../image/common/logo.png" alt="마이루틴"></a></h1>
     <nav class="gnb">
         <ul>
             <li><a href="/admin/exercise/list"><i class="xi-calendar-list"></i>운동 관리</a></li>
