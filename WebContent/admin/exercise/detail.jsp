@@ -109,8 +109,10 @@
                         </div>
                     </div>
                     <div class="button-box">
-                        <button name="kbs" value="asd">수정하기</button>
-                        <button>닫기</button>
+                    <a href="/admin/exercise/edit?id=${ex.id}" class="button">수정하기</a>
+                    <a href="/admin/exercise/list" class="button">닫기</a>
+                        <!-- <input type="button" class="button" value="수정하기"  onclick="location.href='/admin/exercise/edit?id=${ex.id}'">
+                        <input type="button" class="button" value="닫기"  onclick="location.href='/admin/exercise/list'"> -->
                     </div>
                     
                 </div>
@@ -118,7 +120,7 @@
             <!-- //main(개별 컨턴츠 넣는곳) -->
         </div>
 
-        <!-- footer -->
+        footer
         <footer class="footer">
             <span>ⓒ 마이 루틴</span>
         </footer>

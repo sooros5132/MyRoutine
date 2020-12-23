@@ -81,7 +81,8 @@
                             </div> -->
                         </form>
                         <div class="button-box">
-                        	<button >등록</button>
+                            <a href="/admin/exercise/add" class="button">운동 등록</a>                        
+                        	<!-- <input type="button" value="운동 등록"  onclick="location.href='/admin/exercise/add'"></button> -->
                         </div>
                     </div>
                     

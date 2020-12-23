@@ -87,7 +87,7 @@
                                                     <input id="ex" class="ex-menu" type="radio"  name="category" value="2">
                                                     <label for="ex">
                                                         <span class="radio"></span>
-                                                        일반 운동
+                                                        홈트레이닝
                                                     </label>
                                                 </li>
                                             </ul>
