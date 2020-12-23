@@ -26,6 +26,7 @@ public class JdbcComplainDao implements ComplainDao{
 		String url = DBContext.URL;
 		String sql = "INSERT INTO COMPLAIN(WRITER_Id,TITLE,HIT,CONTENTS,CATEGORY_ID) VALUES(?,?,?,?,?)";		
 		
+		System.out.println(sql);
 		Complain m= new Complain();
 		
 			try {

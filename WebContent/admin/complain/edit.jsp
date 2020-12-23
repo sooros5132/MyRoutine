@@ -16,55 +16,14 @@
     <link rel="stylesheet" href="../../css/xeicon.min.css">
     <link rel="stylesheet" href="../../css/admin/sub.css">    
 
-
-
-	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>    
-    <script src="../../common/js/admin_common.js"></script>
     <script src="../../js/admin/community/edit.js"></script>
 </head>
 <body>
     <div class="wrapper">
-        <!-- header -->
-        <header class="header">
-            <h1 class="logo"><a href="#"><img src="../../common/images/common/logo.png" alt="마이루틴"></a></h1>
-            <nav class="gnb">
-                <ul>
-                    <li><a href="#"><i class="xi-calendar-list"></i>운동 관리</a></li>
-                    <li><a href="#"><i class="xi-group"></i>회원 관리</a></li>
-                    <li><a href="#" class="active"><i class="xi-forum"></i>커뮤니티 관리</a></li>
-                    <li><a href="#"><i class="xi-comment"></i>공지사항 관리</a></li>
-                </ul>
-            </nav> 
-            
-            <div class="header-util">
-                <span class="admin">황병준님</span>
-                <a class="logout-btn" href="#">로그아웃</a>
-            </div>
-        </header>
-        <!-- //header -->
+	<jsp:include page="/WEB-INF/jsp/admin/header.jsp"></jsp:include>
         <div class="body">
             <!-- aside -->
-            <aside class="aside">
-                <nav class="snb">
-                    <!-- <h2>서브메뉴</h2> -->
-                    <ul class="dep1">
-                        <!-- 하위 메뉴가 있으면 li태그에 data-type:true 넣어주세요 -->
-                      <li data-type="true">
-                            <a href="#">커뮤니티 관리</a>
-                            <ul class="dep2">
-                                <li><a href="../community/list">커뮤니티 리스트</a></li>
-                                <li><a href="../community/reg">커뮤니티 등록</a></li>
-                            </ul>
-                        </li>
-                        <li data-type="true">
-                            <a href="#">건의사항 관리</a>
-                            <ul class="dep2">
-                                <li><a href="../complain/list">건의사항 리스트</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-           	 </aside>
+ 			<jsp:include page="../complainAside.jsp"></jsp:include>
             <!-- //aside -->
 
             <!-- main(개별 컨턴츠 넣는곳) -->
@@ -152,8 +111,8 @@
 	                <section class="comt-box">
 	                    <div class="list_view">
 		                	<input type="hidden" name="id" value="${m.id}">
-	                        <button class="list_btn"><a  href="detail?id=${m.id}">취소</a></button>
-	                        <button type="submit" class="list_btn">저장</button>
+	                        <button type="submit" class="list_btn myButton">저장</button>
+	                        <button class="list_btn canclebtn"><a  href="detail?id=${m.id}">취소</a></button>
 	                    </div>
 	
 	                </section>          

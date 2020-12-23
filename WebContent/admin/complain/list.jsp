@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../../css/admin/reset.css">
     <link rel="stylesheet" href="../../css/admin/common.css">
     <link rel="stylesheet" href="../../css/xeicon.min.css">
-
+	<link rel="stylesheet" href="../../css/admin/sub.css">
     <link rel="stylesheet" href="../../css/admin/community/list-style.css">
 	
 	<script src="../../js/admin_common.js"></script>
@@ -22,51 +22,12 @@
 </head>
 <body>
     <div class="wrapper">
-        <!-- header -->
-        <header class="header">
-            <h1 class="logo"><a href="#"><img src="../../image/common/logo.png" alt="마이루틴"></a></h1>
-            <nav class="gnb">
-                <ul>
-                    <li><a href="#"><i class="xi-calendar-list"></i>운동 관리</a></li>
-                    <li><a href="#"><i class="xi-group"></i>회원 관리</a></li>
-                    <li><a href="#" class="active"><i class="xi-forum"></i>커뮤니티 관리</a></li>
-                    <li><a href="#"><i class="xi-comment"></i>공지사항 관리</a></li>
-                </ul>
-            </nav> 
-            
-            <div class="header-util">
-                <span class="admin">황병준님</span>
-                <a class="logout-btn" href="#">로그아웃</a>
-            </div>
-        </header>
-        <!-- //header -->
+<jsp:include page="/WEB-INF/jsp/admin/header.jsp"></jsp:include>
        
 
-        <div class="body">
+        <div class="body" style="height: 100%">
             <!-- aside -->
-            <aside class="aside">
-                <nav class="snb">
-                    <!-- <h2>서브메뉴</h2> -->
-                    <ul class="dep1">
-                        <!-- 하위 메뉴가 있으면 li태그에 data-type:true 넣어주세요 -->
-                       <li data-type="true">
-                            <a href="#">커뮤니티 관리</a>
-                            <ul class="dep2">
-                                <li><a href="../community/list">커뮤니티 리스트</a></li>
-                                <li><a href="../community/report/list">커뮤니티신고 리스트</a></li>
-                                <li><a href="../community/report/comment/list">커뮤니티댓글신고 리스트</a></li>                                
-                            </ul>
-                        </li>
-                        <li data-type="true">
-                            <a href="#">건의사항 관리</a>
-                            <ul class="dep2">
-                                <li><a href="../complain/list">건의사항 리스트</a></li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                </nav>
-            </aside>
+           	<jsp:include page="../complainAside.jsp"></jsp:include>
             <!-- //aside -->
 
             <!-- main(개별 컨턴츠 넣는곳) -->
@@ -76,27 +37,27 @@
                         <h1>건의사항 리스트</h1>
                         <div >
 	                        <form action="list" method="get">
-		                        <select name="categoryId" class="select" onchange="this.form.submit();">
+		                        <select name="categoryId" class="select " onchange="this.form.submit();">
 		                        	<c:forEach items="${cList}" var ="categroy">
 		                        		<option <c:if test="${categoryId==categroy.id}">selected</c:if> 
 		                        		value ="${categroy.id}">${categroy.type} </option>
 		                        	</c:forEach>
 		                        </select>
 		                        <input type="text" class="search_input" name= "value">
-		                        <button class="search_btn" type="submit">검색</button>
+		                        <button class="search_btn myButton" style="height:35px; text-align:center;" type="submit">검색</button>
 	                        </form>
                         </div>
                     </div>
                     <div>
-	                    <table>
-	                        <colgroup>
+	                    <table class="admin-from-table">
+     						<colgroup>
 	                            <col style="width:100px">	
 	                            <col style="width:120px">
-	                            <col style="width: 100%">
+	                            <col style="width: auto;">
 	                            <col style="width: 150px">
 	                            <col style="width: 100px">
-	                        </colgroup>
-	                        <thead>
+                        	</colgroup>
+                   	        <thead>
 	                            <tr>
 	                                <th>작성자</th>
 	                                <th>종류</th>
@@ -140,7 +101,7 @@
 					</div>         
 					
                     <div>
-                        <button class="btn"><a href="reg">글쓰기</a></button>
+                        <button class="btn  myButton" style="width:100px; height:55px;"><a href="reg">글쓰기</a></button>
                     </div>
                 </div>   
             </main>

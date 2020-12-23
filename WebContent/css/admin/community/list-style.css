@@ -31,14 +31,30 @@
 	padding: 0px 10px;
 	border-radius: 3px;
 }
-.title_section .list_title .search_btn{
-	width:50px; 
-    line-height:30px; 
-    background:#30baa1; 
-    text-align:center; 
-    border-radius: 3px;
-    color: #fff;
+/* .title_section .list_title .search_btn{ */
+/* 	width:50px;  */
+/*     line-height:30px;  */
+/*     background:#30baa1;  */
+/*     text-align:center;  */
+/*     border-radius: 3px; */
+/*     color: #fff; */
+/* } */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
 }
+
+
+table tr td{
+    border-bottom: 1px solid #30baa1; 
+    text-align: left;    
+    padding : 16px 20px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
 
 /* .title_section>table{ */
 /*     padding: 0px 2px; */
@@ -76,15 +92,39 @@
 
 }
 
-.btn-box .btn { 
-    width:90px; 
-    line-height:46px; 
-    background:#30baa1; 
-    text-align:center; 
-    font-weight:bold;
-    border-radius: 3px;
-}
+/* .btn-box .btn {  */
+/*     width:90px;  */
+/*     line-height:46px;  */
+/*     background:#30baa1;  */
+/*     text-align:center;  */
+/*     font-weight:bold; */
+/*     border-radius: 3px; */
+/* } */
 
 .btn-box .btn a{
     color:#fff; 
+}
+.myButton {
+	box-shadow:inset 0px 1px 0px 0px #87d6c6;
+	background:linear-gradient(to bottom, #b3e0d8 5%, #30baa1 100%);
+	background-color:#b3e0d8;
+	border-radius:6px;
+	border:1px solid #4ba695;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #30baa1 5%, #b3e0d8 100%);
+	background-color:#30baa1;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
 }
