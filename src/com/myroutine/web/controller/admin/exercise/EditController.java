@@ -220,6 +220,6 @@ public class EditController extends HttpServlet {
 		}
 		
 		
-		response.sendRedirect("detail?" + id);
+		response.sendRedirect("detail?id=" + id);
 	}
 }
