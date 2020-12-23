@@ -1,12 +1,8 @@
 window.addEventListener("load",function(){
-	var apBtn = document.querySelector(".ap-btn");
 	var tbody = document.querySelector(".tbody");
-	var complainId= document.querySelector(".complain_id").value;
 	var memberId= document.querySelector(".member_id").value;
-	var cmtId= document.querySelector(".cmt-id").value;
 	
 	var report = document.querySelector(".report");
-	var commReport= document.querySelector(".comn-report");
 	var data = new FormData();
 	
 
@@ -15,12 +11,6 @@ window.addEventListener("load",function(){
 		openPrompt(url);
 	}
 	
-	commReport.onclick= function(){
-		var url= '/api/complain/commReport?commentId='+cmtId;
-		openPrompt(url);
-	};
-	
-
 
 	function openPrompt(url){
 		var result  = prompt("신고사유를 입력하세요.");
@@ -47,34 +37,5 @@ window.addEventListener("load",function(){
 		
 	};
 
-
-	apBtn.onclick = function(){
-
-		var request = new XMLHttpRequest();
-		request.onreadystatechange = function(e){
-			e.stopPropagation();
-			e.preventDefault();;
-			if(request.readyState==4){
-				var commList = new JSON.parse(request.responseText);
-				
-				for(var i=0; i<commList.length; i++){
-					var n = commList[i];
-					var tr ='<tr class="cmd-tr"> \
-			                 <td class="comt-list"'+n.contents+'<button class="cmt-del-btn" > X </button></td> \
-			                 <td class="comt-writer">'+n.regdate+'</td> \
-			                 <td class="comt-writer">'+n.writerName+'</td> \
-			                 <td class="comt-writer">'+n.memberId+' \
-			                 <input type="hidden" name="id" value="'+n.id+'"> \
-			                 <input type="hidden" name="detailId" value="'+m.id+'"> \
-			                 </td> \
-			                 </tr>';
-				}
-					tbody.insertAdjacentHTML(tr);							
-			}
-		}
-		
-		request.open('GET','/admin/complain/commentList',false);
-		request.send();
-	};
 	
 });

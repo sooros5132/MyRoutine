@@ -46,16 +46,20 @@ window.addEventListener("load",function(){
 		request.onload = function(){
 			
 			tbody.innerHTML = '';
-			
+
 			var communityList = JSON.parse(request.responseText);
 			
+			
 			for(var i=0; i<communityList.length; i++){
-				var n = communityList[i];
+				var n=communityList[i];
+				var reg=(n.regdate).replace('월',',');
+				var date=reg.split(',');
+				var regdate = date[2]+'-'+date[0]+'-'+date[1];		
 				var tr = '<tr> \
 	                      <td>'+n.writerName+'</td> \
 	                        <td>'+n.categoryType+'</td> \
 	                        <td><a href="detail?id='+n.id+'"> '+n.title+'['+n.commCount+']</a></td> \
-	                        <td>'+n.regdate+'</td> \
+	                        <td>'+regdate+'</td> \
 	                        <td>'+n.hit+'</td> \
 		                  </tr>';
 	

@@ -9,58 +9,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이루틴</title>
-    <link rel="stylesheet" href="../../common/css/reset.css">
-    <link rel="stylesheet" href="../../common/css/common.css">
-    <link rel="stylesheet" href="../../common/css/xeicon.min.css">
-    <link rel="stylesheet" href="../../common/css/sub.css">
+    <link rel="stylesheet" href="../../css/admin/reset.css">
+    <link rel="stylesheet" href="../../css/admin/common.css">
+    <link rel="stylesheet" href="../../css/xeicon.min.css">
+    <link rel="stylesheet" href="../../css/admin/sub.css">    
     <link rel="stylesheet" href="../../css/admin/community/edit-style.css">
-    <script src="../../common/js/admin_common.js"></script>
+    <script src="../../js/admin_common.js"></script>
 </head>
 <body>
     <div class="wrapper">
-        <!-- header -->
-        <header class="header">
-            <h1 class="logo"><a href="#"><img src="../../common/images/common/logo.png" alt="마이루틴"></a></h1>
-            <nav class="gnb">
-                <ul>
-                    <li><a href="#"><i class="xi-calendar-list"></i>운동 관리</a></li>
-                    <li><a href="#"><i class="xi-group"></i>회원 관리</a></li>
-                    <li><a href="#" class="active"><i class="xi-forum"></i>커뮤니티 관리</a></li>
-                    <li><a href="#"><i class="xi-comment"></i>공지사항 관리</a></li>
-                </ul>
-            </nav> 
-            
-            <div class="header-util">
-                <span class="admin">황병준님</span>
-                <a class="logout-btn" href="#">로그아웃</a>
-            </div>
-        </header>
-        <!-- //header -->
+		<jsp:include page="/WEB-INF/jsp/admin/header.jsp"></jsp:include>
        
 
         <div class="body">
             <!-- aside -->
-            <aside class="aside">
-                <nav class="snb">
-                    <!-- <h2>서브메뉴</h2> -->
-                    <ul class="dep1">
-                        <!-- 하위 메뉴가 있으면 li태그에 data-type:true 넣어주세요 -->
-                       <li data-type="true">
-                            <a href="#">커뮤니티 관리</a>
-                            <ul class="dep2">
-                                <li><a href="../community/list">커뮤니티 리스트</a></li>
-                                <li><a href="../community/reg">커뮤니티 등록</a></li>
-                            </ul>
-                        </li>
-                        <li data-type="true">
-                            <a href="#">건의사항 관리</a>
-                            <ul class="dep2">
-                                <li><a href="../complain/list">건의사항 리스트</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </aside>
+			<jsp:include page="../communityAside.jsp"></jsp:include>
             <!-- //aside -->
 
             <!-- main(개별 컨턴츠 넣는곳) -->
@@ -129,8 +92,8 @@ request header
                             </tbody>
                         </table>
 	                    <div class="btn-box"> 
-	                        <button type="submit" class="btn" >등록</button>
-	                        <a class="btn cancel" href="list">취소</a>
+	                        <button type="submit" class="myButton" >등록</button>
+	                        <a class="canclebtn" href="list">취소</a>
 		                </div>
 	                </form>
              	</section>             
