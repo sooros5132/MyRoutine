@@ -19,6 +19,7 @@ import com.myroutine.web.entity.admin.exercise.Exercise;
 public class JdbcExerciseDao implements ExerciseDao {
 
 
+
 	// 운동정보 (디테일)
 	@Override
 	public Exercise get(int id) {
@@ -65,7 +66,7 @@ public class JdbcExerciseDao implements ExerciseDao {
 						
 				    ) ;
 
-				ex = new Exercise(id, name, contents, regdate, engName,recommend, categoryId,memberId);
+				//ex = new Exercise(id, name, contents, regdate, engName,recommend, ,memberId), categoryId;
 				System.out.println(ex);
 			}
 			//부위를 받아와서 조인으로 생성자에 넣어
@@ -138,8 +139,8 @@ public class JdbcExerciseDao implements ExerciseDao {
 	public int insert(Exercise exercise) {
 		int result=0;
 		String url = DBContext.URL;
-		String sql = "INSERT INTO EXERCISE(NAME, CONTENTS, REGDATE, ENG_NAME, RECOMMEND, MEMBER_ID, CATEGORY_ID) "
-				+ "VALUES(?, ?, SYSTIMESTAMP, ? ,?, ?, ?)";
+		String sql = "INSERT INTO EXERCISE(ID, NAME, CONTENTS, REGDATE, ENG_NAME, RECOMMEND, MEMBER_ID, CATEGORY_ID) "
+				+ "VALUES(EXERCISE_ID_SEQ.NEXTVAL,?, ?, SYSTIMESTAMP, ? ,?, ?, ?)";
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);

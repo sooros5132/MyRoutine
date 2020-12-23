@@ -121,79 +121,37 @@
                                                         <input id="re-list1" type="checkbox" name="body-part-re" value="1" checked>
                                                         <label for="re-list1">
                                                             <span class="check"></span>
-                                                           	목
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <input id="re-list2" type="checkbox" name="body-part-re" value="2">
-                                                        <label for="re-list2">
-                                                            <span class="check"></span>
                                                            	어깨
                                                         </label>
                                                     </li>
                                                     <li>
-                                                        <input id="re-list3" type="checkbox" name="body-part-re" value="3">
+                                                        <input id="re-list2" type="checkbox" name="body-part-re" value="4">
+                                                        <label for="re-list2">
+                                                            <span class="check"></span>
+                                                           	허리
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <input id="re-list3" type="checkbox" name="body-part-re" value="10">
                                                         <label for="re-list3">
                                                             <span class="check"></span>
-                                                            팔
+                                                            목
                                                         </label>
                                                     </li>
                                                     <li>
-                                                        <input id="re-list4" type="checkbox" name="body-part-re" value="4">
+                                                        <input id="re-list4" type="checkbox" name="body-part-re" value="11">
                                                         <label for="re-list4">
                                                             <span class="check"></span>
-                                                            허리
+                                                            손목
                                                         </label>
                                                     </li>
                                                     <li>
-                                                        <input id="re-list5" type="checkbox" name="body-part-re" value="5">
+                                                        <input id="re-list5" type="checkbox" name="body-part-re" value="12">
                                                         <label for="re-list5">
                                                             <span class="check"></span>
-                                                            허벅지
+                                                           	무릅
                                                         </label>
                                                     </li>
-                                                    <li>
-                                                        <input id="re-list6" type="checkbox" name="body-part-re" value="6">
-                                                        <label for="re-list6">
-                                                            <span class="check"></span>
-                                                            무릅
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <input id="re-list7" type="checkbox" name="body-part-re" value="7">
-                                                        <label for="re-list7">
-                                                            <span class="check"></span>
-                                                            발목
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <input id="re-list8" type="checkbox" name="body-part-re" value="8">
-                                                        <label for="re-list8">
-                                                            <span class="check"></span>
-                                                           	등
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <input id="re-list9" type="checkbox" name="body-part-re" value="9">
-                                                        <label for="re-list9">
-                                                            <span class="check"></span>
-                                                           	엉덩이
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <input id="re-list10" type="checkbox" name="body-part-re" value="10">
-                                                        <label for="re-list10">
-                                                            <span class="check"></span>
-                                                            뒷허벅지
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                       <input id="re-list11" type="checkbox" name="body-part-re" value="15">
-                                                       <label for="re-list11">
-                                                           <span class="check"></span>
-                                                           손목
-                                                       </label>
-                                                   </li>
                                                 </ul>
                                             </div>
                                             <!-- //ex_con -->
@@ -204,100 +162,69 @@
                                                         <input id="ex-list1" type="checkbox" name="body-part-ex" value="1" checked>
                                                         <label for="ex-list1">
                                                             <span class="check"></span>
-                                                            목
+                                                            어깨
                                                         </label>
                                                     </li>
                                                     <li>
                                                         <input id="ex-list2" type="checkbox" name="body-part-ex" value="2">
                                                         <label for="ex-list2">
                                                             <span class="check"></span>
-                                                            어깨
+                                                            팔
                                                         </label>
                                                     </li>
                                                     <li>
-                                                        <input id="ex-list3" type="checkbox" name="body-part-ex" value="11">
+                                                        <input id="ex-list3" type="checkbox" name="body-part-ex" value="3">
                                                         <label for="ex-list3">
                                                             <span class="check"></span>
                                                            	가슴
                                                         </label>
                                                     </li>
 													  <li>
-                                                        <input id="ex-list4" type="checkbox" name="body-part-ex" value="12">
+                                                        <input id="ex-list4" type="checkbox" name="body-part-ex" value="4">
                                                         <label for="ex-list4">
-                                                            <span class="check"></span>
-                                                           	배
-                                                        </label>
-                                                    </li>
-													
-													  <li>
-                                                        <input id="ex-list5" type="checkbox" name="body-part-ex" value="4">
-                                                        <label for="ex-list5">
                                                             <span class="check"></span>
                                                            	허리
                                                         </label>
                                                     </li>
 													
 													  <li>
-                                                        <input id="ex-list6" type="checkbox" name="body-part-ex" value="5">
+                                                        <input id="ex-list5" type="checkbox" name="body-part-ex" value="5">
+                                                        <label for="ex-list5">
+                                                            <span class="check"></span>
+                                                           	복근
+                                                        </label>
+                                                    </li>
+													
+													  <li>
+                                                        <input id="ex-list6" type="checkbox" name="body-part-ex" value="6">
                                                         <label for="ex-list6">
+                                                            <span class="check"></span>
+                                                           	등
+                                                        </label>
+                                                    </li>
+													
+													  <li>
+                                                        <input id="ex-list7" type="checkbox" name="body-part-ex" value="7">
+                                                        <label for="ex-list7">
                                                             <span class="check"></span>
                                                            	허벅지
                                                         </label>
                                                     </li>
 													
 													  <li>
-                                                        <input id="ex-list7" type="checkbox" name="body-part-ex" value="6">
-                                                        <label for="ex-list7">
-                                                            <span class="check"></span>
-                                                           	무릅
-                                                        </label>
-                                                    </li>
-													
-													  <li>
-                                                        <input id="ex-list8" type="checkbox" name="body-part-ex" value="7">
+                                                        <input id="ex-list8" type="checkbox" name="body-part-ex" value="8">
                                                         <label for="ex-list8">
-                                                            <span class="check"></span>
-                                                           	발목
-                                                        </label>
-                                                    </li>
-													
-													  <li>
-                                                        <input id="ex-list9" type="checkbox" name="body-part-ex" value="8">
-                                                        <label for="ex-list9">
-                                                            <span class="check"></span>
-                                                           	등
-                                                        </label>
-                                                    </li>
-                                                     <li>
-                                                        <input id="ex-list10" type="checkbox" name="body-part-ex" value="9">
-                                                        <label for="ex-list10">
                                                             <span class="check"></span>
                                                            	엉덩이
                                                         </label>
                                                     </li>
-                                                     <li>
-                                                        <input id="ex-list11" type="checkbox" name="body-part-ex" value="10">
-                                                        <label for="ex-list11">
+                                                    <li>
+                                                        <input id="ex-list9" type="checkbox" name="body-part-ex" value="9">
+                                                        <label for="ex-list9">
                                                             <span class="check"></span>
-                                                           	뒷허벅지
+                                                           	전신
                                                         </label>
                                                     </li>
-                                                    <li>
-                                                       <input id="ex-list12" type="checkbox" name="body-part-ex" value="13">
-                                                       <label for="ex-list12">
-                                                           <span class="check"></span>
-                                                          	종아리
-                                                       </label>
-                                                   </li>
-                                                   <li>
-                                                       <input id="ex-list13" type="checkbox" name="body-part-ex" value="14">
-                                                       <label for="ex-list13">
-                                                           <span class="check"></span>
-                                                          	전신
-                                                       </label>
-                                                   </li>
-												
-												
                                                 </ul>
                                             </div>
                                             <!-- //ex_con -->
@@ -428,6 +355,17 @@
                 
                 return true;
             }
+            
+            
+            //닫기버튼 클릭시
+
+            let cancel = document.querySelector(".btn.cancel");
+            
+            cancel.addEventListener('click', (e)=>{
+                e.preventDefault();
+                alert("a");
+                window.location = "./list";
+            });
         });
     </script>
 <!-- 	<script>

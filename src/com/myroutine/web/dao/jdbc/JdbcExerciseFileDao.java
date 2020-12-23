@@ -54,7 +54,9 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 		return list;
 	}
 	
-	//���� �߰�
+
+	//파일 추가
+
 	@Override
 	public int insert(ExerciseFile exerciseFile) {
 		int result=0;
@@ -69,7 +71,9 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 			st.setInt(3, exerciseFile.getExerciseId());
 
 
-			result = st.executeUpdate(); //insert, update, delete ������ ��			
+
+			result = st.executeUpdate(); //insert, update, delete 문장일 때			
+
 			
 			st.close();
 			con.close();
@@ -84,7 +88,8 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 		return result;
 	}
 	
-	//���� ����
+
+	//파일 삭제
 	@Override
 	public int delete(String fileNameStr, int id) {
 		int result=0;
@@ -96,8 +101,13 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
 			Statement st = con.createStatement();
 			
-			result = st.executeUpdate(sql); //insert, update, delete ������ ��			
+
+			result = st.executeUpdate(sql); //insert, update, delete 문장일 때			
+
 			
+
+			System.out.println("파일 삭제 완료");
+
 			st.close();
 			con.close();
 		} catch (SQLException e) {
@@ -113,7 +123,9 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 	
 	
 	
-	//���� ����2
+
+	//파일 삭제2
+
 	@Override
 	public int delete(int id) {
 		int result=0;
@@ -125,8 +137,13 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, id);
 			
-			result = st.executeUpdate(); //insert, update, delete ������ ��			
+
+			result = st.executeUpdate(); //insert, update, delete 문장일 때			
+
 			
+
+			System.out.println("파일 삭제 완료");
+
 			st.close();
 			con.close();
 		} catch (SQLException e) {
@@ -141,8 +158,9 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 	}
 	
 	
-	
-	//��� ÷�� ���� ����
+
+	//모든 첨부 파일 삭제
+
 	@Override
 	public int deleteAll(int id) {
 		int result=0;
@@ -154,8 +172,12 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, id);
 
-			result = st.executeUpdate(); //insert, update, delete ������ ��			
-			
+
+			result = st.executeUpdate(); //insert, update, delete 문장일 때			
+
+
+			System.out.println("파일 삭제 완료");
+
 			st.close();
 			con.close();
 		} catch (SQLException e) {
@@ -172,7 +194,8 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 
 	
 	
-	//���� ����Ʈ ��������
+	//파일 리스트 가져오기
+
 	@Override
 	public List<ExerciseFile> getList(int id) {
 		List<ExerciseFile> exFileList = new ArrayList<>();
