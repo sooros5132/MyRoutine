@@ -60,14 +60,7 @@ public class JdbcExerciseDao implements ExerciseDao {
 
 	public ExerciseView getView(int id) {
 		
-		ExerciseView exv = null;
-//		 String sql = "SELECT  c.*, m.nickname writer_name, cc.type category_type, cf.files, cf.route file_path "
-//	               + " FROM COMMUNITY c"
-//	               + "      Left join member m on m.id =c.writer_id"
-//	               + "      Left join COMMUNITY_CATEGORY cc on c.category_id = cc.id"
-//	               + "     Left join COMMUNITY_FILE_VIEW cf on cf.community_id = c.id"
-//	               + " where c.id="+id;   
-		 
+		ExerciseView exv = null;		 
 		String url = DBContext.URL;
 		String sql = "SELECT de.*,e.contents FROM "+
 						"(SELECT distinct ev.id ,ev.name,ev.eng_name , ev.regdate, ev.recommend, ev.member_id, ev.category_id "+
@@ -84,23 +77,6 @@ public class JdbcExerciseDao implements ExerciseDao {
 			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
-//			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
-//			PreparedStatement st = con.prepareStatement(sql);
-//			st.setInt(1, id);
-//			st.setInt(2, id);
-//			st.setInt(3, id);
-//			st.setInt(4, id);
-//			ResultSet rs = st.executeQuery(sql);
-			
-//			st.setString(1, exercise.getName());
-//			st.setString(2, exercise.getContents());
-//			st.setString(3, exercise.getEngName());
-//			st.setString(4, exercise.getRecommend());
-//			st.setInt(5, exercise.getMemberId());
-//			st.setInt(6, exercise.getCategoryId());
-			
-
-
 			if (rs.next()) {
 				String name = rs.getString("name");
 				String contents = rs.getString("contents");
@@ -442,12 +418,12 @@ public class JdbcExerciseDao implements ExerciseDao {
 		return null;
 	}
 
-	
+	//재활 리스트의 정보를 받아오는 함수
 	public List<ExerciseListView> getListView() {
 		List<ExerciseListView> list = new ArrayList<>();
 
 		String url = DBContext.URL;
-		String sql = "SELECT * FROM EXERCISE_LIST_VIEW";
+		String sql = "SELECT * FROM EXERCISE_LIST_VIEW WHERE CATEGORY_ID=1";
 		
 		System.out.println("제이디비씨 겟리스트");
 		
@@ -460,10 +436,11 @@ public class JdbcExerciseDao implements ExerciseDao {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
+				int categoryId=rs.getInt("category_id");
 				String efName = rs.getString("ef_name");
 				String efRoute = rs.getString("ef_route");
 
-				ExerciseListView exlv = new ExerciseListView(id,name,efName,efRoute);
+				ExerciseListView exlv = new ExerciseListView(id,name,categoryId, efName,efRoute);
 				System.out.println(list);
 				list.add(exlv);
 			}
@@ -480,14 +457,54 @@ public class JdbcExerciseDao implements ExerciseDao {
 		return list;
 	}
 	
-	@Override
-	public List<ExerciseListView> getListView(String[] parts) {
+	//홈트 리스트의 정보를 받아오는 함수
+	public List<ExerciseListView> getHomeListView(){
+		List<ExerciseListView> list = new ArrayList<>();
+
+		String url = DBContext.URL;
+		String sql = "SELECT * FROM EXERCISE_LIST_VIEW WHERE CATEGORY_ID=2";
+		
+		System.out.println("제이디비씨 겟리스트");
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				int categoryId=rs.getInt("category_id");
+				String efName = rs.getString("ef_name");
+				String efRoute = rs.getString("ef_route");
+
+				ExerciseListView exlv = new ExerciseListView(id,name,categoryId, efName,efRoute);
+				System.out.println(list);
+				list.add(exlv);
+			}
+
+			rs.close();
+			st.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	
+	//부위를 and 체크해서 운동 아이디,이름,카테고리, 파일이름,파일경로
+	public List<ExerciseListView> getAndListView(String[] parts) {
 		String partStrJoin=String.join(",", parts);
 		
 		List<ExerciseListView> list = new ArrayList<>();
 		String url = DBContext.URL;
-		String sql = "SELECT E.EXERCISE_ID ID, E.NAME, EF.NAME EF_NAME, EF.ROUTE EF_ROUTE FROM ( "+
-			    "SELECT IDS.EXERCISE_ID, E.NAME, MIN(EF.ID) EF_ID "+
+		String sql = "SELECT E.EXERCISE_ID ID, E.NAME, E.category_id, EF.NAME EF_NAME, EF.ROUTE EF_ROUTE FROM ( "+
+			    "SELECT IDS.EXERCISE_ID, E.NAME,E.category_id,  MIN(EF.ID) EF_ID "+
 			    "FROM ( "+
 			        "SELECT EXERCISE_ID  "+
 			        "FROM ( "+
@@ -500,9 +517,11 @@ public class JdbcExerciseDao implements ExerciseDao {
 			    ") IDS "+
 			    "LEFT JOIN EXERCISE E ON E.ID = IDS.EXERCISE_ID "+
 			    "LEFT JOIN EXERCISE_FILE EF ON ef.exercise_id = ids.EXERCISE_ID "+
-			    "GROUP BY IDS.EXERCISE_ID, E.NAME "+
+			    "where e.category_id=1 "+
+			    "GROUP BY IDS.EXERCISE_ID, E.NAME ,E.category_id"+
 			") E "+
-			"LEFT JOIN EXERCISE_FILE EF ON EF.ID = E.EF_ID";
+			"LEFT JOIN EXERCISE_FILE EF ON EF.ID = E.EF_ID ";
+			
 
 		System.out.println(sql);
 		
@@ -518,11 +537,12 @@ public class JdbcExerciseDao implements ExerciseDao {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
+				int categoryId= rs.getInt("category_id");
 				String efName = rs.getString("ef_name");
 				String efRoute = rs.getString("ef_route");
 				System.out.println(partStrJoin);
 
-				ExerciseListView exlv = new ExerciseListView(id,name,efName,efRoute);
+				ExerciseListView exlv = new ExerciseListView(id,name,categoryId,efName,efRoute);
 				System.out.println(exlv);
 				list.add(exlv);
 			}
@@ -540,8 +560,192 @@ public class JdbcExerciseDao implements ExerciseDao {
 		return list;
 
 	}
+	
+	//부위를 or 체크해서 운동 아이디,이름,카테고리, 파일이름,파일경로
+		@Override
+	public List<ExerciseListView> getOrListView(String[] parts) {
+			String partStrJoin=String.join(",", parts);
+			
+			List<ExerciseListView> list = new ArrayList<>();
+			String url = DBContext.URL;
+			String sql = "SELECT E.EXERCISE_ID ID, E.NAME, E.category_id, EF.NAME EF_NAME, EF.ROUTE EF_ROUTE FROM ( "+
+				    "SELECT IDS.EXERCISE_ID, E.NAME, E.category_id, MIN(EF.ID) EF_ID "+
+				    "FROM ( "+
+				        "SELECT EXERCISE_ID  "+
+				        "FROM ( "+
+				            "SELECT EXERCISE_ID "+
+				            "FROM exercise_body_part "+
+				            "WHERE BODY_PART_ID IN ("+partStrJoin+") "+
+				        ") "+
+				    ") IDS "+
+				    "LEFT JOIN EXERCISE E ON E.ID = IDS.EXERCISE_ID "+
+				    "LEFT JOIN EXERCISE_FILE EF ON ef.exercise_id = ids.EXERCISE_ID "+
+				    "where e.category_id=1 "+
+				    "GROUP BY IDS.EXERCISE_ID, E.NAME ,E.category_id"+
+				") E "+
+				"LEFT JOIN EXERCISE_FILE EF ON EF.ID = E.EF_ID";
+
+			System.out.println(sql);
+			
+			System.out.println("===운동 or리스트 뷰");
+			System.out.println(partStrJoin);
+			try {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+				Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery(sql);
+				System.out.println(partStrJoin);
+
+				while (rs.next()) {
+					int id = rs.getInt("id");
+					String name = rs.getString("name");
+					int categoryId= rs.getInt("category_id");
+					String efName = rs.getString("ef_name");
+					String efRoute = rs.getString("ef_route");
+					System.out.println(partStrJoin);
+
+					ExerciseListView exlv = new ExerciseListView(id,name,categoryId,efName,efRoute);
+					System.out.println(exlv);
+					list.add(exlv);
+				}
+				
+				rs.close();
+				st.close();
+				con.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			
+			return list;
+
+		}
 
 	
+	//부위를 and 체크해서 운동 아이디,이름,카테고리, 파일이름,파일경로
+	public List<ExerciseListView> getAndHomeListView(String[] parts) {
+			String partStrJoin=String.join(",", parts);
+			
+			List<ExerciseListView> list = new ArrayList<>();
+			String url = DBContext.URL;
+			String sql = "SELECT E.EXERCISE_ID ID, E.NAME, E.category_id, EF.NAME EF_NAME, EF.ROUTE EF_ROUTE FROM ( "+
+				    "SELECT IDS.EXERCISE_ID, E.NAME,E.category_id,  MIN(EF.ID) EF_ID "+
+				    "FROM ( "+
+				        "SELECT EXERCISE_ID  "+
+				        "FROM ( "+
+				            "SELECT EXERCISE_ID "+
+				            "FROM exercise_body_part "+
+				            "WHERE BODY_PART_ID IN ("+partStrJoin+") "+
+				        ") "+
+				        "GROUP BY EXERCISE_ID "+
+				        "HAVING COUNT(EXERCISE_ID) = "+parts.length +
+				    ") IDS "+
+				    "LEFT JOIN EXERCISE E ON E.ID = IDS.EXERCISE_ID "+
+				    "LEFT JOIN EXERCISE_FILE EF ON ef.exercise_id = ids.EXERCISE_ID "+
+				    "where e.category_id=2 "+
+				    "GROUP BY IDS.EXERCISE_ID, E.NAME ,E.category_id"+
+				") E "+
+				"LEFT JOIN EXERCISE_FILE EF ON EF.ID = E.EF_ID";
 
+			System.out.println(sql);
+			
+			System.out.println("===운동 리스트 뷰");
+			System.out.println(partStrJoin);
+			try {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+				Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery(sql);
+				System.out.println(partStrJoin);
 
+				while (rs.next()) {
+					int id = rs.getInt("id");
+					String name = rs.getString("name");
+					int categoryId= rs.getInt("category_id");
+					String efName = rs.getString("ef_name");
+					String efRoute = rs.getString("ef_route");
+					System.out.println(partStrJoin);
+
+					ExerciseListView exlv = new ExerciseListView(id,name,categoryId,efName,efRoute);
+					System.out.println(exlv);
+					list.add(exlv);
+				}
+				
+				rs.close();
+				st.close();
+				con.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			
+			return list;
+
+		}
+	
+	//부위를 or 체크해서 운동 아이디,이름,카테고리, 파일이름,파일경로
+	public List<ExerciseListView> getOrHomeListView(String[] parts) {
+				String partStrJoin=String.join(",", parts);
+				
+				List<ExerciseListView> list = new ArrayList<>();
+				String url = DBContext.URL;
+				String sql = "SELECT E.EXERCISE_ID ID, E.NAME, E.category_id, EF.NAME EF_NAME, EF.ROUTE EF_ROUTE FROM ( "+
+					    "SELECT IDS.EXERCISE_ID, E.NAME, E.category_id, MIN(EF.ID) EF_ID "+
+					    "FROM ( "+
+					        "SELECT EXERCISE_ID  "+
+					        "FROM ( "+
+					            "SELECT EXERCISE_ID "+
+					            "FROM exercise_body_part "+
+					            "WHERE BODY_PART_ID IN ("+partStrJoin+") "+
+					        ") "+
+					    ") IDS "+
+					    "LEFT JOIN EXERCISE E ON E.ID = IDS.EXERCISE_ID "+
+					    "LEFT JOIN EXERCISE_FILE EF ON ef.exercise_id = ids.EXERCISE_ID "+
+					    "where e.category_id=2 "+
+					    "GROUP BY IDS.EXERCISE_ID, E.NAME ,E.category_id"+
+					") E "+
+					"LEFT JOIN EXERCISE_FILE EF ON EF.ID = E.EF_ID";
+
+				System.out.println(sql);
+				
+				System.out.println("===운동 or리스트 뷰");
+				System.out.println(partStrJoin);
+				try {
+					Class.forName("oracle.jdbc.driver.OracleDriver");
+					Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+					Statement st = con.createStatement();
+					ResultSet rs = st.executeQuery(sql);
+					System.out.println(partStrJoin);
+
+					while (rs.next()) {
+						int id = rs.getInt("id");
+						String name = rs.getString("name");
+						int categoryId= rs.getInt("category_id");
+						String efName = rs.getString("ef_name");
+						String efRoute = rs.getString("ef_route");
+						System.out.println(partStrJoin);
+
+						ExerciseListView exlv = new ExerciseListView(id,name,categoryId,efName,efRoute);
+						System.out.println(exlv);
+						list.add(exlv);
+					}
+					
+					rs.close();
+					st.close();
+					con.close();
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+				
+				return list;
+
+			}
+	
 }

@@ -44,11 +44,10 @@
                     <!-- <h2>서브메뉴</h2> -->
                     <ul class="dep1">
                         <!-- 하위 메뉴가 있으면 li태그에 data-type:true 넣어주세요 -->
-                        <li>
-                            <a href="/admin/exercise/list">재활운동 관리<i class="xi-angle-right-min"></i></a>
-                            
+                        <li >
+                            <a href="/admin/exercise/list">재활운동 관리</a>
                         </li>
-                        <li><a href="/admin/exercise/homelist">홈트레이닝 관리</a></li>
+                        <li><a href="/admin/exercise/homelist">홈트레이닝 관리<i class="xi-angle-right-min"></i></a></li>
                        
                     </ul>
                 </nav>
@@ -63,26 +62,34 @@
                 <c:if test=""></c:if>
                 
                     <div class="input-container">
-                    	<form action="/admin/exercise/list" method="get" class="a">
+                    	<form action="/admin/exercise/homelist" method="get" class="a">
                         	
                             <div class="check-label">
                                 부위
                             </div>
                             <div class="check-list">
-                            	<input type="checkbox" id="10" name="part" value="10">
-                            	<label for="10">목</label>
                             	<input type="checkbox" id="1" name="part" value="1">
                             	<label for="1">어깨</label>
-                            	<input type="checkbox" id="11" name="part" value="11">
-                            	<label for="11">손목</label>
+                            	<input type="checkbox" id="2" name="part" value="2">
+                            	<label for="2">팔</label>
+                            	<input type="checkbox" id="3" name="part" value="3">
+                            	<label for="3">가슴</label>
                             	<input type="checkbox" id="4" name="part" value="4">
                             	<label for="4">허리</label>
-                            	<input type="checkbox" id="12" name="part" value="12">
-                                <label for="12">무릎</label>
+                            	<input type="checkbox" id="5" name="part" value="5">
+                                <label for="5">복근</label>
+                            	<input type="checkbox" id=6 name="part" value="6">
+                            	<label for="6">등</label>
+                            	<input type="checkbox" id="7" name="part" value="7">
+                            	<label for="7">허벅지</label>
+                            	<input type="checkbox" id="8" name="part" value="8">
+                            	<label for="8">엉덩이</label>
+                            	<input type="checkbox" id="9" name="part" value="9">
+                                <label for="9">전신</label>
                             </div>
                             <select name="option">
-                                <option value="and">and</option>
-                                <option value="or">or</option>
+                                <option value = "and">and</option>
+                                <option value = "or">or</option>
                             </select>
                             <input type="submit" class="submit-input" value="검색">
                             
@@ -98,9 +105,6 @@
                                 
                             </div> -->
                         </form>
-                        <div class="button-box">
-                        	<button >등록</button>
-                        </div>
                     </div>
                     
                     <%//부위 운동 파일 %>

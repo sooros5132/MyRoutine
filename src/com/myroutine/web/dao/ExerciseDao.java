@@ -36,5 +36,15 @@ public interface ExerciseDao {
 
 	List<ExerciseListView> getListView();
 	
-	List<ExerciseListView> getListView(String[] parts);
-}
+	List<ExerciseListView> getAndListView(String[] parts);
+	
+	List<ExerciseListView> getOrListView(String[] parts);
+
+	List<ExerciseListView> getHomeListView();
+	
+	List<ExerciseListView> getAndHomeListView(String[] parts);
+	
+	List<ExerciseListView> getOrHomeListView(String[] parts);
+
+	
+	}

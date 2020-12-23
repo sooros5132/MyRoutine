@@ -65,12 +65,31 @@ public class ExerciseService {
 		return result;
 	}
 	
-	public List<ExerciseListView> getListView(String[] parts) {
-		List<ExerciseListView> result = exerciseDao.getListView(parts);
+	public List<ExerciseListView> getAndListView(String[] parts) {
+		List<ExerciseListView> result = exerciseDao.getAndListView(parts);
+		return result;
+	}
+	
+	public List<ExerciseListView> getOrListView(String[] parts) {
+		List<ExerciseListView> result = exerciseDao.getOrListView(parts);
 		return result;
 	}
 
-	
+	public List<ExerciseListView> getHomeListView() {
+		List<ExerciseListView> result = exerciseDao.getHomeListView();
 
+		return result;
+	}
+	
+	public List<ExerciseListView> getAndHomeListView(String[] parts) {
+		List<ExerciseListView> result = exerciseDao.getAndHomeListView(parts);
+		return result;
+	}
+	
+	public List<ExerciseListView> getOrHomeListView(String[] parts) {
+		List<ExerciseListView> result = exerciseDao.getOrHomeListView(parts);
+		return result;
+	}
+	
 }
 
