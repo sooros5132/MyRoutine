@@ -6,22 +6,34 @@ import com.myroutine.web.dao.ExerciseFileDao;
 import com.myroutine.web.dao.jdbc.JdbcExerciseFileDao;
 import com.myroutine.web.entity.admin.exercise.ExerciseFile;
 
+
+
 public class ExerciseFileService {
-	ExerciseFileDao exerciseFileDao;
+	private ExerciseFileDao exerciseFileDao;
 	
+	public List<ExerciseFile>getFileList(int exerciseId) {
+		exerciseFileDao = new JdbcExerciseFileDao();
+		List<ExerciseFile> result = exerciseFileDao.getFileList(exerciseId); 
+		return result;
+	}
+
+	public List<ExerciseFile> getFileList(String part) {
+		exerciseFileDao = new JdbcExerciseFileDao();
+		return null;
+	}
 	
 	public ExerciseFileService() {
 		exerciseFileDao = new JdbcExerciseFileDao();
 	}
 	
 	
-	//ÆÄÀÏµî·Ï
+	//ï¿½ï¿½ï¿½Ïµï¿½ï¿½
 	public int insert(ExerciseFile exerciseFile) {
 		int result = exerciseFileDao.insert(exerciseFile);
 		return result;
 	}
 	
-	//ÆÄÀÏ »èÁ¦
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int delete(String fileNameStr, int id) {
 		int result = exerciseFileDao.delete(fileNameStr, id);
 		return result;
@@ -32,7 +44,7 @@ public class ExerciseFileService {
 		return result;
 	}
 	
-	//¸ðµç ÆÄÀÏ »èÁ¦
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int deleteAll(int id) {
 		exerciseFileDao = new JdbcExerciseFileDao();
 		int result = exerciseFileDao.deleteAll(id);
@@ -45,8 +57,4 @@ public class ExerciseFileService {
 		
 		return exerciseFileList;
 	}
-
-	
-
-	
 }

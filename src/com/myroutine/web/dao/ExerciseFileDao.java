@@ -5,19 +5,26 @@ import java.util.List;
 import com.myroutine.web.entity.admin.exercise.ExerciseFile;
 
 public interface ExerciseFileDao {
-	//ÆÄÀÏ Ãß°¡
+
+	List<ExerciseFile> getFileList(int exerciseId) ;
+	
+	//íŒŒì¼ ì¶”ê°€
 	int insert(ExerciseFile exfile);
 	
-	//ÆÄÀÏ »èÁ¦
+
+	//íŒŒì¼ ì‚­ì œ
+	
 	int delete(String fileNameStr,int id);
 	
 	int delete(int id);
 	
 	
-	//¸ğµç ÆÄÀÏ »èÁ¦
+
+	//ëª¨ë“  íŒŒì¼ ì‚­ì œ
 	int deleteAll(int id);
 	
 		
-	//ÆÄÀÏ ¸®½ºÆ® °¡Á®¿À±â
+	//íŒŒì¼ ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
 	List<ExerciseFile> getList(int id);
+
 }

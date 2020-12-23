@@ -22,9 +22,6 @@ public class NoticeService {
 	public NoticeService() {
 		noticeDao = new JdbcNoticeDao();
 	}
-
-
-	
 	
 	public Notice get(int id) {
 
@@ -120,7 +117,9 @@ public class NoticeService {
 	}
 
 
-
+	public int getCount2() {
+		return noticeDao.getCount2();
+	}
 
 
 

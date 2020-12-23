@@ -19,25 +19,25 @@ public class DeleteController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int id = Integer.parseInt(req.getParameter("id"));
-		System.out.println("»èÁ¦ÄÁÆ®·Ñ");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½");
 		
 		
-		// ¿îµ¿¸ñ·Ï»èÁ¦
+		// ï¿½îµ¿ï¿½ï¿½Ï»ï¿½ï¿½ï¿½
 		ExerciseBodyPartService ebpService = new ExerciseBodyPartService();
 		ebpService.delete(id);
 		
 		
-		// Ã·ºÎÆÄÀÏ »èÁ¦
+		// Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		ExerciseFileService exFileService = new ExerciseFileService();
 		exFileService.deleteAll(id);
 				
-		// ¿îµ¿»èÁ¦
+		// ï¿½îµ¿ï¿½ï¿½ï¿½ï¿½
 		ExerciseService exService = new ExerciseService();
 		exService.delete(id);
 
 
 		
-		req.getRequestDispatcher("detail.jsp").forward(req, resp);
+		req.getRequestDispatcher("list.jsp").forward(req, resp);
 	}
 
 }

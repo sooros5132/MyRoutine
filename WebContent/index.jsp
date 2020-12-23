@@ -81,12 +81,12 @@
             // 비디오 설정
             let videoSrc = [
             //     "D1PvIWdJ8xo", //[MV] IU(아이유) _ Blueming(블루밍)
-            //     "CM4CkVFmTds", // TWICE(트와이스) "I CAN'T STOP ME" M/V
+                 "CM4CkVFmTds", // TWICE(트와이스) "I CAN'T STOP ME" M/V
             //     "AAOOKbk-knM", // (MV)유아(YooA)_숲의 아이 (Bon voyage)
             //     "GywDFkY3z-c", // LEE SUHYUN - ‘ALIEN’ M/V
             //     "dyRsYk0LyA8", // BLACKPINK – ‘Lovesick Girls’ M/V
             //     "iDjQSdN_ig8", // [MV] OH MY GIRL(오마이걸) _ Nonstop(살짝 설렜어)
-                "Op2wX3MVIEk", // 1조
+                "H-AcDBLqxi4", // 1조
                 "ttmzTf6XhlA", // 2조
                 "LJgaulCeCbI", // 3조
                 "g22QkE7Mj6Q", // 4조

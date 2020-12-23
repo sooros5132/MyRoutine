@@ -11,12 +11,12 @@ public class Exercise {
 	private String recommend;
 	private int memberId;
 	private int categoryId;
-	
-	
+	private int count;
 	
 	public Exercise() {
 		// TODO Auto-generated constructor stub
 	}
+
 	//운동 등록시 사용
 	public Exercise(String name, String contents, String engName, String recommend, int memberId,
 			int categoryId) {
@@ -108,6 +108,14 @@ public class Exercise {
 		this.categoryId = categoryId;
 	}
 
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 	@Override
 	public String toString() {

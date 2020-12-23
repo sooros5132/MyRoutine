@@ -32,7 +32,7 @@ public interface NoticeDao {
 	int updateHit(Notice notice);
 	int deleteAll(int[] ids);
 	
-	
+	int getCount2();
 	
 	
 

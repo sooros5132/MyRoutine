@@ -2,13 +2,13 @@ package com.myroutine.web.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.sql.PreparedStatement;
 
 import com.myroutine.web.dao.ExerciseFileDao;
 import com.myroutine.web.entity.admin.exercise.Exercise;
@@ -16,8 +16,47 @@ import com.myroutine.web.entity.admin.exercise.ExerciseFile;
 
 public class JdbcExerciseFileDao implements ExerciseFileDao {
 	
+	@Override
+	public List<ExerciseFile> getFileList(int exerciseId) {
+		System.out.println("======ì œì´ë””ë¹„ì”¨_íŒŒì¼_ë‹¤ì˜¤");
+		List<ExerciseFile> list = new ArrayList<>();
+		String url = DBContext.URL;
+		String sql =	"select * from exercise_file where exercise_id='"+exerciseId+"'";
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+
+			while (rs.next()) {
+				int id= rs.getInt("ID");
+				//System.out.println("ID:"+id);
+				String name = rs.getString("NAME");
+				String route = rs.getString("ROUTE");
+				
+				ExerciseFile ef = new ExerciseFile(id,name,route,exerciseId);
+				list.add(ef);
+			}
+			for(ExerciseFile ef : list) {
+				System.out.println(ef);
+			}
+			
+			rs.close();
+			st.close();
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
-	//ÆÄÀÏ Ãß°¡
+
+	//íŒŒì¼ ì¶”ê°€
+
 	@Override
 	public int insert(ExerciseFile exerciseFile) {
 		int result=0;
@@ -32,9 +71,10 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 			st.setInt(3, exerciseFile.getExerciseId());
 
 
-			result = st.executeUpdate(); //insert, update, delete ¹®ÀåÀÏ ¶§			
+
+			result = st.executeUpdate(); //insert, update, delete ë¬¸ì¥ì¼ ë•Œ			
+
 			
-			System.out.println("ÆÄÀÏ Ãß°¡ ¿Ï·á");
 			st.close();
 			con.close();
 		} catch (SQLException e) {
@@ -48,7 +88,8 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 		return result;
 	}
 	
-	//ÆÄÀÏ »èÁ¦
+
+	//íŒŒì¼ ì‚­ì œ
 	@Override
 	public int delete(String fileNameStr, int id) {
 		int result=0;
@@ -60,9 +101,13 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
 			Statement st = con.createStatement();
 			
-			result = st.executeUpdate(sql); //insert, update, delete ¹®ÀåÀÏ ¶§			
+
+			result = st.executeUpdate(sql); //insert, update, delete ë¬¸ì¥ì¼ ë•Œ			
+
 			
-			System.out.println("ÆÄÀÏ »èÁ¦ ¿Ï·á");
+
+			System.out.println("íŒŒì¼ ì‚­ì œ ì™„ë£Œ");
+
 			st.close();
 			con.close();
 		} catch (SQLException e) {
@@ -78,7 +123,9 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 	
 	
 	
-	//ÆÄÀÏ »èÁ¦2
+
+	//íŒŒì¼ ì‚­ì œ2
+
 	@Override
 	public int delete(int id) {
 		int result=0;
@@ -90,9 +137,13 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, id);
 			
-			result = st.executeUpdate(); //insert, update, delete ¹®ÀåÀÏ ¶§			
+
+			result = st.executeUpdate(); //insert, update, delete ë¬¸ì¥ì¼ ë•Œ			
+
 			
-			System.out.println("ÆÄÀÏ »èÁ¦ ¿Ï·á");
+
+			System.out.println("íŒŒì¼ ì‚­ì œ ì™„ë£Œ");
+
 			st.close();
 			con.close();
 		} catch (SQLException e) {
@@ -107,8 +158,9 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 	}
 	
 	
-	
-	//¸ğµç Ã·ºÎ ÆÄÀÏ »èÁ¦
+
+	//ëª¨ë“  ì²¨ë¶€ íŒŒì¼ ì‚­ì œ
+
 	@Override
 	public int deleteAll(int id) {
 		int result=0;
@@ -120,9 +172,12 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, id);
 
-			result = st.executeUpdate(); //insert, update, delete ¹®ÀåÀÏ ¶§			
-			
-			System.out.println("ÆÄÀÏ »èÁ¦ ¿Ï·á");
+
+			result = st.executeUpdate(); //insert, update, delete ë¬¸ì¥ì¼ ë•Œ			
+
+
+			System.out.println("íŒŒì¼ ì‚­ì œ ì™„ë£Œ");
+
 			st.close();
 			con.close();
 		} catch (SQLException e) {
@@ -139,7 +194,8 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 
 	
 	
-	//ÆÄÀÏ ¸®½ºÆ® °¡Á®¿À±â
+	//íŒŒì¼ ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
+
 	@Override
 	public List<ExerciseFile> getList(int id) {
 		List<ExerciseFile> exFileList = new ArrayList<>();
