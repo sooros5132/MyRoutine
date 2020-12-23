@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.myroutine.web.entity.admin.exercise.Exercise;
@@ -85,8 +86,9 @@ public class EditController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("aaa");
-		int memberId  = 21; //임시로 고정 //String memberId = request.getParameter("memberId");
+		
+		HttpSession session = request.getSession();
+		int memberId  =  Integer.parseInt((String) session.getAttribute("memberId"));
 		
 		//운동정보 수정
 		int id = Integer.parseInt(request.getParameter("id"));
