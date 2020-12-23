@@ -18,7 +18,6 @@ import com.myroutine.web.entity.admin.exercise.Exercise;
 public class JdbcExerciseDao implements ExerciseDao {
 
 	//운동정보
-
 	@Override
 	public Exercise get(int id) {
 		Exercise ex = null;
@@ -145,8 +144,8 @@ public class JdbcExerciseDao implements ExerciseDao {
 	public int insert(Exercise exercise) {
 		int result=0;
 		String url = DBContext.URL;
-		String sql = "INSERT INTO EXERCISE(NAME, CONTENTS, REGDATE, ENG_NAME, RECOMMEND, MEMBER_ID, CATEGORY_ID) "
-				+ "VALUES(?, ?, SYSTIMESTAMP, ? ,?, ?, ?)";
+		String sql = "INSERT INTO EXERCISE(ID, NAME, CONTENTS, REGDATE, ENG_NAME, RECOMMEND, MEMBER_ID, CATEGORY_ID) "
+				+ "VALUES(EXERCISE_ID_SEQ.NEXTVAL,?, ?, SYSTIMESTAMP, ? ,?, ?, ?)";
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);

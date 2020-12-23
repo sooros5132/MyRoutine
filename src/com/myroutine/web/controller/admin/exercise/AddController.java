@@ -43,7 +43,7 @@ public class AddController extends HttpServlet {
 		String name = request.getParameter("name");
 		String contents = request.getParameter("contents");
 		String engName = request.getParameter("eng-name");
-		String recommand = request.getParameter("recommand");
+		String recommand = request.getParameter("recommend");
 		int categoryId = Integer.parseInt(request.getParameter("category"));
 		ExerciseService exService = new ExerciseService();
 		Exercise exercise = new Exercise(name, contents, engName, recommand, memberId, categoryId);
@@ -97,8 +97,9 @@ public class AddController extends HttpServlet {
 				System.out.println("pathTemp : " + pathTemp);
 				
 				//업로드 경로생성
-				String filePath = pathTemp + fs + fileName;
-				System.out.println("filePath : " + filePath);
+				//String filePath = pathTemp + fs + fileName;
+				//System.out.println("filePath : " + filePath);
+				String filePath = fs + "image" + fs + "exercise";
 				
 				//업로드 폴더 만들기
 				File path = new File(pathTemp);
@@ -124,7 +125,7 @@ public class AddController extends HttpServlet {
 		}		
 		
 		//목록페이지로 이동
-		//response.sendRedirect("list");
+		response.sendRedirect("list");
 
 	}
 }

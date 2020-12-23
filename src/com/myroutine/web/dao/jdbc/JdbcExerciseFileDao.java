@@ -17,7 +17,7 @@ import com.myroutine.web.entity.admin.exercise.ExerciseFile;
 public class JdbcExerciseFileDao implements ExerciseFileDao {
 	
 	
-	//ÆÄÀÏ Ãß°¡
+	//íŒŒì¼ ì¶”ê°€
 	@Override
 	public int insert(ExerciseFile exerciseFile) {
 		int result=0;
@@ -32,9 +32,9 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 			st.setInt(3, exerciseFile.getExerciseId());
 
 
-			result = st.executeUpdate(); //insert, update, delete ¹®ÀåÀÏ ¶§			
+			result = st.executeUpdate(); //insert, update, delete ë¬¸ì¥ì¼ ë•Œ			
 			
-			System.out.println("ÆÄÀÏ Ãß°¡ ¿Ï·á");
+			System.out.println("íŒŒì¼ ì¶”ê°€ ì™„ë£Œ");
 			st.close();
 			con.close();
 		} catch (SQLException e) {
@@ -48,7 +48,7 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 		return result;
 	}
 	
-	//ÆÄÀÏ »èÁ¦
+	//íŒŒì¼ ì‚­ì œ
 	@Override
 	public int delete(String fileNameStr, int id) {
 		int result=0;
@@ -60,9 +60,9 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
 			Statement st = con.createStatement();
 			
-			result = st.executeUpdate(sql); //insert, update, delete ¹®ÀåÀÏ ¶§			
+			result = st.executeUpdate(sql); //insert, update, delete ë¬¸ì¥ì¼ ë•Œ			
 			
-			System.out.println("ÆÄÀÏ »èÁ¦ ¿Ï·á");
+			System.out.println("íŒŒì¼ ì‚­ì œ ì™„ë£Œ");
 			st.close();
 			con.close();
 		} catch (SQLException e) {
@@ -78,7 +78,7 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 	
 	
 	
-	//ÆÄÀÏ »èÁ¦2
+	//íŒŒì¼ ì‚­ì œ2
 	@Override
 	public int delete(int id) {
 		int result=0;
@@ -90,9 +90,9 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, id);
 			
-			result = st.executeUpdate(); //insert, update, delete ¹®ÀåÀÏ ¶§			
+			result = st.executeUpdate(); //insert, update, delete ë¬¸ì¥ì¼ ë•Œ			
 			
-			System.out.println("ÆÄÀÏ »èÁ¦ ¿Ï·á");
+			System.out.println("íŒŒì¼ ì‚­ì œ ì™„ë£Œ");
 			st.close();
 			con.close();
 		} catch (SQLException e) {
@@ -108,7 +108,7 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 	
 	
 	
-	//¸ğµç Ã·ºÎ ÆÄÀÏ »èÁ¦
+	//ëª¨ë“  ì²¨ë¶€ íŒŒì¼ ì‚­ì œ
 	@Override
 	public int deleteAll(int id) {
 		int result=0;
@@ -120,9 +120,9 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setInt(1, id);
 
-			result = st.executeUpdate(); //insert, update, delete ¹®ÀåÀÏ ¶§			
+			result = st.executeUpdate(); //insert, update, delete ë¬¸ì¥ì¼ ë•Œ			
 			
-			System.out.println("ÆÄÀÏ »èÁ¦ ¿Ï·á");
+			System.out.println("íŒŒì¼ ì‚­ì œ ì™„ë£Œ");
 			st.close();
 			con.close();
 		} catch (SQLException e) {
@@ -139,7 +139,7 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 
 	
 	
-	//ÆÄÀÏ ¸®½ºÆ® °¡Á®¿À±â
+	//íŒŒì¼ ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
 	@Override
 	public List<ExerciseFile> getList(int id) {
 		List<ExerciseFile> exFileList = new ArrayList<>();
