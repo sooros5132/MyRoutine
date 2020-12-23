@@ -40,9 +40,8 @@ public class AddController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		
-		System.out.println("aaa" +  session.getAttribute("memberId"));
 		int memberId  = (int) session.getAttribute("memberId");
+		System.out.println("aaa" +  session.getAttribute("memberId"));
 		System.out.println(memberId);
 		
 		
