@@ -1,3 +1,4 @@
+
 <%@page import="com.myroutine.web.service.CommunityService"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,18 +11,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이루틴</title>
-    <link rel="stylesheet" href="../../common/css/reset.css">
-    <link rel="stylesheet" href="../../common/css/common.css">
-    <link rel="stylesheet" href="../../common/css/xeicon.min.css">
-    <link rel="stylesheet" href="../../css/admin/community/list-style.css">   
-    <script src="../../common/js/admin_common.js"></script>
+    <link rel="stylesheet" href="../../css/admin/reset.css">
+    <link rel="stylesheet" href="../../css/admin/common.css">
+    <link rel="stylesheet" href="../../css/xeicon.min.css">
+
+    <link rel="stylesheet" href="../../css/admin/community/list-style.css">
+	
+	<script src="../../js/admin_common.js"></script>
     <script src="../../js/admin/community/list.js"></script>        
 </head>
 <body>
     <div class="wrapper">
         <!-- header -->
         <header class="header">
-            <h1 class="logo"><a href="#"><img src="../../common/images/common/logo.png" alt="마이루틴"></a></h1>
+            <h1 class="logo"><a href="#"><img src="../../image/common/logo.png" alt="마이루틴"></a></h1>
             <nav class="gnb">
                 <ul>
                     <li><a href="#"><i class="xi-calendar-list"></i>운동 관리</a></li>
@@ -84,35 +87,37 @@
 	                        </form>
                         </div>
                     </div>
-                    <table>
-                        <colgroup>
-                            <col style="width:100px">	
-                            <col style="width:120px">
-                            <col style="width: auto;">
-                            <col style="width: 150px">
-                            <col style="width: 100px">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th>작성자</th>
-                                <th>종류</th>
-                                <th>제목</th>
-                                <th>날짜</th>
-                                <th>조회수</th>
-                            </tr>
-                        </thead>
-                        <tbody class="tbody"> 
-						<c:forEach items="${list}" var="n" >               
-                            <tr>
-                                <td>${n.writerName}</td>
-                                <td>${n.categoryType}</td>
-                                <td><a href="detail?id=${n.id}">${n.title}</a></td>
-                                <td>${n.regdate}</td>
-                                <td>${n.hit}</td>
-                            </tr> 
-                         </c:forEach>
-                        </tbody>
-                    </table>
+                    <div>
+	                    <table>
+	                        <colgroup>
+	                            <col style="width:100px">	
+	                            <col style="width:120px">
+	                            <col style="width: 100%">
+	                            <col style="width: 150px">
+	                            <col style="width: 100px">
+	                        </colgroup>
+	                        <thead>
+	                            <tr>
+	                                <th>작성자</th>
+	                                <th>종류</th>
+	                                <th>제목</th>
+	                                <th>날짜</th>
+	                                <th>조회수</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody class="tbody"> 
+							<c:forEach items="${list}" var="n" >               
+	                            <tr>
+	                                <td>${n.writerName}</td>
+	                                <td>${n.categoryType}</td>
+	                                <td><a href="detail?id=${n.id}">${n.title}</a></td>
+	                                <td>${n.regdate}</td>
+	                                <td>${n.hit}</td>
+	                            </tr> 
+	                         </c:forEach>
+	                        </tbody>
+	                    </table>
+                    </div>
                 </section>
                 <div class="btn-box">
 	                <div class="box1">

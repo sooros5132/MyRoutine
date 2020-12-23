@@ -9,10 +9,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이루틴</title>
-    <link rel="stylesheet" href="../../common/css/reset.css">
-    <link rel="stylesheet" href="../../common/css/common.css">
-    <link rel="stylesheet" href="../../common/css/xeicon.min.css">
-    <link rel="stylesheet" href="../../common/css/sub.css">
+    <link rel="stylesheet" href="../../css/admin/reset.css">
+    <link rel="stylesheet" href="../../css/admin/common.css">
+    <link rel="stylesheet" href="../../css/xeicon.min.css">
+    <link rel="stylesheet" href="../../css/admin/sub.css">    
 	<link rel="stylesheet" href="../../css/admin/community/edit-style.css">    
     <script src="../../common/js/admin_common.js"></script>
 </head>

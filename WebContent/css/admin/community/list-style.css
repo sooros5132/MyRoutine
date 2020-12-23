@@ -1,4 +1,6 @@
-
+.title_section{
+	width:100%;
+}
 .title_section>.list_title{
 	display: flex;
 	justify-content: space-between; 
@@ -38,28 +40,28 @@
     color: #fff;
 }
 
-.title_section>table{
-    padding: 0px 2px;
-    width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
-}
-.title_section table thead tr th{
-    background: #30BAA1;
-    color: white;
-    text-align: left;    
-    padding : 16px 20px;
-}
-.title_section table thead tr th:nth-child(2){
-    text-align: center;
-}
-.title_section table tr td
-{
-    border: 1px solid #30BAA1;
-    padding : 16px 20px;
-    border-left-width: 0;
-    border-right-width: 0;
-}
+/* .title_section>table{ */
+/*     padding: 0px 2px; */
+/*     width: 100%; */
+/*     table-layout: fixed; */
+/*     border-collapse: collapse; */
+/* } */
+/* .title_section table thead tr th{ */
+/*     background: #30BAA1; */
+/*     color: white; */
+/*     text-align: left;     */
+/*     padding : 16px 20px; */
+/* } */
+/* .title_section table thead tr th:nth-child(2){ */
+/*     text-align: center; */
+/* } */
+/* .title_section table tr td */
+/* { */
+/*     border: 1px solid #30BAA1; */
+/*     padding : 16px 20px; */
+/*     border-left-width: 0; */
+/*     border-right-width: 0; */
+/* } */
 .btn-box{
     padding:30px 10px; 
     text-align:right;
