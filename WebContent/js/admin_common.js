@@ -1,24 +1,29 @@
 window.addEventListener("load", () => {
-    let gnb = document.querySelector(".gnb");
-    let ul = gnb.querySelector("ul")
-    var current = ul.querySelector(".active");
+      let gnb = document.querySelector(".gnb");
+      let ul = gnb.querySelector("ul")
 
-    ul.onmouseover = function(e){
-       let target = e.target;
+      var Regex = /^(\/admin\/)([0-9a-zA-Z]*)/;
+      let selectedMenu = Regex.exec(location.pathname)[2];
+      
+      var current = ul.querySelector(`.${selectedMenu}-menu`);
+      current?.classList.add("active");
 
-       if(target.nodeName !='A') return;
+      ul.onmouseover = function(e){
+         let target = e.target;
 
-      current.classList.remove("active");
-        current = target;
-        //current.classList.add("active");   
-    }
-    ul.onclick =function(e){
-       let target = e.target;
-       if(target.nodeName =="A" || target.nodeName =='I') 
-          target.classList.add("active");
+         if(target.nodeName !='A') return;
+
+      current?.classList.remove("active");
+         current = target;
+         //current.classList.add("active");   
+      }
+      ul.onclick =function(e){
+         let target = e.target;
+         if(target.nodeName =="A" || target.nodeName =='I') 
+            target.classList.add("active");
 
 
-    }
+      }
 
   
 
@@ -26,7 +31,7 @@ window.addEventListener("load", () => {
 
    //관리자 페이지 사이드 보기
    let snb = document.querySelector('.snb');
-   let dep1List = snb.querySelectorAll('.dep1 > li');
+   let dep1List = snb?.querySelectorAll('.dep1 > li') || [];
    
    dep1List.forEach((list)=>{
       list.addEventListener('click', (e)=>{
