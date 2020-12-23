@@ -40,9 +40,8 @@ public class AddController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		
-		System.out.println("aaa" +  session.getAttribute("memberId"));
 		int memberId  = (int) session.getAttribute("memberId");
+		System.out.println("aaa" +  session.getAttribute("memberId"));
 		System.out.println(memberId);
 		
 		
@@ -100,15 +99,15 @@ public class AddController extends HttpServlet {
 				String fileName = filePart.getSubmittedFileName(); //파일이름 가져오기
 				
 				//실제 서비스의 물리경로
-				String pathTemp = request.getServletContext().getRealPath(fs + "exercise");
+				String pathTemp = request.getServletContext().getRealPath(fs);
 				System.out.println("pathTemp : " + pathTemp);
 				
 				//업로드 경로생성
-				String filePath = pathTemp + fs + fileName;
+				String filePath = pathTemp + fs + "image" + fs +"exercise" +fs+  fileName;
 				System.out.println("filePath : " + filePath);
 				
 				String filePath2 = fs + "image" + fs + "exercise";
-				System.out.println(filePath2);
+				System.out.println(filePath);
 				
 				//업로드 폴더 만들기
 				File path = new File(pathTemp);
