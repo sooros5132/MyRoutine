@@ -45,7 +45,6 @@
     border-spacing: 0px;
     border-collapse: collapse;
     font-size: 14px;
-    z-index: -1;
 }
 
 /* .member-list-setting{
@@ -137,7 +136,7 @@
 }
 .member-list > table tr.delete{
 	background: rgba(196, 62, 9, 0.7) !important;
-	animation: element-delete 3s linear 1;
+	animation: element-delete 1.5s linear 1;
 }
 
 

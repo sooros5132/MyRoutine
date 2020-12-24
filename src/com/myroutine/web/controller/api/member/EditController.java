@@ -43,13 +43,21 @@ public class EditController extends HttpServlet {
 			out.print("{\"result\": \"fail\"}");
 			return;
 		}
+
 		
 		// SETTING --------------------------------------------------
 		int result = 0;
 		int id = Integer.parseInt(idCheck);
+		MemberService service = new MemberService();
 
-//		삭제 기능 잠시 꺼둠 
-//		활성화 -> actions배열에 delete 추가
+		{ // 삭제하는거일경우, 이곳 제거하면 삭제기능 불가능.
+			String value = request.getParameter("delete");
+			if( value != null && value.equals("1")) {
+				out.printf("{\"result\":%d}", service.delete(id));
+				return;
+			}
+		}
+		
 		String[] actions = {"email","name","nickname","phone","birthday","rule","open_info","last_login"};
 		List<String> keys = new ArrayList<String>();
 		Map<String, String> datas = new HashMap<String, String>();
@@ -65,6 +73,7 @@ public class EditController extends HttpServlet {
 			if( temp == null || temp.equals("") ) {
 				return true;
 			}
+			
 			if( key.equals("last_login")) {
 				TimeService.setNowDate();
 				temp = TimeService.getDateNoSeparator();
@@ -74,7 +83,6 @@ public class EditController extends HttpServlet {
 		});
 
 		List<String> results = new ArrayList<String>();
-		MemberService service = new MemberService();
 
 		// UPDATE --------------------------------------------
 		result = service.updateAll(id, datas);

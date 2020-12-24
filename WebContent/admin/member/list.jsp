@@ -118,8 +118,8 @@
                             </form>
                         </div>
                     </div>
-                    <div><a href="/account/signUp">가입하러 가기 -></a></div>
-                    <div style="text-align:right;"><span>삭제 기능 꺼둠</span></div>
+                    <div><a href="/account/signUp">가입하러 가기 -></a></div><br>
+                    <!-- <div style="text-align:right;"><span>삭제 기능 꺼둠</span></div> -->
                     <table class="member-list-table">
                         <colgroup>
                             <!-- <col style="width: 3%"> -->
