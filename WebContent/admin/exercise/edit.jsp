@@ -121,7 +121,7 @@
 													</li>
 													<li>
 														<input id="re-list5" type="checkbox" name="body-part-re" value="12" <c:if test="${fn:contains(ebps, '0012')}">checked</c:if>>
-														<label for="re-list5"> <span class="check"></span> 무릅</label>
+														<label for="re-list5"> <span class="check"></span> 무릎</label>
 													</li>
 																						
 												</ul>

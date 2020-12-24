@@ -131,7 +131,7 @@
                                                         <input id="re-list5" type="checkbox" name="body-part-re" value="12">
                                                         <label for="re-list5">
                                                             <span class="check"></span>
-                                                           	무릅
+                                                           	무릎
                                                         </label>
                                                     </li>
                                                 </ul>
