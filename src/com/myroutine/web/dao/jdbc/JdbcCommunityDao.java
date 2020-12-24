@@ -563,7 +563,7 @@ public class JdbcCommunityDao implements CommunityDao{
 			String sql = "SELECT m.nickname, c.*  "
 						+ " FROM community_report c "
 						+ "	left join member m on m.id = c.member_id"
-						+ " order by c.regdate";	
+						+ " order by c.regdate desc ";	
 			
 			List<CommunityReport> list = new ArrayList<>();
 			
@@ -612,7 +612,7 @@ public class JdbcCommunityDao implements CommunityDao{
 		String sql = "SELECT m.nickname, c.*  "
 					+ " FROM community_comment_report c "
 					+ "	left join member m on m.id = c.member_id"
-					+ " order by c.regdate";	
+					+ " order by c.regdate desc";	
 		 System.out.println(sql);
 		List<CommunityReport> list = new ArrayList<>();
 		

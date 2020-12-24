@@ -32,11 +32,11 @@
             <main class="main">
                 <section class="title_section">
                     <div class="list_title">
-                        <h1>신고사항 리스트</h1>
+                        <h1>커뮤니티 댓글 신고리스트</h1>
                     </div>
                     <table class="admin-from-table">
                         <colgroup>
-                            <col style="width:100px">
+                            <col style="width:150px">
                             <col style="width: auto;">
                             <col style="width: 150px">
                             <col style="width: 100px">
