@@ -16,6 +16,20 @@
 }
 .input-container .button-box{
     margin-left: auto;
+    padding-top : 5px;
+}
+
+.input-container .button-box .button{
+	
+    background-color: #30baa1;
+    color: white;
+    font-weight: bold;
+    
+    margin-left: auto;
+    padding: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    border:none;
 }
 
 .input-container .check-label{

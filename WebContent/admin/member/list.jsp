@@ -293,7 +293,7 @@
 					<div style="line-height: 30px;font-size: 20px;font-weight: bold;text-align:center;color: #d2d2d2;">
 						<div>검색된 회원: ${totalCount}, 총 페이지: ${totalPage}</div>
 					</div>
-				<jsp:include page="/WEB-INF/jsp/user/bottomMenu.jsp" />
+				<%-- <jsp:include page="/WEB-INF/jsp/user/bottomMenu.jsp" /> --%>
                 </div>
                 <div></div>
     			<script src="../../js/admin/member/list.js"></script>

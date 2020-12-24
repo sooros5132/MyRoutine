@@ -17,27 +17,26 @@ import com.myroutine.web.service.admin.exercise.ExerciseService;
 public class DeleteController extends HttpServlet{
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int id = Integer.parseInt(req.getParameter("id"));
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
 		System.out.println("������Ʈ��");
 		
-		
-		// ���ϻ���
+	
 		ExerciseBodyPartService ebpService = new ExerciseBodyPartService();
 		ebpService.delete(id);
 		
 		
-		// ÷������ ����
+	
 		ExerciseFileService exFileService = new ExerciseFileService();
 		exFileService.deleteAll(id);
 				
-		// �����
+	
 		ExerciseService exService = new ExerciseService();
 		exService.delete(id);
 
 
 		
-		req.getRequestDispatcher("list.jsp").forward(req, resp);
+		response.sendRedirect("list");
 	}
 
 }

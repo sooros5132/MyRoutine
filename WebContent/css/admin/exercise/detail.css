@@ -19,8 +19,8 @@
 
 .content{
     padding: 5px;
-    width: 100px;
-    --height: 40px;
+    
+    
     text-align: center;
 }
 
@@ -28,13 +28,7 @@
     border: 1px solid #30baa1;
 }
 
-button{
-    background-color: #30baa1;
-    color: white;
-    font-weight: bold;
-    margin-left: auto;
-    padding: 10px;
-}
+
 
 .btn-left {
     width: 0px;
@@ -121,4 +115,18 @@ button{
 }
 .button-box{
     margin-left: auto;
+    padding-top : 5px;
+}
+
+.button-box .button{
+	
+    background-color: #30baa1;
+    color: white;
+    font-weight: bold;
+    
+    margin-left: auto;
+    padding: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    border:none;
 }

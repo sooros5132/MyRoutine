@@ -58,31 +58,31 @@
                 <section class="info-box">
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="/admin/exercise/list">
                                 <span class="count">${exerciseCount}</span>
                                 총 운동수
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/admin/member/list">
                                 <span class="count">${memberCount}</span>
                                 총 회원수
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/admin/community/list">
                                 <span class="count">${communityCount}</span>
                                 총 커뮤니티
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/admin/notice/list">
                                 <span class="count">${noticeCount}</span>
                                 총 공지사항
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/admin/complain/list">
                                 <span class="count">${complainCount}</span>
                                 총 건의사항
                             </a>
@@ -90,11 +90,11 @@
                     </ul>
                 </section>
                 <section class="notice-box">
-                    <h2 class="main-tit">커뮤니티<a href="#" class="more">더보기<i class="xi-angle-right-min"></i></a></h2>
+                    <h2 class="main-tit">커뮤니티<a href="/admin/community/list" class="more">더보기<i class="xi-angle-right-min"></i></a></h2>
                     <ul>
 						<c:forEach var="community" items="${communityList}">  
                         <li>
-                            <a href="admin/community/detail?id=${community.id}">
+                            <a href="/admin/community/detail?id=${community.id}">
                                 <span class="notice-tit">${community.title}</span>
                                 <span class="notice-date">${community.regdate}</span>
                             </a>
@@ -103,11 +103,11 @@
                     </ul>
                 </section>
                 <section class="notice-box">
-                    <h2 class="main-tit">공지사항<a href="#" class="more">더보기<i class="xi-angle-right-min"></i></a></h2>
+                    <h2 class="main-tit">공지사항<a href="/admin/notice/list" class="more">더보기<i class="xi-angle-right-min"></i></a></h2>
                     <ul>
 						<c:forEach var="notice" items="${noticeList}">  
                         <li>
-                            <a href="admin/notice/detail?id=${notice.id}">
+                            <a href="/admin/notice/detail?id=${notice.id}">
                                 <span class="notice-tit">${notice.title}</span>
                                 <span class="notice-date">${notice.regdate}</span>
                             </a>

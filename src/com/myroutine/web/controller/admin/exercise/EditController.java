@@ -88,7 +88,7 @@ public class EditController extends HttpServlet {
 			throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		int memberId  =  Integer.parseInt((String) session.getAttribute("memberId"));
+		int memberId  = (int) session.getAttribute("memberId");
 		
 		//운동정보 수정
 		int id = Integer.parseInt(request.getParameter("id"));
@@ -191,12 +191,15 @@ public class EditController extends HttpServlet {
 				String fileName = filePart.getSubmittedFileName(); //파일이름 가져오기
 				
 				//실제 서비스의 물리경로
-				String pathTemp = request.getServletContext().getRealPath(fs + "exercise");
+				String pathTemp = request.getServletContext().getRealPath(fs);
 				System.out.println("pathTemp : " + pathTemp);
 				
 				//업로드 경로생성
-				String filePath = pathTemp + fs + fileName;
+				String filePath = pathTemp + fs + "image" + fs +"exercise" +fs+  fileName;
 				System.out.println("filePath : " + filePath);
+				
+				String filePath2 = fs + "image" + fs + "exercise";
+				System.out.println(filePath);
 				
 				//업로드 폴더 만들기
 				File path = new File(pathTemp);
@@ -215,7 +218,7 @@ public class EditController extends HttpServlet {
 				fos.close();
 				fis.close();
 				
-				ExerciseFile exerciseFile = new ExerciseFile(fileName, pathTemp, id);
+				ExerciseFile exerciseFile = new ExerciseFile(fileName, filePath2, id);
 				System.out.println(exerciseFile.toString());
 				exerciseFileService.insert(exerciseFile);
 			}

@@ -45,6 +45,7 @@
     border-spacing: 0px;
     border-collapse: collapse;
     font-size: 14px;
+    z-index: -1;
 }
 
 /* .member-list-setting{
