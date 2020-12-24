@@ -58,6 +58,7 @@
 }
 .chat .chat-top-alert-box .chat-input-btn{
 	color: #ffffff;
+    flex: 0 0 50px;
 }
 .chat .chat-message-box{
     flex-basis: auto;
