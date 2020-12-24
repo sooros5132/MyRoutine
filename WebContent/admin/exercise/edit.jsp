@@ -88,7 +88,7 @@
 													<label for="re"> <span class="radio"></span> 재활 운동</label></li>
 												<li>
 													<input id="ex" class="ex-menu" type="radio" name="category" value="2" <c:if test ="${ex.categoryId == '2'}">checked</c:if>>
-													<label for="ex"> <span class="radio"></span> 일반 운동</label>
+													<label for="ex"> <span class="radio"></span> 홈트레이닝</label>
 												</li>
 											</ul>
 										</td>
@@ -108,19 +108,19 @@
 													</li>
 													
 													<li>
-														<input id="re-list2" type="checkbox" name="body-part-re" value="2" <c:if test="${fn:contains(ebps, '0004')}">checked</c:if>>
+														<input id="re-list2" type="checkbox" name="body-part-re" value="4" <c:if test="${fn:contains(ebps, '0004')}">checked</c:if>>
 														<label for="re-list2"> <span class="check"></span> 허리</label>
 													</li>
 													<li>
-														<input id="re-list3" type="checkbox" name="body-part-re" value="3" <c:if test="${fn:contains(ebps, '0010')}">checked</c:if>>
+														<input id="re-list3" type="checkbox" name="body-part-re" value="10" <c:if test="${fn:contains(ebps, '0010')}">checked</c:if>>
 														<label for="re-list3"> <span class="check"></span> 목</label>
 													</li>
 													<li>
-														<input id="re-list4" type="checkbox" name="body-part-re" value="4" <c:if test="${fn:contains(ebps, '0011')}">checked</c:if>>
+														<input id="re-list4" type="checkbox" name="body-part-re" value="11" <c:if test="${fn:contains(ebps, '0011')}">checked</c:if>>
 														<label for="re-list4"> <span class="check"></span> 손목</label>
 													</li>
 													<li>
-														<input id="re-list5" type="checkbox" name="body-part-re" value="5" <c:if test="${fn:contains(ebps, '0012')}">checked</c:if>>
+														<input id="re-list5" type="checkbox" name="body-part-re" value="12" <c:if test="${fn:contains(ebps, '0012')}">checked</c:if>>
 														<label for="re-list5"> <span class="check"></span> 무릅</label>
 													</li>
 																						

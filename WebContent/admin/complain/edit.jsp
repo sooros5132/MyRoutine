@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../../css/admin/common.css">
     <link rel="stylesheet" href="../../css/xeicon.min.css">
     <link rel="stylesheet" href="../../css/admin/sub.css">    
-
+    <link rel="stylesheet" href="../../css/admin/community/edit-style.css">
     <script src="../../js/admin/community/edit.js"></script>
 </head>
 <body>
@@ -53,7 +53,7 @@
                                 <tr>
                                     <th>게시판 선택</th>
                                     <td  colspan="3">
-                                        <select name = "categoryId" class ="select-box">
+                                        <select name="categoryId" class ="select-box" style="appearance:auto">
 				                        	<c:forEach var="categroy" items="${cList}" >
 				                        		<option
 				                        		 	<c:if test="${categoryId==0}">disabled</c:if>
@@ -61,6 +61,7 @@
 				                        		value ="${categroy.id}">${categroy.type} </option>
 				                        	</c:forEach>
                                         </select>
+                                        <input name="categoryId"  type="hidden" class="category-id" value="${m.categoryId}">                                        
                                    </td>
                                 </tr>
 	                            <tr>

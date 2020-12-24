@@ -37,7 +37,7 @@ public class EditController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//id¹Þ¾Æ¼­ ÆäÀÌÁö ÀüÈ¯
+	//idï¿½Þ¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
 		int id = Integer.parseInt(request.getParameter("id"));
 
 		CommunityService service = new CommunityService();
@@ -48,11 +48,11 @@ public class EditController extends HttpServlet {
 
 		
 		
-		//Ä«Å×°í¸®
+		//Ä«ï¿½×°ï¿½
 		request.setAttribute("cList", cList);
-		//»ó¼¼
+		//ï¿½ï¿½
 		request.setAttribute("m", m);
-		//ÆÄÀÏ
+		//ï¿½ï¿½ï¿½ï¿½
 		request.setAttribute("fList", fList);
 		
 		request.getRequestDispatcher("edit.jsp").forward(request, response);
@@ -60,7 +60,7 @@ public class EditController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//µ¥ÀÌÅÍ¹Þ¾Æ¼­ Äõ¸®½ÇÇàÈÄ µðÅ×ÀÏÆäÀÌÁö·Î
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Í¹Þ¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		int id=Integer.parseInt(request.getParameter("id"));
 		String title =request.getParameter("title");
 		String contents =request.getParameter("contents");
@@ -70,27 +70,28 @@ public class EditController extends HttpServlet {
 		String oldfile = request.getParameter("oldFile").equals(null) ? "" : request.getParameter("oldFile");
 //		String filePath =request.getParameter("filePath");
 //		String fileId = request.getParameter("fileId");
-	
+		System.out.println(categoryId);
+		
 		CommunityService service = new CommunityService();
 		
-		//==============³¯Â¥Æ÷¸ä=========================================================
+		//==============ï¿½ï¿½Â¥ï¿½ï¿½ï¿½ï¿½=========================================================
 		SimpleDateFormat formatter =new SimpleDateFormat("yyyy");
 		Date date = new Date();
 		String currentYear =formatter.format(date);
 		
-		//È­¸é¿¡¼­ Áö¿î ÆÄÀÏ »èÁ¦=============================================================================
+		//È­ï¿½é¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½=============================================================================
 		if(!oldfile.equals("")) {
 		
 			String[] oldfileIds = oldfile.split(",");
 			for(int i=0; i< oldfileIds.length; i++) {
 				int fileId = Integer.parseInt(oldfileIds[i]);
-				//Áö¿îÆÄÀÏµé..»èÁ¦
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½..ï¿½ï¿½ï¿½ï¿½
 				service.fileDelete(fileId);
 
 			}
 		}
 		
-		//ÆÄÀÏµî·Ï===================================================================
+		//ï¿½ï¿½ï¿½Ïµï¿½ï¿½===================================================================
 		Collection<Part> fileParts =request.getParts();
 		
 		for(Part filePart:fileParts)
@@ -98,12 +99,12 @@ public class EditController extends HttpServlet {
 			if(filePart.getName().equals("file") && filePart.getSize() > 0 ) {
 				
 				String fileName= filePart.getSubmittedFileName();
-				//¼öÁ¤ÀÌ¶ó..Ä¿¹Â´ÏÆ¼ ¾ÆÀÌµð ÇÊ¿äÇÔ..
+				//ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½..Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½..
 //				int newId =  service.getListId()+1;
 
 				String pathTemp =  "/static/community/"+currentYear+"/"+id;
 				
-				//ÆÄÀÏÀúÀåÇÏ±â
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 				String realPathTemp = request.getServletContext().getRealPath(pathTemp);
 				
 				File path = new File(realPathTemp);
@@ -111,7 +112,7 @@ public class EditController extends HttpServlet {
 				if(!path.exists())
 					path.mkdirs();
 				//String filePath = pathTemp +"\\"+filePart.getSubmittedFileName(); 
-				//°æ·Î±¸ºÐÀÚ¸¦ ¾ò¾î¾ßÇÑ´Ù. File.separator À©µµ¿ìÁî³ª ¸®´ª½ºµîÀÇ °æ·Î¿¡ ¸Â°Ô ¹Ù²ãÁØ´Ù.
+				//ï¿½ï¿½Î±ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. File.separator ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î³ª ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¿ï¿½ ï¿½Â°ï¿½ ï¿½Ù²ï¿½ï¿½Ø´ï¿½.
 				String filePath = realPathTemp + File.separator + fileName;
 
 				//File submittedFile = new File("/static/community/2020/5/"+filePart.getSubmittedFileName());
@@ -127,7 +128,7 @@ public class EditController extends HttpServlet {
 					fos.write(buf,0,size);
 				
 
-				//ÆÄÀÏµî·Ï
+				//ï¿½ï¿½ï¿½Ïµï¿½ï¿½
 				CommunityFile communityFile= new CommunityFile(0, fileName, pathTemp+File.separator, id); 
 				service.fileInsert(communityFile);
 				System.out.println(communityFile);
@@ -140,11 +141,11 @@ public class EditController extends HttpServlet {
 		
 
 
-		//¼öÁ¤µî·Ï
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		Community m = new Community(id, 0, "", title, hit, date, contents, categoryId,categoryType, "","","");
 		service.update(m);
 		
-		//detailÆäÀÌÁö	
+		//detailï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	
 		response.sendRedirect("/admin/community/detail?id="+id);	
 	}
 	

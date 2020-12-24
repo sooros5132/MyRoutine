@@ -118,4 +118,42 @@ public class JdbcCommunityFileDao implements CommunityFileDao {
 			return list;	
 	}
 
+	@Override
+	public List<CommunityFile> getTotalFileList(int id) {
+		int result=0;
+		String url = DBContext.URL;
+		String sql =" SELECT id "
+				+ "FROM community_file  "
+				+ "where community_id="+ id; 
+		
+		List<CommunityFile> list = new ArrayList<>();
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url,DBContext.UID, DBContext.PWD);
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+							
+			while(rs.next()) {
+				int ids = rs.getInt("id");
+				
+				CommunityFile m = new CommunityFile();
+				m.setId(ids);
+				
+				list.add(m);
+			}
+			rs.close();
+			st.close();
+			con.close();			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return list;	
+	}
 }

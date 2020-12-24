@@ -52,7 +52,7 @@ public class CommunityService {
 	 
 	public int insert(Community community) {
 		int result = communityDao.insert(community);
-		//insert ÈÄ ÆÄÀÏ¾÷·Îµå¿¡ id°ª Àü´Þ 
+		//insert ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¾ï¿½ï¿½Îµå¿¡ idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 		return result;
 	}
 	
@@ -78,7 +78,7 @@ public class CommunityService {
 	}
 
 	public int hitUp(int id) {
-		//»ó¼¼ÆäÀÌÁö¿¡ ³»¿ë°¡Áö°í ¿Í¼­ hitÃß°¡ÇÏ°í ¾÷µ¥ÀÌÆ®
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ë°¡ï¿½ï¿½ï¿½ï¿½ ï¿½Í¼ï¿½ hitï¿½ß°ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 		Community community = communityDao.getDetail(id);
 		
 		community.setHit(community.getHit()+1);
@@ -127,4 +127,10 @@ public class CommunityService {
 
 		return communityDao.getCommentReportList();
 	}
+
+	public List<CommunityFile> getTotalFileList(int id) {
+		
+		return communityFileDao.getTotalFileList(id);
+	}
+
 }

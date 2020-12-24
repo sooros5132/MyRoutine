@@ -8,13 +8,13 @@ import com.myroutine.web.dao.entity.CommunityReport;
 import com.myroutine.web.dao.entity.CommunityView;
 
 public interface CommunityDao {
-	//3.µî·Ï ¼öÁ¤ »èÁ¦
+	//3.ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	int insert(Community community);
 //	int update(String title, String contents);
 	int delete(int id);
 	
 
-	//1.¸ñ·Ï °Ë»ö
+	//1.ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
 	List<Community> getList(int startIndex, int endIndex);
 //	List<Community> getList(int startIndex);
 //	List<CommunityView> getViewList();
@@ -22,7 +22,7 @@ public interface CommunityDao {
 	List<CommunityView> getViewList(int startIndex,int endIndex);
 	List<CommunityView> getViewList(int startIndex,int endIndex,String value);
 	List<CommunityView> getViewList(int startIndex,int endIndex,int key,String value);
-	//2.»ó¼¼ÆäÀÌÁö 
+	//2.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	Community getDetail(int id);
 	int update(Community m);
 	
@@ -34,5 +34,6 @@ public interface CommunityDao {
 	int commReportInsert(CommunityReport communityReport);
 	List<CommunityReport> getReportList();
 	List<CommunityReport> getCommentReportList();
+
 }
  

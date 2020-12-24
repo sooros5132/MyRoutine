@@ -18,7 +18,7 @@ public class DetailController extends HttpServlet {
 	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//¾ÆÀÌµð µî·ÏÇÒ¶§µµ ÇÊ¿ä
+		//ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
 		CommentService cService = new CommentService();
 		int	id = Integer.parseInt(request.getParameter("id")) ;
 		
@@ -36,10 +36,10 @@ public class DetailController extends HttpServlet {
 		ComplainService service = new ComplainService();
 		Complain m = service.getDetail(id);
 		
-//		TODO ÀÛ¼ºÀÚ¿Í ·Î±×ÀÎÇÑ »ç¶÷ÀÌ ÀÏÄ¡ÇÒ¶§´Â HIT¼ö ¿Ã¸®Áö ¾Ê¾Æ¾ßÇÑ´Ù..
+//		TODO ï¿½Û¼ï¿½ï¿½Ú¿ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½Ò¶ï¿½ï¿½ï¿½ HITï¿½ï¿½ ï¿½Ã¸ï¿½ï¿½ï¿½ ï¿½Ê¾Æ¾ï¿½ï¿½Ñ´ï¿½..
 		
-		//Á¶È¸¼ö ¿Ã¸®±â
-		int hit = service.hitUp(id);
+		//ï¿½ï¿½È¸ï¿½ï¿½ ï¿½Ã¸ï¿½ï¿½ï¿½
+//		int hit = service.hitUp(id);
 		System.out.println("id : "+id);		
 		
 

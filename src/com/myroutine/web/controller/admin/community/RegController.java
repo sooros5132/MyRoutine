@@ -34,11 +34,11 @@ public class RegController extends HttpServlet{
 	public RegController() {
 		service = new CommunityService(); 
 	}
-//µî·Ï	
+//ï¿½ï¿½ï¿½	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//µî·Ï..ÄÁÅÙÃ÷ ¹Þ¾Æ¿Í¼­.. Äõ¸®¹®¿¡ ³Ö±â get¹æ½ÄÀÎÁö post ¹æ½ÄÀÎÁö
-		//ÆÄ¶ó¸ÞÅÍ ¹Þ¾Æ¼­ REGµé¾î¿Í¾ßÇÏ´Ï±î .GET
+	//ï¿½ï¿½ï¿½..ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿Í¼ï¿½.. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½ getï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ post ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¼ï¿½ REGï¿½ï¿½ï¿½Í¾ï¿½ï¿½Ï´Ï±ï¿½ .GET
 		System.out.println(request.getMethod());
 		
 		if(request.getMethod().equals("GET")){
@@ -50,14 +50,15 @@ public class RegController extends HttpServlet{
 			request.getRequestDispatcher("reg.jsp").forward(request, response);
 			
 		}else if(request.getMethod().equals("POST")){
-	//Àü´Þ¹ÞÀº µ¥ÀÌÅÍµéÀ» ³Ñ±â¸é¼­ »ç¿ë
+	//ï¿½ï¿½ï¿½Þ¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ ï¿½Ñ±ï¿½é¼­ ï¿½ï¿½ï¿½
 			String title = request.getParameter("title");
+			int memberId =  Integer.parseInt(request.getParameter("memberId"));
 			String writerName = request.getParameter("writerName");
 			String contents = request.getParameter("contents");
 			String categoryType = request.getParameter("categoryType");
 			int categoryId = Integer.parseInt(request.getParameter("categoryId"));
 
-			//==============³¯Â¥Æ÷¸ä=========================================================
+			//==============ï¿½ï¿½Â¥ï¿½ï¿½ï¿½ï¿½=========================================================
 			SimpleDateFormat formatter =new SimpleDateFormat("yyyy");
 //			SimpleDateFormat formatter1 =new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
 			Date date = new Date();
@@ -65,12 +66,12 @@ public class RegController extends HttpServlet{
 			
 			//=============================================================================
 
-			//============== ÆÄÀÏµî·Ï =========================================================			
-			Collection<Part> fileParts = request.getParts();//¿©·¯ÆÄÀÏÀÏ¶§ ÀüÃ¼¸¦ ¹Þ¾Æ¾ßÇØ¼­ µ¹¾Æ¾ßÇÑ´Ù.
+			//============== ï¿½ï¿½ï¿½Ïµï¿½ï¿½ =========================================================			
+			Collection<Part> fileParts = request.getParts();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Þ¾Æ¾ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½Æ¾ï¿½ï¿½Ñ´ï¿½.
 	         String fileNames = "";
 			 for(Part p:fileParts) {
 				 if(p.getName().equals("file") && p.getSize() > 0) {
-					 //p.getSize() > 0 ÆÄÀÏÃß°¡ ¾ÈÇßÀ»¶§µµ Ãß°¡
+					 //p.getSize() > 0 ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 					 Part filePart = p;
 					 String fileName = filePart.getSubmittedFileName();
 					 System.out.println(fileName);
@@ -79,15 +80,15 @@ public class RegController extends HttpServlet{
 					 int newId = service.getListId() +1; 
 					 
 					 String pathTemp = "/static/community/"+currentYear+"/"+newId;
-					//ÆÄÀÏÀúÀåÇÏ±â
+					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 					String realPathTemp = request.getServletContext().getRealPath(pathTemp);
 					File path=new File(realPathTemp);
-					//ÁöÁ¤µÈ ÆÄÀÏÀÌ ÀÖ´ÂÁö È®ÀÎÇÑ´Ù.
+					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ñ´ï¿½.
 					if(!path.exists())
 						path.mkdirs();
 					
 					//String filePath = pathTemp +"\\"+filePart.getSubmittedFileName(); 
-					//°æ·Î±¸ºÐÀÚ¸¦ ¾ò¾î¾ßÇÑ´Ù. File.separator À©µµ¿ìÁî³ª ¸®´ª½ºµîÀÇ °æ·Î¿¡ ¸Â°Ô ¹Ù²ãÁØ´Ù.
+					//ï¿½ï¿½Î±ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. File.separator ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î³ª ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¿ï¿½ ï¿½Â°ï¿½ ï¿½Ù²ï¿½ï¿½Ø´ï¿½.
 					String filePath = realPathTemp + File.separator + fileName;
 
 					//File submittedFile = new File("/static/community/2020/5/"+filePart.getSubmittedFileName());
@@ -107,7 +108,7 @@ public class RegController extends HttpServlet{
 //					fileNames = fileNames.substring(0, fileNames.lastIndexOf(","));
 //					System.out.println(fileNames);
 
-					//ÆÄÀÏµî·Ï
+					//ï¿½ï¿½ï¿½Ïµï¿½ï¿½
 					CommunityFile communityFile = new CommunityFile(0,fileName, pathTemp + File.separator , newId);
 					System.out.println(communityFile);
 					
@@ -119,17 +120,16 @@ public class RegController extends HttpServlet{
 				 }
 			 }
 		
-				//=============µî·Ï========================================================	
+				//=============ï¿½ï¿½ï¿½========================================================	
 				CommunityService service = new CommunityService();
 				
-				//ÆÄÀÏÅ×ÀÌºí¿¡ µî·Ï..System.currentTimeMillis()
 				
-				Community community = new Community(0, 22,  writerName,title, 0, date,contents, categoryId, categoryType,"","","");
+				Community community = new Community(0, memberId,  writerName,title, 0, date,contents, categoryId, categoryType,"","","");
 
 				int newCommunityId = service.insert(community);
 				//=======================================================================	
 			 
-			 //¸ñ·ÏÆäÀÌÁö·Î ÀÌµ¿
+			 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 			response.sendRedirect("/admin/community/list");
 		}
 	}
