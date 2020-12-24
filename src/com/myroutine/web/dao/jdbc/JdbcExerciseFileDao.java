@@ -165,7 +165,7 @@ public class JdbcExerciseFileDao implements ExerciseFileDao {
 	public int deleteAll(int id) {
 		int result=0;
 		String url = DBContext.URL;
-		String sql = "DELETE INTO EXERCISE_FILE WHERE EXERCISE_ID = ?";
+		String sql = "DELETE EXERCISE_FILE WHERE EXERCISE_ID = ?";
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection(url, DBContext.UID, DBContext.PWD);
