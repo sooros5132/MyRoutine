@@ -37,7 +37,7 @@
                         <h1>건의사항 리스트</h1>
                         <div >
 	                        <form action="list" method="get">
-		                        <select name="categoryId" class="select " onchange="this.form.submit();">
+		                        <select name="categoryId" class="select " onchange="this.form.submit();" style="appearance:auto">
 		                        	<c:forEach items="${cList}" var ="categroy">
 		                        		<option <c:if test="${categoryId==categroy.id}">selected</c:if> 
 		                        		value ="${categroy.id}">${categroy.type} </option>

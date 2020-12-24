@@ -24,5 +24,10 @@ public class CommentService {
 	public int delete(int id) {
 		return commentDao.delete(id);
 	}
+
+	public  List<CommunityComment> getTotalCmtList(int id) {
+		// TODO Auto-generated method stub
+		return commentDao.getTotalCmtList(id);
+	}
 	
 }

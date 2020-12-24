@@ -62,7 +62,7 @@ public class JdbcCommunityDao implements CommunityDao{
 		int result = 0;
 		
 		String url = DBContext.URL;
-		String sql = "UPDATE COMMUNITY SET TITLE=?, CONTENTS=?, HIT=? WHERE ID=?";		
+		String sql = "UPDATE COMMUNITY SET TITLE=?, CONTENTS=?, HIT=?, CATEGORY_ID=? WHERE ID=?";		
 		
 			try {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -72,7 +72,8 @@ public class JdbcCommunityDao implements CommunityDao{
 				st.setString(1, m.getTitle());
 				st.setString(2, m.getContents());
 				st.setInt(3, m.getHit());
-				st.setInt(4, m.getId());
+				st.setInt(4, m.getCategoryId());
+				st.setInt(5, m.getId());
 //				ResultSet rs = st.executeQuery(sql);
 				result = st.executeUpdate();
 
@@ -242,7 +243,7 @@ public class JdbcCommunityDao implements CommunityDao{
 	public List<CommunityCategory> getCategoryList() {
 		String url = DBContext.URL;
 		String sql = "SELECT * FROM COMMUNITY_CATEGORY ORDER BY ID";	
-		//µ¥ÀÌÅÍ°¡ ¼ø¼­´ë·Î ¾È³ª¿È,, µðºñ¼­´Â Á¦´ë·Î º¸ÀÌ´Âµ¥....ÀÌ»óÇØ¼­ Á¤·ÄÃß°¡
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È³ï¿½ï¿½ï¿½,, ï¿½ï¿½ñ¼­´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´Âµï¿½....ï¿½Ì»ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½
 
 		
 		List<CommunityCategory> list = new ArrayList<>();
@@ -405,8 +406,8 @@ public class JdbcCommunityDao implements CommunityDao{
 //	public Community getListId() {
 //		String url = DBContext.URL;
 //		String sql = "SELECT * FROM COMMUNITY WHERE ID = (SELECT MAX(ID) FROM COMMUNITY)";
-//		//°¡Àå ÃÖ±Ù°Í ±¸ÇØ¿Â´Ù..
-//		//ÆÄÀÏµî·ÏÇÒ¶§ Æú´õ¸í °¥¼ö·Ï ¼ýÀÚ°¡ Ä¿Áö±â ¶§¹®¿¡..
+//		//ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±Ù°ï¿½ ï¿½ï¿½ï¿½Ø¿Â´ï¿½..
+//		//ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½Ò¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú°ï¿½ Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..
 //		
 //		Community m= new Community();
 //		
@@ -460,8 +461,8 @@ public class JdbcCommunityDao implements CommunityDao{
 	public int getLast() {
 		String url = DBContext.URL;
 		String sql = "SELECT ID FROM COMMUNITY WHERE ID = (SELECT MAX(ID) FROM COMMUNITY)";
-		//°¡Àå ÃÖ±Ù°Í ±¸ÇØ¿Â´Ù..
-		//ÆÄÀÏµî·ÏÇÒ¶§ Æú´õ¸í °¥¼ö·Ï ¼ýÀÚ°¡ Ä¿Áö±â ¶§¹®¿¡..
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±Ù°ï¿½ ï¿½ï¿½ï¿½Ø¿Â´ï¿½..
+		//ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½Ò¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú°ï¿½ Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..
 		
 		int id = 0;
 		
@@ -612,7 +613,7 @@ public class JdbcCommunityDao implements CommunityDao{
 					+ " FROM community_comment_report c "
 					+ "	left join member m on m.id = c.member_id"
 					+ " order by c.regdate";	
-		
+		 System.out.println(sql);
 		List<CommunityReport> list = new ArrayList<>();
 		
 			try {
@@ -653,4 +654,6 @@ public class JdbcCommunityDao implements CommunityDao{
 
 			return list;	
 	}
+
+
 }

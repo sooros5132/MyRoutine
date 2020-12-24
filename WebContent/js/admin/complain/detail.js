@@ -1,7 +1,7 @@
 window.addEventListener("load",function(){
 	var tbody = document.querySelector(".tbody");
 	var memberId= document.querySelector(".member_id").value;
-	
+	var complainId = document.querySelector(".complain_id").value;
 	var report = document.querySelector(".report");
 	var data = new FormData();
 	
@@ -25,9 +25,9 @@ window.addEventListener("load",function(){
 //			data.append('memberId',memberId);//로그인한아이디넘겨야함..
 //			data.append('complainId',complainId);
 //			console.log(result, membe``rId, complainId);
-			for(let value of data.values()){
-				console.log(value);
-			}
+//			FOR(LET VALUE OF DATA.VALUES()){
+//				CONSOLE.LOG(VALUE);
+//			}
 			
 			request.open('GET',url+'&contents='+result+'&memberId='+memberId);
 			request.send();

@@ -47,14 +47,14 @@ public class JdbcCommunityCommentDao implements CommunityCommentDao{
 		
 		String url =DBContext.URL;
 		String sql = "DELETE FROM COMMUNITY_COMMENT WHERE ID=? ";		
-
+		System.out.println(sql);
 			try {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
 				Connection con = DriverManager.getConnection(url,DBContext.UID,DBContext.PWD);
 				PreparedStatement st = con.prepareStatement(sql);
 				st.setInt(1, id);
 				result = st.executeUpdate();
-
+				
 				st.close();
 				con.close();			
 				
@@ -119,6 +119,45 @@ public class JdbcCommunityCommentDao implements CommunityCommentDao{
 	
 		return list;
 
+	}
+		
+	@Override
+	public List<CommunityComment> getTotalCmtList(int id) {
+			int result=0;
+			String url = DBContext.URL;
+			String sql =" SELECT ID "
+					+ "FROM COMMUNITY_COMMENT  "
+					+ "WHERE COMMUNITY_ID="+ id; 
+			
+			List<CommunityComment> list = new ArrayList<>();
+
+			try {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				Connection con = DriverManager.getConnection(url,DBContext.UID, DBContext.PWD);
+				Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery(sql);
+								
+				while(rs.next()) {
+					int ids = rs.getInt("id");
+					
+					CommunityComment m = new CommunityComment();
+					m.setId(ids);
+					
+					list.add(m);
+				}
+				rs.close();
+				st.close();
+				con.close();			
+				
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return list;	
 	}
 	
 }

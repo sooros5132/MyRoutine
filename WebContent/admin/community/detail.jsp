@@ -42,7 +42,7 @@
 	              		<h2 class="title">커뮤니티 상세</h2>
 	              		<input class="report report-btn" type="button" value="신고">
               		</div> 
-                    <table class="admin-from-table">
+                    <table class="admin-from-table" width="300">
                         <tbody>
                             <tr>
                                 <th>제목</th>
@@ -82,8 +82,9 @@
                                 </td>
                             </tr>
                             <tr class="content" height="300">
-                                <td  colspan="4" class="content_td">                       
-                                ${m.contents}</td>
+                                <td  colspan="4" class="content_td">
+                                	<textarea name="contents" rows="20" disabled="disabled">${m.contents}</textarea>                       
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -92,7 +93,7 @@
 					<form method="post" >
 	                    <div class="div-ap"> 
 <%--  	                    	<input type="hidden" name="memberId" value="${m.memberId}">  --%>
- 	                    	<input type="hidden" class="member_id" name="memberId" value="22"> 
+ 	                    	<input type="hidden" class="member_id" name="memberId" value="${sessionScope.memberId}"> 
  	                    	<input type="hidden" class="community_id" name="communityId" value="${m.id}">
 	                        <input type="text" name="contents" class="ap-text" placeholder="  댓글 입력하세요">
 	                        <button class="ap-btn">댓글</button>
@@ -126,6 +127,8 @@
 <!--                     	<input  type="button" value="댓글추가테스트" class="test-btn"> -->
                         <button class="list_btn myButton"><a  href="list">목록</a></button>
                     	<button class="list_btn myButton"><a  href="edit?id=${m.id}">수정</a></button>
+                    	<button class="list_btn myButton"><a  href="del?id=${m.id}">삭제</a></button>
+                    	
                     </div>
                 </section>          
             </main>

@@ -25,6 +25,7 @@
                             <a href="#">건의사항 관리</a>
                             <ul class="dep2">
                                 <li><a href="../complain/list">건의사항 리스트</a></li>
+                                <li><a href="../complain/reportList">건의사항 신고리스트</a></li>
                             </ul>
                         </li>
 

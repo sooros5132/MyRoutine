@@ -10,19 +10,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이루틴</title>
-    <link rel="stylesheet" href="../../../css/admin/reset.css">
-    <link rel="stylesheet" href="../../../css/admin/common.css">
-    <link rel="stylesheet" href="../../../css/xeicon.min.css">
-    <link rel="stylesheet" href="../../../css/admin/sub.css">    
-    <script src="../../../common/js/admin_common.js"></script>
+    <link rel="stylesheet" href="../../css/admin/reset.css">
+    <link rel="stylesheet" href="../../css/admin/common.css">
+    <link rel="stylesheet" href="../../css/xeicon.min.css">
+	<link rel="stylesheet" href="../../css/admin/sub.css">       
+    <link rel="stylesheet" href="../../css/admin/community/list-style.css">
+    
+    <script src="../../js/admin_common.js"></script>
 </head>
 <body>
     <div class="wrapper">
-		<jsp:include page="/WEB-INF/jsp/admin/header.jsp"></jsp:include>
+        <jsp:include page="/WEB-INF/jsp/admin/header.jsp"></jsp:include>
        
+
         <div class="body">
             <!-- aside -->
-			<jsp:include page="../../complainAside.jsp"></jsp:include>
+ 			<jsp:include page="../communityAside.jsp"></jsp:include>
             <!-- //aside -->
 
             <!-- main(개별 컨턴츠 넣는곳) -->
@@ -31,7 +34,7 @@
                     <div class="list_title">
                         <h1>신고사항 리스트</h1>
                     </div>
-                    <table>
+                    <table class="admin-from-table">
                         <colgroup>
                             <col style="width:100px">
                             <col style="width: auto;">

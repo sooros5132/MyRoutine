@@ -54,14 +54,16 @@
                                 <tr>
                                     <th>게시판 선택</th>
                                     <td  colspan="3">
-                                        <select name = "categoryId" class ="select-box">
+
+                                        <select  class ="select-box" onchange="categoryChange(this)" style="appearance:auto">
 				                        	<c:forEach var="categroy" items="${cList}" >
 				                        		<option
-				                        		 	<c:if test="${categoryId==0}">disabled</c:if>
-				                        			<c:if test="${categoryId==category.Id}">selected</c:if>	 
+				                        		 	<c:if test="${categroy.id==0}">disabled</c:if>
+				                        			<c:if test="${m.categoryId==category.id}">selected</c:if>	 
 				                        		value ="${categroy.id}">${categroy.type} </option>
 				                        	</c:forEach>
                                         </select>
+                                        <input name="categoryId"  type="hidden" class="category-id" value="${m.categoryId}">
                                    </td>
                                 </tr>
 	                            <tr>

@@ -10,13 +10,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이루틴</title>
-    <link rel="stylesheet" href="../../../../css/admin/reset.css">
-    <link rel="stylesheet" href="../../../../css/admin/common.css">
-    <link rel="stylesheet" href="../../../../css/xeicon.min.css">
-	<link rel="stylesheet" href="../../../../css/admin/sub.css">       
-    <link rel="stylesheet" href="../../../../css/admin/community/list-style.css">
+    <link rel="stylesheet" href="../../css/admin/reset.css">
+    <link rel="stylesheet" href="../../css/admin/common.css">
+    <link rel="stylesheet" href="../../css/xeicon.min.css">
+	<link rel="stylesheet" href="../../css/admin/sub.css">       
+    <link rel="stylesheet" href="../../css/admin/community/list-style.css">
     
-    <script src="../../../../js/admin_common.js"></script>
+    <script src="../../js/admin_common.js"></script>
+    <script src="../../js/admin/community/report.js"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -25,7 +26,7 @@
 
         <div class="body">
             <!-- aside -->
- 			<jsp:include page="../../../communityAside.jsp"></jsp:include>
+ 			<jsp:include page="../communityAside.jsp"></jsp:include>
             <!-- //aside -->
 
             <!-- main(개별 컨턴츠 넣는곳) -->
@@ -33,6 +34,7 @@
                 <section class="title_section">
                     <div class="list_title">
                         <h1>신고사항 리스트</h1>
+                        <button>전체삭제</button>
                     </div>
                     <table class="admin-from-table">
                         <colgroup>
@@ -52,7 +54,7 @@
                         <c:forEach items="${list}" var="n" >
                             <tr>
                                 <td>${n.nickname}</td>
-                                <td>${n.contents}</td>
+                                <td>${n.contents} <button type="submit" class="cmt-del-btn report-btn" style="width:20px"> X </button></td>
                                 <td>${n.regdate}</td>
                             </tr> 
 						</c:forEach>                            

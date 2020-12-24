@@ -60,10 +60,10 @@ request header
                                 <tr>
                                     <th>게시판 선택</th>
                                     <td  colspan="3">
-                                        <select name = "categoryId" class ="select-box">
+                                        <select name = "categoryId" class ="select-box" style="appearance:auto">
 				                        	<c:forEach var="categroy" items="${cList}" >
 				                        		<option 
-				                        			<c:if test="${categoryId==0}">disabled</c:if>	 
+				                        			<c:if test="${categroy.id==0}">disabled</c:if>	 
 				                        			<c:if test="${categoryId==1}">selected</c:if>	 
 				                        			value ="${categroy.id}">${categroy.type} </option>
 				                        	</c:forEach>
@@ -91,7 +91,8 @@ request header
                                 </tr>
                             </tbody>
                         </table>
-	                    <div class="btn-box"> 
+	                    <div class="list_view">
+	                    	<input type="hidden" value="${sessionScope.memberId}" name="memberId"/>
 	                        <button type="submit" class="myButton" >등록</button>
 	                        <a class="canclebtn" href="list">취소</a>
 		                </div>

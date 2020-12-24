@@ -1,4 +1,4 @@
-package com.myroutine.web.controller.admin.community.report;
+package com.myroutine.web.controller.admin.complain.report;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.myroutine.web.dao.entity.CommunityReport;
 import com.myroutine.web.service.CommunityService;
 
-@WebServlet("/admin/community/reportList")
+@WebServlet("/admin/complain/reportList")
 public class ListController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,7 +23,7 @@ public class ListController extends HttpServlet{
 		
 		request.setAttribute("list", list);
 		System.out.println(list);
-		request.getRequestDispatcher("/admin/community/reportList.jsp").forward(request, response);
+		request.getRequestDispatcher("/admin/complain/reportList.jsp").forward(request, response);
 	}
 
 }

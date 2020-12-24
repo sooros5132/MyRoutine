@@ -61,6 +61,7 @@
                                 <th>작성자</th>
                                  	<td>${m.writerName}
                                  	<input type="hidden" value="${m.writerId}">
+                                 	<input type="hidden" value="${m.id}" class="complain_id" >
                                  	</td> 
 <!--                                 <th>조회수</th> -->
 <%--                                 <td>${m.hit}</td> --%>
@@ -92,6 +93,7 @@
                     <div class="list_view">
                         <button class="list_btn myButton"><a  href="list">목록</a></button>
                     	<button class="list_btn myButton"><a  href="edit?id=${m.id}">수정</a></button>
+                    	<button class="list_btn myButton"><a  href="del?id=${m.id}">삭제</a></button>
                     </div>
                 </section>          
             </main>
