@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.myroutine.web.dao.entity.CommunityReport;
 import com.myroutine.web.service.CommunityService;
 
-@WebServlet("/admin/community/report/comment/list")
+@WebServlet("/admin/community/cmtReportList")
 public class ListController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,7 +23,7 @@ public class ListController extends HttpServlet{
 		
 		request.setAttribute("list", list);
 		System.out.println(list);
-		request.getRequestDispatcher("/admin/community/report/comment/list.jsp").forward(request, response);
+		request.getRequestDispatcher("/admin/community/cmtReportList.jsp").forward(request, response);
 	}
 
 }

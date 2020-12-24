@@ -8,22 +8,22 @@ window.addEventListener("load", () => {
       var current = ul.querySelector(`.${selectedMenu}-menu`);
       current?.classList.add("active");
 
-      ul.onmouseover = function(e){
-         let target = e.target;
+      // ul.onmouseover = function(e){
+      //    let target = e.target;
 
-         if(target.nodeName !='A') return;
+      //    if(target.nodeName !='A') return;
 
-      current?.classList.remove("active");
-         current = target;
-         //current.classList.add("active");   
-      }
-      ul.onclick =function(e){
-         let target = e.target;
-         if(target.nodeName =="A" || target.nodeName =='I') 
-            target.classList.add("active");
+      // current?.classList.remove("active");
+      //    current = target;
+      //    current.classList.add("active");   
+      // }
+      // ul.onclick =function(e){
+      //    let target = e.target;
+      //    if(target.nodeName =="A" || target.nodeName =='I') 
+      //       target.classList.add("active");
 
 
-      }
+      // }
 
   
 

@@ -11,4 +11,5 @@ public interface CommunityFileDao {
 	int delete(int id);
 	
 	List<CommunityFile> getList(int id);
+	List<CommunityFile> getTotalFileList(int id);
 }

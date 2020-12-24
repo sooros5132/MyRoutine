@@ -21,28 +21,31 @@ public class DetailController extends HttpServlet {
 	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//¾ÆÀÌµð µî·ÏÇÒ¶§µµ ÇÊ¿ä
+		//ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
 		CommentService cService = new CommentService();
 		int	id = Integer.parseInt(request.getParameter("id")) ;
 		
 		if(request.getMethod().equals("POST")) {
-			//´ñ±Û ÀúÀåÇßÀ»¶§ Äõ¸®µî·Ï..ÆäÀÌÁö ´Ù½Ã¿­±â..
+			//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½Ã¿ï¿½ï¿½ï¿½..
 
 			int memberId= Integer.parseInt(request.getParameter("memberId"));
 			int communityId= Integer.parseInt(request.getParameter("communityId"));
 			String contents= request.getParameter("contents");
 			String String= request.getParameter("String");
 			
-			CommunityComment comment = new CommunityComment(0,memberId,String, communityId, new Date() ,contents);
-			cService.insert(comment);
+			if(!request.getParameter("contents").equals(null) && !request.getParameter("contents").equals("")) {
+				CommunityComment comment = new CommunityComment(0,memberId,String, communityId, new Date() ,contents);
+				cService.insert(comment);
+			}
+			
 		}
 
 		CommunityService service = new CommunityService();
 		Community m = service.getDetail(id);
 		
-//		TODO ÀÛ¼ºÀÚ¿Í ·Î±×ÀÎÇÑ »ç¶÷ÀÌ ÀÏÄ¡ÇÒ¶§´Â HIT¼ö ¿Ã¸®Áö ¾Ê¾Æ¾ßÇÑ´Ù..
+//		TODO ï¿½Û¼ï¿½ï¿½Ú¿ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½Ò¶ï¿½ï¿½ï¿½ HITï¿½ï¿½ ï¿½Ã¸ï¿½ï¿½ï¿½ ï¿½Ê¾Æ¾ï¿½ï¿½Ñ´ï¿½..
 		
-		//Á¶È¸¼ö ¿Ã¸®±â
+		//ï¿½ï¿½È¸ï¿½ï¿½ ï¿½Ã¸ï¿½ï¿½ï¿½
 		int hit = service.hitUp(id);
 		System.out.println("id : "+id);		
 		
@@ -52,11 +55,11 @@ public class DetailController extends HttpServlet {
 		request.getRequestDispatcher("/admin/community/detail.jsp").forward(request, response);
 	
 	}	
-	//ÀÓ½ÃÁÖ¼®
+	//ï¿½Ó½ï¿½ï¿½Ö¼ï¿½
 //	@Override
 //	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		
-//		//»ó¼¼ÆäÀÌÁö¿Í ¸ñ·Ï ¹Þ¾Æ¿À±â
+//		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
 //		String	id = request.getParameter("id") ;
 //		
 //		CommunityService service = new CommunityService();
@@ -74,7 +77,7 @@ public class DetailController extends HttpServlet {
 //	@Override
 //	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		
-//		//´ñ±Ûµî·ÏÇÒ¶§ ½ÇÇà
+//		//ï¿½ï¿½Ûµï¿½ï¿½ï¿½Ò¶ï¿½ ï¿½ï¿½ï¿½ï¿½
 //		String	id = request.getParameter("id") ;
 //		String comments= request.getParameter("comments");
 //
@@ -83,7 +86,7 @@ public class DetailController extends HttpServlet {
 //		
 //		service = new CommentService();
 //		service.insert(comment);
-//		´ñ±Û¸®½ºÆ® ´Ù½Ã¹Þ¾Æ¿Í¾ßÇÔ....È­¸é¿¡¼­ ±Û Ãß°¡ÈÄ ´Ù½Ã µÇµ¹¸®±â. È­¸é²Þ»¶°Å¸®Áö ¾Ê°Ô
+//		ï¿½ï¿½Û¸ï¿½ï¿½ï¿½Æ® ï¿½Ù½Ã¹Þ¾Æ¿Í¾ï¿½ï¿½ï¿½....È­ï¿½é¿¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½. È­ï¿½ï¿½Þ»ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½
 //		response.sendRedirect("communityDetail?id="+id);
 //	}
 }

@@ -197,6 +197,16 @@
                 
                 memberUpdatePromise({id:memberId, key:dataKey, value:dataValue})
                 .then((data) => {
+                    if( input.classList.contains("member-delete")){
+                        parentTrElement.classList.add("delete");
+                        parentTrElement.nextElementSibling.classList.add("delete");
+
+                        setTimeout(()=>{
+                            parentTrElement.nextElementSibling.remove();
+                            parentTrElement.remove();
+                        }, 1400);
+                        return;
+                    }
                     if(!data)
                         return;
                     // 변경되고 이벤트
@@ -220,16 +230,6 @@
                             memberStatus.textContent = ruleToString(input.value);
                             break;
                         }
-                    }
-                    if( input.classList.contains("member-delete")){
-                        parentTrElement.classList.add("delete");
-                        parentTrElement.nextElementSibling.classList.add("delete");
-
-                        setTimeout(()=>{
-                            parentTrElement.nextElementSibling.remove();
-                            parentTrElement.remove();
-                        }, 2900);
-                        return;
                     }
                     parentTdElement.classList.remove("fail");
                     parentTdElement.classList.remove("changed");
@@ -358,9 +358,9 @@
                         return;
                     }
                     if( data.result == "sussess" ){
-                        resolve(data.datas);
                         alertOpen({setText: `변경되었습니다.`,activeTime: 20,alertColor: "#30baa1"});
                     }
+                    resolve(data.datas);
                 } else {
                     console.error(xhr.responseText);
                 }

@@ -9,5 +9,6 @@ public interface CommunityCommentDao {
 	int insert(CommunityComment comment);
 	List<CommunityComment> getList(int id);
 	int delete(int id);
+	List<CommunityComment> getTotalCmtList(int id);
 
 }

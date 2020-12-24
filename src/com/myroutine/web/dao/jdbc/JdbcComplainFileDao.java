@@ -19,7 +19,7 @@ public class JdbcComplainFileDao implements ComplainFileDao {
 	public int insert(ComplainFile ComplainFile) {
 		int result = 0;
 		String url = DBContext.URL;
-		String sql = "INSERT INTO Complain_file(NAME,ROUTE,Complain_ID) VALUES(?,?,?)";		
+		String sql = "INSERT INTO Complain_file(NAME,ROUTE,COMPLAIN_ID) VALUES(?,?,?)";		
 		
 		Complain m= new Complain();
 		

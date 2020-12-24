@@ -17,8 +17,8 @@
                             <a href="#">커뮤니티 관리</a>
                             <ul class="dep2">
                                 <li><a href="../community/list">커뮤니티 리스트</a></li>
-                                <li><a href="../community/report/list">커뮤니티신고 리스트</a></li>
-                                <li><a href="../community/report/comment/list">커뮤니티댓글신고 리스트</a></li>                                
+                                <li><a href="../community/reportList">커뮤니티 신고리스트</a></li>
+                                <li><a href="../community/cmtReportList">커뮤니티댓글 신고리스트</a></li>                                
                             </ul>
                         </li>
 <!--                         <li data-type="true"> -->

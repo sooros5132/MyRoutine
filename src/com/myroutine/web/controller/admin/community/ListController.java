@@ -42,21 +42,21 @@ public class ListController extends HttpServlet{
 		CommunityService service = new CommunityService(); 
 		List<CommunityView> list = service.getViewList(page, categoryId, value);
 		List<CommunityCategory> cList = service.getCategoryList();
-		//Ä«Å×°í¸® Ã¹¹øÂ°²¨ ³Ö±â.
-		//CommunityCategory firstCategroy =new CommunityCategory(0,"=ÀüÃ¼°Ô½ÃÆÇ=");
+		//Ä«ï¿½×°ï¿½ Ã¹ï¿½ï¿½Â°ï¿½ï¿½ ï¿½Ö±ï¿½.
+		//CommunityCategory firstCategroy =new CommunityCategory(0,"=ï¿½ï¿½Ã¼ï¿½Ô½ï¿½ï¿½ï¿½=");
 		//cList.add(firstCategroy);
 		
-		//ÆäÀÌÁöÃ³¸® ¸®½ºÆ® ÅäÅ» °ª °¡Áö°í ¿À±â
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Å» ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		int total = service.getTotal(categoryId);
 		
-		//	ÇÑÆäÀÌÁö¿¡ 10°³¾¿º¸¿©ÁÖ°í 5±îÁö¸¸ ³ª¿À°Ô
+		//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 10ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½ 5ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		int groupMax = 5;
 		int group = (total % 10) > 0 ?  (total / 10) +1 : (total / 10);
 		
-		//ÀÌÀüÆäÀÌÁö 
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 		int prevPage = (page-1)==0 ? 1 : page-1;
 		
-		//´ÙÀ½ÆäÀÌÁö
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		int nextPage = (page == group) ? group: page+1;
 
 		//

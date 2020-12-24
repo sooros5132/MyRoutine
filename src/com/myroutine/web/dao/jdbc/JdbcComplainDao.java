@@ -63,7 +63,7 @@ public class JdbcComplainDao implements ComplainDao{
 		int result = 0;
 		
 		String url = DBContext.URL;
-		String sql = "UPDATE Complain SET TITLE=?, CONTENTS=?, HIT=? WHERE ID=?";		
+		String sql = "UPDATE Complain SET TITLE=?, CONTENTS=?, HIT=?, CATEGORY_ID=? WHERE ID=?";		
 		
 			try {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -73,7 +73,8 @@ public class JdbcComplainDao implements ComplainDao{
 				st.setString(1, m.getTitle());
 				st.setString(2, m.getContents());
 				st.setInt(3, m.getHit());
-				st.setInt(4, m.getId());
+				st.setInt(4, m.getCategoryId());
+				st.setInt(5, m.getId());
 //				ResultSet rs = st.executeQuery(sql);
 				result = st.executeUpdate();
 
@@ -243,7 +244,7 @@ public class JdbcComplainDao implements ComplainDao{
 	public List<ComplainCategory> getCategoryList() {
 		String url = DBContext.URL;
 		String sql = "SELECT * FROM Complain_CATEGORY ORDER BY ID";	
-		//µ¥ÀÌÅÍ°¡ ¼ø¼­´ë·Î ¾È³ª¿È,, µðºñ¼­´Â Á¦´ë·Î º¸ÀÌ´Âµ¥....ÀÌ»óÇØ¼­ Á¤·ÄÃß°¡
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È³ï¿½ï¿½ï¿½,, ï¿½ï¿½ñ¼­´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´Âµï¿½....ï¿½Ì»ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½
 
 		
 		List<ComplainCategory> list = new ArrayList<>();
@@ -402,8 +403,8 @@ public class JdbcComplainDao implements ComplainDao{
 //	public Complain getListId() {
 //		String url = DBContext.URL;
 //		String sql = "SELECT * FROM Complain WHERE ID = (SELECT MAX(ID) FROM Complain)";
-//		//°¡Àå ÃÖ±Ù°Í ±¸ÇØ¿Â´Ù..
-//		//ÆÄÀÏµî·ÏÇÒ¶§ Æú´õ¸í °¥¼ö·Ï ¼ýÀÚ°¡ Ä¿Áö±â ¶§¹®¿¡..
+//		//ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±Ù°ï¿½ ï¿½ï¿½ï¿½Ø¿Â´ï¿½..
+//		//ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½Ò¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú°ï¿½ Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..
 //		
 //		Complain m= new Complain();
 //		
@@ -457,8 +458,8 @@ public class JdbcComplainDao implements ComplainDao{
 	public int getLast() {
 		String url = DBContext.URL;
 		String sql = "SELECT ID FROM Complain WHERE ID = (SELECT MAX(ID) FROM Complain)";
-		//°¡Àå ÃÖ±Ù°Í ±¸ÇØ¿Â´Ù..
-		//ÆÄÀÏµî·ÏÇÒ¶§ Æú´õ¸í °¥¼ö·Ï ¼ýÀÚ°¡ Ä¿Áö±â ¶§¹®¿¡..
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±Ù°ï¿½ ï¿½ï¿½ï¿½Ø¿Â´ï¿½..
+		//ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½Ò¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú°ï¿½ Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..
 		
 		int id = 0;
 		

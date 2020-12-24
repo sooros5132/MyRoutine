@@ -3,7 +3,7 @@ window.addEventListener("load",function(){
 	var tbody = document.querySelector(".tbody");
 	var communityId= document.querySelector(".community_id").value;
 	var memberId= document.querySelector(".member_id").value;
-	var cmtId= document.querySelector(".cmt-id").value;
+	var cmtId= document.querySelector(".cmt-id");
 	
 	var report = document.querySelector(".report");
 	var commReport= document.querySelector(".comn-report");
@@ -15,10 +15,14 @@ window.addEventListener("load",function(){
 		openPrompt(url);
 	}
 	
+	
+		
 	commReport.onclick= function(){
-		var url= '/api/community/commReport?commentId='+cmtId;
+		console.log(cmtId);
+		var url= '/api/community/commReport?commentId='+cmtId.value;
 		openPrompt(url);
 	};
+
 	
 
 
